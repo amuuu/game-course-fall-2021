@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,9 @@ public class PlayerMove : MonoBehaviour
     public CloneMove[] cloneMoves;
 
     private bool canJump;
+    private bool canCollectKey;
+
+    private GameObject key;
 
     private Vector3 moveVector;
     void Start()
@@ -22,6 +26,8 @@ public class PlayerMove : MonoBehaviour
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
+        canCollectKey = false;
+        key = new GameObject();
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -58,6 +64,13 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        
+        if (Input.GetKey(KeyCode.E) && canCollectKey)
+        {
+            key.SetActive(false);
+            Debug.Log("KEY!");
+            canCollectKey = false;
+        }
 
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
@@ -82,6 +95,13 @@ public class PlayerMove : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
+        }
+        
+        if (collision.gameObject.CompareTag(TagNames.KeyItem.ToString()))
+        {
+            key = collision.gameObject;
+            canCollectKey = true;
+            Debug.Log("KEY ENTERED!");
         }
     }
 
@@ -108,6 +128,12 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
+        }
+        
+        if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
+        {
+            canCollectKey = false;
+            key = new GameObject();
         }
     }
 
