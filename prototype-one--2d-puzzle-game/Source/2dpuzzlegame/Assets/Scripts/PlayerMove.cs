@@ -28,6 +28,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 moveVector;
     
     public EventSystemCustom eventSystem;
+    public GameManager gameManager;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -95,6 +96,7 @@ public class PlayerMove : MonoBehaviour
             if (canOpenDoor)
             {
                 Debug.Log("VICTORY!");
+                gameManager.LevelComplete();
             }
         }
 
@@ -115,6 +117,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            gameManager.Lost();
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
