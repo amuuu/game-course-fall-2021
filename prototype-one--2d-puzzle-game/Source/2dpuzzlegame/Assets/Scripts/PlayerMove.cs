@@ -27,7 +27,7 @@ public class PlayerMove : MonoBehaviour
 
         canJump = true;
         canCollectKey = false;
-        key = new GameObject();
+        // key = new GameObject();
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -105,6 +105,15 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.KeyItem.ToString()))
+        {
+            canCollectKey = false;
+            Debug.Log("exit key");
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
@@ -128,12 +137,6 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
-        }
-        
-        if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
-        {
-            canCollectKey = false;
-            key = new GameObject();
         }
     }
 
