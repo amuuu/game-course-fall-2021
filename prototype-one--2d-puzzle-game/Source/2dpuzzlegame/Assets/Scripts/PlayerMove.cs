@@ -21,6 +21,8 @@ public class PlayerMove : MonoBehaviour
     private GameObject key;
 
     private Vector3 moveVector;
+    
+    public EventSystemCustom eventSystem;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -68,6 +70,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKey(KeyCode.E) && canCollectKey)
         {
             key.SetActive(false);
+            eventSystem.onKeyObtained.Invoke();
             Debug.Log("KEY!");
             canCollectKey = false;
         }
