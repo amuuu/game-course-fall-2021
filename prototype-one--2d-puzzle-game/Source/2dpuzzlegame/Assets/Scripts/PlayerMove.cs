@@ -14,11 +14,16 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject clones;
     public CloneMove[] cloneMoves;
+    public GameObject keys;
+    public Transform[] keysArray;
 
     private bool canJump;
     private bool canCollectKey;
+    private bool canTryDoor;
+    private bool canOpenDoor;
 
     private GameObject key;
+    private int numberOfKeys;
 
     private Vector3 moveVector;
     
@@ -26,9 +31,13 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+        keysArray = keys.GetComponentsInChildren<Transform>();
 
         canJump = true;
         canCollectKey = false;
+        canTryDoor = false;
+        canOpenDoor = false;
+        numberOfKeys = 0;
         // key = new GameObject();
         moveVector = new Vector3(1 * factor, 0, 0);
     }
@@ -73,6 +82,20 @@ public class PlayerMove : MonoBehaviour
             eventSystem.onKeyObtained.Invoke();
             Debug.Log("KEY!");
             canCollectKey = false;
+            numberOfKeys++;
+            if (numberOfKeys == keysArray.Length-1)
+            {
+                canOpenDoor = true;
+            }
+        }
+        
+        if (Input.GetKey(KeyCode.E) && canTryDoor)
+        {
+            Debug.Log("TRYING DOOR!");
+            if (canOpenDoor)
+            {
+                Debug.Log("VICTORY!");
+            }
         }
 
 
@@ -106,6 +129,12 @@ public class PlayerMove : MonoBehaviour
             canCollectKey = true;
             Debug.Log("KEY ENTERED!");
         }
+        
+        if (collision.gameObject.CompareTag(TagNames.DoorItem.ToString()))
+        {
+            canTryDoor = true;
+            Debug.Log("DOOR AREA ENTERED!");
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -114,6 +143,12 @@ public class PlayerMove : MonoBehaviour
         {
             canCollectKey = false;
             Debug.Log("exit key");
+        }
+        
+        if (collision.gameObject.CompareTag(TagNames.DoorItem.ToString()))
+        {
+            canTryDoor = false;
+            Debug.Log("exit door");
         }
     }
 
