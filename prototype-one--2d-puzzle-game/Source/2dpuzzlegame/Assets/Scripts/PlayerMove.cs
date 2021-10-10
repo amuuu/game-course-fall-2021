@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
+    public WinEventManager winEvent;
 
     public GameObject clones;
     public CloneMove[] cloneMoves;
@@ -17,6 +18,8 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
     public int numberOfKeys;
     public GameObject key;
+    public bool reachedDoor;
+    public static int requiredKeys;
 
     private Vector3 moveVector;
     void Start()
@@ -27,6 +30,9 @@ public class PlayerMove : MonoBehaviour
         moveVector = new Vector3(1 * factor, 0, 0);
 
         numberOfKeys = 0;
+        reachedDoor = false;
+
+        requiredKeys = 1;
     }
 
     void Update()
@@ -70,6 +76,12 @@ public class PlayerMove : MonoBehaviour
                 numberOfKeys++;
                 Destroy(key);
             }
+            if (reachedDoor && numberOfKeys >= requiredKeys)
+            {
+                Debug.Log("WIN!!!!!");
+                winEvent.OnExitDoorWin.Invoke();
+                this.gameObject.SetActive(false);
+            }
         }
 
 
@@ -101,6 +113,11 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("Key AREA!");
             key = collision.gameObject;
         }
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            reachedDoor = true;
+            Debug.Log("near the exit door");
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -108,6 +125,10 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
         {
             key = null;
+        }
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            reachedDoor = false;
         }
     }
 
