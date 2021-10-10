@@ -31,6 +31,7 @@ public class PlayerMove : MonoBehaviour
     private bool canOpenSourceDoor;
 
     private Vector3 moveVector;
+    public Animator animator;
     
     public EventSystemCustom eventSystem;
     public GameManager gameManager;
@@ -54,6 +55,8 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        animator.SetFloat("Speed",0f);
+        
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += moveVector;
@@ -61,6 +64,7 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, true);
 
             spriteRenderer.flipX = false;
+            animator.SetFloat("Speed",1f);
 
         }
 
@@ -71,6 +75,8 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, false);
 
             spriteRenderer.flipX = true;
+            
+            animator.SetFloat("Speed",1f);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)

@@ -3875,6 +3875,7 @@ GameObject:
   - component: {fileID: 1284564628}
   - component: {fileID: 1284564629}
   - component: {fileID: 1284564627}
+  - component: {fileID: 1284564630}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -3967,6 +3968,7 @@ MonoBehaviour:
   cloneMoves: []
   keys: {fileID: 557241883}
   keysArray: []
+  animator: {fileID: 1284564630}
   eventSystem: {fileID: 1587907882}
   gameManager: {fileID: 682224054}
   destDoor: {fileID: 1364098034}
@@ -4017,6 +4019,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.13506317, y: 0.1166611}
   m_EdgeRadius: 0
+--- !u!95 &1284564630
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284564624}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f059ad9f9b7093d4eba7129bde66401b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1313147636
 GameObject:
   m_ObjectHideFlags: 0
