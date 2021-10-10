@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
     public WinEventManager winEvent;
+    public EventSystemCustom eventSystem;
 
     public GameObject clones;
     public CloneMove[] cloneMoves;
@@ -74,6 +75,7 @@ public class PlayerMove : MonoBehaviour
             if (key)
             {
                 numberOfKeys++;
+                eventSystem.OnKeyEnter.Invoke();
                 Destroy(key);
             }
             if (reachedDoor && numberOfKeys >= requiredKeys)
