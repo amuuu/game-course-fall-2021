@@ -24,11 +24,17 @@ public class PlayerMove : MonoBehaviour
 
     private GameObject key;
     private int numberOfKeys;
+    
+    private GameObject specialKey;
+    private bool canCollectSpecialKey;
+    private bool canTrySourceDoor;
+    private bool canOpenSourceDoor;
 
     private Vector3 moveVector;
     
     public EventSystemCustom eventSystem;
     public GameManager gameManager;
+    public Transform destDoor;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -38,6 +44,9 @@ public class PlayerMove : MonoBehaviour
         canCollectKey = false;
         canTryDoor = false;
         canOpenDoor = false;
+        canCollectSpecialKey = false;
+        canTrySourceDoor = false;
+        canOpenSourceDoor = false;
         numberOfKeys = 0;
         // key = new GameObject();
         moveVector = new Vector3(1 * factor, 0, 0);
@@ -90,6 +99,14 @@ public class PlayerMove : MonoBehaviour
             }
         }
         
+        if (Input.GetKey(KeyCode.E) && canCollectSpecialKey)
+        {
+            specialKey.SetActive(false);
+            Debug.Log("SPECIAL KEY!");
+            canCollectSpecialKey = false;
+            canOpenSourceDoor = true;
+        }
+        
         if (Input.GetKey(KeyCode.E) && canTryDoor)
         {
             Debug.Log("TRYING DOOR!");
@@ -97,6 +114,15 @@ public class PlayerMove : MonoBehaviour
             {
                 Debug.Log("VICTORY!");
                 gameManager.LevelComplete();
+            }
+        }
+        
+        if (Input.GetKey(KeyCode.E) && canTrySourceDoor)
+        {
+            Debug.Log("TRYING SOURCE DOOR!");
+            if (canOpenSourceDoor)
+            {
+                transform.position = destDoor.transform.position;
             }
         }
 
@@ -133,10 +159,23 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("KEY ENTERED!");
         }
         
+        if (collision.gameObject.CompareTag(TagNames.SpecialKeyItem.ToString()))
+        {
+            specialKey = collision.gameObject;
+            canCollectSpecialKey = true;
+            Debug.Log("SPECIAL KEY ENTERED!");
+        }
+        
         if (collision.gameObject.CompareTag(TagNames.DoorItem.ToString()))
         {
             canTryDoor = true;
             Debug.Log("DOOR AREA ENTERED!");
+        }
+        
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            canTrySourceDoor = true;
+            Debug.Log("SOURCE DOOR AREA ENTERED!");
         }
     }
 
@@ -148,10 +187,22 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("exit key");
         }
         
+        if (collision.gameObject.CompareTag(TagNames.SpecialKeyItem.ToString()))
+        {
+            canCollectSpecialKey = false;
+            Debug.Log("special exit key");
+        }
+        
         if (collision.gameObject.CompareTag(TagNames.DoorItem.ToString()))
         {
             canTryDoor = false;
             Debug.Log("exit door");
+        }
+        
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            canTrySourceDoor = false;
+            Debug.Log("exit source door");
         }
     }
 
