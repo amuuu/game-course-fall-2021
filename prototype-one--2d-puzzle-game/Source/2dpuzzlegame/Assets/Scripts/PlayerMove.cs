@@ -101,6 +101,8 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            winEvent.OnDeathZoneLose.Invoke();
+            Destroy(this.gameObject);
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))

@@ -14,6 +14,7 @@ public class UiManager : MonoBehaviour
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
         winEvent.OnExitDoorWin.AddListener(ShowWinText);
+        winEvent.OnDeathZoneLose.AddListener(ShowLoseText);
     }
 
     public void UpdateScoreText()
@@ -26,5 +27,10 @@ public class UiManager : MonoBehaviour
     public void ShowWinText()
     {
         winText.text = "You Win!";
+    }
+
+    public void ShowLoseText()
+    {
+        winText.text = "You Lose!";
     }
 }
