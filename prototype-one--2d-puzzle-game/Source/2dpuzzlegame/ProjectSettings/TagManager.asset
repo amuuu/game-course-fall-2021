@@ -10,6 +10,9 @@ TagManager:
   - CollectableItem
   - KeyItem
   - DoorItem
+  - SpecialKeyItem
+  - SourceDoor
+  - DestinationDoor
   layers:
   - Default
   - TransparentFX
