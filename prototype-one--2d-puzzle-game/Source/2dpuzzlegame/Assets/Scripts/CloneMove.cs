@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class CloneMove : MonoBehaviour
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
+    public Transform destDoor;
 
     private void Awake()
     {
@@ -61,6 +63,14 @@ public class CloneMove : MonoBehaviour
     {
         if (canJump)
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            transform.position = destDoor.transform.position;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
