@@ -5,12 +5,15 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    public Text counterText;
+    [SerializeField] Text counterText;
+    [SerializeField] Text endGameText;
+    [SerializeField] Text savedKeysText;
     public EventSystemCustom eventSystem;
 
     void Start()
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
+        savedKeysText.text = "0/0";
     }
 
     public void UpdateScoreText()
