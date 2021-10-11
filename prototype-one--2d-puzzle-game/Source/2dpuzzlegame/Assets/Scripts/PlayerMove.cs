@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    
+    [SerializeField] UiManager uiManager;
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
 
@@ -96,10 +96,8 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             Debug.Log("exit door");
+            uiManager.EndGameTextWin();
         }
-
-       
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)

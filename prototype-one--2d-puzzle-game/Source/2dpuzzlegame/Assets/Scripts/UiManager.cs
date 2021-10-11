@@ -13,7 +13,8 @@ public class UiManager : MonoBehaviour
     void Start()
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
-        savedKeysText.text = "0/0";
+        savedKeysText.text = "0 keys";
+        endGameText.text = "";
     }
 
     public void UpdateScoreText()
@@ -21,5 +22,14 @@ public class UiManager : MonoBehaviour
         Debug.Log("UPDATE SCORE");
         int newTextValue = int.Parse(counterText.text) + 1;
             counterText.text = newTextValue.ToString();
+    }
+
+    public void EndGameTextWin()
+    {
+        endGameText.text = "You Win!";
+    }
+    public void EndGameTextLose()
+    {
+        endGameText.text = "You Lose!\nNOOB!";
     }
 }
