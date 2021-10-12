@@ -9,6 +9,7 @@ public class EventSystemCustom : MonoBehaviour
     public UnityEvent OnCharacterEatKey;
     public UnityEvent OnGameEndedWon;
     public UnityEvent OnGameEndedLost;
+    public UnityEvent OnCharacterEatTeleportKey;
 
     void Awake()
     {
@@ -16,5 +17,6 @@ public class EventSystemCustom : MonoBehaviour
         OnCharacterEatKey = new UnityEvent();
         OnGameEndedWon = new UnityEvent();
         OnGameEndedLost = new UnityEvent();
+        OnCharacterEatTeleportKey = new UnityEvent();
     }
 }

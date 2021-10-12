@@ -9,6 +9,7 @@ public class UiManager : MonoBehaviour
     public Text KeyCounter;
     public Text WinLabel;
     public Text LostLabel;
+    public Image EnableTeleportImg;
     public EventSystemCustom eventSystem;
 
     void Start()
@@ -17,6 +18,7 @@ public class UiManager : MonoBehaviour
         eventSystem.OnCharacterEatKey.AddListener(UpdateKeyScore);
         eventSystem.OnGameEndedWon.AddListener(EndGameWon);
         eventSystem.OnGameEndedLost.AddListener(EndGameLost);
+        eventSystem.OnCharacterEatTeleportKey.AddListener(EnableTeleport);
     }
 
     //public void UpdateScoreText()
@@ -45,5 +47,10 @@ public class UiManager : MonoBehaviour
     public void EndGameLost()
     {
         LostLabel.text = "You Lost!";
+    }
+
+    public void EnableTeleport()
+    {
+        EnableTeleportImg.enabled = true;
     }
 }

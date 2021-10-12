@@ -12,12 +12,16 @@ public class PlayerMove : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
 
+    public Image EnableTeleport;
+
     public GameObject clones;
     public CloneMove[] cloneMoves;
 
     private bool canJump;
 
     public EventSystemCustom eventSystem;
+
+    public GameObject TeleportDestination;
 
     private Vector3 moveVector;
     void Start()
@@ -94,6 +98,23 @@ public class PlayerMove : MonoBehaviour
                 //Debug.Log("YOU WON Event fired!");
             }
         }
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportSource.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E) && EnableTeleport.enabled)
+            {
+                spriteRenderer.transform.position = new Vector2(TeleportDestination.transform.position.x, TeleportDestination.transform.position.y);
+            }   
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                collision.gameObject.SetActive(false);
+                eventSystem.OnCharacterEatTeleportKey.Invoke();
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -101,7 +122,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             eventSystem.OnGameEndedLost.Invoke();
-            Debug.Log("YOU LOST Event fired!");
+            //Debug.Log("YOU LOST Event fired!");
         }
 
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))

@@ -8,7 +8,9 @@ public enum TagNames
     ExitDoor,
     DeathZone,
     CollectableItem,
-    CollectableKey
+    CollectableKey,
+    TeleportSource,
+    TeleportKey
 }
 public static class Constants
 {
