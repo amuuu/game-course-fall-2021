@@ -67,7 +67,7 @@ public class CloneMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
-            Debug.LogWarning("sticky for clone");
+            //Debug.LogWarning("sticky for clone");
 
             // Updating the UI text. But this is not a clean way. We'll fix it later.
             /*int newTextValue = int.Parse(counterText.text) + 1;
@@ -87,7 +87,7 @@ public class CloneMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
-            Debug.LogWarning("sticky no more for clone bruh");
+            //Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
         }
     }

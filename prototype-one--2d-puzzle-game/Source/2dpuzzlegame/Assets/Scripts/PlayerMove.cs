@@ -78,13 +78,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.CollectableKey.ToString()))
         {
-            Debug.Log("you can get key now !");
-
             if (Input.GetKey(KeyCode.E))
             { 
                 collision.gameObject.SetActive(false);
                 eventSystem.OnCharacterEatKey.Invoke();
-                Debug.Log("KEY EVENT FIRED!");
+                //Debug.Log("KEY EVENT FIRED!");
             }
         }
 
@@ -93,7 +91,7 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 eventSystem.OnGameEndedWon.Invoke();
-                Debug.Log("YOU WON Event fired!");
+                //Debug.Log("YOU WON Event fired!");
             }
         }
     }
@@ -102,13 +100,14 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
-            Debug.Log("DEATH ZONE");
+            eventSystem.OnGameEndedLost.Invoke();
+            Debug.Log("YOU LOST Event fired!");
         }
 
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
-            Debug.Log("POTION!");
+            //Debug.Log("POTION!");
         }
 
 
@@ -128,7 +127,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
-            Debug.LogWarning("sticky");
+            //Debug.LogWarning("sticky");
             canJump = false;
         }
 
@@ -145,7 +144,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
-            Debug.LogWarning("sticky no more bruh");
+            //Debug.LogWarning("skticky no more bruh");
             canJump = true;
         }
     }
