@@ -7,12 +7,14 @@ public class UiManager : MonoBehaviour
 {
     //public Text counterText;
     public Text KeyCounter;
+    public Text WinLabel;
     public EventSystemCustom eventSystem;
 
     void Start()
     {
         //eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
-        eventSystem.OnCharacterNearKey.AddListener(UpdateKeyScore);
+        eventSystem.OnCharacterEatKey.AddListener(UpdateKeyScore);
+        eventSystem.OnGameEndedWon.AddListener(EndGameWon);
     }
 
     //public void UpdateScoreText()
@@ -27,5 +29,14 @@ public class UiManager : MonoBehaviour
         Debug.Log("UPDATE KEY SCORE");
         int newTextValue = int.Parse(KeyCounter.text) + 1;
         KeyCounter.text = newTextValue.ToString();
+    }
+    
+    public void EndGameWon()
+    {
+        if (int.Parse(KeyCounter.text) >= Constants.RequiredKeyCountToWin)
+        {
+            Debug.Log("YOU WON!");
+            WinLabel.text = "You Won!";
+        }
     }
 }

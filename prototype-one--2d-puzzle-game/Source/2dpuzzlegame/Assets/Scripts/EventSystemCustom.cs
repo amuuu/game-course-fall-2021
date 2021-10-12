@@ -6,11 +6,13 @@ using UnityEngine.Events;
 public class EventSystemCustom : MonoBehaviour
 {
     //public UnityEvent OnCloneStickyPlatformEnter;
-    public UnityEvent OnCharacterNearKey;
+    public UnityEvent OnCharacterEatKey;
+    public UnityEvent OnGameEndedWon;
 
     void Awake()
     {
         //OnCloneStickyPlatformEnter = new UnityEvent();
-        OnCharacterNearKey = new UnityEvent();
+        OnCharacterEatKey = new UnityEvent();
+        OnGameEndedWon = new UnityEvent();
     }
 }

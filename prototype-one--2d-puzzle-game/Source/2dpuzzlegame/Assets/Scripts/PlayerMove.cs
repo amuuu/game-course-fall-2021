@@ -16,7 +16,6 @@ public class PlayerMove : MonoBehaviour
     public CloneMove[] cloneMoves;
 
     private bool canJump;
-    private bool CanCollectKeys;
 
     public EventSystemCustom eventSystem;
 
@@ -26,7 +25,6 @@ public class PlayerMove : MonoBehaviour
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
-        CanCollectKeys = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -80,11 +78,22 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.CollectableKey.ToString()))
         {
+            Debug.Log("you can get key now !");
+
             if (Input.GetKey(KeyCode.E))
             { 
                 collision.gameObject.SetActive(false);
-                eventSystem.OnCharacterNearKey.Invoke();
+                eventSystem.OnCharacterEatKey.Invoke();
                 Debug.Log("KEY EVENT FIRED!");
+            }
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                eventSystem.OnGameEndedWon.Invoke();
+                Debug.Log("YOU WON Event fired!");
             }
         }
     }
@@ -105,15 +114,15 @@ public class PlayerMove : MonoBehaviour
 
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag(TagNames.CollectableKey.ToString()))
-        {
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag(TagNames.CollectableKey.ToString()))
+    //    {
 
-            Debug.Log("sssssssssssssssssssssssssssssssssssssssssssssss");
+    //        Debug.Log("sssssssssssssssssssssssssssssssssssssssssssssss");
 
-        }
-    }
+    //    }
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -123,10 +132,10 @@ public class PlayerMove : MonoBehaviour
             canJump = false;
         }
 
-        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
-        {
-            Debug.Log("exit door");
-        }
+        //if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        //{
+        //    Debug.Log("exit door");
+        //}
 
 
 

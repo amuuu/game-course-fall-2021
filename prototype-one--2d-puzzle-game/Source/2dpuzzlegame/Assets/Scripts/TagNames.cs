@@ -10,4 +10,8 @@ public enum TagNames
     CollectableItem,
     CollectableKey
 }
+public static class Constants
+{
+    public const int RequiredKeyCountToWin = 3;
+}
     
