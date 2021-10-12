@@ -17,12 +17,26 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+
+    private int collectedKeyCount;
+    public EventSystemCustom eventSystem;
+    private GameObject collidingKey;
+    private bool nearExit;
+    public int allKeysCount;
+    private GameObject collidingSwitchKey;
+
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
+
+        collidingKey = null;
+        collectedKeyCount = 0;
+        nearExit = false;
+        allKeysCount = GameObject.FindGameObjectsWithTag(TagNames.LockOpener.ToString()).Length;
+        collidingSwitchKey = null;
     }
 
     void Update()
@@ -59,6 +73,26 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if(collidingKey != null)
+            {
+                collidingKey.SetActive(false);
+                collectedKeyCount++;
+                eventSystem.onCollectKey.Invoke(collectedKeyCount);
+            }
+            
+            if(nearExit && collectedKeyCount == allKeysCount)
+            {
+                FindObjectOfType<UiManager>().WinScene();
+            }
+
+            if (collidingSwitchKey != null)
+            {
+                collidingSwitchKey.SetActive(false);
+                FindObjectOfType<UiManager>().CharacterSwitchingState();
+            }
+        }
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -75,15 +109,52 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
+            FindObjectOfType<UiManager>().GameOver();
             Debug.Log("DEATH ZONE");
         }
-        
+
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+
+        if (collision.gameObject.CompareTag(TagNames.LockOpener.ToString()))
+        {
+            collidingKey = collision.gameObject;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            nearExit = true;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.SwitchCharacter.ToString()))
+        {
+            collidingSwitchKey = collision.gameObject;
+        }
+
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.LockOpener.ToString()))
+        {
+            collidingKey = null;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            nearExit = false;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.SwitchCharacter.ToString()))
+        {
+            collidingSwitchKey = null;
+        }
+
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -91,11 +162,6 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky");
             canJump = false;
-        }
-
-        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
-        {
-            Debug.Log("exit door");
         }
 
        
@@ -113,13 +179,14 @@ public class PlayerMove : MonoBehaviour
 
     public void MoveClones(Vector3 vec, bool isDirRight)
     {
-        foreach (var c in cloneMoves)
+        foreach (var c in clones.GetComponentsInChildren<CloneMove>())
             c.Move(vec, isDirRight);
     }
 
     public void JumpClones(float amount)
     {
-        foreach (var c in cloneMoves)
+        foreach (var c in clones.GetComponentsInChildren<CloneMove>())
             c.Jump(amount);
     }
+
 }
