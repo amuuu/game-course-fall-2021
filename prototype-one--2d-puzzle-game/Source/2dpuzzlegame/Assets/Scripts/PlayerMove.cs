@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PlayerMove : MonoBehaviour
     public CloneMove[] cloneMoves;
 
     private bool canJump;
+
+    public EventSystemCustom eventSystem;
 
     private Vector3 moveVector;
     void Start()
@@ -82,6 +85,13 @@ public class PlayerMove : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.CollectableKey.ToString()))
+        {
+            collision.gameObject.SetActive(false);
+            eventSystem.OnCharacterNearKey.Invoke();
+            Debug.Log("KEY FIRED");
         }
     }
 

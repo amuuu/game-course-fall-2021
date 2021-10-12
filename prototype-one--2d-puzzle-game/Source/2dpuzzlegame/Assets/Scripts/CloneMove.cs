@@ -74,8 +74,8 @@ public class CloneMove : MonoBehaviour
             counterText.text = newTextValue.ToString();*/
 
             // This is used by UiManager
-            eventSystem.OnCloneStickyPlatformEnter.Invoke();
-            Debug.Log("OnCloneStickyPlatformEnter fired.");
+            //eventSystem.OnCloneStickyPlatformEnter.Invoke();
+            //Debug.Log("OnCloneStickyPlatformEnter fired.");
 
             canJump = false;
             canMove = false;
