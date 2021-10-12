@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    
+
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
 
@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     public CloneMove[] cloneMoves;
 
     private bool canJump;
+    private bool CanCollectKeys;
 
     public EventSystemCustom eventSystem;
 
@@ -25,6 +26,7 @@ public class PlayerMove : MonoBehaviour
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
+        CanCollectKeys = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -74,24 +76,42 @@ public class PlayerMove : MonoBehaviour
         }*/
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.CollectableKey.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E))
+            { 
+                collision.gameObject.SetActive(false);
+                eventSystem.OnCharacterNearKey.Invoke();
+                Debug.Log("KEY EVENT FIRED!");
+            }
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
         }
-        
+
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
 
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
         if (collision.gameObject.CompareTag(TagNames.CollectableKey.ToString()))
         {
-            collision.gameObject.SetActive(false);
-            eventSystem.OnCharacterNearKey.Invoke();
-            Debug.Log("KEY FIRED");
+
+            Debug.Log("sssssssssssssssssssssssssssssssssssssssssssssss");
+
         }
     }
 
@@ -108,7 +128,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("exit door");
         }
 
-       
+
 
     }
 
