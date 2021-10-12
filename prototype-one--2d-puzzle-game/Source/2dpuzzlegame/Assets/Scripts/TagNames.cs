@@ -4,10 +4,12 @@ using UnityEngine;
 
 public enum TagNames
 {
+    Player,
     StickyPlatform,
     ExitDoor,
     DeathZone,
     CollectableItem,
-    Key
+    Key,
+    TeleportKey
 }
     

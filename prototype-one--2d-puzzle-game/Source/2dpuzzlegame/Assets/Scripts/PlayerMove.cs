@@ -12,15 +12,18 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody2D rb;
     public WinEventManager winEvent;
     public EventSystemCustom eventSystem;
+    public TeleportDoorManager doorManager;
+
+    public int numberOfKeys;
+    public GameObject key;
+    public GameObject teleportKey;
+    public bool reachedDoor;
+    public static int requiredKeys;
 
     public GameObject clones;
     public CloneMove[] cloneMoves;
 
     private bool canJump;
-    public int numberOfKeys;
-    public GameObject key;
-    public bool reachedDoor;
-    public static int requiredKeys;
 
     private Vector3 moveVector;
     void Start()
@@ -84,6 +87,11 @@ public class PlayerMove : MonoBehaviour
                 winEvent.OnExitDoorWin.Invoke();
                 this.gameObject.SetActive(false);
             }
+            if (teleportKey)
+            {
+                doorManager.isTeleportKeyStolen = true;
+                Destroy(teleportKey);
+            }
         }
 
 
@@ -122,6 +130,11 @@ public class PlayerMove : MonoBehaviour
             reachedDoor = true;
             Debug.Log("near the exit door");
         }
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            Debug.Log("Teleport Key AREA!");
+            teleportKey = collision.gameObject;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -134,6 +147,10 @@ public class PlayerMove : MonoBehaviour
         {
             reachedDoor = false;
         }
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            teleportKey = null;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -143,14 +160,10 @@ public class PlayerMove : MonoBehaviour
             Debug.LogWarning("sticky");
             canJump = false;
         }
-
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             Debug.Log("exit door");
         }
-
-       
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
