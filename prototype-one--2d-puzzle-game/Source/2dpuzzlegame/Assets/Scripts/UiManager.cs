@@ -31,16 +31,24 @@ public class UiManager : MonoBehaviour
         Debug.Log(keysCounterText.text);
     }
 
-    public void UpdateWonOrLostTextText(bool won)
+    public void UpdateWonOrLostText(string won)
     {
-        if (won)
+        if (won=="won")
         {
             WonOrLostText.text = "YOU WON";
         }
-        else
+        if (won == "lost")
         {
             WonOrLostText.text = "YOU LOST";
 
+        }
+        if (won == "switching")
+        {
+            WonOrLostText.text = "Choose the new player among the clones.";
+        }
+        else
+        {
+            WonOrLostText.text = "";
         }
         Debug.Log(WonOrLostText.text);
     }

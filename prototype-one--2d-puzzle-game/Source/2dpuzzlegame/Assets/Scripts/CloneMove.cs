@@ -11,6 +11,9 @@ public class CloneMove : MonoBehaviour
     private bool canJump;
     private bool canMove;
     //public Text counterText; // Too dirty!
+    public GameObject arrow;
+    public bool arrowActive;
+    public Vector3 position;
 
     public EventSystemCustom eventSystem;
 
@@ -18,6 +21,17 @@ public class CloneMove : MonoBehaviour
     {
         canJump = true;
         canMove = true;
+        arrowActive = false;
+    }
+    private void Update()
+    {
+        arrow.SetActive(arrowActive);
+        position = transform.position;
+    }
+
+    public void SwitchCloneAndCharacter(Vector3 SwitchPosition)
+    {
+        transform.position = SwitchPosition;
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
@@ -80,6 +94,10 @@ public class CloneMove : MonoBehaviour
             canJump = false;
             canMove = false;
 
+        }
+        if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            Destroy(this);
         }
     }
 

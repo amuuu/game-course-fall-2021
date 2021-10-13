@@ -19,8 +19,15 @@ public class PlayerMove : MonoBehaviour
     private GameObject keyToDestroy=null;
     public int keyCollectedCount=0;
     private bool WonOrNot=false;
+    private bool ReadyToSwitch=false;
+    public bool Switching=false;
     public EventSystemCustom eventSystem;
     public UiManager WonOrLostText;
+    public GameObject arrow;
+    public int chooseClone=0;
+    public CloneMove chosenClone;
+    private Vector3 tempPostion;
+
 
 
     private Vector3 moveVector;
@@ -34,56 +41,103 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
+        
+        if (Switching)
         {
-            transform.position += moveVector;
 
-            MoveClones(moveVector, true);
-
-            spriteRenderer.flipX = false;
-
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position -= moveVector;
-
-            MoveClones(moveVector, false);
-
-            spriteRenderer.flipX = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
-        {
-            rb.AddForce(transform.up * jumpAmount, ForceMode2D.Impulse);
-            JumpClones(jumpAmount);
-        }
-
-
-        // This was added to answer a question.
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Destroy(this.gameObject);
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (keyToDestroy)
+            if (Input.GetKeyDown(KeyCode.D))
             {
-                Destroy(keyToDestroy);
-                keyCollectedCount += 1;
-                eventSystem.OnKeyCollected.Invoke();
+                chooseClone += 1;
+                chooseClone %= cloneMoves.Length+1;
+                this.ArrowChange(chooseClone);
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                if (chooseClone == 0)
+                {
+                    chooseClone = cloneMoves.Length;
+                }
+                else
+                {
+                    chooseClone -= 1;
+                }
+                chooseClone %= cloneMoves.Length+1;
+                this.ArrowChange(chooseClone);
+
+            }
+
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Switching = false;
+                WonOrLostText.UpdateWonOrLostText("");
+                this.SwitchCloneAndCharacter();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.E) && WonOrNot)
+        else
         {
-            if (keyCollectedCount == 3)
+            
+
+            if (Input.GetKey(KeyCode.D))
             {
-                WonOrLostText.UpdateWonOrLostTextText(true);
-                Debug.Log("YOU WON");
+                transform.position += moveVector;
+
+                MoveClones(moveVector, true);
+
+                spriteRenderer.flipX = false;
+
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.position -= moveVector;
+
+                MoveClones(moveVector, false);
+
+                spriteRenderer.flipX = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && canJump)
+            {
+                rb.AddForce(transform.up * jumpAmount, ForceMode2D.Impulse);
+                JumpClones(jumpAmount);
+            }
+
+
+            // This was added to answer a question.
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                Destroy(this.gameObject);
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (keyToDestroy)
+                {
+                    Destroy(keyToDestroy);
+                    keyCollectedCount += 1;
+                    eventSystem.OnKeyCollected.Invoke();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && WonOrNot)
+            {
+                if (keyCollectedCount == 4)
+                {
+                    WonOrLostText.UpdateWonOrLostText("won");
+                    Debug.Log("YOU WON");
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && ReadyToSwitch)
+            {
+                Switching = true;
+                WonOrLostText.UpdateWonOrLostText("switching");
             }
         }
+        
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -100,7 +154,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
-            WonOrLostText.UpdateWonOrLostTextText(false);
+            WonOrLostText.UpdateWonOrLostText("lost");
             Debug.Log("DEATH ZONE");
         }
         
@@ -115,6 +169,11 @@ public class PlayerMove : MonoBehaviour
             keyToDestroy = collision.gameObject;
             
         }
+        if (collision.gameObject.CompareTag(TagNames.Switch.ToString()))
+        {
+            ReadyToSwitch = true;
+
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -122,6 +181,12 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.key.ToString()))
         {
             keyToDestroy = null;
+
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.Switch.ToString()))
+        {
+            ReadyToSwitch = false;
 
         }
     }
@@ -169,5 +234,44 @@ public class PlayerMove : MonoBehaviour
     {
         foreach (var c in cloneMoves)
             c.Jump(amount);
+    }
+    public void ArrowChange(int index)
+    {
+        if (index == 0)
+        {
+            foreach (var c in cloneMoves)
+                c.arrowActive=false;
+            arrow.SetActive(true);
+            chosenClone = null;
+        }
+        else
+        {
+            arrow.SetActive(false);
+            foreach (var c in cloneMoves)
+                if (c == cloneMoves[index - 1])
+                {
+                    c.arrowActive = true;
+                    chosenClone = c;
+                }
+                else
+                {
+                    c.arrowActive = false;
+                }
+        }
+    }
+
+    public void SwitchCloneAndCharacter()
+    {
+        if (chosenClone)
+        {
+            tempPostion = transform.position;
+            transform.position = chosenClone.position;
+            chosenClone.SwitchCloneAndCharacter(tempPostion);
+            foreach (var c in cloneMoves)
+                c.arrowActive = false;
+            arrow.SetActive(true);
+            chosenClone = null;
+        }
+        
     }
 }
