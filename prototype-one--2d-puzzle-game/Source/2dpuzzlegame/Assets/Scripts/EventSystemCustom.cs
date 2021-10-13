@@ -14,13 +14,15 @@ public class EventSystemCustom : MonoBehaviour
     public static EventSystemCustom current;
     public UnityEvent OnCloneStickyPlatformEnter;
     public MyIntEvent onKeyCollect;
-    public MyTextEvent onTextChange;
+    public MyTextEvent onHintChange;
+    public MyTextEvent onEndGame;
 
     void Awake()
     {
         current = this;
         OnCloneStickyPlatformEnter = new UnityEvent();
         onKeyCollect = new MyIntEvent();
-        onTextChange = new MyTextEvent();
+        onHintChange = new MyTextEvent();
+        onEndGame = new MyTextEvent();
     }
 }

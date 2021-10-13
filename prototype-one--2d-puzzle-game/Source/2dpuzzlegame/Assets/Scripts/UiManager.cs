@@ -14,7 +14,8 @@ public class UiManager : MonoBehaviour
         // EventManager.current.onKeyCollect += UpdateSaveKeysText;
         EventSystemCustom.current.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
         EventSystemCustom.current.onKeyCollect.AddListener(UpdateSaveKeysText);
-        EventSystemCustom.current.onTextChange.AddListener(UpdateHint);
+        EventSystemCustom.current.onHintChange.AddListener(UpdateHint);
+        EventSystemCustom.current.onEndGame.AddListener(UpdateEndGameText);
         savedKeysText.text = "0 keys";
         endGameText.text = "";
     }
@@ -36,12 +37,8 @@ public class UiManager : MonoBehaviour
         hint.text = text;
     }
 
-    public void EndGameTextWin()
+    public void UpdateEndGameText(string text)
     {
-        endGameText.text = "You Win!";
-    }
-    public void EndGameTextLose()
-    {
-        endGameText.text = "You Lose!\nNOOB!";
+        endGameText.text = text;
     }
 }

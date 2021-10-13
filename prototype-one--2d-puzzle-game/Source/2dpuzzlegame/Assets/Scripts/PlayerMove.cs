@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
 
+    private int MAX_KEYS = 5;
+    private bool onExitDoor;
     private GameObject _collectableObject;
     public int collectedKeys = 0;
     
@@ -71,6 +73,11 @@ public class PlayerMove : MonoBehaviour
                 _collectableObject.SetActive(false);
                 EventSystemCustom.current.onKeyCollect.Invoke(collectedKeys);
             }
+            else if(onExitDoor)
+            {
+                EventSystemCustom.current.onEndGame.Invoke("You Win");
+                
+            }
             
         }
 
@@ -90,6 +97,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            EventSystemCustom.current.onEndGame.Invoke("You Lost,Noob!");
         }
         
         else if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -103,7 +111,7 @@ public class PlayerMove : MonoBehaviour
             // collision.gameObject.SetActive(false);
             Debug.Log("KEY!");
             _collectableObject = collision.gameObject;
-            EventSystemCustom.current.onTextChange.Invoke("Press E to collect");
+            EventSystemCustom.current.onHintChange.Invoke("Press E to collect");
         }
     }
 
@@ -113,7 +121,7 @@ public class PlayerMove : MonoBehaviour
         {
             // collision.gameObject.SetActive(false);
             _collectableObject = null;
-            EventSystemCustom.current.onTextChange.Invoke("");
+            EventSystemCustom.current.onHintChange.Invoke("");
         }
     }
 
@@ -127,8 +135,16 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
-            Debug.Log("exit door");
-            EventSystemCustom.current.onTextChange.Invoke("Press E to exit");
+            if (collectedKeys == MAX_KEYS)
+            {
+                onExitDoor = true;
+                Debug.Log("exit door");
+                EventSystemCustom.current.onHintChange.Invoke("Press E to exit");
+            }
+            else
+            {
+                EventSystemCustom.current.onHintChange.Invoke("You need all Keys");
+            }
         }
     }
 
@@ -141,7 +157,8 @@ public class PlayerMove : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
-            EventSystemCustom.current.onTextChange.Invoke("");
+            onExitDoor = false;
+            EventSystemCustom.current.onHintChange.Invoke("");
         }
     }
 
