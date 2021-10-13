@@ -77,10 +77,16 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("DEATH ZONE");
         }
         
-        if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
+        else if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
+        }
+        
+        else if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            // collision.gameObject.SetActive(false);
+            Debug.Log("KEY!");
         }
     }
 
