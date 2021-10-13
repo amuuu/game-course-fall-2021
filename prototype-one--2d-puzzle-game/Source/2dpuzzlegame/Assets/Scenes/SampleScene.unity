@@ -2505,6 +2505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae8790765ef16145a1fbbba0ae28610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiManager: {fileID: 2110867661}
   factor: 0.005
   jumpAmount: 24
   spriteRenderer: {fileID: 1284564625}
