@@ -103,6 +103,7 @@ public class PlayerMove : MonoBehaviour
             // collision.gameObject.SetActive(false);
             Debug.Log("KEY!");
             _collectableObject = collision.gameObject;
+            EventSystemCustom.current.onTextChange.Invoke("Press E to collect");
         }
     }
 
@@ -112,6 +113,7 @@ public class PlayerMove : MonoBehaviour
         {
             // collision.gameObject.SetActive(false);
             _collectableObject = null;
+            EventSystemCustom.current.onTextChange.Invoke("");
         }
     }
 
@@ -126,6 +128,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             Debug.Log("exit door");
+            EventSystemCustom.current.onTextChange.Invoke("Press E to exit");
         }
     }
 
@@ -135,6 +138,10 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
+        }
+        else if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            EventSystemCustom.current.onTextChange.Invoke("");
         }
     }
 

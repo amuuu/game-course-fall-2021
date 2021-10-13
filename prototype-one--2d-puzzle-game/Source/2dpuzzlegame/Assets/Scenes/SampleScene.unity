@@ -3315,7 +3315,7 @@ GameObject:
   - component: {fileID: 1448630656}
   - component: {fileID: 1448630655}
   m_Layer: 5
-  m_Name: endGameText
+  m_Name: EndGameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3554,6 +3554,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onKeyCollect:
+    m_PersistentCalls:
+      m_Calls: []
+  onTextChange:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1587907883
@@ -4269,7 +4272,7 @@ GameObject:
   - component: {fileID: 1828901414}
   - component: {fileID: 1828901413}
   m_Layer: 5
-  m_Name: savedKeysText
+  m_Name: SavedKeysText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4570,7 +4573,7 @@ GameObject:
   - component: {fileID: 2032155105}
   - component: {fileID: 2032155104}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4627,7 +4630,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press E to collect
+  m_Text: 
 --- !u!222 &2032155105
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4916,6 +4919,7 @@ MonoBehaviour:
   counterText: {fileID: 588809072}
   endGameText: {fileID: 1448630655}
   savedKeysText: {fileID: 1828901413}
+  hint: {fileID: 2032155104}
 --- !u!1001 &2384001784456602377
 PrefabInstance:
   m_ObjectHideFlags: 0
