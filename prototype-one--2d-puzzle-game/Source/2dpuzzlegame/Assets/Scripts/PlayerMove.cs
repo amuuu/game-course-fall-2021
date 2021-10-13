@@ -16,6 +16,9 @@ public class PlayerMove : MonoBehaviour
 
     private bool canJump;
 
+    private GameObject keyToDestroy=null;
+    public int keyCollectedCount=0;
+
     private Vector3 moveVector;
     void Start()
     {
@@ -59,6 +62,15 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (keyToDestroy)
+            {
+                Destroy(keyToDestroy);
+                keyCollectedCount += 1;
+            }
+        }
+
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -82,6 +94,21 @@ public class PlayerMove : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.key.ToString()))
+        {
+            keyToDestroy = collision.gameObject;
+            
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.key.ToString()))
+        {
+            keyToDestroy = null;
+
         }
     }
 
