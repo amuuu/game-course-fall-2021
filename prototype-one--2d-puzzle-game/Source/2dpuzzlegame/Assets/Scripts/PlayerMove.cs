@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+    public EventSystemCustom eventSystem;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -62,10 +64,15 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            collectedKeys++;
-            _collectableObject.SetActive(false);
+            if (_collectableObject != null)
+            {
+                collectedKeys++;
+                _collectableObject.SetActive(false);
+                eventSystem.onKeyCollect.Invoke(collectedKeys);
+            }
+            
         }
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
@@ -97,6 +104,15 @@ public class PlayerMove : MonoBehaviour
             // collision.gameObject.SetActive(false);
             Debug.Log("KEY!");
             _collectableObject = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            // collision.gameObject.SetActive(false);
+            _collectableObject = null;
         }
     }
 
