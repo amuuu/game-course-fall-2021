@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+
+    private GameObject _collectableObject;
+    public int collectedKeys = 0;
+    
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
 
@@ -58,6 +62,11 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (Input.GetKey(KeyCode.E))
+        {
+            collectedKeys++;
+            _collectableObject.SetActive(false);
+        }
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -87,6 +96,7 @@ public class PlayerMove : MonoBehaviour
         {
             // collision.gameObject.SetActive(false);
             Debug.Log("KEY!");
+            _collectableObject = collision.gameObject;
         }
     }
 
