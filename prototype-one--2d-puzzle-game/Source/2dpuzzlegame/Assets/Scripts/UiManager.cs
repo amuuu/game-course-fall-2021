@@ -8,13 +8,12 @@ public class UiManager : MonoBehaviour
     [SerializeField] Text counterText;
     [SerializeField] Text endGameText;
     [SerializeField] Text savedKeysText;
-    public EventSystemCustom eventSystem;
 
     void Start()
     {
         // EventManager.current.onKeyCollect += UpdateSaveKeysText;
-        eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
-        eventSystem.onKeyCollect.AddListener(UpdateSaveKeysText);
+        EventSystemCustom.current.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
+        EventSystemCustom.current.onKeyCollect.AddListener(UpdateSaveKeysText);
         savedKeysText.text = "0 keys";
         endGameText.text = "";
     }

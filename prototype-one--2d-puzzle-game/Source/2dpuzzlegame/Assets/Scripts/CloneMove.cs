@@ -12,7 +12,6 @@ public class CloneMove : MonoBehaviour
     private bool canMove;
     //public Text counterText; // Too dirty!
 
-    public EventSystemCustom eventSystem;
 
     private void Awake()
     {
@@ -74,7 +73,7 @@ public class CloneMove : MonoBehaviour
             counterText.text = newTextValue.ToString();*/
 
             // This is used by UiManager
-            eventSystem.OnCloneStickyPlatformEnter.Invoke();
+            EventSystemCustom.current.OnCloneStickyPlatformEnter.Invoke();
             Debug.Log("OnCloneStickyPlatformEnter fired.");
 
             canJump = false;

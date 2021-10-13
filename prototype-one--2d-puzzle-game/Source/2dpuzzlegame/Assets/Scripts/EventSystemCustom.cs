@@ -8,13 +8,13 @@ public class MyIntEvent : UnityEvent<int> {}
 
 public class EventSystemCustom : MonoBehaviour
 {
-    // public static EventSystemCustom current;
+    public static EventSystemCustom current;
     public UnityEvent OnCloneStickyPlatformEnter;
     public MyIntEvent onKeyCollect;
 
     void Awake()
     {
-        // current = this;
+        current = this;
         OnCloneStickyPlatformEnter = new UnityEvent();
         onKeyCollect = new MyIntEvent();
     }

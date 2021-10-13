@@ -21,7 +21,6 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
-    public EventSystemCustom eventSystem;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -70,7 +69,7 @@ public class PlayerMove : MonoBehaviour
             {
                 collectedKeys++;
                 _collectableObject.SetActive(false);
-                eventSystem.onKeyCollect.Invoke(collectedKeys);
+                EventSystemCustom.current.onKeyCollect.Invoke(collectedKeys);
             }
             
         }
