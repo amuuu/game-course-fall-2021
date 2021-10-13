@@ -170,7 +170,6 @@ MonoBehaviour:
   isMovingSameDirection: 0
   spriteRenderer: {fileID: 15280476}
   rb: {fileID: 15280475}
-  eventSystem: {fileID: 1587907882}
 --- !u!61 &15280474
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1119,6 +1118,87 @@ Transform:
   m_Father: {fileID: 215710208}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &497639930
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 497639931}
+  - component: {fileID: 497639932}
+  m_Layer: 0
+  m_Name: door
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &497639931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497639930}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.304, y: -0.044, z: 0.33086777}
+  m_LocalScale: {x: 1, y: 1.2202015, z: 1}
+  m_Children: []
+  m_Father: {fileID: 944715664}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &497639932
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497639930}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 9ebde76ca4e575a47811ec87fe11931e, type: 3}
+  m_Color: {r: 0.2784314, g: 0.9372549, b: 0.972549, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,11 +1371,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1238345549}
+  - {fileID: 944715664}
   - {fileID: 1284564626}
   - {fileID: 1224677470}
   - {fileID: 1817514336}
   - {fileID: 1887954737}
-  - {fileID: 944715664}
   - {fileID: 1226641609}
   - {fileID: 215710208}
   m_Father: {fileID: 0}
@@ -1538,7 +1618,6 @@ MonoBehaviour:
   isMovingSameDirection: 1
   spriteRenderer: {fileID: 682665344}
   rb: {fileID: 682665343}
-  eventSystem: {fileID: 1587907882}
 --- !u!61 &682665342
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2036,8 +2115,9 @@ Transform:
   m_Children:
   - {fileID: 1720307048}
   - {fileID: 1386085606}
+  - {fileID: 497639931}
   m_Father: {fileID: 579317608}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1178392996
 GameObject:
@@ -2232,7 +2312,7 @@ Transform:
   - {fileID: 682665345}
   - {fileID: 15280472}
   m_Father: {fileID: 579317608}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1226641608
 GameObject:
@@ -2304,7 +2384,6 @@ MonoBehaviour:
   isMovingSameDirection: 1
   spriteRenderer: {fileID: 1233394730}
   rb: {fileID: 1233394729}
-  eventSystem: {fileID: 1587907882}
 --- !u!61 &1233394728
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2688,7 +2767,7 @@ Transform:
   m_Children:
   - {fileID: 2076619738}
   m_Father: {fileID: 579317608}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1284564627
 MonoBehaviour:
@@ -2709,7 +2788,6 @@ MonoBehaviour:
   rb: {fileID: 1284564628}
   clones: {fileID: 1224677469}
   cloneMoves: []
-  eventSystem: {fileID: 1587907882}
 --- !u!50 &1284564628
 Rigidbody2D:
   serializedVersion: 4
@@ -4177,7 +4255,7 @@ Transform:
   m_LocalScale: {x: 4.928125, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 579317608}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1828901411
 GameObject:
@@ -4316,7 +4394,7 @@ Transform:
   - {fileID: 404412548}
   - {fileID: 1709991719}
   m_Father: {fileID: 579317608}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1988720421
 GameObject:
@@ -4838,7 +4916,6 @@ MonoBehaviour:
   counterText: {fileID: 588809072}
   endGameText: {fileID: 1448630655}
   savedKeysText: {fileID: 1828901413}
-  eventSystem: {fileID: 1587907882}
 --- !u!1001 &2384001784456602377
 PrefabInstance:
   m_ObjectHideFlags: 0
