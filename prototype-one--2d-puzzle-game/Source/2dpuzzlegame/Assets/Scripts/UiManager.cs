@@ -7,6 +7,7 @@ public class UiManager : MonoBehaviour
 {
     public Text counterText;
     public Text keysCounterText;
+    public Text WonOrLostText;
     public EventSystemCustom eventSystem;
 
     void Start()
@@ -28,5 +29,19 @@ public class UiManager : MonoBehaviour
         int newTextValue = int.Parse(keysCounterText.text) + 1;
         keysCounterText.text = newTextValue.ToString();
         Debug.Log(keysCounterText.text);
+    }
+
+    public void UpdateWonOrLostTextText(bool won)
+    {
+        if (won)
+        {
+            WonOrLostText.text = "YOU WON";
+        }
+        else
+        {
+            WonOrLostText.text = "YOU LOST";
+
+        }
+        Debug.Log(WonOrLostText.text);
     }
 }

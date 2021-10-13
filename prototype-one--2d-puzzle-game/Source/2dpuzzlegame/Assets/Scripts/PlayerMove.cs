@@ -18,7 +18,9 @@ public class PlayerMove : MonoBehaviour
 
     private GameObject keyToDestroy=null;
     public int keyCollectedCount=0;
+    private bool WonOrNot=false;
     public EventSystemCustom eventSystem;
+    public UiManager WonOrLostText;
 
 
     private Vector3 moveVector;
@@ -74,6 +76,14 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && WonOrNot)
+        {
+            if (keyCollectedCount == 3)
+            {
+                WonOrLostText.UpdateWonOrLostTextText(true);
+                Debug.Log("YOU WON");
+            }
+        }
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -90,6 +100,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
+            WonOrLostText.UpdateWonOrLostTextText(false);
             Debug.Log("DEATH ZONE");
         }
         
@@ -126,6 +137,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             Debug.Log("exit door");
+            WonOrNot = true;
         }
 
        
@@ -138,6 +150,12 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            Debug.Log("exit door");
+            WonOrNot = false;
         }
     }
 
