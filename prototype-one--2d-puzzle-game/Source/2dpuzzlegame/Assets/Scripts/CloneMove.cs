@@ -7,6 +7,8 @@ public class CloneMove : MonoBehaviour
 {
     public bool isMovingSameDirection;
     public SpriteRenderer spriteRenderer;
+    public GameObject TeleportDestination;
+
     public Rigidbody2D rb;
     private bool canJump;
     private bool canMove;
@@ -61,6 +63,15 @@ public class CloneMove : MonoBehaviour
     {
         if (canJump)
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.TeleportSource.ToString()))
+        {
+            Debug.Log("Clone sucked into teleport source");
+            spriteRenderer.transform.position = new Vector2(TeleportDestination.transform.position.x, TeleportDestination.transform.position.y);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
