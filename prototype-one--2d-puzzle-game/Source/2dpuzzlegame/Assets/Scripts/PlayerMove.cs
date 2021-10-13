@@ -18,6 +18,8 @@ public class PlayerMove : MonoBehaviour
 
     private GameObject keyToDestroy=null;
     public int keyCollectedCount=0;
+    public EventSystemCustom eventSystem;
+
 
     private Vector3 moveVector;
     void Start()
@@ -68,6 +70,7 @@ public class PlayerMove : MonoBehaviour
             {
                 Destroy(keyToDestroy);
                 keyCollectedCount += 1;
+                eventSystem.OnKeyCollected.Invoke();
             }
         }
 
