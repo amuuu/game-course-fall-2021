@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,10 +24,9 @@ public class UiManager : MonoBehaviour
         int newTextValue = int.Parse(counterText.text) + 1;
             counterText.text = newTextValue.ToString();
     }
-    public void UpdateCollectedKeysCounterText()
+    public void UpdateCollectedKeysCounterText(int newTextValue)
     {
         Debug.Log("UPDATE keys count");
-        int newTextValue = int.Parse(collectedKeysCounterText.text) + 1;
         collectedKeysCounterText.text = newTextValue.ToString();
     }
     public void ShowWinText()

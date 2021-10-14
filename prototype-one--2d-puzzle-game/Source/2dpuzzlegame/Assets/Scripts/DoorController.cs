@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DoorController : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class DoorController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        KeysNeededText.text = NumberOfKeysNeeded.ToString();
+        eventSystem.OnKeyPickup.AddListener(UpdateKeysNeededColor);
     }
 
     // Update is called once per frame
@@ -34,4 +36,14 @@ public class DoorController : MonoBehaviour
     }
 
     //method to show needed keys count on top of door
+    void UpdateKeysNeededColor(int keyCount){
+        if(keyCount >= NumberOfKeysNeeded){
+            KeysNeededText.color = Color.green;
+            KeyIcon.color = Color.green;
+        }
+        else{
+            KeysNeededText.color = Color.red;
+            KeyIcon.color = Color.red;
+        }
+    }
 }

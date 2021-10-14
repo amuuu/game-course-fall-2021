@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -61,8 +61,8 @@ public class PlayerMove : MonoBehaviour
             if (adjacentKey != null)
             {
                 Debug.Log("pick the key up dude!");
-                eventSystem.OnKeyPickup.Invoke();
                 collectedKeysCount++;
+                eventSystem.OnKeyPickup.Invoke(collectedKeysCount);
                 adjacentKey.SetActive(false);
             }
             if (adjacentDoor != null)
