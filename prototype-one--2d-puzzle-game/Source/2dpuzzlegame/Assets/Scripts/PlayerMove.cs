@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject clones;
     public CloneMove[] cloneMoves;
+    public GameObject[] keys; 
 
     private bool canJump;
 
@@ -20,10 +21,14 @@ public class PlayerMove : MonoBehaviour
     public int keyCollectedCount=0;
     private bool WonOrNot=false;
     private bool ReadyToSwitch=false;
+    private bool ReadyToTransport=false;
+    private GameObject ReadyToCollectTransportKey;
+    public bool CollectTransportKey = false;
     public bool Switching=false;
     public EventSystemCustom eventSystem;
     public UiManager WonOrLostText;
     public GameObject arrow;
+    public GameObject DestinationDoor;
     public int chooseClone=0;
     public CloneMove chosenClone;
     private Vector3 tempPostion;
@@ -126,17 +131,27 @@ public class PlayerMove : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E) && WonOrNot)
             {
-                if (keyCollectedCount == 4)
+                if (keyCollectedCount == keys.Length)
                 {
-                    WonOrLostText.UpdateWonOrLostText("won");
+                    WonOrLostText.UpdateWonOrLostText("YOU WON");
                     Debug.Log("YOU WON");
                 }
+            }
+            if (Input.GetKeyDown(KeyCode.E) && ReadyToCollectTransportKey)
+            {
+                CollectTransportKey = true;
+                ReadyToCollectTransportKey.SetActive(false);
             }
 
             if (Input.GetKeyDown(KeyCode.E) && ReadyToSwitch)
             {
                 Switching = true;
-                WonOrLostText.UpdateWonOrLostText("switching");
+                WonOrLostText.UpdateWonOrLostText("Choose the new player among the clones.");
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && ReadyToTransport && CollectTransportKey)
+            {
+                transform.position = DestinationDoor.transform.position;
             }
         }
         
@@ -156,7 +171,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
-            WonOrLostText.UpdateWonOrLostText("lost");
+            WonOrLostText.UpdateWonOrLostText("YOU LOST");
             Debug.Log("DEATH ZONE");
         }
         
@@ -171,9 +186,19 @@ public class PlayerMove : MonoBehaviour
             keyToDestroy = collision.gameObject;
             
         }
+        if (collision.gameObject.CompareTag(TagNames.transportKey.ToString()))
+        {
+            ReadyToCollectTransportKey = collision.gameObject;
+
+        }
         if (collision.gameObject.CompareTag(TagNames.Switch.ToString()))
         {
             ReadyToSwitch = true;
+
+        }
+        if (collision.gameObject.CompareTag(TagNames.EnterTransportDoor.ToString()))
+        {
+            ReadyToTransport = true;
 
         }
     }
@@ -185,10 +210,20 @@ public class PlayerMove : MonoBehaviour
             keyToDestroy = null;
 
         }
+        if (collision.gameObject.CompareTag(TagNames.transportKey.ToString()))
+        {
+            ReadyToCollectTransportKey = null;
+
+        }
 
         if (collision.gameObject.CompareTag(TagNames.Switch.ToString()))
         {
             ReadyToSwitch = false;
+
+        }
+        if (collision.gameObject.CompareTag(TagNames.EnterTransportDoor.ToString()))
+        {
+            ReadyToTransport = false;
 
         }
     }

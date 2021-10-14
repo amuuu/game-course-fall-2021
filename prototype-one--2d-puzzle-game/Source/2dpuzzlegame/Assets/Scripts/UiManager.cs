@@ -33,23 +33,8 @@ public class UiManager : MonoBehaviour
 
     public void UpdateWonOrLostText(string won)
     {
-        if (won=="won")
-        {
-            WonOrLostText.text = "YOU WON";
-        }
-        if (won == "lost")
-        {
-            WonOrLostText.text = "YOU LOST";
-
-        }
-        if (won == "switching")
-        {
-            WonOrLostText.text = "Choose the new player among the clones.";
-        }
-        else
-        {
-            WonOrLostText.text = "";
-        }
+        
+        WonOrLostText.text = won;
         Debug.Log(WonOrLostText.text);
     }
 }

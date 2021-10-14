@@ -10,6 +10,8 @@ TagManager:
   - CollectableItem
   - key
   - Switch
+  - transportKey
+  - EnterTransportDoor
   layers:
   - Default
   - TransparentFX
