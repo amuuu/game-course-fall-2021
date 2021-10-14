@@ -9,7 +9,7 @@ public class UiManager : MonoBehaviour
 {
     public Text counterText, keyCounterText;
     public EventSystemCustom eventSystem;
-    public GameObject pickupMessagePanel, activateMessagePanel;
+    public GameObject pickupMessagePanel, activateMessagePanel, endScreenPanel;
     public PlayerMove mainCharacter;
 
     void Start()
@@ -20,6 +20,8 @@ public class UiManager : MonoBehaviour
         UnityEngine.Events.UnityAction OpenActivateMessagePanel = () => activateMessagePanel.SetActive(true);
         UnityEngine.Events.UnityAction CloseActivateMessagePanel = () => activateMessagePanel.SetActive(false);
 
+        UnityEngine.Events.UnityAction OpenFinishedLevelPanel = () => endScreenPanel.SetActive(true);
+
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
 
         eventSystem.OnCharacterNearObjectEnter.AddListener(OpenPickupMessagePanel);
@@ -28,6 +30,8 @@ public class UiManager : MonoBehaviour
 
         eventSystem.OnCharacterExitDoorEnter.AddListener(OpenActivateMessagePanel);
         eventSystem.OnCharacterExitDoorExit.AddListener(CloseActivateMessagePanel);
+
+        eventSystem.OnFinishedLevel.AddListener(OpenFinishedLevelPanel);
     }
 
     private void UpdateKeyText()

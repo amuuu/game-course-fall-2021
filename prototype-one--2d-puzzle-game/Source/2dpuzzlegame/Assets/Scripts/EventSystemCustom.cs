@@ -7,7 +7,9 @@ public class EventSystemCustom : MonoBehaviour
 {
     public UnityEvent OnCloneStickyPlatformEnter, 
         OnAccquiredKey, OnCharacterNearObjectEnter, OnCharacterNearObjectExit,  //key logic
-        OnCharacterExitDoorEnter, OnCharacterExitDoorExit;                      //exit door logic
+        OnCharacterExitDoorEnter, OnCharacterExitDoorExit,                       //exit door logic
+        OnFinishedLevel
+        ;
 
     void Awake()
     {
@@ -19,5 +21,7 @@ public class EventSystemCustom : MonoBehaviour
 
         OnCharacterExitDoorEnter = new UnityEvent();
         OnCharacterExitDoorExit = new UnityEvent();
+
+        OnFinishedLevel = new UnityEvent();
     }
 }

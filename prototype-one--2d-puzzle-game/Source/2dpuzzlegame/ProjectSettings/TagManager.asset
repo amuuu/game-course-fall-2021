@@ -10,6 +10,8 @@ TagManager:
   - CollectableItem
   - Key
   - MainPlayer
+  - KeyParent
+  - EndScreen
   layers:
   - Default
   - TransparentFX

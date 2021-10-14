@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
-    public int accquiredKeys;
+    public int totalKeys, accquiredKeys;
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour
     public GameObject keys;
 
     private bool canJump;
-    private bool isNearKey;
+    private bool isNearKey, isNearExitDoor;
     private Collider2D nearbyKey;
 
     private Vector3 moveVector;
@@ -29,10 +29,12 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+        totalKeys = GameObject.FindGameObjectWithTag(TagNames.KeyParent.ToString()).transform.childCount;
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
         isNearKey = false;
+        isNearExitDoor = false;
         nearbyKey = null;
         accquiredKeys = 0;
     }
@@ -72,9 +74,11 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) &&
             isNearKey)
-        {
             PickupKey();
-        }
+
+        if (Input.GetKeyDown(KeyCode.E) &&
+            isNearExitDoor && accquiredKeys == totalKeys)
+            eventSystem.OnFinishedLevel.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -119,6 +123,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             eventSystem.OnCharacterExitDoorEnter.Invoke();
+            isNearExitDoor = true;
         }
     }
 
@@ -133,6 +138,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             eventSystem.OnCharacterExitDoorExit.Invoke();
+            isNearExitDoor = false;
         }
     }
 
