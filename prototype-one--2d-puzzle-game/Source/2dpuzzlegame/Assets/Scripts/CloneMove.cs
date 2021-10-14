@@ -95,10 +95,7 @@ public class CloneMove : MonoBehaviour
             canMove = false;
 
         }
-        if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
-        {
-            Destroy(this);
-        }
+        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -107,6 +104,18 @@ public class CloneMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+            canMove = true;
+
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            //rb.gameObject.SetActive(false);
+            Destroy(this.gameObject);
+
         }
     }
 }

@@ -33,7 +33,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 moveVector;
     void Start()
     {
-        cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+        //cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
@@ -41,7 +41,9 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        
+        cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+
+
         if (Switching)
         {
 
