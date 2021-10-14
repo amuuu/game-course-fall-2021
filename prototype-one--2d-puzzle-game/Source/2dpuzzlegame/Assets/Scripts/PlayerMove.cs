@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -98,6 +98,7 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("DEATH ZONE");
             //invoke event to show lose text
+            eventSystem.OnDeathZoneEnter.Invoke();
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))

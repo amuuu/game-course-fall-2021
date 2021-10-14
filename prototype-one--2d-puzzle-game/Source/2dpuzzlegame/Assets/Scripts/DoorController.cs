@@ -1,10 +1,13 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
     public int NumberOfKeysNeeded;
+    public EventSystemCustom eventSystem;
+    public TextMesh KeysNeededText;
+    public SpriteRenderer KeyIcon;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,7 @@ public class DoorController : MonoBehaviour
         if (keysCount >= NumberOfKeysNeeded){
             Debug.Log("door opened");
             //invoke event to show win text
+            eventSystem.OnDoorOpened.Invoke();
             return true;
         }
         Debug.Log("keys not enough!");
