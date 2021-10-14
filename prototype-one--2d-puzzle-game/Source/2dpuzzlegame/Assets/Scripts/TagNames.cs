@@ -11,6 +11,6 @@ public enum TagNames
     Key,
     MainPlayer,
     KeyParent,
-    EndScreen,
+    WinScreen,
 }
     

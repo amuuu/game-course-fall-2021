@@ -78,20 +78,19 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) &&
             isNearExitDoor && accquiredKeys == totalKeys)
-            eventSystem.OnFinishedLevel.Invoke();
+            eventSystem.OnWon.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
-            Debug.Log("DEATH ZONE");
+            eventSystem.OnLost.Invoke();
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
-            Debug.Log("POTION!");
         }
 
         if (collision.gameObject.CompareTag(TagNames.Key.ToString()))

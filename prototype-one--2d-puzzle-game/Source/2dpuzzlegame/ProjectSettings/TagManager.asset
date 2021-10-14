@@ -11,7 +11,8 @@ TagManager:
   - Key
   - MainPlayer
   - KeyParent
-  - EndScreen
+  - WinScreen
+  - LostScreen
   layers:
   - Default
   - TransparentFX

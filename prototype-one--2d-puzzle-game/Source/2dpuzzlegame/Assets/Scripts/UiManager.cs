@@ -9,7 +9,7 @@ public class UiManager : MonoBehaviour
 {
     public Text counterText, keyCounterText;
     public EventSystemCustom eventSystem;
-    public GameObject pickupMessagePanel, activateMessagePanel, endScreenPanel;
+    public GameObject pickupMessagePanel, activateMessagePanel, wonScreenPanel, lostScreenPanel;
     public PlayerMove mainCharacter;
 
     void Start()
@@ -20,8 +20,11 @@ public class UiManager : MonoBehaviour
         UnityEngine.Events.UnityAction OpenActivateMessagePanel = () => activateMessagePanel.SetActive(true);
         UnityEngine.Events.UnityAction CloseActivateMessagePanel = () => activateMessagePanel.SetActive(false);
 
-        UnityEngine.Events.UnityAction OpenFinishedLevelPanel = () => endScreenPanel.SetActive(true);
+        UnityEngine.Events.UnityAction OpenWonLevelPanel = () => wonScreenPanel.SetActive(true);
+        UnityEngine.Events.UnityAction OpenLostLevelPanel = () => lostScreenPanel.SetActive(true);
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
 
         eventSystem.OnCharacterNearObjectEnter.AddListener(OpenPickupMessagePanel);
@@ -31,7 +34,8 @@ public class UiManager : MonoBehaviour
         eventSystem.OnCharacterExitDoorEnter.AddListener(OpenActivateMessagePanel);
         eventSystem.OnCharacterExitDoorExit.AddListener(CloseActivateMessagePanel);
 
-        eventSystem.OnFinishedLevel.AddListener(OpenFinishedLevelPanel);
+        eventSystem.OnWon.AddListener(OpenWonLevelPanel);
+        eventSystem.OnLost.AddListener(OpenLostLevelPanel);
     }
 
     private void UpdateKeyText()

@@ -6,9 +6,9 @@ using UnityEngine.Events;
 public class EventSystemCustom : MonoBehaviour
 {
     public UnityEvent OnCloneStickyPlatformEnter, 
-        OnAccquiredKey, OnCharacterNearObjectEnter, OnCharacterNearObjectExit,  //key logic
-        OnCharacterExitDoorEnter, OnCharacterExitDoorExit,                       //exit door logic
-        OnFinishedLevel
+        OnAccquiredKey, OnCharacterNearObjectEnter, OnCharacterNearObjectExit,  // Key 
+        OnCharacterExitDoorEnter, OnCharacterExitDoorExit,                      // Exit door 
+        OnWon, OnLost                                                           // Finished game 
         ;
 
     void Awake()
@@ -22,6 +22,7 @@ public class EventSystemCustom : MonoBehaviour
         OnCharacterExitDoorEnter = new UnityEvent();
         OnCharacterExitDoorExit = new UnityEvent();
 
-        OnFinishedLevel = new UnityEvent();
+        OnWon = new UnityEvent();
+        OnLost = new UnityEvent();
     }
 }
