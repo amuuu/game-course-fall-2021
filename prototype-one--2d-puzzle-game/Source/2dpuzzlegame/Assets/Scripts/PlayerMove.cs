@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 moveVector;
     public EventSystemCustom eventSystem;
-    GameObject adjacentKey;
+    GameObject adjacentKey, adjacentDoor;
     int collectedKeysCount = 0;
     void Start()
     {
@@ -56,12 +56,22 @@ public class PlayerMove : MonoBehaviour
             JumpClones(jumpAmount);
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && adjacentKey != null)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("pick the key up dude!");
-            eventSystem.OnKeyPickup.Invoke();
-            collectedKeysCount++;
-            adjacentKey.SetActive(false);
+            if (adjacentKey != null)
+            {
+                Debug.Log("pick the key up dude!");
+                collectedKeysCount++;
+                eventSystem.OnKeyPickup.Invoke(collectedKeysCount);
+                adjacentKey.SetActive(false);
+            }
+            if (adjacentDoor != null)
+            {
+                var doorController = adjacentDoor.GetComponent<DoorController>();
+                if (doorController.OpenDoor(collectedKeysCount))
+                    this.gameObject.SetActive(false);
+                // game ends if door opens so no need to update key counter text
+            }
         }
 
         // This was added to answer a question.
@@ -87,6 +97,8 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            //invoke event to show lose text
+            eventSystem.OnDeathZoneEnter.Invoke();
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -100,6 +112,12 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("next to key!");
             adjacentKey = collision.gameObject;
         }
+        
+        if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
+        {
+            Debug.Log("next to door!");
+            adjacentDoor = collision.gameObject;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision){
@@ -107,6 +125,11 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("NOT next to key!");
             adjacentKey = null;
+        }
+        if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
+        {
+            Debug.Log("NOT next to door!");
+            adjacentDoor = null;
         }
     }
 
