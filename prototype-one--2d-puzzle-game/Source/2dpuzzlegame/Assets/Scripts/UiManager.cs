@@ -27,7 +27,7 @@ public class UiManager : MonoBehaviour
         eventSystem.OnAccquiredKey.AddListener(UpdateKeyText);
 
         eventSystem.OnCharacterExitDoorEnter.AddListener(OpenActivateMessagePanel);
-        eventSystem.OnCharacterExitDoorEnter.AddListener(CloseActivateMessagePanel);
+        eventSystem.OnCharacterExitDoorExit.AddListener(CloseActivateMessagePanel);
     }
 
     private void UpdateKeyText()

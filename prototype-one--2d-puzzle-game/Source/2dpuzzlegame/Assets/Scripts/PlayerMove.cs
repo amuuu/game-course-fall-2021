@@ -119,7 +119,6 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             eventSystem.OnCharacterExitDoorEnter.Invoke();
-            Debug.Log("exit");
         }
     }
 
@@ -134,7 +133,6 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             eventSystem.OnCharacterExitDoorExit.Invoke();
-            Debug.Log("door");
         }
     }
 
