@@ -21,7 +21,7 @@ public class CloneMove : MonoBehaviour
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
-        if (!canMove)
+        if (!canMove || spriteRenderer == null)
             return;
 
         int factor = 1;
@@ -59,7 +59,7 @@ public class CloneMove : MonoBehaviour
 
     public void Jump(float amount)
     {
-        if (canJump)
+        if (canJump && spriteRenderer != null)
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
     }
 
@@ -89,6 +89,16 @@ public class CloneMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+            canMove = true;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
