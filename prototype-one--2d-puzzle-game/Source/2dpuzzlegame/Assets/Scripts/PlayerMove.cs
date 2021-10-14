@@ -17,12 +17,16 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+    public EventSystemCustom eventSystem;
+    GameObject adjacentKey;
+    int collectedKeysCount = 0;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
+        adjacentKey = null;
     }
 
     void Update()
@@ -52,6 +56,13 @@ public class PlayerMove : MonoBehaviour
             JumpClones(jumpAmount);
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && adjacentKey != null)
+        {
+            Debug.Log("pick the key up dude!");
+            eventSystem.OnKeyPickup.Invoke();
+            collectedKeysCount++;
+            adjacentKey.SetActive(false);
+        }
 
         // This was added to answer a question.
         if (Input.GetKeyDown(KeyCode.Z))
@@ -82,6 +93,20 @@ public class PlayerMove : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
+        }
+        
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            Debug.Log("next to key!");
+            adjacentKey = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision){
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            Debug.Log("NOT next to key!");
+            adjacentKey = null;
         }
     }
 
