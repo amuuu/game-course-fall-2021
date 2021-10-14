@@ -92,7 +92,7 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
         {
-            eventSystem.OneCharacterNearObjectEnter.Invoke();
+            eventSystem.OnCharacterNearObjectEnter.Invoke();
             isNearKey = true;
             nearbyKey = collision;
         }
@@ -102,7 +102,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
         {
-            eventSystem.OneCharacterNearObjectExit.Invoke();
+            eventSystem.OnCharacterNearObjectExit.Invoke();
             isNearKey = false;
             nearbyKey = null;
         }
@@ -118,7 +118,8 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
-            Debug.Log("exit door");
+            eventSystem.OnCharacterExitDoorEnter.Invoke();
+            Debug.Log("exit");
         }
     }
 
@@ -128,6 +129,12 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            eventSystem.OnCharacterExitDoorExit.Invoke();
+            Debug.Log("door");
         }
     }
 

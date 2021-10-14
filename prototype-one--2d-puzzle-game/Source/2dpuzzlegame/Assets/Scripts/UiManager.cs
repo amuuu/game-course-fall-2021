@@ -7,39 +7,37 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    public Text counterText, keyCounterText, messagePanelText;
+    public Text counterText, keyCounterText;
     public EventSystemCustom eventSystem;
-    public GameObject messagePanel;
+    public GameObject pickupMessagePanel, activateMessagePanel;
     public PlayerMove mainCharacter;
 
     void Start()
     {
+        UnityEngine.Events.UnityAction OpenPickupMessagePanel = () => pickupMessagePanel.SetActive(true);
+        UnityEngine.Events.UnityAction ClosePickupMessagePanel = () => pickupMessagePanel.SetActive(false);
+
+        UnityEngine.Events.UnityAction OpenActivateMessagePanel = () => activateMessagePanel.SetActive(true);
+        UnityEngine.Events.UnityAction CloseActivateMessagePanel = () => activateMessagePanel.SetActive(false);
+
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
-        eventSystem.OneCharacterNearObjectEnter.AddListener(OpenMessagePanel);
-        eventSystem.OneCharacterNearObjectExit.AddListener(CloseMessagePanel);
+
+        eventSystem.OnCharacterNearObjectEnter.AddListener(OpenPickupMessagePanel);
+        eventSystem.OnCharacterNearObjectExit.AddListener(ClosePickupMessagePanel);
         eventSystem.OnAccquiredKey.AddListener(UpdateKeyText);
+
+        eventSystem.OnCharacterExitDoorEnter.AddListener(OpenActivateMessagePanel);
+        eventSystem.OnCharacterExitDoorEnter.AddListener(CloseActivateMessagePanel);
     }
 
     private void UpdateKeyText()
     {
-        //Debug.Log("UPDATE KEYS");
         keyCounterText.text = "Collected " + mainCharacter.accquiredKeys.ToString() + " keys";
     }
 
     public void UpdateScoreText()
     {
-        //Debug.Log("UPDATE SCORE");
         int newTextValue = int.Parse(Regex.Match(counterText.text, @"\d+").Value) + 1;
             counterText.text = "Clone mfs touched the sticky platform " + newTextValue.ToString() + " times";
-    }
-
-    public void OpenMessagePanel()
-    {
-        messagePanel.SetActive(true);
-    }
-
-    public void CloseMessagePanel()
-    {
-        messagePanel.SetActive(false);
     }
 }
