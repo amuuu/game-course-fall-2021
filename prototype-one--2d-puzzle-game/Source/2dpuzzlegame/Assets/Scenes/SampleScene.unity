@@ -171,6 +171,7 @@ MonoBehaviour:
   isMovingSameDirection: 0
   spriteRenderer: {fileID: 15280476}
   rb: {fileID: 15280475}
+  myArrow: {fileID: 0}
   eventSystem: {fileID: 1587907882}
 --- !u!61 &15280474
 BoxCollider2D:
@@ -431,6 +432,84 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &202336204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 202336205}
+  - component: {fileID: 202336207}
+  - component: {fileID: 202336206}
+  m_Layer: 5
+  m_Name: CharSwitchMessagePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &202336205
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202336204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2110867660}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0000061989, y: -178.66}
+  m_SizeDelta: {x: 609.4772, y: 83.932495}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &202336206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202336204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.99173784, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 10
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 20
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Choose the new player amongst the clones
+--- !u!222 &202336207
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202336204}
+  m_CullTransparentMesh: 0
 --- !u!1 &220828697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,6 +1745,7 @@ MonoBehaviour:
   isMovingSameDirection: 1
   spriteRenderer: {fileID: 682665344}
   rb: {fileID: 682665343}
+  myArrow: {fileID: 0}
   eventSystem: {fileID: 1587907882}
 --- !u!61 &682665342
 BoxCollider2D:
@@ -3354,6 +3434,7 @@ MonoBehaviour:
   isMovingSameDirection: 1
   spriteRenderer: {fileID: 1233394730}
   rb: {fileID: 1233394729}
+  myArrow: {fileID: 0}
   eventSystem: {fileID: 1587907882}
 --- !u!61 &1233394728
 BoxCollider2D:
@@ -3653,6 +3734,7 @@ MonoBehaviour:
   rb: {fileID: 1284564628}
   clones: {fileID: 1224677469}
   cloneMoves: []
+  myArrow: {fileID: 0}
   keys: {fileID: 1036261569}
   eventSystem: {fileID: 1587907882}
 --- !u!50 &1284564628
@@ -4076,6 +4158,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnCharacterNearObjectExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCharSwtchEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCharSwtchExit:
     m_PersistentCalls:
       m_Calls: []
   OnCharacterExitDoorEnter:
@@ -5779,6 +5867,7 @@ RectTransform:
   - {fileID: 1840826796}
   - {fileID: 940260879}
   - {fileID: 2116687291}
+  - {fileID: 202336205}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5806,6 +5895,7 @@ MonoBehaviour:
   activateMessagePanel: {fileID: 1840826795}
   wonScreenPanel: {fileID: 940260878}
   lostScreenPanel: {fileID: 2116687290}
+  CharSwitchPanel: {fileID: 202336204}
   mainCharacter: {fileID: 1284564627}
 --- !u!1 &2116687290
 GameObject:

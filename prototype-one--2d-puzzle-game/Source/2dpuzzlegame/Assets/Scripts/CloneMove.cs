@@ -11,7 +11,7 @@ public class CloneMove : MonoBehaviour
     private bool canJump;
     private bool canMove;
 
-    private GameObject myArrow;
+    public GameObject myArrow;
 
     public EventSystemCustom eventSystem;
 

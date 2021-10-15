@@ -9,13 +9,16 @@ public class UiManager : MonoBehaviour
 {
     public Text counterText, keyCounterText;
     public EventSystemCustom eventSystem;
-    public GameObject pickupMessagePanel, activateMessagePanel, wonScreenPanel, lostScreenPanel;
+    public GameObject pickupMessagePanel, activateMessagePanel, wonScreenPanel, lostScreenPanel, CharSwitchPanel;
     public PlayerMove mainCharacter;
 
     void Start()
     {
         UnityEngine.Events.UnityAction OpenPickupMessagePanel = () => pickupMessagePanel.SetActive(true);
         UnityEngine.Events.UnityAction ClosePickupMessagePanel = () => pickupMessagePanel.SetActive(false);
+
+        UnityEngine.Events.UnityAction OpenCharSwitchMessagePanel = () => CharSwitchPanel.SetActive(true);
+        UnityEngine.Events.UnityAction CloseCharSwitchMessagePanel = () => CharSwitchPanel.SetActive(false);
 
         UnityEngine.Events.UnityAction OpenActivateMessagePanel = () => activateMessagePanel.SetActive(true);
         UnityEngine.Events.UnityAction CloseActivateMessagePanel = () => activateMessagePanel.SetActive(false);
@@ -30,6 +33,9 @@ public class UiManager : MonoBehaviour
         eventSystem.OnCharacterNearObjectEnter.AddListener(OpenPickupMessagePanel);
         eventSystem.OnCharacterNearObjectExit.AddListener(ClosePickupMessagePanel);
         eventSystem.OnAccquiredKey.AddListener(UpdateKeyText);
+
+        eventSystem.OnCharSwtchEnter.AddListener(OpenCharSwitchMessagePanel);
+        eventSystem.OnCharSwtchExit.AddListener(CloseCharSwitchMessagePanel);
 
         eventSystem.OnCharacterExitDoorEnter.AddListener(OpenActivateMessagePanel);
         eventSystem.OnCharacterExitDoorExit.AddListener(CloseActivateMessagePanel);

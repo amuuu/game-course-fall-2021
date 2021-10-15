@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
     public List<CloneMove> cloneMoves;
     int currActiveArrow;
 
+    public GameObject myArrow;
     public GameObject keys;
 
     private bool canJump, canSwitchCharacter, isInSwitchChatMode;
@@ -42,6 +43,8 @@ public class PlayerMove : MonoBehaviour
         nearbyKey = null;
         accquiredKeys = 0;
         currActiveArrow = 0;
+
+        myArrow = transform.GetChild(0).gameObject;
     }
 
     void Update()
@@ -62,12 +65,12 @@ public class PlayerMove : MonoBehaviour
                 return;
 
             if (currActiveArrow == 0)
-                transform.GetChild(0).gameObject.SetActive(false);
+                myArrow.SetActive(false);
 
             else
-                cloneMoves[currActiveArrow - 1].gameObject.transform.GetChild(0).gameObject.SetActive(false);
+                cloneMoves[currActiveArrow - 1].myArrow.SetActive(false);
 
-            cloneMoves[currActiveArrow].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            cloneMoves[currActiveArrow].myArrow.SetActive(true);
             currActiveArrow++;
         }
 
@@ -77,17 +80,33 @@ public class PlayerMove : MonoBehaviour
                 return;
 
             if (currActiveArrow == 1)
-                transform.GetChild(0).gameObject.SetActive(true);
+                myArrow.SetActive(true);
 
             else
-                cloneMoves[currActiveArrow - 2].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                cloneMoves[currActiveArrow - 2].myArrow.SetActive(true);
             
-            cloneMoves[currActiveArrow - 1].gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            cloneMoves[currActiveArrow - 1].myArrow.SetActive(false);
             currActiveArrow--;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-            ExitSwitchCharacterMode();
+        if (Input.GetKeyDown(KeyCode.Space))
+            SwitchCharacter();
+    }
+
+    private void SwitchCharacter()
+    {
+        if (currActiveArrow != 0)
+        {
+            var mainCharOriginalPosition = transform.position;
+            transform.position = cloneMoves[currActiveArrow - 1].transform.position;
+            cloneMoves[currActiveArrow - 1].transform.position = mainCharOriginalPosition;
+
+            myArrow.SetActive(true);
+            cloneMoves[currActiveArrow - 1].myArrow.SetActive(false);
+        }
+
+        currActiveArrow = 0;
+        ExitSwitchCharacterMode();
     }
 
     private void NormalControls()
@@ -138,12 +157,16 @@ public class PlayerMove : MonoBehaviour
     {
         Time.timeScale = 0;
         isInSwitchChatMode = true;
+
+        eventSystem.OnCharSwtchEnter.Invoke();
     }
 
     private void ExitSwitchCharacterMode()
     {
         Time.timeScale = 1;
         isInSwitchChatMode = false;
+    
+        eventSystem.OnCharSwtchExit.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
