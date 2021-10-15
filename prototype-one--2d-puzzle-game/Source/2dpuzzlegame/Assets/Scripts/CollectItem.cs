@@ -5,6 +5,7 @@ public class CollectItem : MonoBehaviour
     public int keyNumber;       // Number of keys that we have collected
     public float distFromKey;   // Minimum distance from keys to be able to collect them
     public GameObject[] keys;   // Array of keys in the scene
+    public EventSystemCustom eventSystem;
 
     void Update()
     {
@@ -25,6 +26,8 @@ public class CollectItem : MonoBehaviour
                     keys[i].SetActive(false);
                     // Increase number of keys that we have
                     keyNumber++;
+                    // Invoke increase key number text signal
+                    eventSystem.onGetKey.Invoke();
                 }
             }
         }
