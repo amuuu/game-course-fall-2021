@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
     public Text keyNumber;
     public GameObject winText;
     public GameObject winDoor;
+    public GameObject deathZone;
 
     private bool canJump;
     private bool inExitPos;
@@ -71,7 +72,6 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && inExitPos)
         {
             dist = Mathf.Abs(transform.position.x - winDoor.transform.position.x);
-            Debug.Log(dist);
             if (int.Parse(keyNumber.text) > 0 && dist < doordist)
             {
                 winText.SetActive(true);
@@ -97,6 +97,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
+            deathZone.SetActive(true);
             Debug.Log("DEATH ZONE");
         }
         
