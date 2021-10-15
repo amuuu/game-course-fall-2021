@@ -10,7 +10,8 @@ public class CloneMove : MonoBehaviour
     public Rigidbody2D rb;
     private bool canJump;
     private bool canMove;
-    //public Text counterText; // Too dirty!
+
+    private GameObject myArrow;
 
     public EventSystemCustom eventSystem;
 
@@ -18,6 +19,8 @@ public class CloneMove : MonoBehaviour
     {
         canJump = true;
         canMove = true;
+
+        myArrow = transform.GetChild(0).gameObject;
     }
     public void Move(Vector3 vec, bool isDirRight)
     {

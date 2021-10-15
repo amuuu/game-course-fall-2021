@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -14,7 +15,8 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody2D rb;
 
     public GameObject clones;
-    public CloneMove[] cloneMoves;
+    public List<CloneMove> cloneMoves;
+    int currActiveArrow;
 
     public GameObject keys;
 
@@ -28,7 +30,7 @@ public class PlayerMove : MonoBehaviour
 
     void Start()
     {
-        cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+        cloneMoves = clones.GetComponentsInChildren<CloneMove>().ToList();
         totalKeys = GameObject.FindGameObjectWithTag(TagNames.KeyParent.ToString()).transform.childCount;
 
         isInSwitchChatMode = false;
@@ -39,10 +41,12 @@ public class PlayerMove : MonoBehaviour
         isNearExitDoor = false;
         nearbyKey = null;
         accquiredKeys = 0;
+        currActiveArrow = 0;
     }
 
     void Update()
     {
+        UpdateCloneMoveList();
         if (!isInSwitchChatMode)
             NormalControls();
 
@@ -52,7 +56,38 @@ public class PlayerMove : MonoBehaviour
 
     private void SwitchCharControls()
     {
-        
+        if (Input.GetKeyDown(KeyCode.D)) // move cursor to next clone
+        {
+            if (currActiveArrow == cloneMoves.Count)
+                return;
+
+            if (currActiveArrow == 0)
+                transform.GetChild(0).gameObject.SetActive(false);
+
+            else
+                cloneMoves[currActiveArrow - 1].gameObject.transform.GetChild(0).gameObject.SetActive(false);
+
+            cloneMoves[currActiveArrow].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            currActiveArrow++;
+        }
+
+        if (Input.GetKeyDown(KeyCode.A)) // move cursor to previous clone
+        {
+            if (currActiveArrow == 0)
+                return;
+
+            if (currActiveArrow == 1)
+                transform.GetChild(0).gameObject.SetActive(true);
+
+            else
+                cloneMoves[currActiveArrow - 2].gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            
+            cloneMoves[currActiveArrow - 1].gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            currActiveArrow--;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+            ExitSwitchCharacterMode();
     }
 
     private void NormalControls()
@@ -96,13 +131,19 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q) &&
             canSwitchCharacter)
-            StartSwitchCharacterMode();
+            EnterSwitchCharacterMode();
     }
 
-    private void StartSwitchCharacterMode()
+    private void EnterSwitchCharacterMode()
     {
         Time.timeScale = 0;
         isInSwitchChatMode = true;
+    }
+
+    private void ExitSwitchCharacterMode()
+    {
+        Time.timeScale = 1;
+        isInSwitchChatMode = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -188,5 +229,10 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("Key accquired!!!");
             nearbyKey = null;
         }
+    }
+
+    private void UpdateCloneMoveList()
+    {
+        cloneMoves.RemoveAll(item => item == null);
     }
 }
