@@ -2452,6 +2452,7 @@ GameObject:
   - component: {fileID: 988226009}
   - component: {fileID: 988226010}
   - component: {fileID: 988226011}
+  - component: {fileID: 988226012}
   m_Layer: 0
   m_Name: SourceDoor
   m_TagString: SourceDoor
@@ -2549,6 +2550,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
+--- !u!114 &988226012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988226008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a03eaa85c782744ae533fc2a462e36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportDoorDist: 0.4
+  Player: {fileID: 1284564624}
+  destinationDoor: {fileID: 482865056}
 --- !u!1 &1028519618
 GameObject:
   m_ObjectHideFlags: 0
@@ -3289,7 +3305,6 @@ MonoBehaviour:
   factor: 0.005
   jumpAmount: 24
   doordist: 1.8
-  teleportDoorDist: 0.4
   spriteRenderer: {fileID: 1284564625}
   rb: {fileID: 1284564628}
   clones: {fileID: 1224677469}
@@ -3299,6 +3314,7 @@ MonoBehaviour:
   winDoor: {fileID: 207121748}
   deathZone: {fileID: 626456999}
   sourceDoor: {fileID: 988226008}
+  destDoor: {fileID: 0}
 --- !u!50 &1284564628
 Rigidbody2D:
   serializedVersion: 4
