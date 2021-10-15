@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,8 +14,11 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject clones;
     public CloneMove[] cloneMoves;
+    public Text keyNumber;
+    public GameObject winText;
 
     private bool canJump;
+    private bool inExitPos;
 
     private Vector3 moveVector;
     void Start()
@@ -22,6 +26,7 @@ public class PlayerMove : MonoBehaviour
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
+        inExitPos = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -59,6 +64,18 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        // 
+        if (Input.GetKeyDown(KeyCode.E) && inExitPos)
+        {
+            if (int.Parse(keyNumber.text) > 0)
+            {
+                winText.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("You don't have enough key to open the door");
+            }
+        }
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -95,11 +112,8 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
-            Debug.Log("exit door");
+            inExitPos = true;
         }
-
-       
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
