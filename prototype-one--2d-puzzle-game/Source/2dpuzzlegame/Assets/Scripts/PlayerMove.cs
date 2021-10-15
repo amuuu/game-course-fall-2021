@@ -22,12 +22,15 @@ public class PlayerMove : MonoBehaviour
     public GameObject keys;
 
     private bool canJump, canSwitchCharacter, isInSwitchChatMode;
-    private bool isNearKey, isNearExitDoor;
+    private bool isNearKey, isNearExitDoor, isRunning;
     private Collider2D nearbyKey;
 
     private Vector3 moveVector;
+    private Vector3 previousPosition;
 
     public EventSystemCustom eventSystem;
+
+    public Animator animator;
 
     void Start()
     {
@@ -45,11 +48,23 @@ public class PlayerMove : MonoBehaviour
         currActiveArrow = 0;
 
         myArrow = transform.GetChild(0).gameObject;
+        previousPosition = transform.position;
     }
 
     void Update()
     {
         UpdateCloneMoveList();
+
+        //if ((transform.position - previousPosition).magnitude > 0.5)
+        if (transform.position != previousPosition)
+            isRunning = true;
+        else
+            isRunning = false;
+
+        previousPosition = transform.position;
+
+        animator.SetBool("isRunning", isRunning);
+
         if (!isInSwitchChatMode)
             NormalControls();
 
