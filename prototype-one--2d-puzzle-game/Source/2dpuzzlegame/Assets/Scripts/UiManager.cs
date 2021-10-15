@@ -7,6 +7,7 @@ public class UiManager : MonoBehaviour
 {
     public Text counterText;
     public Text keyText;
+    public Text specialKeyText;
     public Text result;
     public EventSystemCustom eventSystem;
 
@@ -17,6 +18,8 @@ public class UiManager : MonoBehaviour
         eventSystem.OnLoseKey.AddListener(DownGradeKeyScoreText);
         eventSystem.OnLose.AddListener(UpdateLoseText);
         eventSystem.OnWin.AddListener(UpdateWinText);
+        eventSystem.OnCollectSpecialKey.AddListener(UpdateSpecialKeyScoreText);
+        eventSystem.OnLoseSpecialKey.AddListener(DownGradeSpecialKeyScoreText);
     }
 
     public void UpdateScoreText()
@@ -35,22 +38,36 @@ public class UiManager : MonoBehaviour
 
     public void DownGradeKeyScoreText()
     {
-        Debug.Log("Downgrade  KEY");
+        Debug.Log("DOWNGRADE  KEY");
         int newTextValue = int.Parse(keyText.text) - 1;
         keyText.text = newTextValue.ToString();
     }
 
     public void UpdateLoseText()
     {
-        Debug.Log("Lose");
+        Debug.Log("LOSE");
         string newTextValue = "YOU LOST!";
         result.text = newTextValue.ToString();
     }
 
     public void UpdateWinText()
     {
-        Debug.Log("Win");
+        Debug.Log("WIN");
         string newTextValue = "YOU WON!";
         result.text = newTextValue.ToString();
+    }
+
+    public void UpdateSpecialKeyScoreText()
+    {
+        Debug.Log("UPDATE SPECIAL  KEY");
+        int newTextValue = int.Parse(specialKeyText.text) + 1;
+        specialKeyText.text = newTextValue.ToString();
+    }
+
+    public void DownGradeSpecialKeyScoreText()
+    {
+        Debug.Log("DOWNGRADE SPECIAL  KEY");
+        int newTextValue = int.Parse(specialKeyText.text) - 1;
+        specialKeyText.text = newTextValue.ToString();
     }
 }

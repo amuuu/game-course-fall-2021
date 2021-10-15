@@ -9,6 +9,9 @@ TagManager:
   - ExitDoor
   - CollectableItem
   - Key
+  - Source
+  - Destination
+  - SpecialKey
   layers:
   - Default
   - TransparentFX

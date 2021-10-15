@@ -24,6 +24,10 @@ public class PlayerMove : MonoBehaviour
 
     public bool exitCollided = false;
 
+    public int specialKeyCounter = 0;
+    public bool specialKeyCollided = false;
+    public GameObject specialKey;
+
     private Vector3 moveVector;
     void Start()
     {
@@ -81,6 +85,19 @@ public class PlayerMove : MonoBehaviour
             keyCounter += 1;
         }
 
+        // Collect special key
+        if (Input.GetKeyDown(KeyCode.E) && specialKeyCollided)
+        {
+            specialKeyCollided = false;
+            specialKey.SetActive(false);
+
+            // Update text on scene
+            eventSystem.OnCollectSpecialKey.Invoke();
+
+            // Key numbers
+            specialKeyCounter += 1;
+        }
+
         // Exit door
         if (Input.GetKeyDown(KeyCode.E) && exitCollided && keyCounter > 0)
         {
@@ -126,6 +143,13 @@ public class PlayerMove : MonoBehaviour
             key = collision.gameObject;
         }
 
+        if (collision.gameObject.CompareTag(TagNames.SpecialKey.ToString()))
+        {
+            Debug.Log("SPECIAL KEY!");
+            specialKeyCollided = true;
+            specialKey = collision.gameObject;
+        }
+
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             Debug.Log("EXIT DOOR!");
@@ -147,9 +171,7 @@ public class PlayerMove : MonoBehaviour
         //{
         //    Debug.Log("EXIT DOOR");
         //}
-
-       
-
+        
     }
 
     private void OnCollisionExit2D(Collision2D collision)

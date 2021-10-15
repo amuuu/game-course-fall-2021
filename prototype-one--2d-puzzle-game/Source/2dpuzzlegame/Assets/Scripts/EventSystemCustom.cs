@@ -10,6 +10,8 @@ public class EventSystemCustom : MonoBehaviour
     public UnityEvent OnLoseKey;
     public UnityEvent OnLose;
     public UnityEvent OnWin;
+    public UnityEvent OnCollectSpecialKey;
+    public UnityEvent OnLoseSpecialKey;
 
     void Awake()
     {
@@ -17,5 +19,7 @@ public class EventSystemCustom : MonoBehaviour
         OnCollectKey = new UnityEvent();
         OnLose = new UnityEvent();
         OnWin = new UnityEvent();
+        OnCollectSpecialKey = new UnityEvent();
+        OnLoseSpecialKey = new UnityEvent();
     }
 }
