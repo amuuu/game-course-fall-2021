@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class CloneMove : MonoBehaviour
 {
     public bool isMovingSameDirection;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
+    public GameObject clone;
+    public GameObject sourceDoor;
+    public float teleportDoorDist;
+
     private bool canJump;
     private bool canMove;
     //public Text counterText; // Too dirty!
@@ -19,6 +20,16 @@ public class CloneMove : MonoBehaviour
         canJump = true;
         canMove = true;
     }
+
+    private void Update()
+    {
+        float distFromTeleDoor = Vector3.Distance(sourceDoor.transform.position, transform.position);
+        if (distFromTeleDoor < teleportDoorDist)
+        {
+            sourceDoor.GetComponent<Teleport>().teleport(clone ,teleportDoorDist);
+        }
+    }
+
     public void Move(Vector3 vec, bool isDirRight)
     {
         if (!canMove)
