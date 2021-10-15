@@ -8,6 +8,7 @@ public class PlayerMove : MonoBehaviour
     
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
+    public float doordist;
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
@@ -16,9 +17,11 @@ public class PlayerMove : MonoBehaviour
     public CloneMove[] cloneMoves;
     public Text keyNumber;
     public GameObject winText;
+    public GameObject winDoor;
 
     private bool canJump;
     private bool inExitPos;
+    private float dist;
 
     private Vector3 moveVector;
     void Start()
@@ -67,7 +70,9 @@ public class PlayerMove : MonoBehaviour
         // 
         if (Input.GetKeyDown(KeyCode.E) && inExitPos)
         {
-            if (int.Parse(keyNumber.text) > 0)
+            dist = Mathf.Abs(transform.position.x - winDoor.transform.position.x);
+            Debug.Log(dist);
+            if (int.Parse(keyNumber.text) > 0 && dist < doordist)
             {
                 winText.SetActive(true);
             }

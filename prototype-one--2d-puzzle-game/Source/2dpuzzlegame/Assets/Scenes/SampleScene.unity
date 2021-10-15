@@ -2883,12 +2883,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   factor: 0.005
   jumpAmount: 24
+  doordist: 0.2
   spriteRenderer: {fileID: 1284564625}
   rb: {fileID: 1284564628}
   clones: {fileID: 1224677469}
   cloneMoves: []
   keyNumber: {fileID: 1293718304}
   winText: {fileID: 652330561}
+  winDoor: {fileID: 207121748}
 --- !u!50 &1284564628
 Rigidbody2D:
   serializedVersion: 4
