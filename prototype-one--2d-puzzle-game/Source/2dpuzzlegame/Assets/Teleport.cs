@@ -19,17 +19,22 @@ public class Teleport : MonoBehaviour
         {
             if (Player.GetComponent<CollectItem>().teleportKeyNumber > 0)
             {
-                float distFromTeleDoor = Vector3.Distance(Player.transform.position, transform.position);
-                if (distFromTeleDoor < teleportDoorDist)
-                {
-                    Player.SetActive(false);
-                    Player.transform.position = appearPoint.transform.position;
-                    Player.SetActive(true);
-                }
+                teleport(Player, teleportDoorDist);
             }else
             {
                 Debug.Log("You don't have the key");
             }
+        }
+    }
+
+    public void teleport(GameObject obj, float teleDist)
+    {
+        float distFromTeleDoor = Vector3.Distance(obj.transform.position, transform.position);
+        if (distFromTeleDoor < teleDist)
+        {
+            obj.SetActive(false);
+            obj.transform.position = appearPoint.transform.position;
+            obj.SetActive(true);
         }
     }
 }
