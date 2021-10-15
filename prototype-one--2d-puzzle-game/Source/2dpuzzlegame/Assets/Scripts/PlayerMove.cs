@@ -16,6 +16,14 @@ public class PlayerMove : MonoBehaviour
 
     private bool canJump;
 
+    public EventSystemCustom eventSystem;
+
+    public int keyCounter = 0;
+    public bool keyCollided = false;
+    public GameObject key;
+
+    public bool exitCollided = false;
+
     private Vector3 moveVector;
     void Start()
     {
@@ -60,6 +68,32 @@ public class PlayerMove : MonoBehaviour
         }
 
 
+        // Collect key
+        if (Input.GetKeyDown(KeyCode.E) && keyCollided)
+        {
+            keyCollided = false;
+            key.SetActive(false);
+
+            // Update text on scene
+            eventSystem.OnCollectKey.Invoke();
+
+            // Key numbers
+            keyCounter += 1;
+        }
+
+        // Exit door
+        if (Input.GetKeyDown(KeyCode.E) && exitCollided && keyCounter > 0)
+        {
+            exitCollided = false;
+
+            // Update text on scene
+            eventSystem.OnWin.Invoke();
+
+            // Key numbers
+            keyCounter -= 1;
+            eventSystem.OnLoseKey.Invoke();
+        }
+
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
         {
@@ -76,6 +110,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            eventSystem.OnLose.Invoke();
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -83,20 +118,35 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            Debug.Log("KEY!");
+            keyCollided = true;
+            key = collision.gameObject;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            Debug.Log("EXIT DOOR!");
+            exitCollided = true;
+        }
+
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
-            Debug.LogWarning("sticky");
+            Debug.LogWarning("STICKY");
             canJump = false;
         }
 
-        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
-        {
-            Debug.Log("exit door");
-        }
+        //if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        //{
+        //    Debug.Log("EXIT DOOR");
+        //}
 
        
 
@@ -106,7 +156,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
-            Debug.LogWarning("sticky no more bruh");
+            Debug.LogWarning("STICKY NO MORE BRUH");
             canJump = true;
         }
     }
