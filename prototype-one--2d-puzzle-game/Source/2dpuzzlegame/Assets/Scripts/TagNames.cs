@@ -8,6 +8,7 @@ public enum TagNames
     ExitDoor,
     DeathZone,
     CollectableItem,
-    KeyItem
+    KeyItem,
+    teleportKey
 }
     

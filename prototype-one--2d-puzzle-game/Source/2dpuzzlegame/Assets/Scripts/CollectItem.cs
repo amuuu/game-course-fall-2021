@@ -2,10 +2,12 @@
 
 public class CollectItem : MonoBehaviour
 {
-    public int keyNumber;       // Number of keys that we have collected
-    public float distFromKey;   // Minimum distance from keys to be able to collect them
-    public GameObject[] keys;   // Array of keys in the scene
+    public int keyNumber;           // Number of keys that we have collected
+    public float distFromKey;       // Maximum distance from keys to be able to collect them
+    public int teleportKeyNumber;   // Number of keys that allows you to open teleport door
+    public GameObject[] keys;       // Array of keys in the scene
     public EventSystemCustom eventSystem;
+    Color myColor = new Color(255f, 255f, 106f, 255f);
 
     void Update()
     {
@@ -17,10 +19,9 @@ public class CollectItem : MonoBehaviour
             {
                 
                 // Calculate player distance from keys in X Axis for each key
-                float dist = Mathf.Abs(transform.position.x - keys[i].transform.position.x);
-
+                float dist = Vector3.Distance(keys[i].transform.position, transform.position);
                 // Check if the key is active or not and the distance is less than threshold
-                if (dist < distFromKey && keys[i].activeSelf)
+                if ((dist < distFromKey && keys[i].activeSelf))
                 {
                     // Deactivate the key that we collect
                     keys[i].SetActive(false);
@@ -28,6 +29,10 @@ public class CollectItem : MonoBehaviour
                     keyNumber++;
                     // Invoke increase key number text signal
                     eventSystem.onGetKey.Invoke();
+                    if (keys[i].CompareTag(TagNames.teleportKey.ToString()))
+                    {
+                        teleportKeyNumber++;
+                    }
                 }
             }
         }

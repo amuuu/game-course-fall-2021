@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
     public float doordist;
+    public float teleportDoorDist;
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
@@ -19,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     public GameObject winText;
     public GameObject winDoor;
     public GameObject deathZone;
+    public GameObject sourceDoor;
 
     private bool canJump;
     private bool inExitPos;
@@ -69,16 +71,27 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 
-        if (Input.GetKeyDown(KeyCode.E) && inExitPos)
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            dist = Mathf.Abs(transform.position.x - winDoor.transform.position.x);
-            if (int.Parse(keyNumber.text) > 0 && dist < doordist)
+            if (inExitPos)
             {
-                winText.SetActive(true);
+                dist = Vector3.Distance(sourceDoor.transform.position, transform.position);
+                if (int.Parse(keyNumber.text) > 0 && dist < doordist)
+                {
+                    winText.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("You don't have enough key to open the door");
+                }
             }
             else
             {
-                Debug.Log("You don't have enough key to open the door");
+                float distFromTeleDoor = Vector3.Distance(sourceDoor.transform.position, transform.position);
+                if (distFromTeleDoor < teleportDoorDist)
+                {
+                    Debug.Log("Here near the source teleport door");
+                }
             }
         }
 
