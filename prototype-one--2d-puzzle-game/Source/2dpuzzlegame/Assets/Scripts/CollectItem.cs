@@ -7,7 +7,6 @@ public class CollectItem : MonoBehaviour
     public int teleportKeyNumber;   // Number of keys that allows you to open teleport door
     public GameObject[] keys;       // Array of keys in the scene
     public EventSystemCustom eventSystem;
-    Color myColor = new Color(255f, 255f, 106f, 255f);
 
     void Update()
     {
@@ -17,7 +16,6 @@ public class CollectItem : MonoBehaviour
             // Iterate on each key
             for (int i = 0; i < keys.Length; i++)
             {
-                
                 // Calculate player distance from keys in X Axis for each key
                 float dist = Vector3.Distance(keys[i].transform.position, transform.position);
                 // Check if the key is active or not and the distance is less than threshold
@@ -27,12 +25,12 @@ public class CollectItem : MonoBehaviour
                     keys[i].SetActive(false);
                     // Increase number of keys that we have
                     keyNumber++;
-                    // Invoke increase key number text signal
-                    eventSystem.onGetKey.Invoke();
-                    if (keys[i].CompareTag(TagNames.teleportKey.ToString()))
+                    if (keys[i].CompareTag(TagNames.TeleKey.ToString()))
                     {
                         teleportKeyNumber++;
                     }
+                    // Invoke increase key number text signal
+                    eventSystem.onGetKey.Invoke();
                 }
             }
         }
