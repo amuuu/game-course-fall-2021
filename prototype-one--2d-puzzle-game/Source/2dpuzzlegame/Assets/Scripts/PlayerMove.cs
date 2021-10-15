@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject keys;
 
-    private bool canJump;
+    private bool canJump, canSwitchCharacter, isInSwitchChatMode;
     private bool isNearKey, isNearExitDoor;
     private Collider2D nearbyKey;
 
@@ -31,7 +31,9 @@ public class PlayerMove : MonoBehaviour
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
         totalKeys = GameObject.FindGameObjectWithTag(TagNames.KeyParent.ToString()).transform.childCount;
 
+        isInSwitchChatMode = false;
         canJump = true;
+        canSwitchCharacter = false;
         moveVector = new Vector3(1 * factor, 0, 0);
         isNearKey = false;
         isNearExitDoor = false;
@@ -40,6 +42,20 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Update()
+    {
+        if (!isInSwitchChatMode)
+            NormalControls();
+
+        else
+            SwitchCharControls();
+    }
+
+    private void SwitchCharControls()
+    {
+        
+    }
+
+    private void NormalControls()
     {
         if (Input.GetKey(KeyCode.D))
         {
@@ -68,9 +84,7 @@ public class PlayerMove : MonoBehaviour
 
         // This was added to answer a question.
         if (Input.GetKeyDown(KeyCode.Z))
-        {
             Destroy(this.gameObject);
-        }
 
         if (Input.GetKeyDown(KeyCode.E) &&
             isNearKey)
@@ -79,6 +93,16 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) &&
             isNearExitDoor && accquiredKeys == totalKeys)
             eventSystem.OnWon.Invoke();
+
+        if (Input.GetKeyDown(KeyCode.Q) &&
+            canSwitchCharacter)
+            StartSwitchCharacterMode();
+    }
+
+    private void StartSwitchCharacterMode()
+    {
+        Time.timeScale = 0;
+        isInSwitchChatMode = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -91,6 +115,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
+            canSwitchCharacter = true;
         }
 
         if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
