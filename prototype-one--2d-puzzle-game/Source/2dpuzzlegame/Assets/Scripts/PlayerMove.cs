@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     public CloneMove[] cloneMoves;
 
     private GameObject key;
+    private int collectedKeysNum;
 
     private bool canJump;
 
@@ -22,6 +23,8 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+
+        collectedKeysNum = 0;
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
@@ -64,6 +67,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && key)
         {
             Destroy(key);
+            collectedKeysNum++;
         }
 
 
