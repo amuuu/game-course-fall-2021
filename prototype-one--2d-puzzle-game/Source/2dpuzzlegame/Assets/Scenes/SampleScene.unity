@@ -4283,3 +4283,4 @@ MonoBehaviour:
   counterText: {fileID: 588809072}
   eventSystem: {fileID: 1587907882}
   collectedKeysCount: 0
+  collectedKeysText: {fileID: 2067728239}

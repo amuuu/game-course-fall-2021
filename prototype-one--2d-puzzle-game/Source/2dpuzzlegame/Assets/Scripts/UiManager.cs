@@ -8,6 +8,7 @@ public class UiManager : MonoBehaviour
     public Text counterText;
     public EventSystemCustom eventSystem;
     public int collectedKeysCount;
+    public Text collectedKeysText;
 
     void Start()
     {
@@ -24,7 +25,8 @@ public class UiManager : MonoBehaviour
     }
     public void UpdateKeyCountText()
     {
+        Debug.Log("UPDATE COLLECTED KEYS");
         collectedKeysCount++;
-        Debug.Log("COLLECTED KEYS COUNT: " + collectedKeysCount.ToString());
+        collectedKeysText.text = collectedKeysCount.ToString();
     }
 }
