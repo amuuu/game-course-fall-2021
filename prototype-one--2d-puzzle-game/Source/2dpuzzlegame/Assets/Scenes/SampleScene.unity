@@ -1332,8 +1332,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.3, y: 34.7}
-  m_SizeDelta: {x: 340.65845, y: 174.58069}
+  m_AnchoredPosition: {x: -261, y: 237}
+  m_SizeDelta: {x: 340.65845, y: 40.047974}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &588809072
 MonoBehaviour:
@@ -1367,7 +1367,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 'Sticky Clones: 0'
 --- !u!222 &588809073
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3961,8 +3961,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 401, y: 93.004}
-  m_SizeDelta: {x: 342.4082, y: 57.972107}
+  m_AnchoredPosition: {x: -262, y: 183}
+  m_SizeDelta: {x: 342.4082, y: 40.051025}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2067728239
 MonoBehaviour:
@@ -3996,7 +3996,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 'Collected Keys: 0'
 --- !u!222 &2067728240
 CanvasRenderer:
   m_ObjectHideFlags: 0

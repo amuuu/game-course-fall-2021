@@ -24,12 +24,12 @@ public class UiManager : MonoBehaviour
     {
         Debug.Log("UPDATE STICKY CLONE");
         stickyClonesCount++;
-        stickyClonesText.text = stickyClonesCount.ToString();
+        stickyClonesText.text = "Sticky Clones: " + stickyClonesCount.ToString();
     }
     public void UpdateKeyCountText()
     {
         Debug.Log("UPDATE COLLECTED KEYS");
         collectedKeysCount++;
-        collectedKeysText.text = collectedKeysCount.ToString();
+        collectedKeysText.text = "Collected Keys: " + collectedKeysCount.ToString();
     }
 }
