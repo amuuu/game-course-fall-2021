@@ -14,15 +14,33 @@ public class CloneMove : MonoBehaviour
 
     public EventSystemCustom eventSystem;
 
+    Animator animator;
+    private float speed;
+
     private void Awake()
     {
         canJump = true;
         canMove = true;
+        GetAnimator();
+        speed = 0;
+    }
+
+    public void GetAnimator()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    private void LateUpdate()
+    {
+        animator.SetFloat("Speed", speed);
+        speed = 0;
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
         if (!canMove)
             return;
+
+        speed += vec.x;
 
         int factor = 1;
         if (isDirRight)

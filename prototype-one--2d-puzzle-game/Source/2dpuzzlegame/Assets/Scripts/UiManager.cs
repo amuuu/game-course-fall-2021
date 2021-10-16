@@ -75,8 +75,9 @@ public class UiManager : MonoBehaviour
                 newCharacterMove.rb = cloneMove.rb;
                 SpriteRenderer cloneRenderer = newCharacterMove.GetComponent<SpriteRenderer>();
                 Color cloneColor = cloneRenderer.color;
-                cloneRenderer.color = characterMove.GetComponent<SpriteRenderer>().color; 
-                
+                cloneRenderer.color = characterMove.GetComponent<SpriteRenderer>().color;
+                newCharacterMove.GetAnimator();
+
                 fields = cloneMove.GetType().GetFields();
                 foreach (System.Reflection.FieldInfo field in fields)
                 {
@@ -85,6 +86,7 @@ public class UiManager : MonoBehaviour
                 newCloneMove.spriteRenderer = characterMove.spriteRenderer;
                 newCloneMove.rb = characterMove.rb;
                 newCloneMove.GetComponent<SpriteRenderer>().color = cloneColor;
+                newCloneMove.GetAnimator();
 
                 Destroy(cloneMove);
                 Destroy(characterMove);

@@ -25,6 +25,8 @@ public class PlayerMove : MonoBehaviour
     public int allKeysCount;
     private GameObject collidingSwitchKey;
 
+    public Animator animator;
+
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -37,10 +39,12 @@ public class PlayerMove : MonoBehaviour
         nearExit = false;
         allKeysCount = GameObject.FindGameObjectsWithTag(TagNames.LockOpener.ToString()).Length;
         collidingSwitchKey = null;
+        GetAnimator();
     }
 
     void Update()
     {
+        float speed = 0;
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += moveVector;
@@ -48,6 +52,8 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, true);
 
             spriteRenderer.flipX = false;
+
+            speed += moveVector.x;
 
         }
 
@@ -58,6 +64,7 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, false);
 
             spriteRenderer.flipX = true;
+            speed += moveVector.x;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
@@ -94,6 +101,8 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
+        animator.SetFloat("Speed", speed);
+
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
         {
@@ -103,6 +112,11 @@ public class PlayerMove : MonoBehaviour
         {
             transform.position = new Vector3(-0.53f, transform.position.y, transform.position.z);
         }*/
+    }
+
+    public void GetAnimator()
+    {
+        animator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
