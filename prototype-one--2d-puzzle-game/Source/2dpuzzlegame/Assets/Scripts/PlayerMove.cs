@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     GameObject adjacentKey, adjacentDoor, adjacentPortalKey, adjacentPortal;
     int collectedKeysCount = 0;
     int portalKeysCount = 0;
+    bool isTeleported = false; // useful when both portals are source
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -76,12 +77,13 @@ public class PlayerMove : MonoBehaviour
             else if (adjacentPortalKey != null)
             {
                 portalKeysCount++;
+                eventSystem.OnPortalKeyPickup.Invoke(portalKeysCount);
                 adjacentPortalKey.SetActive(false);
             }
             else if (adjacentPortal != null)
             {
                 var portalController = adjacentPortal.GetComponent<PortalController>();
-                portalController.TryTeleport(this.gameObject, portalKeysCount);
+                isTeleported = portalController.TryTeleport(this.gameObject, portalKeysCount);
             }
         }
 
@@ -149,7 +151,10 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.PortalKey.ToString()))
             adjacentPortalKey = null;
         if (collision.gameObject.CompareTag(TagNames.Portal.ToString()))
-            adjacentPortal = null;
+        {
+            if (isTeleported) isTeleported = false;
+            else adjacentPortal = null;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
