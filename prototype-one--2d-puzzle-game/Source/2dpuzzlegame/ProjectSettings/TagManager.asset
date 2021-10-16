@@ -10,6 +10,9 @@ TagManager:
   - CollectableItem
   - Key
   - Door
+  - PortalKey
+  - Portal
+  - Character
   layers:
   - Default
   - TransparentFX

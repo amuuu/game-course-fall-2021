@@ -7,6 +7,7 @@ public class UiManager : MonoBehaviour
 {
     public Text counterText;
     public Text collectedKeysCounterText;
+    public Text portalKeysCounter;
     public Text gameResultText;
     public EventSystemCustom eventSystem;
 
@@ -14,6 +15,7 @@ public class UiManager : MonoBehaviour
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
         eventSystem.OnKeyPickup.AddListener(UpdateCollectedKeysCounterText);
+        eventSystem.OnPortalKeyPickup.AddListener(UpdatePortalKeysCounter);
         eventSystem.OnDoorOpened.AddListener(ShowWinText);
         eventSystem.OnDeathZoneEnter.AddListener(ShowLoseText);
     }
@@ -31,14 +33,15 @@ public class UiManager : MonoBehaviour
     }
     public void ShowWinText()
     {
-        gameResultText.text = "YOU WON !";
+        gameResultText.text = "YOU WON";
         gameResultText.color = Color.green;
         gameResultText.gameObject.SetActive(true);
     }
     public void ShowLoseText()
     {
-        gameResultText.text = "YOU LOST !";
+        gameResultText.text = "YOU LOST";
         gameResultText.color = Color.red;
         gameResultText.gameObject.SetActive(true);
     }
+    public void UpdatePortalKeysCounter(int value) => portalKeysCounter.text = value.ToString();
 }

@@ -18,8 +18,10 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 moveVector;
     public EventSystemCustom eventSystem;
-    GameObject adjacentKey, adjacentDoor;
+    GameObject adjacentKey, adjacentDoor, adjacentPortalKey, adjacentPortal;
     int collectedKeysCount = 0;
+    int portalKeysCount = 0;
+    bool isTeleported = false; // useful when both portals are source
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -65,12 +67,23 @@ public class PlayerMove : MonoBehaviour
                 eventSystem.OnKeyPickup.Invoke(collectedKeysCount);
                 adjacentKey.SetActive(false);
             }
-            if (adjacentDoor != null)
+            else if (adjacentDoor != null)
             {
                 var doorController = adjacentDoor.GetComponent<DoorController>();
                 if (doorController.OpenDoor(collectedKeysCount))
                     this.gameObject.SetActive(false);
                 // game ends if door opens so no need to update key counter text
+            }
+            else if (adjacentPortalKey != null)
+            {
+                portalKeysCount++;
+                eventSystem.OnPortalKeyPickup.Invoke(portalKeysCount);
+                adjacentPortalKey.SetActive(false);
+            }
+            else if (adjacentPortal != null)
+            {
+                var portalController = adjacentPortal.GetComponent<PortalController>();
+                isTeleported = portalController.TryTeleport(this.gameObject, portalKeysCount);
             }
         }
 
@@ -112,12 +125,16 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("next to key!");
             adjacentKey = collision.gameObject;
         }
+        if (collision.gameObject.CompareTag(TagNames.PortalKey.ToString()))
+            adjacentPortalKey = collision.gameObject;
         
         if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
         {
             Debug.Log("next to door!");
             adjacentDoor = collision.gameObject;
         }
+        if (collision.gameObject.CompareTag(TagNames.Portal.ToString()))
+            adjacentPortal = collision.gameObject;
     }
 
     private void OnTriggerExit2D(Collider2D collision){
@@ -130,6 +147,13 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("NOT next to door!");
             adjacentDoor = null;
+        }
+        if (collision.gameObject.CompareTag(TagNames.PortalKey.ToString()))
+            adjacentPortalKey = null;
+        if (collision.gameObject.CompareTag(TagNames.Portal.ToString()))
+        {
+            if (isTeleported) isTeleported = false;
+            else adjacentPortal = null;
         }
     }
 

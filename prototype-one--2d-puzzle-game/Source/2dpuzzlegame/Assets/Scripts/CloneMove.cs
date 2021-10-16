@@ -91,4 +91,13 @@ public class CloneMove : MonoBehaviour
             canJump = true;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.Portal.ToString()))
+        {
+            var portalController = collision.gameObject.GetComponent<PortalController>();
+            portalController.TryTeleport(this.gameObject);
+        }
+    }
 }

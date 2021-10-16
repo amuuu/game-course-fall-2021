@@ -7,6 +7,7 @@ public class EventSystemCustom : MonoBehaviour
 {
     public UnityEvent OnCloneStickyPlatformEnter;
     public UnityIntEvent OnKeyPickup; // invoke with number of collected keys
+    public UnityIntEvent OnPortalKeyPickup; // invoke with number of collected keys
     public UnityEvent OnDoorOpened;
     public UnityEvent OnDeathZoneEnter;
 
@@ -14,6 +15,7 @@ public class EventSystemCustom : MonoBehaviour
     {
         OnCloneStickyPlatformEnter = new UnityEvent();
         OnKeyPickup = new UnityIntEvent();
+        OnPortalKeyPickup = new UnityIntEvent();
         OnDoorOpened = new UnityEvent();
         OnDeathZoneEnter = new UnityEvent();
     }
