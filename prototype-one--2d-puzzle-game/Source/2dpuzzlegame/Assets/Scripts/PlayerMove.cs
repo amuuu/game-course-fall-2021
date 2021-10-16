@@ -85,13 +85,19 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+    }
 
-        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKey(KeyCode.E))
         {
-            collision.gameObject.SetActive(false);
-            Debug.Log("KEY!");
-            eventSystem.OnKeyPickup.Invoke();
-            Debug.Log("OnKeyPickup fired.");
+            if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+            {
+                collision.gameObject.SetActive(false);
+                Debug.Log("KEY!");
+                eventSystem.OnKeyPickup.Invoke();
+                Debug.Log("OnKeyPickup fired.");
+            }
         }
     }
 
