@@ -14,6 +14,8 @@ public class PlayerMove : MonoBehaviour
     public GameObject clones;
     public CloneMove[] cloneMoves;
 
+    public EventSystemCustom eventSystem;
+
     private GameObject key;
     private int collectedKeysNum;
 
@@ -68,6 +70,7 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(key);
             collectedKeysNum++;
+            eventSystem.OnPlayerKeyCollect.Invoke();
         }
 
 
