@@ -9,6 +9,9 @@ public enum TagNames
     DeathZone,
     CollectableItem,
     Key,
-    Door
+    Door,
+    Portal,
+    PortalKey,
+    Character
 }
     
