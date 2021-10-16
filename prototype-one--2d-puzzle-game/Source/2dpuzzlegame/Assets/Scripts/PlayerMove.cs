@@ -20,9 +20,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 moveVector
     {
         set { _moveVector = value; }
-        get {
-            Debug.Log("Delta time: " + Time.deltaTime);
-            return _moveVector * Time.deltaTime; }
+        get { return _moveVector * Time.deltaTime; }
     }
     public EventSystemCustom eventSystem;
     GameObject adjacentKey, adjacentDoor, adjacentPortalKey, adjacentPortal;

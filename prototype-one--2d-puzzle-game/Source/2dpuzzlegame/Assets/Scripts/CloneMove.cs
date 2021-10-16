@@ -99,5 +99,10 @@ public class CloneMove : MonoBehaviour
             var portalController = collision.gameObject.GetComponent<PortalController>();
             portalController.TryTeleport(this.gameObject);
         }
+        else if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            Debug.Log("Clone Destroyed");
+            Destroy(this.gameObject);
+        }
     }
 }
