@@ -83,6 +83,12 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            collision.gameObject.SetActive(false);
+            Debug.Log("KEY!");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
