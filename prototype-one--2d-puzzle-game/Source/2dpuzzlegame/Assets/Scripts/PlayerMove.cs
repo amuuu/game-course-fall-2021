@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+    public int storedKey = 0;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -83,9 +84,28 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+
+       
+
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+
+                collision.gameObject.SetActive(false);
+                Debug.Log("Key!");
+
+                storedKey = storedKey + 1;
+                Debug.Log("keyyy"+storedKey);
+
+            }
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
