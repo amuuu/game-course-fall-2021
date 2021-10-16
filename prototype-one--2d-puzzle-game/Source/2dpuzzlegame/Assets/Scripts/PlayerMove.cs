@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PlayerMove : MonoBehaviour
 {
     
@@ -17,6 +19,8 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+    public EventSystemCustom ev;
+
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -60,6 +64,7 @@ public class PlayerMove : MonoBehaviour
         }
 
 
+
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
         {
@@ -83,6 +88,7 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -98,8 +104,20 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("exit door");
         }
 
-       
 
+
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.KeyItem.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                collision.gameObject.SetActive(false);
+                Debug.Log("eat key with keypress E");
+                ev.OnEatKey.Invoke();
+            }
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
