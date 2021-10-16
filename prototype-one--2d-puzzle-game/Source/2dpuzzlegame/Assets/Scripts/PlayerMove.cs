@@ -14,6 +14,8 @@ public class PlayerMove : MonoBehaviour
     public GameObject clones;
     public CloneMove[] cloneMoves;
 
+    private GameObject key;
+
     private bool canJump;
 
     private Vector3 moveVector;
@@ -59,6 +61,11 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && key)
+        {
+            Destroy(key);
+        }
+
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -83,6 +90,16 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            key = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        key = null;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
