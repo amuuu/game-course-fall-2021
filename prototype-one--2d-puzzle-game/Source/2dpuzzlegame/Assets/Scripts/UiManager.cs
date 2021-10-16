@@ -7,10 +7,13 @@ public class UiManager : MonoBehaviour
 {
     public Text counterText;
     public EventSystemCustom eventSystem;
+    public int collectedKeysCount;
 
     void Start()
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
+        eventSystem.OnKeyPickup.AddListener(UpdateKeyCountText);
+        collectedKeysCount = 0;
     }
 
     public void UpdateScoreText()
@@ -18,5 +21,10 @@ public class UiManager : MonoBehaviour
         Debug.Log("UPDATE SCORE");
         int newTextValue = int.Parse(counterText.text) + 1;
             counterText.text = newTextValue.ToString();
+    }
+    public void UpdateKeyCountText()
+    {
+        collectedKeysCount++;
+        Debug.Log("COLLECTED KEYS COUNT: " + collectedKeysCount.ToString());
     }
 }

@@ -14,6 +14,8 @@ public class PlayerMove : MonoBehaviour
     public GameObject clones;
     public CloneMove[] cloneMoves;
 
+    public EventSystemCustom eventSystem;
+
     private bool canJump;
 
     private Vector3 moveVector;
@@ -88,6 +90,8 @@ public class PlayerMove : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             Debug.Log("KEY!");
+            eventSystem.OnKeyPickup.Invoke();
+            Debug.Log("OnKeyPickup fired.");
         }
     }
 

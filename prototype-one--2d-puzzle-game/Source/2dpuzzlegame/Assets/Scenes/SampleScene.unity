@@ -2729,6 +2729,7 @@ MonoBehaviour:
   rb: {fileID: 1284564628}
   clones: {fileID: 1224677469}
   cloneMoves: []
+  eventSystem: {fileID: 1587907882}
 --- !u!50 &1284564628
 Rigidbody2D:
   serializedVersion: 4
@@ -3143,6 +3144,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnKeyPickup:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1587907883
 Transform:
   m_ObjectHideFlags: 0
@@ -4199,3 +4203,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   counterText: {fileID: 588809072}
   eventSystem: {fileID: 1587907882}
+  collectedKeysCount: 0
