@@ -1310,7 +1310,7 @@ GameObject:
   - component: {fileID: 588809073}
   - component: {fileID: 588809072}
   m_Layer: 5
-  m_Name: CounterText
+  m_Name: StickyClonesText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4280,7 +4280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f631f71aaf1884b953c8d779a3c42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counterText: {fileID: 588809072}
   eventSystem: {fileID: 1587907882}
+  stickyClonesCount: 0
+  stickyClonesText: {fileID: 588809072}
   collectedKeysCount: 0
   collectedKeysText: {fileID: 2067728239}

@@ -5,23 +5,26 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    public Text counterText;
     public EventSystemCustom eventSystem;
+
+    public int stickyClonesCount;
+    public Text stickyClonesText;
     public int collectedKeysCount;
     public Text collectedKeysText;
 
     void Start()
     {
-        eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
+        eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateStickyCloneText);
         eventSystem.OnKeyPickup.AddListener(UpdateKeyCountText);
+        stickyClonesCount = 0;
         collectedKeysCount = 0;
     }
 
-    public void UpdateScoreText()
+    public void UpdateStickyCloneText()
     {
-        Debug.Log("UPDATE SCORE");
-        int newTextValue = int.Parse(counterText.text) + 1;
-            counterText.text = newTextValue.ToString();
+        Debug.Log("UPDATE STICKY CLONE");
+        stickyClonesCount++;
+        stickyClonesText.text = stickyClonesCount.ToString();
     }
     public void UpdateKeyCountText()
     {
