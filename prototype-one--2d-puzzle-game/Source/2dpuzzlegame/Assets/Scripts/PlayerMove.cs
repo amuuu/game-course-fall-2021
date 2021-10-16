@@ -16,7 +16,14 @@ public class PlayerMove : MonoBehaviour
 
     private bool canJump;
 
-    private Vector3 moveVector;
+    private Vector3 _moveVector;
+    private Vector3 moveVector
+    {
+        set { _moveVector = value; }
+        get {
+            Debug.Log("Delta time: " + Time.deltaTime);
+            return _moveVector * Time.deltaTime; }
+    }
     public EventSystemCustom eventSystem;
     GameObject adjacentKey, adjacentDoor, adjacentPortalKey, adjacentPortal;
     int collectedKeysCount = 0;
