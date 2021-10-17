@@ -577,6 +577,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &326960272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 326960273}
+  m_Layer: 0
+  m_Name: Teleport Doors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &326960273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326960272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 566299373}
+  - {fileID: 812817913}
+  m_Father: {fileID: 579317608}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &372920492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,7 +1192,7 @@ GameObject:
   - component: {fileID: 566299375}
   - component: {fileID: 566299374}
   m_Layer: 0
-  m_Name: Teleport Door
+  m_Name: Source Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1174,11 +1206,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 566299372}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.818, y: 0.005, z: 11.357459}
+  m_LocalPosition: {x: 0.81799996, y: 0.004999995, z: 11.357459}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 579317608}
-  m_RootOrder: 13
+  m_Father: {fileID: 326960273}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &566299374
 MonoBehaviour:
@@ -1192,6 +1224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976c1cb119e7f49eea4e35c18c3940ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherDoor: {fileID: 812817912}
+  isSource: 1
 --- !u!61 &566299375
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1308,8 +1342,7 @@ Transform:
   - {fileID: 944715664}
   - {fileID: 1610362592}
   - {fileID: 1534018424}
-  - {fileID: 566299373}
-  - {fileID: 812817913}
+  - {fileID: 326960273}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1899,7 +1932,7 @@ GameObject:
   - component: {fileID: 812817915}
   - component: {fileID: 812817914}
   m_Layer: 0
-  m_Name: Teleport Door (1)
+  m_Name: Destination Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1916,8 +1949,8 @@ Transform:
   m_LocalPosition: {x: 0.727, y: -1.249, z: 11.357459}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 579317608}
-  m_RootOrder: 14
+  m_Father: {fileID: 326960273}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &812817914
 MonoBehaviour:
@@ -1931,6 +1964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976c1cb119e7f49eea4e35c18c3940ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherDoor: {fileID: 566299372}
+  isSource: 0
 --- !u!61 &812817915
 BoxCollider2D:
   m_ObjectHideFlags: 0
