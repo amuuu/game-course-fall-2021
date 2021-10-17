@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody2D rb;
 
     public GameObject clones;
+    public GameObject keys;
     public CloneMove[] cloneMoves;
 
     public EventSystemCustom eventSystem;
@@ -19,17 +20,22 @@ public class PlayerMove : MonoBehaviour
     private GameObject key;
     private int collectedKeysNum;
 
+    private int totalKeyCount;
     private bool canJump;
+    private bool isNearDoor;
 
     private Vector3 moveVector;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+        totalKeyCount = keys.GetComponentsInChildren<BoxCollider2D>().Length;
 
         collectedKeysNum = 0;
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
+
+        isNearDoor = false;
     }
 
     void Update()
@@ -73,6 +79,11 @@ public class PlayerMove : MonoBehaviour
             eventSystem.OnPlayerKeyCollect.Invoke();
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && isNearDoor && (collectedKeysNum == totalKeyCount))
+        {
+            Debug.Log("Exit DOOR");
+        }
+
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -102,6 +113,11 @@ public class PlayerMove : MonoBehaviour
         {
             key = collision.gameObject;
         }
+
+        if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
+        {
+            isNearDoor = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -109,6 +125,11 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
         {
             key = null;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
+        {
+            isNearDoor = false;
         }
     }
 
