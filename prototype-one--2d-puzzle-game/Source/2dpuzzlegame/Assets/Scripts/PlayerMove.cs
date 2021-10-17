@@ -22,9 +22,10 @@ public class PlayerMove : MonoBehaviour
     public EventSystemCustom eventSystem;
     private GameObject collidingKey;
     private bool nearExit;
-    public int allKeysCount;
+    public int allExitKeysCount;
     private GameObject collidingSwitchKey;
-
+    private GameObject collidingTeleportDoor;
+    private int collectedTeleportKeyCount;
     public Animator animator;
 
     void Start()
@@ -36,8 +37,9 @@ public class PlayerMove : MonoBehaviour
 
         collidingKey = null;
         collectedKeyCount = 0;
+        collectedTeleportKeyCount = 0;
         nearExit = false;
-        allKeysCount = GameObject.FindGameObjectsWithTag(TagNames.LockOpener.ToString()).Length;
+        allExitKeysCount = GameObject.FindGameObjectsWithTag(TagNames.LockOpener.ToString()).Length;
         collidingSwitchKey = null;
         GetAnimator();
     }
@@ -89,7 +91,7 @@ public class PlayerMove : MonoBehaviour
                 eventSystem.onCollectKey.Invoke(collectedKeyCount);
             }
             
-            if(nearExit && collectedKeyCount == allKeysCount)
+            if(nearExit && collectedKeyCount == allExitKeysCount)
             {
                 FindObjectOfType<UiManager>().WinScene();
             }
@@ -99,6 +101,13 @@ public class PlayerMove : MonoBehaviour
                 collidingSwitchKey.SetActive(false);
                 FindObjectOfType<UiManager>().CharacterSwitchingState();
             }
+
+            if(collidingTeleportDoor != null && collectedTeleportKeyCount > 0)
+            {
+                collidingTeleportDoor.GetComponent<TeleportDoor>().SendObjectToDest(this.gameObject);
+                collectedTeleportKeyCount--;
+            }
+
         }
 
         animator.SetFloat("Speed", speed);
@@ -148,6 +157,17 @@ public class PlayerMove : MonoBehaviour
             collidingSwitchKey = collision.gameObject;
         }
 
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            collision.gameObject.SetActive(false);
+            collectedTeleportKeyCount++;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportSrc.ToString()))
+        {
+            collidingTeleportDoor = collision.gameObject;
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -167,6 +187,11 @@ public class PlayerMove : MonoBehaviour
             collidingSwitchKey = null;
         }
 
+        if (collision.gameObject.CompareTag(TagNames.TeleportSrc.ToString()))
+        {
+            collidingTeleportDoor = null;
+        }
+
     }
 
 
@@ -177,8 +202,6 @@ public class PlayerMove : MonoBehaviour
             Debug.LogWarning("sticky");
             canJump = false;
         }
-
-       
 
     }
 

@@ -9,6 +9,8 @@ public enum TagNames
     DeathZone,
     CollectableItem,
     LockOpener,
-    SwitchCharacter
+    SwitchCharacter,
+    TeleportKey,
+    TeleportSrc
 }
     

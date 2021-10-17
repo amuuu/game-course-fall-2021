@@ -10,6 +10,8 @@ TagManager:
   - CollectableItem
   - LockOpener
   - SwitchCharacter
+  - TeleportKey
+  - TeleportSrc
   layers:
   - Default
   - TransparentFX
