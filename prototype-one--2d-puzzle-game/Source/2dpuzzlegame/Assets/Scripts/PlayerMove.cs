@@ -19,11 +19,13 @@ public class PlayerMove : MonoBehaviour
 
     private GameObject key;
     private GameObject teleportKey;
+    private GameObject destDoor;
     private int collectedKeysNum;
 
     private int totalKeyCount;
     private bool canJump;
     private bool isNearDoor;
+    private bool haveTeleportKey;
 
     private Vector3 moveVector;
     void Start()
@@ -37,6 +39,7 @@ public class PlayerMove : MonoBehaviour
         moveVector = new Vector3(1 * factor, 0, 0);
 
         isNearDoor = false;
+        haveTeleportKey = false;
     }
 
     void Update()
@@ -88,6 +91,12 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && teleportKey)
         {
             Destroy(teleportKey);
+            haveTeleportKey = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && destDoor && haveTeleportKey)
+        {
+            transform.position = destDoor.transform.position;
         }
 
 
@@ -130,6 +139,15 @@ public class PlayerMove : MonoBehaviour
         {
             isNearDoor = true;
         }
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportDoor.ToString()))
+        {
+            DoorContainer doorContainer = collision.gameObject.GetComponent<DoorContainer>();
+            if (doorContainer.isSource)
+            {
+                destDoor = doorContainer.otherDoor;
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -147,6 +165,15 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             isNearDoor = false;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportDoor.ToString()))
+        {
+            DoorContainer doorContainer = collision.gameObject.GetComponent<DoorContainer>();
+            if (doorContainer.isSource)
+            {
+                destDoor = null;
+            }
         }
     }
 

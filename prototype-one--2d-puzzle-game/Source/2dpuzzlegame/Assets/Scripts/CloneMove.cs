@@ -63,6 +63,18 @@ public class CloneMove : MonoBehaviour
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.TeleportDoor.ToString()))
+        {
+            DoorContainer doorContainer = collision.gameObject.GetComponent<DoorContainer>();
+            if (doorContainer.isSource)
+            {
+                transform.position = doorContainer.otherDoor.transform.position;
+            }
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
