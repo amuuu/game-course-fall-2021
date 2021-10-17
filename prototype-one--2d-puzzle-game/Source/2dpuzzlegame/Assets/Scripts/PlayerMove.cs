@@ -13,7 +13,11 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject clones;
     public GameObject KEY;
+    public GameObject TeleportDoor;
+    public bool IsNormalKey;
     public bool ExitDoorTouched;
+    public bool HaveTeleportKey;
+    public bool TouchTeleportKey;
     public CloneMove[] cloneMoves;
     public lost lost;
     public win win;
@@ -23,10 +27,12 @@ public class PlayerMove : MonoBehaviour
     private Vector3 moveVector;
     
     void Start()
-    {
+    {   IsNormalKey=false;
         neededKeys=Random.Range(0, 8);
         NeededKeyText.text=neededKeys.ToString();
         eatenKeys=0;
+        HaveTeleportKey=false;
+        TouchTeleportKey=false;
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
@@ -60,14 +66,36 @@ public class PlayerMove : MonoBehaviour
             JumpClones(jumpAmount);
         }
 
-        if(Input.GetKey(KeyCode.E) && KEY!=null){
+        if(Input.GetKey(KeyCode.E) && KEY!=null && IsNormalKey){
             KEY.SetActive(false);
             eventSystem.OnCollectKey.Invoke();
             eatenKeys++;
-            Debug.Log("KEY");
+            Debug.Log("Normal KEY");
         }
 
-        if(eatenKeys>=neededKeys && Input.GetKeyDown(KeyCode.E) && ExitDoorTouched==true){
+        if(Input.GetKey(KeyCode.E) && TouchTeleportKey ){
+            KEY.SetActive(false);
+            HaveTeleportKey=true;
+            Debug.Log("Teleport KEY!");
+        }
+        ///teleport
+        if(Input.GetKey(KeyCode.E) && HaveTeleportKey && TeleportDoor!=null ){
+            Debug.Log("hereeeeeeeeeeeeeeee");
+            //var X = TeleportDoor.gameObject.transform.position.x;
+            //var Y = TeleportDoor.gameObject.transform.position.y;
+            //var Z = TeleportDoor.gameObject.transform.position.z;
+           
+            var X = 0;
+            var Y = 0;
+            var Z = 0;
+            transform.position = TeleportDoor.GetComponent<teleDoor>().Dest.transform.position ;
+
+
+
+        }
+
+
+        if (eatenKeys>=neededKeys && Input.GetKeyDown(KeyCode.E) && ExitDoorTouched==true){
             win.setup();
             Debug.Log("exit door");
             
@@ -100,13 +128,26 @@ public class PlayerMove : MonoBehaviour
         ///key
         if ( collision.gameObject.CompareTag(TagNames.normalkey.ToString()))
         {
+            IsNormalKey=true;
+            KEY=collision.gameObject;
+        }
+        //teleport key
+        if (collision.gameObject.CompareTag(TagNames.teleportKey.ToString()))
+        {   TouchTeleportKey=true;
             KEY=collision.gameObject;
         }
         ///exit door
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
            ExitDoorTouched=true;
-            Debug.Log("touched door");
+            Debug.Log("touched exit door");
+        }
+
+        ///teleport door
+        if (collision.gameObject.CompareTag(TagNames.teleportDoor.ToString()))
+        {
+           TeleportDoor=collision.gameObject;
+            Debug.Log("touched teleport door");
         }
 
     }
@@ -114,8 +155,23 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.normalkey.ToString()))
         {
             KEY=null;
-            ExitDoorTouched=false;
+            IsNormalKey=false;
+
         }
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            ExitDoorTouched=false;  
+        }
+        if (collision.gameObject.CompareTag(TagNames.teleportKey.ToString()))
+        {
+            TouchTeleportKey=false;
+        }
+        if (collision.gameObject.CompareTag(TagNames.teleportDoor.ToString()))
+        {
+            TeleportDoor=null;
+        }
+
+         
       }
 
     

@@ -822,7 +822,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &244792508
 GameObject:
@@ -850,7 +850,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244792508}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.937, y: -0.451, z: 11.35746}
+  m_LocalPosition: {x: -0.087, y: -0.235, z: 11.35746}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1444016835}
@@ -1490,7 +1490,7 @@ RectTransform:
   m_Children:
   - {fileID: 312635381}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1588,8 +1588,8 @@ GameObject:
   m_Component:
   - component: {fileID: 392428829}
   - component: {fileID: 392428831}
-  - component: {fileID: 392428830}
   - component: {fileID: 392428832}
+  - component: {fileID: 392428830}
   m_Layer: 0
   m_Name: teleportS
   m_TagString: teleportDoor
@@ -1611,19 +1611,32 @@ Transform:
   m_Father: {fileID: 713715851}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &392428830
-BoxCollider:
+--- !u!61 &392428830
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392428828}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
-  m_Center: {x: 0.00000011920929, y: 0, z: 0}
+  m_Size: {x: 0.2, y: 0.2}
+  m_EdgeRadius: 0
 --- !u!212 &392428831
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1662,7 +1675,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 9ebde76ca4e575a47811ec87fe11931e, type: 3}
   m_Color: {r: 1, g: 0.96739495, b: 0, a: 1}
   m_FlipX: 0
@@ -1687,7 +1700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSource: 1
-  dest: {fileID: 2011460848}
+  Dest: {fileID: 2011460848}
 --- !u!1 &404412547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,7 +2312,7 @@ Transform:
   - {fileID: 713715851}
   - {fileID: 944715664}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &588809070
 GameObject:
@@ -4707,7 +4720,11 @@ MonoBehaviour:
   rb: {fileID: 1284564628}
   clones: {fileID: 1224677469}
   KEY: {fileID: 0}
+  TeleportDoor: {fileID: 0}
+  IsNormalKey: 0
   ExitDoorTouched: 0
+  HaveTeleportKey: 0
+  TouchTeleportKey: 0
   cloneMoves: []
   lost: {fileID: 312635384}
   win: {fileID: 695714118}
@@ -5318,7 +5335,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497395708}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.117, y: -0.225, z: 11.35746}
+  m_LocalPosition: {x: 0.589, y: -0.449, z: 11.35746}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1444016835}
@@ -5530,7 +5547,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1601236829
 GameObject:
@@ -6737,11 +6754,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2011460849}
   - component: {fileID: 2011460851}
-  - component: {fileID: 2011460850}
   - component: {fileID: 2011460852}
+  - component: {fileID: 2011460850}
   m_Layer: 0
   m_Name: teleportD
-  m_TagString: teleportDoor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6760,19 +6777,32 @@ Transform:
   m_Father: {fileID: 713715851}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2011460850
-BoxCollider:
+--- !u!61 &2011460850
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2011460848}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
-  m_Center: {x: 0.00000011920929, y: 0, z: 0}
+  m_Size: {x: 0.2, y: 0.2}
+  m_EdgeRadius: 0
 --- !u!212 &2011460851
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6811,7 +6841,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 9ebde76ca4e575a47811ec87fe11931e, type: 3}
   m_Color: {r: 1, g: 0.96862745, b: 0, a: 1}
   m_FlipX: 0
@@ -6836,7 +6866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSource: 0
-  dest: {fileID: 0}
+  Dest: {fileID: 0}
 --- !u!1 &2025555448
 GameObject:
   m_ObjectHideFlags: 0
@@ -7071,7 +7101,7 @@ RectTransform:
   m_Children:
   - {fileID: 695714115}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7439,7 +7469,7 @@ RectTransform:
   - {fileID: 1951430861}
   - {fileID: 761451278}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

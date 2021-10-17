@@ -5,5 +5,5 @@ using UnityEngine;
 public class teleDoor : MonoBehaviour
 {
     public bool isSource;
-    public GameObject dest;
+    public GameObject Dest;
 }
