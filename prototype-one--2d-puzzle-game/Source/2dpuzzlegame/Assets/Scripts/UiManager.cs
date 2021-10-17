@@ -11,6 +11,7 @@ public class UiManager : MonoBehaviour
     public Text stickyClonesText;
     public int collectedKeysCount;
     public Text collectedKeysText;
+    public Text gameOverText;
 
     void Start()
     {
@@ -40,6 +41,7 @@ public class UiManager : MonoBehaviour
             Debug.Log("WIN");
             collectedKeysCount -= requiredKeyCount;
             collectedKeysText.text = "Collected Keys: " + collectedKeysCount.ToString();
+            gameOverText.text = "You Won!";
         }
         else
         {
