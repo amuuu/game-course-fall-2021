@@ -81,7 +81,7 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) && isNearDoor && (collectedKeysNum == totalKeyCount))
         {
-            Debug.Log("Exit DOOR");
+            eventSystem.OnPlayerWin.Invoke();
         }
 
 

@@ -7,12 +7,14 @@ public class UiManager : MonoBehaviour
 {
     public Text counterText;
     public Text keyCounterText;
+    public Text winText;
     public EventSystemCustom eventSystem;
 
     void Start()
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
         eventSystem.OnPlayerKeyCollect.AddListener(UpdateKeyCounterText);
+        eventSystem.OnPlayerWin.AddListener(ShowWinText);
     }
 
     public void UpdateScoreText()
@@ -26,5 +28,10 @@ public class UiManager : MonoBehaviour
     {
         int newTextValue = int.Parse(keyCounterText.text) + 1;
         keyCounterText.text = newTextValue.ToString();
+    }
+
+    public void ShowWinText()
+    {
+        winText.text = "You Won!";
     }
 }
