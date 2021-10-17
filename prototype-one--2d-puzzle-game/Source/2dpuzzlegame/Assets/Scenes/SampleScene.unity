@@ -2017,8 +2017,8 @@ GameObject:
   - component: {fileID: 944715664}
   - component: {fileID: 944715663}
   m_Layer: 0
-  m_Name: Exit Door
-  m_TagString: ExitDoor
+  m_Name: Exit Platform
+  m_TagString: ExitPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3329,6 +3329,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnPlayerLose:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1587907883
 Transform:
   m_ObjectHideFlags: 0

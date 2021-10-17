@@ -5,10 +5,10 @@ using UnityEngine;
 public enum TagNames
 {
     StickyPlatform,
-    ExitDoor,
+    ExitPlatform,
     DeathZone,
     CollectableItem,
     Key,
-    Door
+    Door,
 }
     

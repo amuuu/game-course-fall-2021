@@ -142,9 +142,9 @@ public class PlayerMove : MonoBehaviour
             canJump = false;
         }
 
-        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        if (collision.gameObject.CompareTag(TagNames.ExitPlatform.ToString()))
         {
-            Debug.Log("exit door");
+            Debug.Log("exit platform");
         }
 
        

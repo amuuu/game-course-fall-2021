@@ -6,10 +6,10 @@ TagManager:
   tags:
   - DeathZone
   - StickyPlatform
-  - ExitDoor
   - CollectableItem
   - Key
   - Door
+  - ExitPlatform
   layers:
   - Default
   - TransparentFX
