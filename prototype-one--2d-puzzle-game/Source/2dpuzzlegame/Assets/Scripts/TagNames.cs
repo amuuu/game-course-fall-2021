@@ -11,6 +11,6 @@ public enum TagNames
     ExitKey,
     ExitDoor,
     TeleportDoor,
-    TepeportKey
+    TeleportKey
 }
     
