@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
@@ -75,8 +73,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (inExitPos)
             {
-                dist = Vector3.Distance(sourceDoor.transform.position, transform.position);
-                if (int.Parse(keyNumber.text) > 0 && dist < doordist)
+                if (int.Parse(keyNumber.text) > 0)
                 {
                     winText.SetActive(true);
                 }
@@ -133,6 +130,11 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            inExitPos = false;
         }
     }
 

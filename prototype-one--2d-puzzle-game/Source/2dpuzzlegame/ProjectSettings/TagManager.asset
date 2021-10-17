@@ -12,10 +12,10 @@ TagManager:
   - DestDoor
   - TeleKey
   - SwitchKey
-  - SwitchZone
   - SrcDoor
   - MainPlayer
   - ClonePlayer
+  - SwZone
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ public class CollectItem : MonoBehaviour
     public int keyNumber;           // Number of keys that we have collected
     public float distFromKey;       // Maximum distance from keys to be able to collect them
     public int teleportKeyNumber;   // Number of keys that allows you to open teleport door
+    public int switchKeyNumber;     // Number of keys that allows you to switch with clones
     public GameObject[] keys;       // Array of keys in the scene
     public EventSystemCustom eventSystem;
 
@@ -24,13 +25,20 @@ public class CollectItem : MonoBehaviour
                     // Deactivate the key that we collect
                     keys[i].SetActive(false);
                     // Increase number of keys that we have
-                    keyNumber++;
-                    if (keys[i].CompareTag(TagNames.TeleKey.ToString()))
+                    if (keys[i].CompareTag(TagNames.KeyItem.ToString()))
+                    {
+                        keyNumber++;
+                        // Invoke increase key number text signal
+                        eventSystem.onGetKey.Invoke();
+                    }
+                    else if (keys[i].CompareTag(TagNames.SwitchKey.ToString()))
+                    {
+                        switchKeyNumber++;
+                    }
+                    else if (keys[i].CompareTag(TagNames.TeleKey.ToString()))
                     {
                         teleportKeyNumber++;
                     }
-                    // Invoke increase key number text signal
-                    eventSystem.onGetKey.Invoke();
                 }
             }
         }

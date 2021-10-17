@@ -14,19 +14,29 @@ public class ChangePlayer : MonoBehaviour
 
     void Update()
     {
-        if (inChangeZone)
+        if (inChangeZone && Player.GetComponent<CollectItem>().switchKeyNumber > 0)
         {
-            Debug.Log("Here");
             chooseText.SetActive(true);
-            Time.timeScale = 0;
+            Player.GetComponent<PlayerMove>().enabled = false;
+        }else
+        {
+            chooseText.SetActive(false);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (collision.gameObject.CompareTag(TagNames.SwitchZone.ToString()))
-        ///{
-           // Debug.Log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        //}
+        if (collision.gameObject.CompareTag(TagNames.MainPlayer.ToString()))
+        {
+            inChangeZone = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.MainPlayer.ToString()))
+        {
+            inChangeZone = false;
+        }
     }
 }
