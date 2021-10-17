@@ -17,10 +17,15 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+
+    public GameObject[] keys;
+
+
+
+
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
-
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
@@ -98,8 +103,6 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("exit door");
         }
 
-       
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -109,6 +112,7 @@ public class PlayerMove : MonoBehaviour
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
         }
+
     }
 
     public void MoveClones(Vector3 vec, bool isDirRight)
