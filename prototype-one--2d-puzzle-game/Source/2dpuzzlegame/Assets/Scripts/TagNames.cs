@@ -9,5 +9,6 @@ public enum TagNames
     DeathZone,
     CollectableItem,
     Key,
+    KeyTele,
 }
     
