@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
+    public Animator animator;
 
     public GameObject clones;
     public CloneMove[] cloneMoves;
@@ -19,10 +20,10 @@ public class PlayerMove : MonoBehaviour
     public GameObject deathZone;
     public GameObject sourceDoor;
     public GameObject destDoor;
-
+    
+    private float horizontalMove = 0f;
     private bool canJump;
     private bool inExitPos;
-    private float dist;
 
     private Vector3 moveVector;
     void Start()
@@ -36,6 +37,9 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        horizontalMove = Input.GetAxisRaw("Horizontal") * factor;
+        animator.SetFloat("speed", Mathf.Abs(horizontalMove));
+
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += moveVector;
@@ -83,7 +87,6 @@ public class PlayerMove : MonoBehaviour
                 }
             }
         }
-
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
         {
