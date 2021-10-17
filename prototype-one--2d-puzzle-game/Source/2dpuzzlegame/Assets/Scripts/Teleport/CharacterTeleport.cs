@@ -20,13 +20,13 @@ public class CharacterTeleport : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if(key)
+            if(key != null)
             {
                 key.SetActive(false);
                 key = null;
                 haveKey = true;
             }
-            else if (doorSource)
+            else if (doorSource != null)
             {
                 transform.position = doorDestination.transform.position;
             }
