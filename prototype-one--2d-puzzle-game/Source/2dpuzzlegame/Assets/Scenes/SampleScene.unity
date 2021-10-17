@@ -2109,7 +2109,7 @@ GameObject:
   - component: {fileID: 946462039}
   m_Layer: 0
   m_Name: Win Door
-  m_TagString: Untagged
+  m_TagString: WinDoor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
