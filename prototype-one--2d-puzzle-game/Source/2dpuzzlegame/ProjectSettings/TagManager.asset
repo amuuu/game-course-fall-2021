@@ -10,6 +10,7 @@ TagManager:
   - CollectableItem
   - Key
   - KeyTele
+  - DoorTeleS
   layers:
   - Default
   - TransparentFX

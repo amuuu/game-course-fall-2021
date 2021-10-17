@@ -10,5 +10,6 @@ public enum TagNames
     CollectableItem,
     Key,
     KeyTele,
+    DoorTeleS
 }
     

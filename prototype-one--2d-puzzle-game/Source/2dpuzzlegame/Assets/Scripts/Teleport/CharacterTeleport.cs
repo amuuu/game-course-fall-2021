@@ -6,7 +6,9 @@ using UnityEngine;
 public class CharacterTeleport : MonoBehaviour
 {
     private GameObject key;
+    private GameObject doorSource;
     private bool haveKey = false;
+    [SerializeField] GameObject doorDestination;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,12 @@ public class CharacterTeleport : MonoBehaviour
             if(key)
             {
                 key.SetActive(false);
+                key = null;
                 haveKey = true;
+            }
+            else if (doorSource)
+            {
+                transform.position = doorDestination.transform.position;
             }
         }
     }
@@ -34,6 +41,18 @@ public class CharacterTeleport : MonoBehaviour
             key = collision.gameObject;
             EventSystemCustom.current.onHintChange.Invoke("Press E to collect");
         }
+        else if (collision.gameObject.CompareTag(TagNames.DoorTeleS.ToString()))
+        {
+            if (haveKey)
+            {
+                doorSource = collision.gameObject;
+                EventSystemCustom.current.onHintChange.Invoke("Press E to teleport");
+            }
+            else
+            {
+                EventSystemCustom.current.onHintChange.Invoke("You need purple key.");
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -42,6 +61,11 @@ public class CharacterTeleport : MonoBehaviour
         {
             // collision.gameObject.SetActive(false);
             key = null;
+            EventSystemCustom.current.onHintChange.Invoke("");
+        }
+        else if (collision.gameObject.CompareTag(TagNames.DoorTeleS.ToString()))
+        {
+            doorSource = null;
             EventSystemCustom.current.onHintChange.Invoke("");
         }
     }
