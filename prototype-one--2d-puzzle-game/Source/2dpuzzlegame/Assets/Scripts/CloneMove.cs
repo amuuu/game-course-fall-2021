@@ -7,10 +7,10 @@ public class CloneMove : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject clone;
     public GameObject sourceDoor;
-    public float teleportDoorDist;
 
     private bool canJump;
     private bool canMove;
+    private bool inTeleportZone;
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
@@ -19,14 +19,14 @@ public class CloneMove : MonoBehaviour
     {
         canJump = true;
         canMove = true;
+        inTeleportZone = false;
     }
 
     private void Update()
     {
-        float distFromTeleDoor = Vector3.Distance(sourceDoor.transform.position, transform.position);
-        if (distFromTeleDoor < teleportDoorDist)
+        if (inTeleportZone)
         {
-            sourceDoor.GetComponent<Teleport>().teleport(clone ,teleportDoorDist);
+            sourceDoor.GetComponent<Teleport>().teleport(clone);
         }
     }
 
@@ -92,6 +92,11 @@ public class CloneMove : MonoBehaviour
             canMove = false;
 
         }
+
+        if (collision.gameObject.CompareTag(TagNames.SrcDoor.ToString()))
+        {
+            inTeleportZone = true;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -100,6 +105,11 @@ public class CloneMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.SrcDoor.ToString()))
+        {
+            inTeleportZone = false;
         }
     }
 }

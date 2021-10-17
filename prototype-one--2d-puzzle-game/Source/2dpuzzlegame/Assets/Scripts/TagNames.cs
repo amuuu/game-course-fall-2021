@@ -10,6 +10,8 @@ public enum TagNames
     CollectableItem,
     KeyItem,
     TeleKey,
-    SourceDoor
+    SrcDoor,
+    MainPlayer,
+    ClonePlayer
 }
     
