@@ -12,6 +12,8 @@ public enum TagNames
     TeleKey,
     SrcDoor,
     MainPlayer,
-    ClonePlayer
+    ClonePlayer,
+    SwZone,
+    SwitchKey
 }
     
