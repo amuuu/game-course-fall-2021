@@ -10,6 +10,7 @@ TagManager:
   - Key
   - ExitPlatform
   - ExitDoor
+  - TeleportDoor
   layers:
   - Default
   - TransparentFX

@@ -1193,7 +1193,7 @@ GameObject:
   - component: {fileID: 566299374}
   m_Layer: 0
   m_Name: Source Door
-  m_TagString: Untagged
+  m_TagString: TeleportDoor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1933,7 +1933,7 @@ GameObject:
   - component: {fileID: 812817914}
   m_Layer: 0
   m_Name: Destination Door
-  m_TagString: Untagged
+  m_TagString: TeleportDoor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
