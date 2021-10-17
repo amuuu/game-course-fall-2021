@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class Teleport : MonoBehaviour
 {
@@ -45,7 +44,7 @@ public class Teleport : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(TagNames.SrcDoor.ToString()))
+        if (collision.gameObject.CompareTag(TagNames.MainPlayer.ToString()))
         {
             inTeleportZone = false;
         }
