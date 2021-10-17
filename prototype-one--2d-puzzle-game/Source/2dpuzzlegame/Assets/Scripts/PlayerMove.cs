@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
 
-    private int MAX_KEYS = 5;
+    private int MAX_KEYS;
     private bool onExitDoor;
     private GameObject _collectableObject;
     public int collectedKeys = 0;
@@ -26,7 +26,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
-
+        MAX_KEYS = GameObject.FindGameObjectsWithTag("Key").Length;
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
