@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 moveVector;
     public int storedKey = 0;
+
+    public EventSystemCustom eventSystem;
+
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -96,10 +100,14 @@ public class PlayerMove : MonoBehaviour
             {
 
                 collision.gameObject.SetActive(false);
-                Debug.Log("Key!");
+              Debug.Log("Key!");
 
                 storedKey = storedKey + 1;
                 Debug.Log("keyyy"+storedKey);
+
+                eventSystem.OnCollectedKeysEvent.Invoke();
+                Debug.Log("keyy invoke");
+
 
             }
         }
