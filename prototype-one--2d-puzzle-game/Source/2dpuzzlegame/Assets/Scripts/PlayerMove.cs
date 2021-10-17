@@ -7,11 +7,13 @@ public class PlayerMove : MonoBehaviour
     
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
+    public int count = 0;
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
 
     public GameObject clones;
+    public GameObject keys;
     public CloneMove[] cloneMoves;
 
     private bool canJump;
@@ -57,6 +59,13 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             Destroy(this.gameObject);
+
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Destroy(keys);
+            count++;
+            Debug.Log(count);
         }
 
 
@@ -83,6 +92,13 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+        if (collision.gameObject.CompareTag("key"))
+        {
+            Debug.Log("golabu");
+            keys = collision.gameObject;
+        }
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -101,6 +117,17 @@ public class PlayerMove : MonoBehaviour
        
 
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        
+        if (collision.gameObject.CompareTag("key"))
+        {
+            keys = null;
+        }
+
+
+    }
+
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -109,6 +136,7 @@ public class PlayerMove : MonoBehaviour
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
         }
+
     }
 
     public void MoveClones(Vector3 vec, bool isDirRight)
