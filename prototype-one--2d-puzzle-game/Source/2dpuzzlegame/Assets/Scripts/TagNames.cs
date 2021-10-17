@@ -7,6 +7,9 @@ public enum TagNames
     StickyPlatform,
     ExitDoor,
     DeathZone,
-    CollectableItem
+    CollectableItem,
+    normalkey,
+    teleportKey,
+    teleportDoor
 }
     

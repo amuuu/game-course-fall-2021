@@ -1,32 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    
+    public int neededKeys;
+    public EventSystemCustom eventSystem;
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
-
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
-
     public GameObject clones;
+    public GameObject KEY;
     public CloneMove[] cloneMoves;
-
+    public lost lost;
+    public win win;
+    public  int eatenKeys;
     private bool canJump;
-
+    private bool Epressed;
     private Vector3 moveVector;
+    
     void Start()
     {
+        neededKeys=1;
+        //Random.Range(0, 6);
+        eatenKeys=0;
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
-
         canJump = true;
+        Epressed=false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
     void Update()
     {
+        
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += moveVector;
@@ -52,30 +60,28 @@ public class PlayerMove : MonoBehaviour
             JumpClones(jumpAmount);
         }
 
-
+        if(Input.GetKey(KeyCode.E) && KEY!=null){
+            KEY.SetActive(false);
+            eventSystem.OnCollectKey.Invoke();
+            eatenKeys++;
+            Debug.Log("KEY");
+        }
         // This was added to answer a question.
         if (Input.GetKeyDown(KeyCode.Z))
         {
             Destroy(this.gameObject);
         }
 
-
-        // This is too dirty. We must decalare/calculate the bounds in another way. 
-        /*if (transform.position.x < -0.55f) 
-        {
-            transform.position = new Vector3(0.51f, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x > 0.53f)
-        {
-            transform.position = new Vector3(-0.53f, transform.position.y, transform.position.z);
-        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
+            lost.setup();
             Debug.Log("DEATH ZONE");
+            Destroy(this.gameObject);
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -83,8 +89,25 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
-    }
+        if ( collision.gameObject.CompareTag(TagNames.normalkey.ToString()))
+        {
+            KEY=collision.gameObject;
+            // collision.gameObject.SetActive(false);
+            // eventSystem.OnCollectKey.Invoke();
+            // eatenKeys++;
+            // Debug.Log("KEY");
+            //Epressed=false;
+        }
 
+    }
+        private void OnTriggerExit2D(Collider2D collision){
+        if (collision.gameObject.CompareTag(TagNames.normalkey.ToString()))
+        {
+            KEY=null;
+        }
+      }
+
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
@@ -93,23 +116,26 @@ public class PlayerMove : MonoBehaviour
             canJump = false;
         }
 
-        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        if (eatenKeys==neededKeys&& Input.GetKeyDown(KeyCode.E) &&collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
+            win.setup();
             Debug.Log("exit door");
+            //Destroy(this.gameObject);
+
         }
-
-       
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
-            Debug.LogWarning("sticky no more bruh");
+            Debug.Log("sticky no more bruh");
             canJump = true;
         }
+        //Epressed=false;
     }
+
+   
 
     public void MoveClones(Vector3 vec, bool isDirRight)
     {
@@ -122,4 +148,6 @@ public class PlayerMove : MonoBehaviour
         foreach (var c in cloneMoves)
             c.Jump(amount);
     }
+
+   
 }
