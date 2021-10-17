@@ -97,6 +97,11 @@ public class CloneMove : MonoBehaviour
         {
             inTeleportZone = true;
         }
+
+        if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            clone.gameObject.SetActive(false);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
