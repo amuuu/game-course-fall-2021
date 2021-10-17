@@ -14,11 +14,15 @@ public class CloneMove : MonoBehaviour
 
     public EventSystemCustom eventSystem;
 
+    public GameObject source;
+    
+
     private void Awake()
     {
         canJump = true;
         canMove = true;
     }
+
     public void Move(Vector3 vec, bool isDirRight)
     {
         if (!canMove)
@@ -61,6 +65,20 @@ public class CloneMove : MonoBehaviour
     {
         if (canJump)
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.Source.ToString()))
+        {
+            Debug.Log("Near speacial door");
+            // Retrieve its destination
+            source = collision.gameObject;
+
+            GameObject destination = source.transform.GetChild(0).gameObject;
+            transform.position = destination.transform.position;
+
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

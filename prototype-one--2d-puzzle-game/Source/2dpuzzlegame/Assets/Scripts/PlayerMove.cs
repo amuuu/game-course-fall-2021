@@ -27,6 +27,8 @@ public class PlayerMove : MonoBehaviour
     public int specialKeyCounter = 0;
     public bool specialKeyCollided = false;
     public GameObject specialKey;
+    public bool teleport = false;
+    public GameObject source;
 
     private Vector3 moveVector;
     void Start()
@@ -111,6 +113,19 @@ public class PlayerMove : MonoBehaviour
             eventSystem.OnLoseKey.Invoke();
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && teleport && specialKeyCounter > 0)
+        {
+            teleport = false;
+            GameObject destination = source.transform.GetChild(0).gameObject;
+            transform.position = destination.transform.position;
+
+            // Key numbers
+            specialKeyCounter -= 1;
+            eventSystem.OnLoseSpecialKey.Invoke();
+        }
+      
+
+
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
         {
@@ -127,6 +142,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            Destroy(this.gameObject);
             eventSystem.OnLose.Invoke();
         }
         
@@ -156,8 +172,45 @@ public class PlayerMove : MonoBehaviour
             exitCollided = true;
         }
 
+        if (collision.gameObject.CompareTag(TagNames.Source.ToString()))
+        {
+            Debug.Log("Near speacial door");
+            // Retrieve its destination
+            source = collision.gameObject;
+            teleport = true;
+
+        }
+
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            Debug.Log("EXIT KEY!");
+            keyCollided = false;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.SpecialKey.ToString()))
+        {
+            Debug.Log("EXIT SPECIAL KEY!");
+            specialKeyCollided = false;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            Debug.Log("OUT OF EXIT DOOR!");
+            exitCollided = false;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.Source.ToString()))
+        {
+            Debug.Log("Exit near speacial door");
+            // Retrieve its destination
+            teleport = false;
+
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
