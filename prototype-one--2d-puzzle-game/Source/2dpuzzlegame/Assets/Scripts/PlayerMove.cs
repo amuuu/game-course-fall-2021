@@ -110,7 +110,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("POTION!");
         }
 
-        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        if (collision.gameObject.CompareTag(TagNames.ExitKey.ToString()))
         {
             key = collision.gameObject;
         }
@@ -123,7 +123,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        if (collision.gameObject.CompareTag(TagNames.ExitKey.ToString()))
         {
             key = null;
         }
