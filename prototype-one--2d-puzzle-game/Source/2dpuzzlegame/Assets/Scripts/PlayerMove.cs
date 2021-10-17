@@ -115,7 +115,7 @@ public class PlayerMove : MonoBehaviour
             key = collision.gameObject;
         }
 
-        if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             isNearDoor = true;
         }
@@ -128,7 +128,7 @@ public class PlayerMove : MonoBehaviour
             key = null;
         }
 
-        if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             isNearDoor = false;
         }
