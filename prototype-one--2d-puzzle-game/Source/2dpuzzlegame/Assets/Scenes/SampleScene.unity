@@ -1361,7 +1361,7 @@ GameObject:
   - component: {fileID: 645644917}
   - component: {fileID: 645644916}
   m_Layer: 5
-  m_Name: WinText
+  m_Name: StatusText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4527,5 +4527,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   counterText: {fileID: 588809072}
   keyCounterText: {fileID: 1080666300}
-  winText: {fileID: 645644916}
+  statusText: {fileID: 645644916}
   eventSystem: {fileID: 1587907882}

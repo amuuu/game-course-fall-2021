@@ -7,7 +7,7 @@ public class UiManager : MonoBehaviour
 {
     public Text counterText;
     public Text keyCounterText;
-    public Text winText;
+    public Text statusText;
     public EventSystemCustom eventSystem;
 
     void Start()
@@ -32,6 +32,6 @@ public class UiManager : MonoBehaviour
 
     public void ShowWinText()
     {
-        winText.text = "You Won!";
+        statusText.text = "You Won!";
     }
 }
