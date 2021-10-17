@@ -106,7 +106,10 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        key = null;
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            key = null;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
