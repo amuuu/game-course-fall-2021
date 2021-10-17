@@ -3,38 +3,58 @@ using UnityEngine.UI;
 
 public class Teleport : MonoBehaviour
 {
-    public float teleportDoorDist;
-
     public GameObject Player;
     public GameObject appearPoint;
-    public GameObject destinationDoor;
+
+    private bool inTeleportZone;
 
     void Start()
     {
-        
+        inTeleportZone = false;
     }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (inTeleportZone)
         {
-            if (Player.GetComponent<CollectItem>().teleportKeyNumber > 0)
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                teleport(Player, teleportDoorDist);
-            }else
-            {
-                Debug.Log("You don't have the key");
+                if (Player.GetComponent<CollectItem>().teleportKeyNumber > 0)
+                {
+                    teleport(Player);
+                }
+                else
+                {
+                    Debug.Log("You don't have the key");
+                }
             }
         }
     }
 
-    public void teleport(GameObject obj, float teleDist)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        float distFromTeleDoor = Vector3.Distance(obj.transform.position, transform.position);
-        if (distFromTeleDoor < teleDist)
+        if (collision.gameObject.CompareTag(TagNames.MainPlayer.ToString()))
         {
-            obj.SetActive(false);
-            obj.transform.position = appearPoint.transform.position;
-            obj.SetActive(true);
+            inTeleportZone = true;
         }
+        if (collision.gameObject.CompareTag(TagNames.ClonePlayer.ToString()))
+        {
+
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.SrcDoor.ToString()))
+        {
+            inTeleportZone = false;
+        }
+    }
+
+    public void teleport(GameObject obj)
+    {
+        obj.SetActive(false);
+        obj.transform.position = appearPoint.transform.position;
+        obj.SetActive(true);   
     }
 }

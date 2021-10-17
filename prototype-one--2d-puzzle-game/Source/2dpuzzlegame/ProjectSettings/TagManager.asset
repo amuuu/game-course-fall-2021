@@ -9,9 +9,13 @@ TagManager:
   - ExitDoor
   - CollectableItem
   - KeyItem
-  - SourceDoor
   - DestDoor
   - TeleKey
+  - SwitchKey
+  - SwitchZone
+  - SrcDoor
+  - MainPlayer
+  - ClonePlayer
   layers:
   - Default
   - TransparentFX
