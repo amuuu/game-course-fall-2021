@@ -8,6 +8,7 @@ public class UiManager : MonoBehaviour
     public Text counterText;
     public Text winText;
     public Text keyText;
+    public Text requiredKeyText;
     public EventSystemCustom eventSystem;
     public WinEventManager winEvent;
 
@@ -17,6 +18,8 @@ public class UiManager : MonoBehaviour
         winEvent.OnExitDoorWin.AddListener(ShowWinText);
         winEvent.OnDeathZoneLose.AddListener(ShowLoseText);
         eventSystem.OnKeyEnter.AddListener(UpdateKeyText);
+
+        requiredKeyText.text = "Required Keys: " + FindObjectOfType<PlayerMove>().requiredKeys.ToString();
     }
 
     public void UpdateScoreText()

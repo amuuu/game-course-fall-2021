@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     public GameObject key;
     public GameObject teleportKey;
     public bool reachedDoor;
-    public static int requiredKeys;
+    public int requiredKeys;
 
     public GameObject clones;
     public CloneMove[] cloneMoves;
@@ -36,7 +36,7 @@ public class PlayerMove : MonoBehaviour
         numberOfKeys = 0;
         reachedDoor = false;
 
-        requiredKeys = 1;
+        requiredKeys = 2;
     }
 
     void Update()
