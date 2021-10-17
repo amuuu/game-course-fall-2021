@@ -13,22 +13,22 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject clones;
     public GameObject KEY;
+    public bool ExitDoorTouched;
     public CloneMove[] cloneMoves;
     public lost lost;
     public win win;
+    public Text NeededKeyText;
     public  int eatenKeys;
     private bool canJump;
-    private bool Epressed;
     private Vector3 moveVector;
     
     void Start()
     {
-        neededKeys=1;
-        //Random.Range(0, 6);
+        neededKeys=Random.Range(0, 8);
+        NeededKeyText.text=neededKeys.ToString();
         eatenKeys=0;
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
         canJump = true;
-        Epressed=false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -66,6 +66,14 @@ public class PlayerMove : MonoBehaviour
             eatenKeys++;
             Debug.Log("KEY");
         }
+
+        if(eatenKeys>=neededKeys && Input.GetKeyDown(KeyCode.E) && ExitDoorTouched==true){
+            win.setup();
+            Debug.Log("exit door");
+            
+        }
+
+
         // This was added to answer a question.
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -76,27 +84,29 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        ///DEATH ZONE
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             lost.setup();
             Debug.Log("DEATH ZONE");
             Destroy(this.gameObject);
         }
-        
+        //POTION
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+        ///key
         if ( collision.gameObject.CompareTag(TagNames.normalkey.ToString()))
         {
             KEY=collision.gameObject;
-            // collision.gameObject.SetActive(false);
-            // eventSystem.OnCollectKey.Invoke();
-            // eatenKeys++;
-            // Debug.Log("KEY");
-            //Epressed=false;
+        }
+        ///exit door
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+           ExitDoorTouched=true;
+            Debug.Log("touched door");
         }
 
     }
@@ -104,6 +114,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.normalkey.ToString()))
         {
             KEY=null;
+            ExitDoorTouched=false;
         }
       }
 
@@ -112,17 +123,10 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
-            Debug.LogWarning("sticky");
+            Debug.Log("sticky");
             canJump = false;
         }
-
-        if (eatenKeys==neededKeys&& Input.GetKeyDown(KeyCode.E) &&collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
-        {
-            win.setup();
-            Debug.Log("exit door");
-            //Destroy(this.gameObject);
-
-        }
+       
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -132,7 +136,6 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("sticky no more bruh");
             canJump = true;
         }
-        //Epressed=false;
     }
 
    
