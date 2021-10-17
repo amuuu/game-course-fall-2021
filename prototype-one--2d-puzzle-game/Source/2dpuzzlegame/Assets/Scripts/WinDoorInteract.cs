@@ -5,6 +5,7 @@ using UnityEngine;
 public class WinDoorInteract : MonoBehaviour
 {
     public Collider2D collider;
+    public EventSystemCustom eventSystem;
     public int requiredKeyCount;
     bool playerIsNearby;
     // Start is called before the first frame update
@@ -18,6 +19,7 @@ public class WinDoorInteract : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && playerIsNearby)
         {
+            eventSystem.OnWinDoorInteract.Invoke(requiredKeyCount);
             Debug.Log("DOOR");
         }
     }

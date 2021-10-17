@@ -2218,8 +2218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 946462039}
-  requiredKeyCount: 2
   eventSystem: {fileID: 1587907882}
+  requiredKeyCount: 1
 --- !u!1 &1178392996
 GameObject:
   m_ObjectHideFlags: 0

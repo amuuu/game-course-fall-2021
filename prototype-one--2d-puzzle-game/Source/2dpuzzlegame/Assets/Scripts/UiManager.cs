@@ -16,6 +16,7 @@ public class UiManager : MonoBehaviour
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateStickyCloneText);
         eventSystem.OnKeyPickup.AddListener(UpdateKeyCountText);
+        eventSystem.OnWinDoorInteract.AddListener(CheckForWinCondition);
         stickyClonesCount = 0;
         collectedKeysCount = 0;
     }
@@ -31,5 +32,18 @@ public class UiManager : MonoBehaviour
         Debug.Log("UPDATE COLLECTED KEYS");
         collectedKeysCount++;
         collectedKeysText.text = "Collected Keys: " + collectedKeysCount.ToString();
+    }
+    public void CheckForWinCondition(int requiredKeyCount)
+    {
+        if (collectedKeysCount >= requiredKeyCount)
+        {
+            Debug.Log("WIN");
+            collectedKeysCount -= requiredKeyCount;
+            collectedKeysText.text = "Collected Keys: " + collectedKeysCount.ToString();
+        }
+        else
+        {
+            Debug.Log("NOT ENOUGH KEYS");
+        }
     }
 }
