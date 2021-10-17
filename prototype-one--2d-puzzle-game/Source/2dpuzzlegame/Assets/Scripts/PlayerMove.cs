@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
     public EventSystemCustom eventSystem;
 
     private GameObject key;
+    private GameObject teleportKey;
     private int collectedKeysNum;
 
     private int totalKeyCount;
@@ -84,6 +85,11 @@ public class PlayerMove : MonoBehaviour
             eventSystem.OnPlayerWin.Invoke();
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && teleportKey)
+        {
+            Destroy(teleportKey);
+        }
+
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -115,6 +121,11 @@ public class PlayerMove : MonoBehaviour
             key = collision.gameObject;
         }
 
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            teleportKey = collision.gameObject;
+        }
+
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             isNearDoor = true;
@@ -126,6 +137,11 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitKey.ToString()))
         {
             key = null;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            teleportKey = null;
         }
 
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
