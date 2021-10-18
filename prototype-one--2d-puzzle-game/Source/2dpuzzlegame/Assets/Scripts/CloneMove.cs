@@ -69,8 +69,13 @@ public class CloneMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.TeleportSource.ToString()))
         {
-            Debug.Log("Clone sucked into teleport source");
+            //Debug.Log("Clone sucked into teleport source");
             spriteRenderer.transform.position = new Vector2(TeleportDestination.transform.position.x, TeleportDestination.transform.position.y);
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -100,6 +105,8 @@ public class CloneMove : MonoBehaviour
         {
             //Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+            canMove = true;
+
         }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerMove : MonoBehaviour
 {
 
-    public float factor = 0.01f;
+    public float factor;
     public float jumpAmount = 0.5f;
 
     public SpriteRenderer spriteRenderer;
@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
     public CloneMove[] cloneMoves;
 
     private bool canJump;
+    private bool isGrounded;
 
     public EventSystemCustom eventSystem;
 
@@ -29,6 +30,7 @@ public class PlayerMove : MonoBehaviour
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
+        isGrounded = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -53,18 +55,19 @@ public class PlayerMove : MonoBehaviour
             spriteRenderer.flipX = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        if (Input.GetKeyDown(KeyCode.Space) && canJump && isGrounded)
         {
             rb.AddForce(transform.up * jumpAmount, ForceMode2D.Impulse);
             JumpClones(jumpAmount);
         }
+        isGrounded = false;
 
 
         // This was added to answer a question.
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Destroy(this.gameObject);
-        }
+        //if (Input.GetKeyDown(KeyCode.Z))
+        //{
+        //    Destroy(this.gameObject);
+        //}
 
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
@@ -122,6 +125,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             eventSystem.OnGameEndedLost.Invoke();
+            this.gameObject.SetActive(false);
             //Debug.Log("YOU LOST Event fired!");
         }
 
@@ -131,18 +135,7 @@ public class PlayerMove : MonoBehaviour
             //Debug.Log("POTION!");
         }
 
-
     }
-
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag(TagNames.CollectableKey.ToString()))
-    //    {
-
-    //        Debug.Log("sssssssssssssssssssssssssssssssssssssssssssssss");
-
-    //    }
-    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -152,6 +145,7 @@ public class PlayerMove : MonoBehaviour
             canJump = false;
         }
 
+        
         //if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         //{
         //    Debug.Log("exit door");
@@ -161,6 +155,11 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        isGrounded = true;
+    }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
@@ -168,6 +167,7 @@ public class PlayerMove : MonoBehaviour
             //Debug.LogWarning("skticky no more bruh");
             canJump = true;
         }
+
     }
 
     public void MoveClones(Vector3 vec, bool isDirRight)

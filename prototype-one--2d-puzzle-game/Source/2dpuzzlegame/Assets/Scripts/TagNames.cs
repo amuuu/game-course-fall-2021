@@ -10,10 +10,11 @@ public enum TagNames
     CollectableItem,
     CollectableKey,
     TeleportSource,
-    TeleportKey
+    TeleportKey,
+    NormalPlatform
 }
 public static class Constants
 {
-    public const int RequiredKeyCountToWin = 3;
+    public const int RequiredKeyCountToWin = 4;
 }
     

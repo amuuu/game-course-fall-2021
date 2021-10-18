@@ -11,6 +11,7 @@ TagManager:
   - CollectableKey
   - TeleportSource
   - TeleportKey
+  - NormalPlatform
   layers:
   - Default
   - TransparentFX
