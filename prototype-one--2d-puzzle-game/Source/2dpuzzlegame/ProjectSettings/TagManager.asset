@@ -10,6 +10,7 @@ TagManager:
   - CollectableItem
   - Key
   - WinDoor
+  - PortalSource
   layers:
   - Default
   - TransparentFX
