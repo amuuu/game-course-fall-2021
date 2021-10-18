@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     public int takenKeys;
     public bool isNearKey1Region;
     public bool isNearKey2Region;
+    public EventSystemCustom eventSystem;
 
     void Start()
     {
@@ -73,17 +74,15 @@ public class PlayerMove : MonoBehaviour
         {
             if (isNearKey1Region)
             {
-                //Debug.Log("fdfdfd");
                 Key1.SetActive(false);
-                //GameObject.Find(TagNames.Key1.ToString()).SetActive(false);
                 isNearKey1Region = false;
+                eventSystem.CollectKey.Invoke();
             }
             else if (isNearKey2Region)
             {
-                //Debug.Log("fdfdfd");
                 Key2.SetActive(false);
-                //GameObject.Find(TagNames.Key2.ToString()).SetActive(false);
                 isNearKey2Region = false;
+                eventSystem.CollectKey.Invoke();
             }
             // it could be else too, but it is better if in the future key count increases
             if (takenKeys == 0)
@@ -124,13 +123,11 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.CompareTag(TagNames.Key1.ToString()))
         {
-            //collision.gameObject.SetActive(false);
             isNearKey1Region = true;
         }
 
         if (collision.gameObject.CompareTag(TagNames.Key2.ToString()))
         {
-            //collision.gameObject.SetActive(false);
             isNearKey2Region = true;
         }
     }
