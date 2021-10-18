@@ -10,9 +10,12 @@ public class CloneMove : MonoBehaviour
     public Rigidbody2D rb;
     private bool canJump;
     private bool canMove;
+    public Transform teleportDoorDes;
+  
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
+
 
     private void Awake()
     {
@@ -89,6 +92,14 @@ public class CloneMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.DoorSource.ToString()))
+        {
+            transform.position = teleportDoorDes.position;
+            Debug.Log("teleport for clones!");
         }
     }
 }
