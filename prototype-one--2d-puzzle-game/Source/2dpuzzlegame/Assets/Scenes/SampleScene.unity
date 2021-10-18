@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 15280473}
   m_Layer: 0
   m_Name: Clone (2)
-  m_TagString: Untagged
+  m_TagString: Clone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1583,7 +1583,7 @@ GameObject:
   - component: {fileID: 682665341}
   m_Layer: 0
   m_Name: Clone (1)
-  m_TagString: Untagged
+  m_TagString: Clone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2554,7 +2554,7 @@ GameObject:
   - component: {fileID: 1233394727}
   m_Layer: 0
   m_Name: Clone
-  m_TagString: Untagged
+  m_TagString: Clone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -29,6 +29,10 @@ public class PortalSource : MonoBehaviour
             player = collision.gameObject;
             playerIsNearby = true;
         }
+        else if (collision.gameObject.CompareTag(TagNames.Clone.ToString()))
+        {
+            collision.gameObject.transform.position = destination.transform.position;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

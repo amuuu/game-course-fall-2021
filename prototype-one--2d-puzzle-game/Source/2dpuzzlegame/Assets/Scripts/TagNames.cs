@@ -11,6 +11,7 @@ public enum TagNames
     Key,
     WinDoor,
     Player,
-    PortalSource
+    PortalSource,
+    Clone
 }
     
