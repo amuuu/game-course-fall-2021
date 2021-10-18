@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     
     public float factor = 0.01f;
-    public float jumpAmount = 0.5f;
+    public float jumpAmount = 0.9f;
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
@@ -18,6 +18,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] int keyCnt;
     [SerializeField] UnityEngine.UI.Text keyCntTxt;
+    [SerializeField] UnityEngine.UI.Text winTxt;
 
 
     private Vector3 moveVector;
@@ -89,13 +90,13 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("POTION!");
         }
 
-        if (collision.gameObject.CompareTag(TagNames.Key.ToString())  )
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()) )
         {
             if (Input.GetKey(KeyCode.E))
             {
                 collision.gameObject.SetActive(false);
                 keyCnt++;
-                Debug.Log(keyCnt.ToString() + " Keys Collected!");          
+                Debug.Log(keyCnt.ToString() + " Keys Collected!");
                 keyCntTxt.text = ("Keys: " + keyCnt.ToString());
             }
         }
@@ -109,13 +110,13 @@ public class PlayerMove : MonoBehaviour
             canJump = false;
         }
 
-        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()) &&
+            Input.GetKey(KeyCode.E) && keyCnt >= 2)
         {
+            winTxt.text = "You Won!";
             Debug.Log("exit door");
         }
 
-       
-        
     }
 
 
