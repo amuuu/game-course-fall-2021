@@ -12,6 +12,7 @@ TagManager:
   - WinDoor
   - PortalSource
   - Clone
+  - PortalKey
   layers:
   - Default
   - TransparentFX
