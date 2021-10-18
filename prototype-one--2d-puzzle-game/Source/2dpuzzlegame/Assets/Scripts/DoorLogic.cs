@@ -34,7 +34,6 @@ public class DoorLogic : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("asaas");
                     StartCoroutine(ExampleCoroutine());
                 }
             }

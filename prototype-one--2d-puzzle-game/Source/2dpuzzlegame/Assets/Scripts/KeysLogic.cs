@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class KeysLogic : MonoBehaviour
 {
     private bool inKeyArea;
-    [SerializeField] private int keyCollected;
+    public EventSystemCustom eventSystem;
+    //[SerializeField] private int keyCollected;
 
     [SerializeField] Text keysCollectedText;
 
@@ -23,14 +24,14 @@ public class KeysLogic : MonoBehaviour
         {
             if (inKeyArea)
             {
-                keyCollected++;
+               // keyCollected++;
                 inKeyArea = false;
 
-                var text = keysCollectedText.text;
-                text = text.Split(':')[1];
-                var number = int.Parse(text) + 1;
-                Debug.Log(number);
-                keysCollectedText.text="Keys:" + (number);
+                // var text = keysCollectedText.text;
+                // text = text.Split(':')[1];
+                // var number = int.Parse(text) + 1;
+                eventSystem.OnKeyCollected.Invoke();
+               // keysCollectedText.text="Keys:" + (number);
                 Destroy(this.gameObject);
             }
         }
