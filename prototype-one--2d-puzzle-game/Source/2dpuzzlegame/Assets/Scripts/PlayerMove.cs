@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
-
+    public Animator animator;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
 
@@ -27,6 +27,9 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        animator.ResetTrigger("start walk");
+        animator.SetTrigger("stop walk");
+
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += moveVector;
@@ -35,10 +38,14 @@ public class PlayerMove : MonoBehaviour
 
             spriteRenderer.flipX = false;
 
+            animator.SetTrigger("start walk");
+
         }
 
         if (Input.GetKey(KeyCode.A))
         {
+            animator.SetTrigger("start walk");
+
             transform.position -= moveVector;
 
             MoveClones(moveVector, false);

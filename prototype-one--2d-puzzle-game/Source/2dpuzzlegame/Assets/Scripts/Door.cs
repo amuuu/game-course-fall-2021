@@ -14,7 +14,7 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.E) && player != null)
+        if (Input.GetKey(KeyCode.E) && game.collectedKeys > 0 && player != null)
         {
             if (isExit)
             {
@@ -49,12 +49,13 @@ public class Door : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        player = null;
+
         if (isExit)
         {
             return;
         }
 
-        player = null;
         if (collision.gameObject.CompareTag(TagNames.Player.ToString()))
         {
             teleportEnable = true;

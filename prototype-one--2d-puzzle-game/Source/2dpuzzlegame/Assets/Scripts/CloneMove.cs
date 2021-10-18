@@ -8,6 +8,7 @@ public class CloneMove : MonoBehaviour
     public bool isMovingSameDirection;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
+    public Animator animator;
     private bool canJump;
     private bool canMove;
     //public Text counterText; // Too dirty!
@@ -19,14 +20,26 @@ public class CloneMove : MonoBehaviour
         canJump = true;
         canMove = true;
     }
+
+    void Update()
+    {
+        animator.ResetTrigger("start walk");
+        animator.SetTrigger("stop walk");
+    }
     public void Move(Vector3 vec, bool isDirRight)
     {
         if (!canMove)
             return;
 
         int factor = 1;
+
+        animator.ResetTrigger("start walk");
+        animator.SetTrigger("stop walk");
+
         if (isDirRight)
         {
+            animator.SetTrigger("start walk");
+
             if (isMovingSameDirection)
             {
                 spriteRenderer.flipX = false;
@@ -40,6 +53,7 @@ public class CloneMove : MonoBehaviour
         }
         else
         {
+            animator.SetTrigger("start walk");
 
             if (isMovingSameDirection)
             {
