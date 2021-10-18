@@ -10,6 +10,7 @@ TagManager:
   - CollectableItem
   - Key
   - Character
+  - Clone
   layers:
   - Default
   - TransparentFX

@@ -21,14 +21,18 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject deathMenu;
     public GameObject Level;
-
+    public EventSystemCustom eventSystem;
+    public GameObject DestionationDoor;
 
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
+        eventSystem.PlayerShouldTeleport.AddListener(TeleportHandler);
     }
+
+
 
     void Update()
     {
@@ -128,6 +132,10 @@ public class PlayerMove : MonoBehaviour
         foreach (var c in cloneMoves)
             c.Jump(amount);
     }
-
+    private void TeleportHandler()
+    {
+        var DestinationDoorPosition = DestionationDoor.transform.position;
+        transform.position = new Vector3(DestinationDoorPosition.x,DestinationDoorPosition.y,transform.position.z);
+    }
 
 }

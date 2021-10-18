@@ -8,7 +8,7 @@ public enum TagNames
     ExitDoor,
     DeathZone,
     CollectableItem,
-    Key,
-    Character
+    Character,
+    Clone
 }
     
