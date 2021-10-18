@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,11 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+
+    // new variables
+    public int collectedKeys = 0;
+    private GameObject pickableItem = null;
+
 
     void Start()
     {
@@ -43,6 +49,13 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, false);
 
             spriteRenderer.flipX = true;
+        }
+
+        // E for To pick a pickable item
+        if (Input.GetKey(KeyCode.E) && pickableItem != null)
+        {
+            pickableItem.SetActive(false);
+            collectedKeys++;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
@@ -80,7 +93,22 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
-            Debug.Log("POTION!");
+            Debug.Log("POTION! enter trigger magic glass");
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()))
+        {
+            Debug.Log("POTION! enter trigger pickable");
+            pickableItem = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()))
+        {
+            Debug.Log("POTION! exit trigger pickable key");
+            pickableItem = null;
         }
     }
 
@@ -95,6 +123,11 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             Debug.Log("exit door");
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()))
+        {
+            Debug.Log("POTION! pickable key collision enter");
         }
     }
 
