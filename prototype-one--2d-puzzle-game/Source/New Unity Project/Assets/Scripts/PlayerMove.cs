@@ -15,15 +15,19 @@ public class PlayerMove : MonoBehaviour
     public EventSystemCustom eventSystem;
     public Text keyCollectedText;
     public GameObject winDoor;
+    public GameObject sourceDoor;
     private bool canJump;
     private Vector3 moveVector;
     private bool canCollectKey;
     private bool canWin;
+    private bool canTransport;
+    private bool hasTransportKey;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
         canCollectKey = false;
         canWin = false;
+        hasTransportKey = false;
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
@@ -68,7 +72,8 @@ public class PlayerMove : MonoBehaviour
         // }
         
         isNearKey();
-        isNeardoor();
+        isNearDoor();
+        isNearTransportDoor();
 
 
 
@@ -116,10 +121,22 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("Key collected");
             eventSystem.OnKeyCollected.Invoke();
         }
+        if (collision.gameObject.CompareTag(TagNames.transportKey.ToString()) && canCollectKey && Input.GetKey(KeyCode.E))
+        {
+            collision.gameObject.SetActive(false);
+            Debug.Log("Transport Key collected");
+            hasTransportKey = true;
+        }
         if (collision.gameObject.CompareTag(TagNames.winDoor.ToString()) && canWin && Input.GetKey(KeyCode.E))
         {
             Debug.Log("exit door");
             eventSystem.OnPlayerWin.Invoke();
+        }
+        if (collision.gameObject.CompareTag(TagNames.sourceDoor.ToString()) && canTransport && Input.GetKey(KeyCode.E))
+        {
+            Debug.Log("source door");
+            // eventSystem.OnPlayerWin.Invoke();
+            sourceDoor.GetComponent<TransportDoorScript>().transportPlayer(transform);
         }
     }
 
@@ -180,7 +197,7 @@ public class PlayerMove : MonoBehaviour
         canCollectKey = isNear;
     }
 
-    public void isNeardoor()
+    public void isNearDoor()
     {
         bool isNear = false;
         float distance = Vector3.Distance(transform.position, winDoor.GetComponent<Transform>().position);
@@ -204,5 +221,19 @@ public class PlayerMove : MonoBehaviour
             canWin = false;
         }
         // Debug.Log(canWin);
+    }
+
+    public void isNearTransportDoor()
+    {
+        bool isNear = sourceDoor.GetComponent<TransportDoorScript>().isNearPlayer(transform);
+
+        if (hasTransportKey && isNear)
+        {
+            canTransport = true;
+        }
+        else
+        {
+            canTransport = false;
+        }
     }
 }

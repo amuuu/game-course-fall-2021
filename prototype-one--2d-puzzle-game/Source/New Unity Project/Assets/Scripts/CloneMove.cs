@@ -10,6 +10,8 @@ public class CloneMove : MonoBehaviour
     public Rigidbody2D rb;
     private bool canJump;
     private bool canMove;
+	private bool isNearTransportDoorVar;
+	public GameObject sourceDoor;
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
@@ -18,6 +20,18 @@ public class CloneMove : MonoBehaviour
     {
         canJump = true;
         canMove = true;
+    }
+	void Update()
+	{
+		isNearTransportDoor();
+		if (isNearTransportDoorVar)
+		{
+			sourceDoor.GetComponent<TransportDoorScript>().transportPlayer(transform);
+		}
+	}
+	public void isNearTransportDoor()
+    {
+        isNearTransportDoorVar = sourceDoor.GetComponent<TransportDoorScript>().isNearPlayer(transform);
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
