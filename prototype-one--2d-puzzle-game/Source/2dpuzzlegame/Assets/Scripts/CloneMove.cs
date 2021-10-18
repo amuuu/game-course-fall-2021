@@ -13,6 +13,7 @@ public class CloneMove : MonoBehaviour
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
+    private Vector3 target;
 
     private void Awake()
     {
@@ -81,7 +82,11 @@ public class CloneMove : MonoBehaviour
             canMove = false;
 
         }
+
+
+
     }
+
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -89,6 +94,25 @@ public class CloneMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            foreach (Component c in collision.gameObject.GetComponentInChildren<Transform>())
+            {
+
+                target = c.transform.position;
+
+            }
+
+            // Debug.Log("positionnnn" + target);
+            transform.position = target;
+            Debug.Log("clonnnnnnnnn");
+
         }
     }
 }

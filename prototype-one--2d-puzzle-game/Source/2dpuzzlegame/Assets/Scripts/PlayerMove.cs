@@ -19,15 +19,29 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 moveVector;
     public int storedKey = 0;
+    public GameObject keys;
+    public int reqKey;
+    private bool isSource;
+    private bool isDestination;
+
+    private Vector3 target;
+    public GameObject TeleportGoal;
 
     public EventSystemCustom eventSystem;
 
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+        
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Key") as GameObject[];
+        reqKey = objects.Length - 1;
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
+        isSource = false;
+        isDestination = false;
+
+
     }
 
     void Update()
@@ -64,6 +78,18 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (Input.GetKeyDown(KeyCode.E)&& isSource)
+        {
+          
+            
+                target = TeleportGoal.transform.position;
+                // Debug.Log("position" + target);
+                transform.position = target;
+                Debug.Log("source Doorrrr");
+                isSource = false;
+            
+        }
+
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -89,7 +115,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("POTION!");
         }
 
-       
+
 
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -100,16 +126,35 @@ public class PlayerMove : MonoBehaviour
             {
 
                 collision.gameObject.SetActive(false);
-              Debug.Log("Key!");
+                Debug.Log("Key!");
 
                 storedKey = storedKey + 1;
-                Debug.Log("keyyy"+storedKey);
+                Debug.Log("keyyy" + storedKey);
 
                 eventSystem.OnCollectedKeysEvent.Invoke();
                 Debug.Log("keyy invoke");
 
 
             }
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.WinDoor.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                Debug.Log("Dooorr!");
+                if (reqKey == storedKey)
+                {
+                    Debug.Log("winnnn" + storedKey);
+                    eventSystem.OnWinDoorEvent.Invoke();
+                    //  Debug.Log("WinDoor invoke");
+                }
+            }
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            isSource = true;
         }
     }
 
