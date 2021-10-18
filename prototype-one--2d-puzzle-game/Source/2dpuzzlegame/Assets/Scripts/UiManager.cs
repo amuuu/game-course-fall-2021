@@ -17,6 +17,6 @@ public class UiManager : MonoBehaviour
     {
         Debug.Log("UPDATE SCORE");
         int newTextValue = int.Parse(counterText.text) + 1;
-            counterText.text = newTextValue.ToString();
+        counterText.text = newTextValue.ToString();
     }
 }

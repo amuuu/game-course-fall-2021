@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
 
@@ -17,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -34,7 +34,6 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, true);
 
             spriteRenderer.flipX = false;
-
         }
 
         if (Input.GetKey(KeyCode.A))
@@ -77,7 +76,7 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("DEATH ZONE");
         }
-        
+
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
@@ -97,9 +96,6 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("exit door");
         }
-
-       
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -111,13 +107,13 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void MoveClones(Vector3 vec, bool isDirRight)
+    private void MoveClones(Vector3 vec, bool isDirRight)
     {
         foreach (var c in cloneMoves)
             c.Move(vec, isDirRight);
     }
 
-    public void JumpClones(float amount)
+    private void JumpClones(float amount)
     {
         foreach (var c in cloneMoves)
             c.Jump(amount);

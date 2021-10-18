@@ -9,6 +9,7 @@ public class CloneMove : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
     private bool canJump;
+
     private bool canMove;
     //public Text counterText; // Too dirty!
 
@@ -19,6 +20,7 @@ public class CloneMove : MonoBehaviour
         canJump = true;
         canMove = true;
     }
+
     public void Move(Vector3 vec, bool isDirRight)
     {
         if (!canMove)
@@ -40,7 +42,6 @@ public class CloneMove : MonoBehaviour
         }
         else
         {
-
             if (isMovingSameDirection)
             {
                 spriteRenderer.flipX = true;
@@ -50,7 +51,6 @@ public class CloneMove : MonoBehaviour
             {
                 spriteRenderer.flipX = false;
                 factor = 1;
-
             }
         }
 
@@ -79,7 +79,6 @@ public class CloneMove : MonoBehaviour
 
             canJump = false;
             canMove = false;
-
         }
     }
 
