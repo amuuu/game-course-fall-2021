@@ -17,11 +17,20 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+
+    public GameObject Key1;
+    public GameObject Key2;
+    public int takenKeys;
+    public bool isNearKey1Region;
+    public bool isNearKey2Region;
+
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
+        isNearKey1Region = false;
+        isNearKey2Region = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -59,6 +68,35 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        // Check if E pressed, and close enough to take the key
+        if (Input.GetKey(KeyCode.E) && (isNearKey1Region || isNearKey2Region))
+        {
+            if (isNearKey1Region)
+            {
+                //Debug.Log("fdfdfd");
+                Key1.SetActive(false);
+                //GameObject.Find(TagNames.Key1.ToString()).SetActive(false);
+                isNearKey1Region = false;
+            }
+            else if (isNearKey2Region)
+            {
+                //Debug.Log("fdfdfd");
+                Key2.SetActive(false);
+                //GameObject.Find(TagNames.Key2.ToString()).SetActive(false);
+                isNearKey2Region = false;
+            }
+            // it could be else too, but it is better if in the future key count increases
+            if (takenKeys == 0)
+            {
+                Debug.Log("First Key collected!");
+            }
+            else if (takenKeys == 1)
+            {
+                Debug.Log("Second Key collected!");
+            }
+            takenKeys += 1;
+        }
+
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -83,6 +121,30 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+
+        if (collision.gameObject.CompareTag(TagNames.Key1.ToString()))
+        {
+            //collision.gameObject.SetActive(false);
+            isNearKey1Region = true;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.Key2.ToString()))
+        {
+            //collision.gameObject.SetActive(false);
+            isNearKey2Region = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.Key1.ToString()))
+        {
+            isNearKey1Region = false;
+        }
+        else if (collision.gameObject.CompareTag(TagNames.Key2.ToString()))
+        {
+            isNearKey2Region = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -97,8 +159,6 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("exit door");
         }
-
-       
 
     }
 
