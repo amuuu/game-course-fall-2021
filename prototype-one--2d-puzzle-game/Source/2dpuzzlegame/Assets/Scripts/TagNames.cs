@@ -12,6 +12,7 @@ public enum TagNames
     Door,
     Portal,
     PortalKey,
-    Character
+    Character,
+    Switch
 }
     

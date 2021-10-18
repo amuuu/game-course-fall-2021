@@ -9,6 +9,7 @@ public class UiManager : MonoBehaviour
     public Text collectedKeysCounterText;
     public Text portalKeysCounter;
     public Text gameResultText;
+    public Text UIText;
     public EventSystemCustom eventSystem;
 
     void Start()
@@ -44,4 +45,12 @@ public class UiManager : MonoBehaviour
         gameResultText.gameObject.SetActive(true);
     }
     public void UpdatePortalKeysCounter(int value) => portalKeysCounter.text = value.ToString();
+    public void UpdateUIText(string text) => UIText.text = text;
+    public void UpdateUIText(string text, float timerSeconds) => StartCoroutine(UpdateUITextTimed(text, timerSeconds));
+    public IEnumerator UpdateUITextTimed(string text, float timerSeconds)
+    {
+        UIText.text = text;
+        yield return new WaitForSeconds(timerSeconds);
+        UIText.text = "";
+    }
 }

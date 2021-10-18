@@ -89,6 +89,7 @@ public class CloneMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+            canMove = true;
         }
     }
 
@@ -98,6 +99,11 @@ public class CloneMove : MonoBehaviour
         {
             var portalController = collision.gameObject.GetComponent<PortalController>();
             portalController.TryTeleport(this.gameObject);
+        }
+        else if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            Debug.Log("Clone Destroyed");
+            Destroy(this.gameObject);
         }
     }
 }

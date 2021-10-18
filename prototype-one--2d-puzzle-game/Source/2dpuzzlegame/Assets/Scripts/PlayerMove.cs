@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,9 +17,14 @@ public class PlayerMove : MonoBehaviour
 
     private bool canJump;
 
-    private Vector3 moveVector;
+    private Vector3 _moveVector;
+    private Vector3 moveVector
+    {
+        set { _moveVector = value; }
+        get { return _moveVector * Time.deltaTime; }
+    }
     public EventSystemCustom eventSystem;
-    GameObject adjacentKey, adjacentDoor, adjacentPortalKey, adjacentPortal;
+    GameObject adjacentKey, adjacentDoor, adjacentPortalKey, adjacentPortal, adjacentSwitch;
     int collectedKeysCount = 0;
     int portalKeysCount = 0;
     bool isTeleported = false; // useful when both portals are source
@@ -85,6 +91,11 @@ public class PlayerMove : MonoBehaviour
                 var portalController = adjacentPortal.GetComponent<PortalController>();
                 isTeleported = portalController.TryTeleport(this.gameObject, portalKeysCount);
             }
+            else if (adjacentSwitch != null)
+            {
+                adjacentSwitch.SetActive(false);
+                EnterSwitchMode();
+            } 
         }
 
         // This was added to answer a question.
@@ -105,6 +116,13 @@ public class PlayerMove : MonoBehaviour
         }*/
     }
 
+    private void EnterSwitchMode()
+    {
+        Debug.Log("disabling playermove");
+        GetComponent<SwitchMode>().enabled = true;
+        this.enabled = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
@@ -112,6 +130,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("DEATH ZONE");
             //invoke event to show lose text
             eventSystem.OnDeathZoneEnter.Invoke();
+            Destroy(this.gameObject);
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -135,6 +154,9 @@ public class PlayerMove : MonoBehaviour
         }
         if (collision.gameObject.CompareTag(TagNames.Portal.ToString()))
             adjacentPortal = collision.gameObject;
+
+        if (collision.gameObject.CompareTag(TagNames.Switch.ToString()))
+            adjacentSwitch = collision.gameObject;
     }
 
     private void OnTriggerExit2D(Collider2D collision){
@@ -155,6 +177,9 @@ public class PlayerMove : MonoBehaviour
             if (isTeleported) isTeleported = false;
             else adjacentPortal = null;
         }
+    
+        if (collision.gameObject.CompareTag(TagNames.Switch.ToString()))
+            adjacentSwitch = null;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -186,12 +211,18 @@ public class PlayerMove : MonoBehaviour
     public void MoveClones(Vector3 vec, bool isDirRight)
     {
         foreach (var c in cloneMoves)
-            c.Move(vec, isDirRight);
+        {
+            if (c != null)
+                c.Move(vec, isDirRight);
+        }
     }
 
     public void JumpClones(float amount)
     {
         foreach (var c in cloneMoves)
-            c.Jump(amount);
+        {
+            if (c != null)
+                c.Jump(amount);
+        }
     }
 }
