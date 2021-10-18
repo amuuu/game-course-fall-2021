@@ -13,6 +13,7 @@ public class CloneMove : MonoBehaviour
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
+    private Vector3 DestinationDoorPosition;
 
     private void Awake()
     {
@@ -89,6 +90,15 @@ public class CloneMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+            canMove = true;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            DestinationDoorPosition = GameObject.FindGameObjectsWithTag("DestinationDoor")[0].transform.position;
+            transform.position = DestinationDoorPosition;
         }
     }
 }

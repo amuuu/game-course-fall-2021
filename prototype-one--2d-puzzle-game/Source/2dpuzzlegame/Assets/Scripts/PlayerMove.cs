@@ -13,16 +13,22 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject clones;
     public GameObject keyObj;
+    public GameObject TeleportKeyObj;
+    public GameObject SourceDoorObj;
+    //public GameObject DestinationDoorObj;
     public CloneMove[] cloneMoves;
 
     private bool canJump;
 
     private Vector3 moveVector;
+    private Vector3 DestinationDoorPosition;
     public EventSystemCustom eventSystem;
 
     public UiManager uiManager;
 
     private bool isWin = false;
+    private bool TeleportKey = false;
+    
     public int keyNumToWin = 2;
     void Start()
     {
@@ -78,6 +84,19 @@ public class PlayerMove : MonoBehaviour
             {
                 Debug.Log("WIN");
             }
+            else if (TeleportKeyObj)
+            {
+                TeleportKeyObj.SetActive(false);
+                TeleportKeyObj = null;
+                Debug.Log("TELEPORT KEY");
+                TeleportKey = true;
+            }
+            else if (TeleportKey && SourceDoorObj)
+            {
+                DestinationDoorPosition = GameObject.FindGameObjectsWithTag("DestinationDoor")[0].transform.position;
+                transform.position = DestinationDoorPosition;
+                SourceDoorObj = null;
+            }
         }
 
 
@@ -108,8 +127,26 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.key.ToString()))
         {
             keyObj = collision.gameObject;
-            //collision.gameObject.SetActive(false);
-            Debug.Log("eat key!");
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            TeleportKeyObj = collision.gameObject;
+        }
+        
+        if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
+        {
+            //Debug.Log(uiManager.keyNumberText.text.ToString());
+
+            if (int.Parse(uiManager.keyNumberText.text) == keyNumToWin)
+            {
+                isWin = true;
+            }
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            SourceDoorObj = collision.gameObject;   
         }
     }
 
@@ -118,6 +155,18 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.key.ToString()))
         {
             keyObj = null;
+        }
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            TeleportKeyObj = null;
+        }
+        if (int.Parse(uiManager.keyNumberText.text) == keyNumToWin)
+        {
+            isWin = false;
+        }
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            SourceDoorObj = null;
         }
     }
 
@@ -132,17 +181,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             Debug.Log("exit door");
-        }
-
-        if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
-        {
-            //Debug.Log(uiManager.keyNumberText.text.ToString());
-            
-            if (int.Parse(uiManager.keyNumberText.text) == keyNumToWin)
-            {
-                isWin = true;
-            }
-        }
+        } 
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -151,10 +190,6 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
-        }
-        if (int.Parse(uiManager.keyNumberText.text) == keyNumToWin)
-        {
-            isWin = false;
         }
     }
 
