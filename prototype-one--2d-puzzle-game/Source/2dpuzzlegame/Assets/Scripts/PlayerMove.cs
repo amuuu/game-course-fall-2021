@@ -130,6 +130,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("DEATH ZONE");
             //invoke event to show lose text
             eventSystem.OnDeathZoneEnter.Invoke();
+            Destroy(this.gameObject);
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
