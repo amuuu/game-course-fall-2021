@@ -16,9 +16,12 @@ public class PlayerMove : MonoBehaviour
 
     private bool canJump;
 
+    [SerializeField] int keyCnt;
+
     private Vector3 moveVector;
     void Start()
     {
+        keyCnt = 0;
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
@@ -83,6 +86,16 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString())  )
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                collision.gameObject.SetActive(false);
+                keyCnt++;
+                Debug.Log(keyCnt.ToString() + " Keys Collected!");
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -99,8 +112,9 @@ public class PlayerMove : MonoBehaviour
         }
 
        
-
+        
     }
+
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -111,11 +125,13 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+
     public void MoveClones(Vector3 vec, bool isDirRight)
     {
         foreach (var c in cloneMoves)
             c.Move(vec, isDirRight);
     }
+
 
     public void JumpClones(float amount)
     {
