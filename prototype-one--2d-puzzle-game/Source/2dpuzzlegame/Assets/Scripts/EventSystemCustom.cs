@@ -6,9 +6,11 @@ using UnityEngine.Events;
 public class EventSystemCustom : MonoBehaviour
 {
     public UnityEvent OnCloneStickyPlatformEnter;
+    public UnityEvent OnKeyTrigger;
 
-    void Awake()
+	void Awake()
     {
         OnCloneStickyPlatformEnter = new UnityEvent();
+		OnKeyTrigger = new UnityEvent();
     }
 }

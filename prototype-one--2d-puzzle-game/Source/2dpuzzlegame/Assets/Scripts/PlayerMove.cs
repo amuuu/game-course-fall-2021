@@ -16,7 +16,9 @@ public class PlayerMove : MonoBehaviour
 
     private bool canJump;
 
-    private Vector3 moveVector;
+	public EventSystemCustom eventSystem;
+
+	private Vector3 moveVector;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -85,7 +87,22 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+		{
+			Debug.Log("player near a key");
+			if (Input.GetKey(KeyCode.E))
+			{
+				Debug.Log("player entered E");
+				eventSystem.OnKeyTrigger.Invoke();
+				Debug.Log("OnKeyTrigger fired.");
+				collision.gameObject.SetActive(false);
+			}
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {

@@ -63,7 +63,22 @@ public class CloneMove : MonoBehaviour
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+		{
+			Debug.Log("clone near a key");
+			if (Input.GetKey(KeyCode.E))
+			{
+				Debug.Log("clone entered E");
+				eventSystem.OnKeyTrigger.Invoke();
+				Debug.Log("OnKeyTrigger fired.");
+				collision.gameObject.SetActive(false);
+			}
+		}
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
