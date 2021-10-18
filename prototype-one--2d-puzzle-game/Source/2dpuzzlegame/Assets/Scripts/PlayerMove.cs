@@ -9,6 +9,8 @@ public class PlayerMove : MonoBehaviour
     
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
+    public int keynumber = 0;
+    public int maxNumber;
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
@@ -27,6 +29,8 @@ public class PlayerMove : MonoBehaviour
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
+        maxNumber = GameObject.FindGameObjectsWithTag(TagNames.KeyItem.ToString()).Length;
+   
     }
 
     void Update()
@@ -114,8 +118,20 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 collision.gameObject.SetActive(false);
-                Debug.Log("eat key with keypress E");
+                keynumber += 1;
+                Debug.Log("eat key with keypress E"+ keynumber);
                 ev.OnEatKey.Invoke();
+            }
+        }
+        if (collision.gameObject.CompareTag(TagNames.DoorItem.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                if (keynumber==maxNumber)
+                {
+                    ev.OnWin.Invoke();
+                }
+                
             }
         }
     }

@@ -8,12 +8,15 @@ public class UiManager : MonoBehaviour
     public Text counterText;
     public EventSystemCustom eventSystem;
     public Text storedKey ;
+    public Text WonText;
+
 
 
     void Start()
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
         eventSystem.OnEatKey.AddListener(UpdateStoredkey);
+        eventSystem.OnWin.AddListener(Win);
 
     }
 
@@ -29,5 +32,9 @@ public class UiManager : MonoBehaviour
         Debug.Log("UPDATE key");
         int valKey = int.Parse(storedKey.text) + 1;
         storedKey.text = valKey.ToString();
+    }
+     public void Win()
+    {
+        WonText.text = "You Won!";
     }
 }
