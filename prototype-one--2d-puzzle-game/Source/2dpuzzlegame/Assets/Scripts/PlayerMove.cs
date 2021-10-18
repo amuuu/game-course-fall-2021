@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class PlayerMove : MonoBehaviour
         get { return _moveVector * Time.deltaTime; }
     }
     public EventSystemCustom eventSystem;
-    GameObject adjacentKey, adjacentDoor, adjacentPortalKey, adjacentPortal;
+    GameObject adjacentKey, adjacentDoor, adjacentPortalKey, adjacentPortal, adjacentSwitch;
     int collectedKeysCount = 0;
     int portalKeysCount = 0;
     bool isTeleported = false; // useful when both portals are source
@@ -90,6 +91,11 @@ public class PlayerMove : MonoBehaviour
                 var portalController = adjacentPortal.GetComponent<PortalController>();
                 isTeleported = portalController.TryTeleport(this.gameObject, portalKeysCount);
             }
+            else if (adjacentSwitch != null)
+            {
+                adjacentSwitch.SetActive(false);
+                EnterSwitchMode();
+            } 
         }
 
         // This was added to answer a question.
@@ -108,6 +114,13 @@ public class PlayerMove : MonoBehaviour
         {
             transform.position = new Vector3(-0.53f, transform.position.y, transform.position.z);
         }*/
+    }
+
+    private void EnterSwitchMode()
+    {
+        Debug.Log("disabling playermove");
+        GetComponent<SwitchMode>().enabled = true;
+        this.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -140,6 +153,9 @@ public class PlayerMove : MonoBehaviour
         }
         if (collision.gameObject.CompareTag(TagNames.Portal.ToString()))
             adjacentPortal = collision.gameObject;
+
+        if (collision.gameObject.CompareTag(TagNames.Switch.ToString()))
+            adjacentSwitch = collision.gameObject;
     }
 
     private void OnTriggerExit2D(Collider2D collision){
@@ -160,6 +176,9 @@ public class PlayerMove : MonoBehaviour
             if (isTeleported) isTeleported = false;
             else adjacentPortal = null;
         }
+    
+        if (collision.gameObject.CompareTag(TagNames.Switch.ToString()))
+            adjacentSwitch = null;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
