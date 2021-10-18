@@ -80,18 +80,8 @@ public class PlayerMove : MonoBehaviour
         }
         ///teleport
         if(Input.GetKey(KeyCode.E) && HaveTeleportKey && TeleportDoor!=null ){
-            Debug.Log("hereeeeeeeeeeeeeeee");
-            //var X = TeleportDoor.gameObject.transform.position.x;
-            //var Y = TeleportDoor.gameObject.transform.position.y;
-            //var Z = TeleportDoor.gameObject.transform.position.z;
-           
-            var X = 0;
-            var Y = 0;
-            var Z = 0;
+            Debug.Log("Teleport!!");
             transform.position = TeleportDoor.GetComponent<teleDoor>().Dest.transform.position ;
-
-
-
         }
 
 

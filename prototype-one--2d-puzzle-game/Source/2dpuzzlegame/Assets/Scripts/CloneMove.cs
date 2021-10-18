@@ -69,7 +69,7 @@ public class CloneMove : MonoBehaviour
         {
             Debug.Log("sticky for clone");
 
-            
+
             // This is used by UiManager
             eventSystem.OnCloneStickyPlatformEnter.Invoke();
             Debug.Log("OnCloneStickyPlatformEnter fired.");
@@ -80,7 +80,19 @@ public class CloneMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    { if (collision.gameObject.CompareTag(TagNames.teleportDoor.ToString()))
+        {
+            //TeleportDoor=collision.gameObject;
+            Debug.Log("Teleport clone!!");
+            transform.position = collision.GetComponent<teleDoor>().Dest.transform.position;
+        }
+    }
+
+
+
+        private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
