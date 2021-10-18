@@ -8,6 +8,16 @@ public enum TagNames
     ExitDoor,
     DeathZone,
     CollectableItem,
-	Key
+	Key,
+	SpecialKey,
+	Door,
+	SourceDoor,
+	DestDoor
+}
+
+public enum Doors
+{
+	one,
+	two
 }
     

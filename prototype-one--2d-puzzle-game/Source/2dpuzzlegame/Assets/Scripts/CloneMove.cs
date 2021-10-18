@@ -10,9 +10,9 @@ public class CloneMove : MonoBehaviour
     public Rigidbody2D rb;
     private bool canJump;
     private bool canMove;
-    //public Text counterText; // Too dirty!
+	//public Text counterText; // Too dirty!
 
-    public EventSystemCustom eventSystem;
+	public EventSystemCustom eventSystem;
 
     private void Awake()
     {
@@ -65,15 +65,50 @@ public class CloneMove : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+		//if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+		//{
+		//	Debug.Log("clone near a key");
+		//	if (Input.GetKey(KeyCode.E))
+		//	{
+		//		Debug.Log("clone entered E");
+		//		eventSystem.OnKeyTrigger.Invoke();
+		//		Debug.Log("OnKeyTrigger fired.");
+		//		collision.gameObject.SetActive(false);
+		//	}
+		//}
+
+		// check for teleport
+		if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
 		{
-			Debug.Log("clone near a key");
-			if (Input.GetKey(KeyCode.E))
+			Door sourceDoor = collision.gameObject.GetComponent<Door>();
+			Door destDoor = null;
+			Debug.Log("clone near a door");
+
+			if (sourceDoor.isSource)
 			{
-				Debug.Log("clone entered E");
-				eventSystem.OnKeyTrigger.Invoke();
-				Debug.Log("OnKeyTrigger fired.");
-				collision.gameObject.SetActive(false);
+				// teleport without any condition
+				Doors sourceNum = sourceDoor.doorNum; // source door number
+				Debug.Log(sourceNum);
+
+				// get all doors in order to find dest door
+				GameObject[] objs = GameObject.FindGameObjectsWithTag("Door");
+				foreach (var obj in objs)
+				{
+					Door d = obj.GetComponent<Door>();
+					if (d.isSource)
+						continue;
+
+					// find dest door related to this door
+					if (d.doorNum == sourceNum)
+					{
+						Debug.Log("found dest door for clone");
+						destDoor = d;
+						break;
+					}
+				}
+
+				// transfer clone to destDoor
+				this.transform.position = destDoor.transform.position;
 			}
 		}
 	}
@@ -93,9 +128,9 @@ public class CloneMove : MonoBehaviour
             Debug.Log("OnCloneStickyPlatformEnter fired.");
 
             canJump = false;
-            canMove = false;
+			canMove = false;
 
-        }
+		}
     }
 
     private void OnCollisionExit2D(Collision2D collision)

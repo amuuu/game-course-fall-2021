@@ -7,13 +7,18 @@ public class UiManager : MonoBehaviour
 {
     public Text counterText;
 	public Text keyText;
+	public Text win;
+	public Text specialKeyText;
     public EventSystemCustom eventSystem;
 
     void Start()
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
         eventSystem.OnKeyTrigger.AddListener(UpdateKeyText);
-    }
+		eventSystem.OnWinCondition.AddListener(UpdateWinText);
+		eventSystem.OnSpecialKeyTrigger.AddListener(IncreaseSpecialKey);
+		eventSystem.OnSpecialKeyDecrease.AddListener(DecreaseSpecialKey);
+	}
 
     public void UpdateScoreText()
     {
@@ -27,5 +32,25 @@ public class UiManager : MonoBehaviour
 		Debug.Log("UPDATE key counter");
 		int newTextValue = int.Parse(keyText.text) + 1;
 		keyText.text = newTextValue.ToString();
+	}
+
+	public void UpdateWinText()
+	{
+		//Debug.Log("Win!");
+		win.text = "You Won!";
+	}
+
+	public void IncreaseSpecialKey()
+	{
+		Debug.Log("specialKey increased");
+		int newTextValue = int.Parse(specialKeyText.text) + 1;
+		specialKeyText.text = newTextValue.ToString();
+	}
+
+	public void DecreaseSpecialKey()
+	{
+		Debug.Log("specialKey decreased");
+		int newTextValue = int.Parse(specialKeyText.text) - 1;
+		specialKeyText.text = newTextValue.ToString();
 	}
 }
