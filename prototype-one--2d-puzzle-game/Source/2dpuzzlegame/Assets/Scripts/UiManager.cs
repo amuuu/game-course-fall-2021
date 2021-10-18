@@ -8,6 +8,7 @@ public class UiManager : MonoBehaviour
     public Text counterText;
     public Text CollectedKeysText;
     public Text Win;
+    public Text Lose;
     public EventSystemCustom eventSystem;
 
     void Start()
@@ -15,6 +16,7 @@ public class UiManager : MonoBehaviour
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
         eventSystem.CollectKey.AddListener(UpdateCollectedKeys);
         eventSystem.Win.AddListener(UpdateWin);
+        eventSystem.Lose.AddListener(UpdateLose);
     }
 
     public void UpdateScoreText()
@@ -28,12 +30,17 @@ public class UiManager : MonoBehaviour
     {
         Debug.Log("UPDATE COLLECTED KEYS");
         int newCollectedKeysValue = int.Parse(CollectedKeysText.text.Split(' ')[2]) + 1;
-        CollectedKeysText.text = "Collecterd Keys: " + newCollectedKeysValue.ToString();
+        CollectedKeysText.text = "Collected Keys: " + newCollectedKeysValue.ToString();
     }
 
     public void UpdateWin()
     {
         Debug.Log("YOU WON!");
-        Win.text = "TOU WON!";
+        Win.text = "YOU WON!";
+    }
+
+    public void UpdateLose()
+    {
+        Lose.text = "YOU LOST!";
     }
 }
