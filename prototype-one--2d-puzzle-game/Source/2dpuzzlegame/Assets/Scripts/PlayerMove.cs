@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -191,12 +191,18 @@ public class PlayerMove : MonoBehaviour
     public void MoveClones(Vector3 vec, bool isDirRight)
     {
         foreach (var c in cloneMoves)
-            c.Move(vec, isDirRight);
+        {
+            if (c != null)
+                c.Move(vec, isDirRight);
+        }
     }
 
     public void JumpClones(float amount)
     {
         foreach (var c in cloneMoves)
-            c.Jump(amount);
+        {
+            if (c != null)
+                c.Jump(amount);
+        }
     }
 }
