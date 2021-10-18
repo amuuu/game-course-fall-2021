@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -18,9 +19,8 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 moveVector;
 
-    public GameObject[] keys;
-
-
+    public GameObject deathMenu;
+    public GameObject Level;
 
 
     void Start()
@@ -80,7 +80,9 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
-            Debug.Log("DEATH ZONE");
+            //Debug.Log("DEATH ZONE");
+            deathMenu.SetActive(true);
+            Level.SetActive(false);
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -126,4 +128,6 @@ public class PlayerMove : MonoBehaviour
         foreach (var c in cloneMoves)
             c.Jump(amount);
     }
+
+
 }
