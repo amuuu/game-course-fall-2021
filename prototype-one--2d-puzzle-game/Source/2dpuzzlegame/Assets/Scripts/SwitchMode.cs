@@ -13,6 +13,7 @@ public class SwitchMode : MonoBehaviour
     void OnEnable() // called when enabled
     {
         Debug.Log("enabling switchmode");
+        Time.timeScale = 0;
 
         // get clones transforms
         clonesTransforms = new List<Transform>();
@@ -53,6 +54,7 @@ public class SwitchMode : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             SwitchToClone(activeCloneIndex);
+            UiManager.UpdateUIText("");
             ExitSwitchMode();
         }
     }
@@ -61,6 +63,7 @@ public class SwitchMode : MonoBehaviour
     {
         Debug.Log("disabling switchmode");
         GetComponent<PlayerMove>().enabled = true;
+        Time.timeScale = 1;
         this.enabled = false;
     }
 
