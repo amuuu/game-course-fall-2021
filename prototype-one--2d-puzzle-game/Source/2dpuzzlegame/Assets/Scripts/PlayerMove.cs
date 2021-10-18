@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    
+    public EventSystemCustom eventSystem;
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
     public int count = 0;
@@ -14,7 +14,9 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject clones;
     public GameObject keys;
+    public GameObject door  ;
     public CloneMove[] cloneMoves;
+    
 
     private bool canJump;
 
@@ -29,6 +31,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += moveVector;
@@ -56,15 +59,23 @@ public class PlayerMove : MonoBehaviour
 
 
         // This was added to answer a question.
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && door!= null && count>=2)
         {
             Destroy(this.gameObject);
+            eventSystem.Win.Invoke();
 
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log(door);
+            
+            if (keys != null)
+            {
+                count++;
+                eventSystem.UpdateKeys.Invoke();
+                
+            }
             Destroy(keys);
-            count++;
             Debug.Log(count);
         }
 
@@ -85,6 +96,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            eventSystem.GameOver.Invoke();
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -94,8 +106,11 @@ public class PlayerMove : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("key"))
         {
-            Debug.Log("golabu");
             keys = collision.gameObject;
+        }
+        if (collision.gameObject.CompareTag("door"))
+        {
+            door = collision.gameObject;
         }
 
 
@@ -123,6 +138,10 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag("key"))
         {
             keys = null;
+        }
+        if (collision.gameObject.CompareTag("door"))
+        {
+            door = null;
         }
 
 
