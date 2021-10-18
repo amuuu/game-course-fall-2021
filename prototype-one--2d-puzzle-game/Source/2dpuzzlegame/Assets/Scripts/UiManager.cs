@@ -26,6 +26,6 @@ public class UiManager : MonoBehaviour
         Debug.Log("UPDATE KEY NUMBER");
         int newValue = int.Parse(keyNumberText.text) + 1;
         keyNumberText.text = newValue.ToString();
-        Debug.Log(int.Parse(keyNumberText.text).ToString());
+       // Debug.Log(int.Parse(keyNumberText.text).ToString());
     }
 }

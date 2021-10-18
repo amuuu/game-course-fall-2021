@@ -19,6 +19,11 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 moveVector;
     public EventSystemCustom eventSystem;
+
+    public UiManager uiManager;
+
+    private bool isWin = false;
+    public int keyNumToWin = 2;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -61,10 +66,18 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
-            keyObj.SetActive(false);
-            eventSystem.KeyNum.Invoke();
+            if (keyObj)
+            {
+                keyObj.SetActive(false);
+                eventSystem.KeyNum.Invoke();
+                keyObj = null;
+            }
+            else if (isWin)
+            {
+                Debug.Log("WIN");
+            }
         }
 
 
@@ -100,6 +113,14 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.key.ToString()))
+        {
+            keyObj = null;
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
@@ -113,6 +134,15 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("exit door");
         }
 
+        if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
+        {
+            //Debug.Log(uiManager.keyNumberText.text.ToString());
+            
+            if (int.Parse(uiManager.keyNumberText.text) == keyNumToWin)
+            {
+                isWin = true;
+            }
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -121,6 +151,10 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
+        }
+        if (int.Parse(uiManager.keyNumberText.text) == keyNumToWin)
+        {
+            isWin = false;
         }
     }
 
