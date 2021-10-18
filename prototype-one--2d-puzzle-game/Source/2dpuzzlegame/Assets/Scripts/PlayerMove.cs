@@ -61,7 +61,6 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
         {
