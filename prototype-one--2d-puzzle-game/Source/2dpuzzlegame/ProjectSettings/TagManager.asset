@@ -11,6 +11,8 @@ TagManager:
   - Key1
   - Key2
   - Door
+  - TeleportKey
+  - SourceDoor
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,8 @@ public enum TagNames
     CollectableItem,
     Key1,
     Key2,
-    Door
+    Door,
+    TeleportKey,
+    SourceDoor
 }
     

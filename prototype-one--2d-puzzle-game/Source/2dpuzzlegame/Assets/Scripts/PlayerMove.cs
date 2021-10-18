@@ -25,7 +25,14 @@ public class PlayerMove : MonoBehaviour
     private bool isNearKey2Region;
     public EventSystemCustom eventSystem;
 
-    public bool isNearDoorRegion;
+    private bool isNearDoorRegion;
+
+    public GameObject TeleportKey;
+    private bool takenTeleportKey;
+    private bool isNearTeleportKey;
+    private bool isNearSourceDoor;
+    public GameObject DestinationDoor;
+
 
     void Start()
     {
@@ -33,6 +40,7 @@ public class PlayerMove : MonoBehaviour
         canJump = true;
         isNearKey1Region = false;
         isNearKey2Region = false;
+        takenTeleportKey = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -103,6 +111,19 @@ public class PlayerMove : MonoBehaviour
             eventSystem.Win.Invoke();
         }
 
+        if (Input.GetKey(KeyCode.E) && isNearTeleportKey)
+        {
+            takenTeleportKey = true;
+            TeleportKey.SetActive(false);
+            Debug.Log("You got the teleport key!");
+        }
+
+        if (Input.GetKey(KeyCode.E) && takenTeleportKey && isNearSourceDoor)
+        {
+            this.gameObject.transform.position = DestinationDoor.transform.position;
+            Debug.Log("You are just teleported to the destination door!");
+        }
+
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -143,6 +164,15 @@ public class PlayerMove : MonoBehaviour
         {
             isNearDoorRegion = true;
         }
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            isNearTeleportKey = true;
+        }
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            isNearSourceDoor = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -158,6 +188,14 @@ public class PlayerMove : MonoBehaviour
         else if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
         {
             isNearDoorRegion = false;
+        }
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            isNearTeleportKey = false;
+        }
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            isNearSourceDoor = false;
         }
     }
 
