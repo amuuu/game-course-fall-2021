@@ -7,10 +7,12 @@ public class EventSystemCustom : MonoBehaviour
 {
     public UnityEvent OnCloneStickyPlatformEnter;
     public UnityEvent CollectKey;
+    public UnityEvent Win;
 
     void Awake()
     {
         OnCloneStickyPlatformEnter = new UnityEvent();
         CollectKey = new UnityEvent();
+        Win = new UnityEvent();
     }
 }

@@ -9,6 +9,7 @@ public enum TagNames
     DeathZone,
     CollectableItem,
     Key1,
-    Key2
+    Key2,
+    Door
 }
     

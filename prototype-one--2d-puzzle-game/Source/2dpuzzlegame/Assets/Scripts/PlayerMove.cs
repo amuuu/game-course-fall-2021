@@ -21,14 +21,15 @@ public class PlayerMove : MonoBehaviour
     public GameObject Key1;
     public GameObject Key2;
     public int takenKeys;
-    public bool isNearKey1Region;
-    public bool isNearKey2Region;
+    private bool isNearKey1Region;
+    private bool isNearKey2Region;
     public EventSystemCustom eventSystem;
+
+    public bool isNearDoorRegion;
 
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
-
         canJump = true;
         isNearKey1Region = false;
         isNearKey2Region = false;
@@ -96,6 +97,12 @@ public class PlayerMove : MonoBehaviour
             takenKeys += 1;
         }
 
+        // win condition
+        if (Input.GetKey(KeyCode.E) && takenKeys == 2 && isNearDoorRegion)
+        {
+            eventSystem.Win.Invoke();
+        }
+
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -130,6 +137,11 @@ public class PlayerMove : MonoBehaviour
         {
             isNearKey2Region = true;
         }
+
+        if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
+        {
+            isNearDoorRegion = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -141,6 +153,10 @@ public class PlayerMove : MonoBehaviour
         else if (collision.gameObject.CompareTag(TagNames.Key2.ToString()))
         {
             isNearKey2Region = false;
+        }
+        else if (collision.gameObject.CompareTag(TagNames.Door.ToString()))
+        {
+            isNearDoorRegion = false;
         }
     }
 
