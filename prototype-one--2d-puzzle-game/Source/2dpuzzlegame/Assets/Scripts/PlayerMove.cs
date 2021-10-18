@@ -1,26 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
-
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
-
     public GameObject clones;
+    public GameObject[] listOfKeys;
     public CloneMove[] cloneMoves;
-
+    public EventSystemCustom eventSystem;
+    public Text keyCollectedText;
+    public GameObject winDoor;
+    public GameObject sourceDoor;
     private bool canJump;
-
     private Vector3 moveVector;
+    private bool canCollectKey;
+    private bool canWin;
+    private bool canTransport;
+    private bool hasTransportKey;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
-
+        canCollectKey = false;
+        canWin = false;
+        hasTransportKey = false;
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
@@ -58,6 +65,16 @@ public class PlayerMove : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        
+        // if (Input.GetKeyDown(KeyCode.E) && canCollectKey)
+        // {
+        //     isNearKey();
+        // }
+        
+        isNearKey();
+        isNearDoor();
+        isNearTransportDoor();
+
 
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
@@ -75,7 +92,9 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
+            eventSystem.OnPlayerLoose.Invoke();
             Debug.Log("DEATH ZONE");
+            Destroy(this);
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -83,7 +102,44 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+        
+        // if (collision.gameObject.CompareTag(TagNames.keyItem.ToString()) && canCollectKey && Input.GetKey(KeyCode.E))
+        // {
+        //     collision.gameObject.SetActive(false);
+        //     Debug.Log("Key");
+        // }
+        
+        
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //     Debug.Log("Key");
+        if (collision.gameObject.CompareTag(TagNames.keyItem.ToString()) && canCollectKey && Input.GetKey(KeyCode.E))
+        {
+            collision.gameObject.SetActive(false);
+            Debug.Log("Key collected");
+            eventSystem.OnKeyCollected.Invoke();
+        }
+        if (collision.gameObject.CompareTag(TagNames.transportKey.ToString()) && canCollectKey && Input.GetKey(KeyCode.E))
+        {
+            collision.gameObject.SetActive(false);
+            Debug.Log("Transport Key collected");
+            hasTransportKey = true;
+        }
+        if (collision.gameObject.CompareTag(TagNames.winDoor.ToString()) && canWin && Input.GetKey(KeyCode.E))
+        {
+            Debug.Log("exit door");
+            eventSystem.OnPlayerWin.Invoke();
+        }
+        if (collision.gameObject.CompareTag(TagNames.sourceDoor.ToString()) && canTransport && Input.GetKey(KeyCode.E))
+        {
+            Debug.Log("source door");
+            // eventSystem.OnPlayerWin.Invoke();
+            sourceDoor.GetComponent<TransportDoorScript>().transportPlayer(transform);
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -93,10 +149,10 @@ public class PlayerMove : MonoBehaviour
             canJump = false;
         }
 
-        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
-        {
-            Debug.Log("exit door");
-        }
+        // if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()) && canWin && Input.GetKey(KeyCode.E))
+        // {
+        //     Debug.Log("exit door");
+        // }
 
        
 
@@ -121,5 +177,63 @@ public class PlayerMove : MonoBehaviour
     {
         foreach (var c in cloneMoves)
             c.Jump(amount);
+    }
+
+    public void isNearKey()
+    {
+        bool isNear = false;
+        foreach (var k in listOfKeys)
+        {
+            if (k.GetComponent<Renderer>().enabled == true)
+            {
+                isNear = k.GetComponent<keyScript>().isNearPlayer(transform);
+                if (isNear == true)
+                {
+                    break;
+                }
+            }
+        }
+        // Debug.Log(isNear);
+        canCollectKey = isNear;
+    }
+
+    public void isNearDoor()
+    {
+        bool isNear = false;
+        float distance = Vector3.Distance(transform.position, winDoor.GetComponent<Transform>().position);
+        if (distance <= 0.2)
+        {
+            isNear = true;
+        }
+        else
+        {
+            isNear = false;
+        }
+        // Debug.Log(isNear);
+        // Debug.Log(int.Parse(keyCollectedText.text));
+
+        if (int.Parse(keyCollectedText.text) >= 3 && isNear)
+        {
+            canWin = true;
+        }
+        else
+        {
+            canWin = false;
+        }
+        // Debug.Log(canWin);
+    }
+
+    public void isNearTransportDoor()
+    {
+        bool isNear = sourceDoor.GetComponent<TransportDoorScript>().isNearPlayer(transform);
+
+        if (hasTransportKey && isNear)
+        {
+            canTransport = true;
+        }
+        else
+        {
+            canTransport = false;
+        }
     }
 }
