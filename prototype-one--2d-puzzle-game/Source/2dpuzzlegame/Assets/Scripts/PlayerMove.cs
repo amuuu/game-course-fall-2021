@@ -19,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] int keyCnt;
     [SerializeField] UnityEngine.UI.Text keyCntTxt;
     [SerializeField] UnityEngine.UI.Text winTxt;
+    [SerializeField] UnityEngine.UI.Text lostTxt;
 
 
     private Vector3 moveVector;
@@ -81,6 +82,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
+            lostTxt.text = "You Lost :(";
             Debug.Log("DEATH ZONE");
         }
         
@@ -114,7 +116,7 @@ public class PlayerMove : MonoBehaviour
             Input.GetKey(KeyCode.E) && keyCnt >= 2)
         {
             winTxt.text = "You Won!";
-            Debug.Log("exit door");
+            Debug.Log("Exit Door");
         }
 
     }
