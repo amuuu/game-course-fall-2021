@@ -17,6 +17,8 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     [SerializeField] int keyCnt;
+    [SerializeField] UnityEngine.UI.Text keyCntTxt;
+
 
     private Vector3 moveVector;
     void Start()
@@ -93,7 +95,8 @@ public class PlayerMove : MonoBehaviour
             {
                 collision.gameObject.SetActive(false);
                 keyCnt++;
-                Debug.Log(keyCnt.ToString() + " Keys Collected!");
+                Debug.Log(keyCnt.ToString() + " Keys Collected!");          
+                keyCntTxt.text = ("Keys: " + keyCnt.ToString());
             }
         }
     }

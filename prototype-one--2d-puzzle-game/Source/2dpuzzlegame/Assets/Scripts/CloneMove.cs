@@ -19,6 +19,7 @@ public class CloneMove : MonoBehaviour
         canJump = true;
         canMove = true;
     }
+
     public void Move(Vector3 vec, bool isDirRight)
     {
         if (!canMove)
