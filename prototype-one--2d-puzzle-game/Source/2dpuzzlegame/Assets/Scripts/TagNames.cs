@@ -10,6 +10,7 @@ public enum TagNames
     CollectableItem,
     Key,
     WinDoor,
-    Player
+    Player,
+    PortalSource
 }
     
