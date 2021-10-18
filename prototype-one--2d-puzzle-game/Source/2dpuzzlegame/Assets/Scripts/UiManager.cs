@@ -9,6 +9,7 @@ public class UiManager : MonoBehaviour
     public EventSystemCustom eventSystem;
     public Text storedKey ;
     public Text WonText;
+    public Text LostText;
 
 
 
@@ -17,6 +18,7 @@ public class UiManager : MonoBehaviour
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
         eventSystem.OnEatKey.AddListener(UpdateStoredkey);
         eventSystem.OnWin.AddListener(Win);
+        eventSystem.OnDeathZone.AddListener(Lose);
 
     }
 
@@ -36,5 +38,9 @@ public class UiManager : MonoBehaviour
      public void Win()
     {
         WonText.text = "You Won!";
+    }
+    public void Lose()
+    {
+        LostText.text = "You lost!";
     }
 }

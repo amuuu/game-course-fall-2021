@@ -85,6 +85,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            ev.OnDeathZone.Invoke();
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
