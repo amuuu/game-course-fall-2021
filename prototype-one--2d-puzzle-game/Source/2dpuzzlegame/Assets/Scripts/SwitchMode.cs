@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwitchMode : MonoBehaviour
 {
+    public UiManager UiManager;
     public Transform characterTransform;
     public Transform clonesTransform;
     List<Transform> clonesTransforms;
@@ -21,6 +22,7 @@ public class SwitchMode : MonoBehaviour
         if(clonesTransforms.Count==0)
             return;
         
+        UiManager.UpdateUIText("Choose the new player amongst the clones.");
         SetActiveCharacterArrow(false);
         activeCloneIndex = 0;
         SetActiveCloneArrow(activeCloneIndex, true);
@@ -30,7 +32,10 @@ public class SwitchMode : MonoBehaviour
     void Update()
     {
         if(clonesTransforms.Count==0)
+        {
+            UiManager.UpdateUIText("There are no clones to switch to!", 1);
             ExitSwitchMode();
+        }
 
         int newActiveCloneIndex = activeCloneIndex;
         if(Input.GetKeyDown(KeyCode.A))
@@ -48,7 +53,6 @@ public class SwitchMode : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             SwitchToClone(activeCloneIndex);
-            // TODO: update UI text
             ExitSwitchMode();
         }
     }

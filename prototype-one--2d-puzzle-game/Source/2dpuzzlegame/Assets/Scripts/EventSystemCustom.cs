@@ -10,6 +10,7 @@ public class EventSystemCustom : MonoBehaviour
     public UnityIntEvent OnPortalKeyPickup; // invoke with number of collected keys
     public UnityEvent OnDoorOpened;
     public UnityEvent OnDeathZoneEnter;
+    public UnityEvent OnSwitchModeEnable;
 
     void Awake()
     {
@@ -18,6 +19,7 @@ public class EventSystemCustom : MonoBehaviour
         OnPortalKeyPickup = new UnityIntEvent();
         OnDoorOpened = new UnityEvent();
         OnDeathZoneEnter = new UnityEvent();
+        OnSwitchModeEnable = new UnityEvent();
     }
 }
 
