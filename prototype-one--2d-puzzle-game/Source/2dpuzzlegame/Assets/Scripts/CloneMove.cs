@@ -10,6 +10,7 @@ public class CloneMove : MonoBehaviour
     public Rigidbody2D rb;
     private bool canJump;
     private bool canMove;
+    public bool teleportPermission;
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
@@ -61,6 +62,14 @@ public class CloneMove : MonoBehaviour
     {
         if (canJump)
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.doorT.ToString()) && !FindObjectOfType<Teleport>().destinationDoor)
+        {
+            transform.position = FindObjectOfType<Teleport>().destination.position;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
