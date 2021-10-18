@@ -30,7 +30,7 @@ public class PlayerMove : MonoBehaviour
     {
         telKey = false;
         teleportPermission = false;
-        totalkeycount = 3;
+        totalkeycount = 8;
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
         keys = null;
         canJump = true;
@@ -41,6 +41,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        cloneMoves = clones.GetComponentsInChildren<CloneMove>();
         float sp = 0;
         if (Input.GetKey(KeyCode.D))
         {

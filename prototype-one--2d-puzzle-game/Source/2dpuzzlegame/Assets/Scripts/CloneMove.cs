@@ -81,6 +81,12 @@ public class CloneMove : MonoBehaviour
         {
             transform.position = FindObjectOfType<Teleport>().destination.position;
         }
+
+        if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            Destroy(this.gameObject);
+            Debug.Log("DEATH ZONE For Clone");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
