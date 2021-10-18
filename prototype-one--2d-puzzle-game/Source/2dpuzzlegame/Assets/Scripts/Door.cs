@@ -6,15 +6,22 @@ using System;
 public class Door : MonoBehaviour
 {
     public Action<GameObject> OnTouchDoor;
+    public bool isExit;
     public bool isDestination;
-    public Boolean teleportEnable = true;
+    public Boolean teleportEnable;
     public Game game;
     private GameObject player = null;
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.E) && game.collectedKeys > 0 && player != null)
+        if (Input.GetKey(KeyCode.E) && player != null)
         {
+            if (isExit)
+            {
+                game.onExitDoorUnlocked();
+                return;
+            }
+
             OnTouchDoor.Invoke(player);
             game.onKeyUsed();
             player = null;
@@ -24,9 +31,14 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(TagNames.Player.ToString()) && game.collectedKeys > 0)
+        if (collision.gameObject.CompareTag(TagNames.Player.ToString()))
         {
             player = collision.gameObject;
+        }
+
+        if (isExit)
+        {
+            return;
         }
 
         if (collision.gameObject.CompareTag(TagNames.Clone.ToString()))
@@ -37,6 +49,11 @@ public class Door : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (isExit)
+        {
+            return;
+        }
+
         player = null;
         if (collision.gameObject.CompareTag(TagNames.Player.ToString()))
         {

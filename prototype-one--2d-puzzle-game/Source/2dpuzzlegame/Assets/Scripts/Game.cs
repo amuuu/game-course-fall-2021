@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     public Text keyCounterText;
+    public Text winOrLoseText;
     public int collectedKeys = 0;
     
     public void onKeyCollected()
@@ -20,4 +21,18 @@ public class Game : MonoBehaviour
         keyCounterText.text = collectedKeys.ToString();
     }
 
+    public void onExitDoorUnlocked()
+    {
+        collectedKeys -= 1;
+        keyCounterText.text = collectedKeys.ToString();
+
+        winOrLoseText.text = "You Won!";
+        winOrLoseText.color = Color.yellow;
+    }
+
+    public void onTouchDeathZone()
+    {
+        winOrLoseText.text = "Game Over!";
+        winOrLoseText.color = Color.red;
+    }
 }
