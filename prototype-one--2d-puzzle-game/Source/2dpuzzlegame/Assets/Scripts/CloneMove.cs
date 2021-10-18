@@ -89,14 +89,6 @@ public class CloneMove : MonoBehaviour
             Debug.Log("Teleport clone!!");
             transform.position = collision.GetComponent<teleDoor>().Dest.transform.position;
         }
-    if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
-        {
-            
-            Debug.Log("Clone In DEATH ZONE");
-            Destroy(this.gameObject);
-        }
-
-
     }
 
 
