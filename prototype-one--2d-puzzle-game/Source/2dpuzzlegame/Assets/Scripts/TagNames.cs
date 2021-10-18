@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum TagNames
 {
+    Clone,
     Player,
     StickyPlatform,
     ExitDoor,

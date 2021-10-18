@@ -5,19 +5,18 @@ using UnityEngine;
 public class DoorsHandler : MonoBehaviour
 {
     public Door[] Doors;
-    public GameObject Player;
 
     private void Start()
     {
-        Doors[0].OnTouchDoor += () => teleportToDoor(0,1);
-        Doors[1].OnTouchDoor += () => teleportToDoor(1,0);
+        Doors[0].OnTouchDoor += (GameObject gameObject) => teleportToDoor(gameObject, 0, 1);
+        Doors[1].OnTouchDoor += (GameObject gameObject) => teleportToDoor(gameObject, 1, 0);
     }
 
-    private void teleportToDoor(int start, int dest)
+    private void teleportToDoor(GameObject gameObject, int start, int dest)
     {
-        if (Doors[start].teleportEnable)
+        if (Doors[start].teleportEnable && !Doors[start].isDestination)
         {
-            Player.transform.position = Doors[dest].transform.position;
+            gameObject.transform.position = Doors[dest].transform.position;
             Doors[dest].teleportEnable = false;
         }
     }

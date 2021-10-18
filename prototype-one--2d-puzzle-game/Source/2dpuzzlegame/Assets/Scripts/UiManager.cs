@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UiManager : MonoBehaviour
 {
-    public Text counterText;
     public EventSystemCustom eventSystem;
 
     void Start()
@@ -15,8 +14,6 @@ public class UiManager : MonoBehaviour
 
     public void UpdateScoreText()
     {
-        Debug.Log("UPDATE SCORE");
-        int newTextValue = int.Parse(counterText.text) + 1;
-            counterText.text = newTextValue.ToString();
+ 
     }
 }
