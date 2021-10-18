@@ -15,7 +15,8 @@ public class PlayerMove : MonoBehaviour
     public CloneMove[] cloneMoves;
 
     private bool canJump;
-
+    public GameObject DeathPage;
+    public GameObject Level;
     private Vector3 moveVector;
     void Start()
     {
@@ -76,6 +77,8 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            DeathPage.SetActive(true);
+            Level.SetActive(false);
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
