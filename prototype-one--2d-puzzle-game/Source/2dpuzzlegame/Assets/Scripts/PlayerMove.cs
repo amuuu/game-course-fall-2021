@@ -10,7 +10,10 @@ public class PlayerMove : MonoBehaviour
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
     public int keynumber = 0;
+    public int MainKeyNumber = 0;
     public int maxNumber;
+    public int maxMainKey;
+    
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
@@ -22,15 +25,19 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 moveVector;
     public EventSystemCustom ev;
+    public Transform teleportDoorDes;
+  
+
 
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
-
         canJump = true;
+        maxMainKey = GameObject.FindGameObjectsWithTag(TagNames.MainKey.ToString()).Length;
         moveVector = new Vector3(1 * factor, 0, 0);
         maxNumber = GameObject.FindGameObjectsWithTag(TagNames.KeyItem.ToString()).Length;
-   
+       
+
     }
 
     void Update()
@@ -67,7 +74,7 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-
+     
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -93,7 +100,7 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
-
+      
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -131,6 +138,26 @@ public class PlayerMove : MonoBehaviour
                 if (keynumber==maxNumber)
                 {
                     ev.OnWin.Invoke();
+                }
+                
+            }
+        }
+        if (collision.gameObject.CompareTag(TagNames.MainKey.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                collision.gameObject.SetActive(false);
+                MainKeyNumber += 1;
+            }
+        }
+        if (collision.gameObject.CompareTag(TagNames.DoorSource.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                if (MainKeyNumber == maxMainKey)
+                {
+                    transform.position = teleportDoorDes.position;
+                    Debug.Log("teleport!");
                 }
                 
             }
