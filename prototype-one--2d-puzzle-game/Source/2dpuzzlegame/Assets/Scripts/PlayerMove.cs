@@ -21,6 +21,8 @@ public class PlayerMove : MonoBehaviour
     public bool telKey;
     public bool teleportPermission;
 
+    public Animator animator;
+
     public EventSystemCustom eventSystem;
 
     private Vector3 moveVector;
@@ -39,6 +41,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        float sp = 0;
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += moveVector;
@@ -46,6 +49,9 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, true);
 
             spriteRenderer.flipX = false;
+            sp += moveVector.x+1;
+
+            animator.SetFloat("speed", sp);
 
         }
 
@@ -56,6 +62,9 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, false);
 
             spriteRenderer.flipX = true;
+            sp += moveVector.x+1;
+
+            animator.SetFloat("speed", sp);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
@@ -88,7 +97,7 @@ public class PlayerMove : MonoBehaviour
                 FindObjectOfType<UiManager>().WiningScene();
             }
         }
-
+        animator.SetFloat("speed", sp);
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 

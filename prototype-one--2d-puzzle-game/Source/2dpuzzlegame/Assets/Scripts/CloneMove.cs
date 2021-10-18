@@ -11,6 +11,8 @@ public class CloneMove : MonoBehaviour
     private bool canJump;
     private bool canMove;
     public bool teleportPermission;
+    public Animator animator;
+    private float sp;
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
@@ -20,10 +22,19 @@ public class CloneMove : MonoBehaviour
         canJump = true;
         canMove = true;
     }
+    void Update() 
+    {
+        animator.SetFloat("speed", sp);
+        sp = 0;
+    }
     public void Move(Vector3 vec, bool isDirRight)
     {
+        
+
         if (!canMove)
             return;
+
+        sp += vec.x + 1;
 
         int factor = 1;
         if (isDirRight)
@@ -98,6 +109,7 @@ public class CloneMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+            canMove = true;
         }
     }
 }
