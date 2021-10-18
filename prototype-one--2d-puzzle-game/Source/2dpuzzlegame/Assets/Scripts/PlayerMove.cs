@@ -12,11 +12,13 @@ public class PlayerMove : MonoBehaviour
     public Rigidbody2D rb;
 
     public GameObject clones;
+    public GameObject keyObj;
     public CloneMove[] cloneMoves;
 
     private bool canJump;
 
     private Vector3 moveVector;
+    public EventSystemCustom eventSystem;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -59,6 +61,12 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            keyObj.SetActive(false);
+            eventSystem.KeyNum.Invoke();
+        }
+
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -83,6 +91,13 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
         }
+
+        if (collision.gameObject.CompareTag(TagNames.key.ToString()))
+        {
+            keyObj = collision.gameObject;
+            //collision.gameObject.SetActive(false);
+            Debug.Log("eat key!");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -97,8 +112,6 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("exit door");
         }
-
-       
 
     }
 
