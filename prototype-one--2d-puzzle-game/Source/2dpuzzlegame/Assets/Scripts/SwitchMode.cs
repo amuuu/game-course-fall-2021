@@ -13,12 +13,15 @@ public class SwitchMode : MonoBehaviour
     {
         Debug.Log("enabling switchmode");
 
-        SetActiveCharacterArrow(false);
         // get clones transforms
         clonesTransforms = new List<Transform>();
         foreach (Transform t in clonesTransform)
             clonesTransforms.Add(t);
 
+        if(clonesTransforms.Count==0)
+            return;
+        
+        SetActiveCharacterArrow(false);
         activeCloneIndex = 0;
         SetActiveCloneArrow(activeCloneIndex, true);
     }
@@ -26,6 +29,9 @@ public class SwitchMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(clonesTransforms.Count==0)
+            ExitSwitchMode();
+
         int newActiveCloneIndex = activeCloneIndex;
         if(Input.GetKeyDown(KeyCode.A))
             newActiveCloneIndex = (activeCloneIndex + clonesTransforms.Count - 1) % clonesTransforms.Count;
