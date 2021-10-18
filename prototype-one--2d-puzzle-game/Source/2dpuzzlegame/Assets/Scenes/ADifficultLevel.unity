@@ -3036,7 +3036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae8790765ef16145a1fbbba0ae28610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  factor: 0.2
+  factor: 0.005
   jumpAmount: 24
   spriteRenderer: {fileID: 8828170525442004631}
   rb: {fileID: 8828170525442004626}
