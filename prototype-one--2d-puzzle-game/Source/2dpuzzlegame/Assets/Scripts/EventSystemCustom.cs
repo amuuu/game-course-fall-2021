@@ -10,11 +10,13 @@ public class EventSystemCustom : MonoBehaviour
     public UnityEvent OnCloneStickyPlatformEnter;
     public UnityEvent OnKeyPickup;
     public KeyEvent OnWinDoorInteract;
+    public UnityEvent OnPlayerDeath;
 
     void Awake()
     {
         OnCloneStickyPlatformEnter = new UnityEvent();
         OnKeyPickup = new UnityEvent();
         OnWinDoorInteract = new KeyEvent();
+        OnPlayerDeath = new UnityEvent();
     }
 }

@@ -18,6 +18,7 @@ public class UiManager : MonoBehaviour
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateStickyCloneText);
         eventSystem.OnKeyPickup.AddListener(UpdateKeyCountText);
         eventSystem.OnWinDoorInteract.AddListener(CheckForWinCondition);
+        eventSystem.OnPlayerDeath.AddListener(UpdateLoseText);
         stickyClonesCount = 0;
         collectedKeysCount = 0;
     }
@@ -47,5 +48,10 @@ public class UiManager : MonoBehaviour
         {
             Debug.Log("NOT ENOUGH KEYS");
         }
+    }
+    public void UpdateLoseText()
+    {
+        gameOverText.text = "You Lost!";
+        gameOverText.color = Color.red;
     }
 }

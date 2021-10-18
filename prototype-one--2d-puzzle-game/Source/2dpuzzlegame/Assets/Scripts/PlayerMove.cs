@@ -77,6 +77,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
+            eventSystem.OnPlayerDeath.Invoke();
             Debug.Log("DEATH ZONE");
         }
         
