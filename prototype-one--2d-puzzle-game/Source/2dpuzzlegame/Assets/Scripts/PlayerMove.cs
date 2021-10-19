@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
     private int i;
+    public int sum;
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
@@ -21,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     public Text deadText;
     public Text keysCounter;
     public Text realKeysCounter;
+    public Text wonText;
 
     private Vector3 moveVector;
     void Start()
@@ -70,25 +72,35 @@ public class PlayerMove : MonoBehaviour
             GameObject.FindGameObjectWithTag("KeyO").SetActive(false);
             i++;
             // realKeysCounter.text = $"{i}";
-            int newTextValue = int.Parse(realKeysCounter.text) + 1;
-            realKeysCounter.text = newTextValue.ToString();
-            
+            int counter = int.Parse(realKeysCounter.text) + 1;
+            realKeysCounter.text = counter.ToString();
+            sum = counter;
         }
         if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < -0.340 && transform.position.x > -0.582 && transform.position.y > -0.0604)
         {
             GameObject.FindGameObjectWithTag("KeyT").SetActive(false);
             i++;
             // realKeysCounter.text = $"{i}";
-            int newTextValue = int.Parse(realKeysCounter.text) + 1;
-            realKeysCounter.text = newTextValue.ToString();
+            int counter = int.Parse(realKeysCounter.text) + 1;
+            realKeysCounter.text = counter.ToString();
+            sum = counter;
         }
-        if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.453 && transform.position.x > 0.231 && transform.position.y >-0.875 &&transform.position.y <-0.7964266 )
+        if (Input.GetKeyDown(KeyCode.E) && transform.position.x < 0.453 && transform.position.x > 0.231 && transform.position.y >-0.875 &&transform.position.y <-0.7964266 )
         {
             GameObject.FindGameObjectWithTag("KeyF").SetActive(false);
             i++;
             // realKeysCounter.text = $"{i}";
-           int newTextValue = int.Parse(realKeysCounter.text) + 1;
-           realKeysCounter.text = newTextValue.ToString();
+           int counter = int.Parse(realKeysCounter.text) + 1;
+           realKeysCounter.text = counter.ToString();
+           sum = counter;
+        }
+
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+            
+        // }
+         if(Input.GetKeyDown(KeyCode.E)&& transform.position.x < -0.769 && transform.position.x >= -461.964 && transform.position.y > -180 && sum > 1){
+            wonText.text ="You Won!";
         }
 
         //og position x = 0.686 y = 0.053
