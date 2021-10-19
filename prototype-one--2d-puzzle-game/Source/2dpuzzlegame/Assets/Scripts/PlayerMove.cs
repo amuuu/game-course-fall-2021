@@ -159,19 +159,19 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (Input.GetKey(KeyCode.E))
-        {
-            if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
-            {
-                collision.gameObject.SetActive(false);
-                Debug.Log("KEY!");
-                eventSystem.OnKeyPickup.Invoke();
-                Debug.Log("OnKeyPickup fired.");
-            }
-        }
-    }
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (Input.GetKey(KeyCode.E))
+    //    {
+    //        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+    //        {
+    //            collision.gameObject.SetActive(false);
+    //            Debug.Log("KEY!");
+    //            eventSystem.OnKeyPickup.Invoke();
+    //            Debug.Log("OnKeyPickup fired.");
+    //        }
+    //    }
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
