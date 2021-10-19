@@ -11,12 +11,14 @@ public class UiManager : MonoBehaviour
     public GameObject  GOver;
     public GameObject Win;
     public Image teleportkeyPic;
+    public Text switchpc;
 
     private void Awake() 
     {
         teleportkeyPic.enabled = false;
         GOver.SetActive(false);
         Win.SetActive(false);
+        switchpc.enabled = false;
     }
 
     void Start()
@@ -57,8 +59,4 @@ public class UiManager : MonoBehaviour
         teleportkeyPic.enabled = true;
     }
 
-    //public void SwitchPlayerAndClone()
-    //{
-    //    return;
-    //}
 }

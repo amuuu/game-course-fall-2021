@@ -161,6 +161,7 @@ public class PlayerMove : MonoBehaviour
             FindObjectOfType<PlayerMove>().GetComponent<MonoBehaviour>().enabled = false;
             FindObjectOfType<Switches>().GetPlayerAndClones();
             letsswitch = true;
+            FindObjectOfType<UiManager>().switchpc.enabled = true;
             Debug.Log("Switch player and clone");
         }
     }
@@ -189,6 +190,7 @@ public class PlayerMove : MonoBehaviour
         {
             letsswitch = false;
             FindObjectOfType<PlayerMove>().GetComponent<MonoBehaviour>().enabled = true;
+            FindObjectOfType<UiManager>().switchpc.enabled = false;
         }
     }
 
