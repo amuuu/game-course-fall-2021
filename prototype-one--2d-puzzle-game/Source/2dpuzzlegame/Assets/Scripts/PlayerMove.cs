@@ -64,15 +64,7 @@ public class PlayerMove : MonoBehaviour
         }
 
 
-        // This is too dirty. We must decalare/calculate the bounds in another way. 
-        /*if (transform.position.x < -0.55f) 
-        {
-            transform.position = new Vector3(0.51f, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x > 0.53f)
-        {
-            transform.position = new Vector3(-0.53f, transform.position.y, transform.position.z);
-        }*/
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
