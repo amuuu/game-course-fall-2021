@@ -32,24 +32,13 @@ public class KeyLogic : MonoBehaviour
             Debug.LogWarning("sticky");
             isDetected = true;
            
-            //canJump = false;
+           
         }
-        //
-        // if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
-        // {
-        //     Debug.Log("exit door");
-        // }
+        
 
        
 
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        // if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
-        // {
-        //     Debug.LogWarning("sticky no more bruh");
-        //     canJump = true;
-        // }
-    }
+    
 }

@@ -18,6 +18,9 @@ public class PlayerMove : MonoBehaviour
     public GameObject DeathPage;
     public GameObject Level;
     private Vector3 moveVector;
+
+ 
+   
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -87,6 +90,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("POTION!");
         }
     }
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

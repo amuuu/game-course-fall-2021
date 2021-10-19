@@ -8,6 +8,8 @@ public enum TagNames
     ExitDoor,
     DeathZone,
     CollectableItem,
-    Character
+    Character,
+    WinPage
+    
 }
     
