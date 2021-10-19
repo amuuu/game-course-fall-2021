@@ -18,6 +18,7 @@ public class PortalKey : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && playerIsNearby)
         {
             Debug.Log("PORTAL KEY");
+            eventSystem.OnPortalKeyPickup.Invoke();
             this.gameObject.SetActive(false);
         }
     }

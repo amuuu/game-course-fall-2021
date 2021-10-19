@@ -11,6 +11,7 @@ public class UiManager : MonoBehaviour
     public Text stickyClonesText;
     public int collectedKeysCount;
     public Text collectedKeysText;
+    public Text portalKeyText;
     public Text gameOverText;
 
     void Start()
@@ -34,6 +35,11 @@ public class UiManager : MonoBehaviour
         Debug.Log("UPDATE COLLECTED KEYS");
         collectedKeysCount++;
         collectedKeysText.text = "Collected Keys: " + collectedKeysCount.ToString();
+    }
+    public void UpdatePortalKeyText(int portalKeyCount)
+    {
+        Debug.Log("UPDATE PORTAL KEY");
+        portalKeyText.text = "Portal Keys: " + portalKeyCount.ToString();
     }
     public void CheckForWinCondition(int requiredKeyCount)
     {
