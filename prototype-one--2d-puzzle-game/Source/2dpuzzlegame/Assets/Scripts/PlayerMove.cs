@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
 
     private Vector3 moveVector;
     string state;
+    private int cloneToSwitchIndex;
 
     void Start()
     {
@@ -31,15 +32,18 @@ public class PlayerMove : MonoBehaviour
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
         state = "move";
+        cloneToSwitchIndex = 0;
     }
 
     private void EnableCloneSwitch()
     {
         arrow.SetActive(false);
+        cloneMoves[cloneToSwitchIndex].EnableArrow();
         state = "switch";
     }
-    private void DisableCloneSwitch()
+    private void FinishCloneSwitch()
     {
+        cloneMoves[cloneToSwitchIndex].DisableArrow();
         arrow.SetActive(true);
         state = "move";
     }
@@ -75,9 +79,25 @@ public class PlayerMove : MonoBehaviour
         }
         else if (state == "switch")
         {
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                cloneMoves[cloneToSwitchIndex].DisableArrow();
+                cloneToSwitchIndex++;
+                if (cloneToSwitchIndex == cloneMoves.Length)
+                    cloneToSwitchIndex = 0;
+                cloneMoves[cloneToSwitchIndex].EnableArrow();
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                cloneMoves[cloneToSwitchIndex].DisableArrow();
+                cloneToSwitchIndex--;
+                if (cloneToSwitchIndex == -1)
+                    cloneToSwitchIndex = cloneMoves.Length - 1;
+                cloneMoves[cloneToSwitchIndex].EnableArrow();
+            }
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                DisableCloneSwitch();
+                FinishCloneSwitch();
             }
         }
 

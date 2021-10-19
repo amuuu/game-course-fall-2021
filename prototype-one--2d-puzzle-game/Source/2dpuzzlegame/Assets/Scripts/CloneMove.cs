@@ -20,10 +20,18 @@ public class CloneMove : MonoBehaviour
         canJump = true;
         canMove = true;
     }
+    public void EnableArrow()
+    {
+        arrow.SetActive(true);
+    }
+    public void DisableArrow()
+    {
+        arrow.SetActive(false);
+    }
     private void Start()
     {
         arrow = transform.GetChild(0).gameObject;
-        arrow.SetActive(false);
+        DisableArrow();
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
