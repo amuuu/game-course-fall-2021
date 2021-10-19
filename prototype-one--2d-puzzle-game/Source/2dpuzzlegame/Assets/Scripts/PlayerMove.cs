@@ -85,6 +85,7 @@ public class PlayerMove : MonoBehaviour
             if (transport == true)
             {
                 transform.position = GameObject.FindGameObjectWithTag(TagNames.destination.ToString()).transform.position;
+                transport = false;
             }
             if (win == true)
             {
@@ -168,10 +169,11 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
             Debug.LogWarning("sticky");
+            win = false;
             canJump = false;
         }
 
-        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        if (collision.gameObject.CompareTag(TagNames.exitDoor.ToString()))
         {
             int newTextValue = int.Parse(counterText.text);
             if (newTextValue > 0 )
