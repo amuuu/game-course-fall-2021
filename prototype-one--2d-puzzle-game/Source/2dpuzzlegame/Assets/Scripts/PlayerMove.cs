@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//public static class Globals
+//{
+
+//    public int keyCounter = 0;
+//}
+
+
+
 public class PlayerMove : MonoBehaviour
 {
     
@@ -16,9 +25,11 @@ public class PlayerMove : MonoBehaviour
 
     private bool canJump;
 
-    public int keyCounter = 0;
+    
+    private int keyCounter;
 
     private Vector3 moveVector;
+
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -92,13 +103,16 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 collision.gameObject.SetActive(false);
-                keyCounter++;
+                keyCounter += 1;
+                //UiManager.UpdateKeyText(keyCounter);
+
                 Debug.Log("KEY!");
             }
         }
 
     }
 
+    
    
 
     private void OnCollisionEnter2D(Collision2D collision)
