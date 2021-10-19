@@ -20,41 +20,65 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+    string state;
 
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
         arrow = transform.GetChild(0).gameObject;
+        eventSystem.OnCloneSwitchMode.AddListener(EnableCloneSwitch);
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
+        state = "move";
+    }
+
+    private void EnableCloneSwitch()
+    {
+        arrow.SetActive(false);
+        state = "switch";
+    }
+    private void DisableCloneSwitch()
+    {
+        arrow.SetActive(true);
+        state = "move";
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (state == "move")
         {
-            transform.position += moveVector;
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.position += moveVector;
 
-            MoveClones(moveVector, true);
+                MoveClones(moveVector, true);
 
-            spriteRenderer.flipX = false;
+                spriteRenderer.flipX = false;
 
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.position -= moveVector;
+
+                MoveClones(moveVector, false);
+
+                spriteRenderer.flipX = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && canJump)
+            {
+                rb.AddForce(transform.up * jumpAmount, ForceMode2D.Impulse);
+                JumpClones(jumpAmount);
+            }
         }
-
-        if (Input.GetKey(KeyCode.A))
+        else if (state == "switch")
         {
-            transform.position -= moveVector;
-
-            MoveClones(moveVector, false);
-
-            spriteRenderer.flipX = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
-        {
-            rb.AddForce(transform.up * jumpAmount, ForceMode2D.Impulse);
-            JumpClones(jumpAmount);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                DisableCloneSwitch();
+            }
         }
 
         // This was added to answer a question.
