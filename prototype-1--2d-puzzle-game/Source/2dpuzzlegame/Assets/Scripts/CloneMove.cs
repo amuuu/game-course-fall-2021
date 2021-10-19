@@ -13,7 +13,16 @@ public class CloneMove : MonoBehaviour
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
-
+    void Update()
+    {
+         if(transform.position.x > -0.126 && transform.position.x < 0.100  ){
+            // transform.position.x=-0.540;
+            // transform.position.y=-;
+    
+        
+            transform.position = new Vector3(-0.440f, -0.669f, transform.position.z);
+        }
+    }
     private void Awake()
     {
         canJump = true;

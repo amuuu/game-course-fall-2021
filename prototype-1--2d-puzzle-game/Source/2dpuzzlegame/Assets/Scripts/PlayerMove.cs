@@ -17,8 +17,9 @@ public class PlayerMove : MonoBehaviour
     public Text loserText;
     public Text keyCounter;
     public Text winnerText;
-    public int check;
+    public int check = 0;
     private bool canJump;
+    int strange;
 
     private Vector3 moveVector;
     void Start()
@@ -66,14 +67,20 @@ public class PlayerMove : MonoBehaviour
         // {
         //     Destroy(this.gameObject);
         // }
-        // if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.848 && transform.position.x > 0.550 && transform.position.y > -0.039)
-        // {
-        //     GameObject.FindGameObjectWithTag("ImageTree").SetActive(false);
-        //     int newTextValue = int.Parse(keyCounter.text) + 1;
-        //     keyCounter.text = newTextValue.ToString();
-        //     check = newTextValue;
+        if (transform.position.x > 0.064 && transform.position.x < 0.070 && transform.position.y > 0.361)
+        {
+            GameObject.FindGameObjectWithTag("StrangeKey").SetActive(false);
+            strange ++;
+            Debug.Log(strange);
 
-        // }
+        }
+         if(Input.GetKeyDown(KeyCode.E)  && transform.position.x > -0.126 && transform.position.x < 0.100 &&  strange >0 ){
+            // transform.position.x=-0.540;
+            // transform.position.y=-;
+    
+        
+            transform.position = new Vector3(-0.540f, -0.669f, transform.position.z);
+        }
 
         if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < -0.276 && transform.position.x > -0.559 && transform.position.y > -0.051)
         {
@@ -96,9 +103,10 @@ public class PlayerMove : MonoBehaviour
             keyCounter.text = newTextValue.ToString();
             check = newTextValue;
         }
-        if(Input.GetKeyDown(KeyCode.E)&& transform.position.x < -0.769 && transform.position.x > -1.007 && transform.position.y > -0.4558 && check>1){
+        if(Input.GetKeyDown(KeyCode.E)&& transform.position.x < -0.769 && transform.position.x > -1.007 && transform.position.y > -0.473){
             winnerText.text ="You Won!";
         }
+       
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
         {

@@ -13,5 +13,7 @@ public enum TagNames
     imageF,
     ImageFive,
     WonDoor,
+    StrangeKey,
+    Charac,
 }
     
