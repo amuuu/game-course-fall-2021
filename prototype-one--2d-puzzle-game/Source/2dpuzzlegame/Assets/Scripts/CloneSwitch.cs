@@ -19,6 +19,7 @@ public class CloneSwitch : MonoBehaviour
         {
             Debug.Log("SWITCH");
             eventSystem.OnCloneSwitchMode.Invoke();
+            gameObject.SetActive(false);
         }
     }
 
