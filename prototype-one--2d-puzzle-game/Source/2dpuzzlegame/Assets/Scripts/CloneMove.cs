@@ -10,6 +10,7 @@ public class CloneMove : MonoBehaviour
     public Rigidbody2D rb;
     private bool canJump;
     private bool canMove;
+    public bool Sourcedoor = false;
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
@@ -18,6 +19,17 @@ public class CloneMove : MonoBehaviour
     {
         canJump = true;
         canMove = true;
+    }
+    private void Update()
+    {
+        if ( Sourcedoor == true)
+        {
+            spriteRenderer.transform.position = new Vector2(-1.403f, 1.0837611f);
+            Debug.Log("transformed");
+            Sourcedoor = false;
+            //canJump = true;
+            //canMove = true;
+        }
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
@@ -82,8 +94,15 @@ public class CloneMove : MonoBehaviour
 
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("sourcedoor"))
+        {
+            Sourcedoor = true;
+        }
+    }
 
-    private void OnCollisionExit2D(Collision2D collision)
+        private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {

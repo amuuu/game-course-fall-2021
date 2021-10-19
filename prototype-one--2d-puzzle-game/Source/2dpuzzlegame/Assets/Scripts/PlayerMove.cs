@@ -15,7 +15,13 @@ public class PlayerMove : MonoBehaviour
     public GameObject clones;
     public GameObject keys;
     public GameObject door  ;
+    public GameObject goldenkey;
+    public GameObject sourcedoor;
+    public GameObject destdoor;
     public CloneMove[] cloneMoves;
+    public bool hasgoldenkey;
+    public bool Sourcedoor;
+    public bool Destdoor;
     
 
     private bool canJump;
@@ -23,8 +29,10 @@ public class PlayerMove : MonoBehaviour
     private Vector3 moveVector;
     void Start()
     {
+        Sourcedoor = false;
+        Destdoor = false;
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
-
+        hasgoldenkey = false;
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
@@ -59,24 +67,30 @@ public class PlayerMove : MonoBehaviour
 
 
         // This was added to answer a question.
-        if (Input.GetKeyDown(KeyCode.Z) && door!= null && count>=2)
+        if (Input.GetKeyDown(KeyCode.E) && door!= null && count>=2)
         {
             Destroy(this.gameObject);
             eventSystem.Win.Invoke();
 
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && keys !=null)
         {
             Debug.Log(door);
-            
-            if (keys != null)
-            {
-                count++;
-                eventSystem.UpdateKeys.Invoke();
-                
-            }
+            count++;
+            eventSystem.UpdateKeys.Invoke();
             Destroy(keys);
             Debug.Log(count);
+        }
+        if(Input.GetKeyDown(KeyCode.E) && goldenkey!= null)
+        {
+            Destroy(goldenkey);
+            hasgoldenkey = true;
+            Debug.Log(hasgoldenkey);
+        }
+        if (Input.GetKeyDown(KeyCode.E) && hasgoldenkey == true && Sourcedoor ==true )
+        {
+            transform.position = new Vector2( -1.403f, 1.0837611f);
+            Debug.Log("transformed");
         }
 
 
@@ -112,6 +126,20 @@ public class PlayerMove : MonoBehaviour
         {
             door = collision.gameObject;
         }
+        if (collision.gameObject.CompareTag("goldenkey"))
+        {
+            goldenkey = collision.gameObject;
+        }
+        if (collision.gameObject.CompareTag("sourcedoor"))
+        {
+            sourcedoor = collision.gameObject;
+            Sourcedoor = true;
+        }
+        if (collision.gameObject.CompareTag("destdoor"))
+        {
+            destdoor = collision.gameObject;
+            Destdoor = true;
+        }
 
 
     }
@@ -142,6 +170,20 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag("door"))
         {
             door = null;
+        }
+        if (collision.gameObject.CompareTag("goldenkey"))
+        {
+            goldenkey = null;
+        }
+        if (collision.gameObject.CompareTag("sourcedoor"))
+        {
+            Sourcedoor = false;
+            sourcedoor = null;
+        }
+        if (collision.gameObject.CompareTag("destdoor"))
+        {
+            destdoor = null;
+            Destdoor = false;
         }
 
 
