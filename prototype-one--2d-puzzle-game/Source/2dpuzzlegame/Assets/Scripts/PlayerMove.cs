@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -22,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 moveVector;
     string state;
     private int cloneToSwitchIndex;
+    private List<CloneMove> aliveClones;
 
     void Start()
     {
@@ -38,7 +40,12 @@ public class PlayerMove : MonoBehaviour
     private void EnableCloneSwitch()
     {
         arrow.SetActive(false);
-        cloneMoves[cloneToSwitchIndex].EnableArrow();
+        aliveClones = cloneMoves.Where(clone => clone.isActiveAndEnabled).ToList();
+        if (aliveClones.Count > 0)
+        {
+            cloneToSwitchIndex = 0;
+            aliveClones[0].EnableArrow();
+        }
         state = "switch";
     }
     private void FinishCloneSwitch()
@@ -88,26 +95,35 @@ public class PlayerMove : MonoBehaviour
         }
         else if (state == "switch")
         {
-            if (Input.GetKeyDown(KeyCode.D))
+            if (aliveClones.Count == 0)
             {
-                cloneMoves[cloneToSwitchIndex].DisableArrow();
-                cloneToSwitchIndex++;
-                if (cloneToSwitchIndex == cloneMoves.Length)
-                    cloneToSwitchIndex = 0;
-                cloneMoves[cloneToSwitchIndex].EnableArrow();
+                state = "move";
+                eventSystem.OnExitCloneSwitchMode.Invoke();
             }
-            if (Input.GetKeyDown(KeyCode.A))
+            else
             {
-                cloneMoves[cloneToSwitchIndex].DisableArrow();
-                cloneToSwitchIndex--;
-                if (cloneToSwitchIndex == -1)
-                    cloneToSwitchIndex = cloneMoves.Length - 1;
-                cloneMoves[cloneToSwitchIndex].EnableArrow();
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    aliveClones[cloneToSwitchIndex].DisableArrow();
+                    cloneToSwitchIndex++;
+                    if (cloneToSwitchIndex == aliveClones.Count)
+                        cloneToSwitchIndex = 0;
+                    aliveClones[cloneToSwitchIndex].EnableArrow();
+                }
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    aliveClones[cloneToSwitchIndex].DisableArrow();
+                    cloneToSwitchIndex--;
+                    if (cloneToSwitchIndex == -1)
+                        cloneToSwitchIndex = aliveClones.Count - 1;
+                    aliveClones[cloneToSwitchIndex].EnableArrow();
+                }
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    FinishCloneSwitch();
+                }
             }
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                FinishCloneSwitch();
-            }
+            
         }
 
         // This was added to answer a question.
