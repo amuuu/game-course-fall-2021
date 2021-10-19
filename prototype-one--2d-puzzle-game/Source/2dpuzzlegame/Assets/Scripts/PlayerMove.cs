@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     public int collectedKeys = 0;
     private GameObject pickableItem = null;
     public EventSystemCustom eventSystem;
+    private bool isNearExitDoor = false;
 
     void Start()
     {
@@ -51,12 +53,20 @@ public class PlayerMove : MonoBehaviour
             spriteRenderer.flipX = true;
         }
 
-        // E for To pick a pickable item
+        // E To pick a pickable item
         if (Input.GetKey(KeyCode.E) && pickableItem != null)
         {
             pickableItem.SetActive(false);
             collectedKeys++;
             eventSystem.OnKeyPickUp.Invoke();
+        }
+
+        // E To exit the room and win the game
+        if (Input.GetKey(KeyCode.E) && isNearExitDoor && collectedKeys == 3)
+        {
+            // Debug.Log(GameObject.FindGameObjectsWithTag(TagNames.PickableItem.ToString()).Length);
+            this.gameObject.SetActive(false);
+            eventSystem.WinningGame.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
@@ -65,6 +75,12 @@ public class PlayerMove : MonoBehaviour
             JumpClones(jumpAmount);
         }
 
+
+        // Reload Game
+        if (Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 
         // This was added to answer a question.
         if (Input.GetKeyDown(KeyCode.Z))
@@ -89,6 +105,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            eventSystem.LoosingGame.Invoke();
         }
 
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -102,6 +119,12 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("POTION! enter trigger pickable");
             pickableItem = collision.gameObject;
         }
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            Debug.Log("POTION! enter trigger exit door");
+            isNearExitDoor = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -110,6 +133,13 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("POTION! exit trigger pickable key");
             pickableItem = null;
+        }
+
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            Debug.Log("POTION! exit trigger exit door");
+            isNearExitDoor = false;
         }
     }
 
