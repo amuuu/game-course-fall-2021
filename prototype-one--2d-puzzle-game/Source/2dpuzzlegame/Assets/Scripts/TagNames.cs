@@ -6,9 +6,12 @@ public enum TagNames
 {
     StickyPlatform,
     ExitDoor,
+    SrcDoor,
+    TargetDoor,
     DeathZone,
     CollectableItem,
     ExitKey,
+    TeleportKey,
     FinishDoor,
 }
     

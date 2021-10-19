@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -80,6 +81,17 @@ public class CloneMove : MonoBehaviour
             canJump = false;
             canMove = false;
 
+        }
+
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.SrcDoor.ToString()))
+        {
+            GameObject targetDoor = GameObject.FindWithTag(TagNames.TargetDoor.ToString());
+            transform.position = targetDoor.transform.position;
         }
     }
 

@@ -9,8 +9,8 @@ public class PlayerMove : MonoBehaviour
     public EventSystemCustom eventSystem;
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
-    public int collectedKeys = 0;
-
+    public int collectedExitKeys = 0;
+    public int collectedTeleportKeys = 0;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
 
@@ -19,8 +19,10 @@ public class PlayerMove : MonoBehaviour
 
     private bool canJump;
     public bool canEnd = false;
-    private GameObject onKey;
+    private GameObject onExitKey;
+    private GameObject onTeleportKey;
     private GameObject onDoor;
+    private GameObject onSrcDoor;
     private Vector3 moveVector;
     void Start()
     {
@@ -68,13 +70,13 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown((KeyCode.E)))
         {
             
-            if (onKey != null && canEnd == false)
+            if (onExitKey != null && canEnd == false)
             {
-                collectedKeys++;
+                collectedExitKeys++;
                 if(eventSystem != null)
                     eventSystem.onCloneKeyCounterEnter.Invoke();
-                Destroy(this.onKey);
-                // onKey.SetActive(false);
+                Destroy(this.onExitKey);
+                // onExitKey.SetActive(false);
             }
             
             if (onDoor != null && canEnd)
@@ -83,27 +85,27 @@ public class PlayerMove : MonoBehaviour
                 if(eventSystem != null)
                     eventSystem.onCloneExitDoorEnter.Invoke();
                 // Destroy(this.onDoor);
-                // onKey.SetActive(false);
+                // onExitKey.SetActive(false);
             }
             
-            if (collectedKeys == 4)
+            if (collectedExitKeys == 4)
             {
                 canEnd = true;
             }
-            
+
+            if (onTeleportKey != null)
+            {
+                collectedTeleportKeys++;
+                Destroy(this.onTeleportKey);
+            }
+
+            if (onSrcDoor != null && collectedTeleportKeys == 2)
+            {
+                GameObject targetDoor = GameObject.FindWithTag(TagNames.TargetDoor.ToString());
+                transform.position = targetDoor.transform.position;
+            }
             
         }
-
-
-        // This is too dirty. We must decalare/calculate the bounds in another way. 
-        /*if (transform.position.x < -0.55f) 
-        {
-            transform.position = new Vector3(0.51f, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x > 0.53f)
-        {
-            transform.position = new Vector3(-0.53f, transform.position.y, transform.position.z);
-        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -127,9 +129,16 @@ public class PlayerMove : MonoBehaviour
         }
         if (collision.gameObject.CompareTag(TagNames.ExitKey.ToString()))
         {
-            onKey = collision.gameObject;
+            onExitKey = collision.gameObject;
             // collision.gameObject.SetActive(false);
-            Debug.Log("Key!");
+            Debug.Log("ExitKey!");
+
+        }
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            onTeleportKey = collision.gameObject;
+            // collision.gameObject.SetActive(false);
+            Debug.Log("TeleportKey!");
 
         }
         if (collision.gameObject.CompareTag(TagNames.FinishDoor.ToString()))
@@ -138,13 +147,19 @@ public class PlayerMove : MonoBehaviour
             // collision.gameObject.SetActive(false);
             Debug.Log("FinishDoor!");
         }
+        if (collision.gameObject.CompareTag(TagNames.SrcDoor.ToString()))
+        {
+            onSrcDoor = collision.gameObject;
+            // collision.gameObject.SetActive(false);
+            Debug.Log("SrcDoor!");
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.ExitKey.ToString()))
         {
-            onKey = null;
+            onExitKey = null;
             // collision.gameObject.SetActive(false);
             Debug.Log("Key Exited!");
 
@@ -154,6 +169,19 @@ public class PlayerMove : MonoBehaviour
             onDoor = null;
             // collision.gameObject.SetActive(false);
             Debug.Log("FinishDoor Exited!");
+        }
+        if (collision.gameObject.CompareTag(TagNames.SrcDoor.ToString()))
+        {
+            onSrcDoor = null;
+            // collision.gameObject.SetActive(false);
+            Debug.Log("SrcDoor Exited");
+        }
+        if (collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            onTeleportKey = null;
+            // collision.gameObject.SetActive(false);
+            Debug.Log("TeleportKey!");
+
         }
     }
 
