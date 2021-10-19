@@ -33,7 +33,7 @@ public class CloneMove : MonoBehaviour
         arrow = transform.GetChild(0).gameObject;
         DisableArrow();
     }
-    public void Move(Vector3 vec, bool isDirRight)
+    public void Move(Vector3 vec, bool isDirRight, float deltaTime)
     {
         if (!canMove)
             return;
@@ -68,7 +68,7 @@ public class CloneMove : MonoBehaviour
             }
         }
 
-        transform.position += vec * factor;
+        transform.position += vec * factor * Time.deltaTime;
     }
 
     public void Jump(float amount)

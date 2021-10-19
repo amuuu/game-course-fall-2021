@@ -70,9 +70,9 @@ public class PlayerMove : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.D))
             {
-                transform.position += moveVector;
+                transform.position += moveVector * Time.deltaTime;
 
-                MoveClones(moveVector, true);
+                MoveClones(moveVector, true, Time.deltaTime);
 
                 spriteRenderer.flipX = false;
 
@@ -80,9 +80,9 @@ public class PlayerMove : MonoBehaviour
 
             if (Input.GetKey(KeyCode.A))
             {
-                transform.position -= moveVector;
+                transform.position -= moveVector * Time.deltaTime;
 
-                MoveClones(moveVector, false);
+                MoveClones(moveVector, false, Time.deltaTime);
 
                 spriteRenderer.flipX = true;
             }
@@ -205,10 +205,10 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    public void MoveClones(Vector3 vec, bool isDirRight)
+    public void MoveClones(Vector3 vec, bool isDirRight, float deltaTime)
     {
         foreach (var c in cloneMoves)
-            c.Move(vec, isDirRight);
+            c.Move(vec, isDirRight, deltaTime);
     }
 
     public void JumpClones(float amount)
