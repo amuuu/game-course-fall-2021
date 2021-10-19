@@ -7,7 +7,6 @@ public class UiManager : MonoBehaviour
 {
     public EventSystemCustom eventSystem;
 
-    public int stickyClonesCount;
     public Text stickyClonesText;
     public int collectedKeysCount;
     public Text collectedKeysText;
@@ -16,18 +15,15 @@ public class UiManager : MonoBehaviour
 
     void Start()
     {
-        eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateStickyCloneText);
         eventSystem.OnKeyPickup.AddListener(UpdateKeyCountText);
         eventSystem.OnWinDoorInteract.AddListener(CheckForWinCondition);
         eventSystem.OnPlayerDeath.AddListener(UpdateLoseText);
-        stickyClonesCount = 0;
         collectedKeysCount = 0;
     }
 
-    public void UpdateStickyCloneText()
+    public void UpdateStickyCloneText(int stickyClonesCount)
     {
         Debug.Log("UPDATE STICKY CLONE");
-        stickyClonesCount++;
         stickyClonesText.text = "Sticky Clones: " + stickyClonesCount.ToString();
     }
     public void UpdateKeyCountText()
