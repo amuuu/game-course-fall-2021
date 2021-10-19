@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-
+    private Animator anim;
     private int MAX_KEYS;
     private bool onExitDoor;
     private GameObject _collectableObject;
@@ -25,6 +25,7 @@ public class PlayerMove : MonoBehaviour
     private Vector3 moveVector;
     void Start()
     {
+        anim = GetComponent<Animator>();
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
         MAX_KEYS = GameObject.FindGameObjectsWithTag("Key").Length;
         canJump = true;
@@ -40,7 +41,7 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, true);
 
             spriteRenderer.flipX = false;
-
+            
         }
 
         if (Input.GetKey(KeyCode.A))
@@ -50,6 +51,17 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, false);
 
             spriteRenderer.flipX = true;
+            
+        }
+
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+        {
+            anim.SetBool("isWalking",false);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+        {
+            anim.SetBool("isWalking",true);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)

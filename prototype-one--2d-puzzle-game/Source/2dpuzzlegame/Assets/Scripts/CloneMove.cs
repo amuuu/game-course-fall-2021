@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CloneMove : MonoBehaviour
 {
+    private Animator anim;
     public bool isMovingSameDirection;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
@@ -12,6 +14,27 @@ public class CloneMove : MonoBehaviour
     private bool canMove;
     //public Text counterText; // Too dirty!
 
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+        {
+            anim.SetBool("isWalking",false);
+        }
+
+        if (canMove)
+        {
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) )
+            {
+                anim.SetBool("isWalking",true);
+            }
+        }
+        
+    }
 
     private void Awake()
     {
@@ -20,6 +43,8 @@ public class CloneMove : MonoBehaviour
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
+        
+        
         if (!canMove)
             return;
 
@@ -79,6 +104,7 @@ public class CloneMove : MonoBehaviour
             canJump = false;
             canMove = false;
 
+            anim.SetBool("isWalking",false);
         }
     }
 
@@ -88,6 +114,7 @@ public class CloneMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+            canMove = true;
         }
     }
 }
