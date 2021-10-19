@@ -13,6 +13,7 @@ public enum TagNames
     Player,
     PortalSource,
     Clone,
-    PortalKey
+    PortalKey,
+    Platform
 }
     

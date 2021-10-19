@@ -13,6 +13,7 @@ TagManager:
   - PortalSource
   - Clone
   - PortalKey
+  - Platform
   layers:
   - Default
   - TransparentFX

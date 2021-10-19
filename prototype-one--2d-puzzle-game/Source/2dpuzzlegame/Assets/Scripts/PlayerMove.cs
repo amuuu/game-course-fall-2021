@@ -164,14 +164,15 @@ public class PlayerMove : MonoBehaviour
             Debug.LogWarning("sticky");
             canJump = false;
         }
-
+        if (collision.gameObject.CompareTag(TagNames.Platform.ToString())
+        || collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            canJump = true;
+        }
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             Debug.Log("exit door");
         }
-
-       
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -179,7 +180,12 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
             Debug.LogWarning("sticky no more bruh");
-            canJump = true;
+            //canJump = true;
+        }
+        if (collision.gameObject.CompareTag(TagNames.Platform.ToString())
+        || collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            canJump = false;
         }
     }
 
