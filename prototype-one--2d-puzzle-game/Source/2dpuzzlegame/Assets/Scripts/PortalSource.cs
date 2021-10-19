@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PortalSource : MonoBehaviour
 {
+    public EventSystemCustom eventSystem;
+    public GameObject player;
     public GameObject destination;
-    GameObject player;
     bool playerIsNearby;
     // Start is called before the first frame update
     void Start()
     {
         playerIsNearby = false;
+        eventSystem.OnPlayerTeleport.AddListener(TeleportPlayer);
     }
 
     // Update is called once per frame
@@ -18,8 +20,14 @@ public class PortalSource : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && playerIsNearby)
         {
-            player.transform.position = destination.transform.position;
+            eventSystem.OnPortalInteract.Invoke();
         }
+    }
+
+    void TeleportPlayer()
+    {
+        if (playerIsNearby)
+            player.transform.position = destination.transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

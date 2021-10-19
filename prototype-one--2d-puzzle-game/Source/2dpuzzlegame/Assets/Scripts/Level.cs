@@ -20,9 +20,18 @@ public class Level : MonoBehaviour
         //    Debug.LogWarning("event system is null");
         //}
         eventSystem.OnPortalKeyPickup.AddListener(OnPortalKeyPickup);
+        eventSystem.OnPortalInteract.AddListener(OnPortalInteract);
         portalKeyCount = 0;
     }
-    
+    public void OnPortalInteract()
+    {
+        if (portalKeyCount >= 1)
+        {
+            portalKeyCount--;
+            uiManager.UpdatePortalKeyText(portalKeyCount);
+            eventSystem.OnPlayerTeleport.Invoke();
+        }
+    }
     public void OnPortalKeyPickup()
     {
         portalKeyCount++;

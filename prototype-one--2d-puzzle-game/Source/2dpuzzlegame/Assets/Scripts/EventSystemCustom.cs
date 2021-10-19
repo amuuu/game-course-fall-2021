@@ -12,6 +12,8 @@ public class EventSystemCustom : MonoBehaviour
     public KeyEvent OnWinDoorInteract;
     public UnityEvent OnPlayerDeath;
     public UnityEvent OnPortalKeyPickup;
+    public UnityEvent OnPortalInteract;
+    public UnityEvent OnPlayerTeleport;
 
     void Awake()
     {
@@ -20,5 +22,7 @@ public class EventSystemCustom : MonoBehaviour
         OnWinDoorInteract = new KeyEvent();
         OnPlayerDeath = new UnityEvent();
         OnPortalKeyPickup = new UnityEvent();
+        OnPortalInteract = new UnityEvent();
+        OnPlayerTeleport = new UnityEvent();
     }
 }

@@ -2404,6 +2404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1831b2c8d04c344834e8dab0b2b0c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventSystem: {fileID: 1587907882}
+  player: {fileID: 1284564624}
   destination: {fileID: 1521565988}
 --- !u!212 &973766254
 SpriteRenderer:
@@ -3812,6 +3814,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnPortalKeyPickup:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPortalInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerTeleport:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1587907883
