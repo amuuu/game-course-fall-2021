@@ -54,6 +54,7 @@ public class PlayerMove : MonoBehaviour
         transform.position = position;
         spriteRenderer.flipX = flipX;
         state = "move";
+        eventSystem.OnExitCloneSwitchMode.Invoke();
     }
 
     void Update()

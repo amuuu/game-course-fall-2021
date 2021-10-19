@@ -15,6 +15,7 @@ public class EventSystemCustom : MonoBehaviour
     public UnityEvent OnPortalInteract;
     public UnityEvent OnPlayerTeleport;
     public UnityEvent OnCloneSwitchMode;
+    public UnityEvent OnExitCloneSwitchMode;
 
     void Awake()
     {
@@ -26,5 +27,6 @@ public class EventSystemCustom : MonoBehaviour
         OnPortalInteract = new UnityEvent();
         OnPlayerTeleport = new UnityEvent();
         OnCloneSwitchMode = new UnityEvent();
+        OnExitCloneSwitchMode = new UnityEvent();
     }
 }

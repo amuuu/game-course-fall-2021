@@ -11,10 +11,15 @@ public class UiManager : MonoBehaviour
     public Text collectedKeysText;
     public Text portalKeyText;
     public Text gameOverText;
+    public Text switchText;
 
     void Start()
     {
         eventSystem.OnPlayerDeath.AddListener(UpdateLoseText);
+        eventSystem.OnCloneSwitchMode.AddListener(EnableSwitchText);
+        eventSystem.OnExitCloneSwitchMode.AddListener(DisableSwitchText);
+
+        DisableSwitchText();
     }
 
     public void UpdateStickyCloneText(int stickyClonesCount)
@@ -41,5 +46,13 @@ public class UiManager : MonoBehaviour
     {
         gameOverText.text = "You Lost!";
         gameOverText.color = Color.red;
+    }
+    public void EnableSwitchText()
+    {
+        switchText.text = "Choose the new player amongst the clones.";
+    }
+    public void DisableSwitchText()
+    {
+        switchText.text = "";
     }
 }
