@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,16 +10,23 @@ public class CloneMove : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
     private bool canJump;
+
     private bool canMove;
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
+
+    // New variables
+    public GameObject pickableItem = null;
+    public bool isNearTeleport = false;
+
 
     private void Awake()
     {
         canJump = true;
         canMove = true;
     }
+
     public void Move(Vector3 vec, bool isDirRight)
     {
         if (!canMove)
@@ -40,7 +48,6 @@ public class CloneMove : MonoBehaviour
         }
         else
         {
-
             if (isMovingSameDirection)
             {
                 spriteRenderer.flipX = true;
@@ -50,7 +57,6 @@ public class CloneMove : MonoBehaviour
             {
                 spriteRenderer.flipX = false;
                 factor = 1;
-
             }
         }
 
@@ -61,6 +67,38 @@ public class CloneMove : MonoBehaviour
     {
         if (canJump)
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()) ||
+            collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
+        {
+            Debug.Log("POTION! enter trigger pickable");
+            pickableItem = collision.gameObject;
+        }
+
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportDoor.ToString()))
+        {
+            isNearTeleport = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()))
+        {
+            Debug.Log("POTION! exit trigger pickable key");
+            pickableItem = null;
+        }
+
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportDoor.ToString()))
+        {
+            isNearTeleport = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -79,7 +117,6 @@ public class CloneMove : MonoBehaviour
 
             canJump = false;
             canMove = false;
-
         }
     }
 
