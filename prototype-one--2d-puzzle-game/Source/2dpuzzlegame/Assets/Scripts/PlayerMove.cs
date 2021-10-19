@@ -95,7 +95,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // E To exit the room and win the game
-        if (Input.GetKey(KeyCode.E) && isNearExitDoor && collectedKeys == 3)
+        if (Input.GetKey(KeyCode.E) && isNearExitDoor && collectedKeys == 5)
         {
             // Debug.Log(GameObject.FindGameObjectsWithTag(TagNames.PickableItem.ToString()).Length);
             this.gameObject.SetActive(false);
