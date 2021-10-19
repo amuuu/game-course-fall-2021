@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CloneSwitch : MonoBehaviour
 {
+    public EventSystemCustom eventSystem;
     bool playerIsNearby;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class CloneSwitch : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && playerIsNearby)
         {
             Debug.Log("SWITCH");
+            eventSystem.OnCloneSwitchMode.Invoke();
         }
     }
 

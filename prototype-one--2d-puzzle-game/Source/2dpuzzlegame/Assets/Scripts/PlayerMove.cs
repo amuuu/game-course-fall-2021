@@ -13,15 +13,18 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject clones;
     public CloneMove[] cloneMoves;
+    private GameObject arrow;
 
     public EventSystemCustom eventSystem;
 
     private bool canJump;
 
     private Vector3 moveVector;
+
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+        arrow = transform.GetChild(0).gameObject;
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
@@ -53,7 +56,6 @@ public class PlayerMove : MonoBehaviour
             rb.AddForce(transform.up * jumpAmount, ForceMode2D.Impulse);
             JumpClones(jumpAmount);
         }
-
 
         // This was added to answer a question.
         if (Input.GetKeyDown(KeyCode.Z))

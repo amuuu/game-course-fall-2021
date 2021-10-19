@@ -13,11 +13,17 @@ public class CloneMove : MonoBehaviour
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
+    private GameObject arrow;
 
     private void Awake()
     {
         canJump = true;
         canMove = true;
+    }
+    private void Start()
+    {
+        arrow = transform.GetChild(0).gameObject;
+        arrow.SetActive(false);
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
