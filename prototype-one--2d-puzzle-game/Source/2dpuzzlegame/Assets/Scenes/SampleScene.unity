@@ -1286,7 +1286,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412568055}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14, y: -0.364, z: 0.3308678}
+  m_LocalPosition: {x: 0.144, y: -0.352, z: 0.3308678}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1475438548}
@@ -2353,7 +2353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650383229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.716, y: 1.108, z: -6.0154657}
+  m_LocalPosition: {x: -0.60300004, y: 1.399, z: -6.0154657}
   m_LocalScale: {x: 0.8486123, y: 0.8486123, z: 0.8486123}
   m_Children: []
   m_Father: {fileID: 1417085498}
@@ -3984,7 +3984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020102838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.188, y: 0.339, z: 11.357459}
+  m_LocalPosition: {x: -0.075, y: 0.63, z: 11.357459}
   m_LocalScale: {x: 0.68831044, y: 0.68831044, z: 0.68831044}
   m_Children: []
   m_Father: {fileID: 579317608}
@@ -4819,7 +4819,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238345547}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.593, y: -1.003, z: 11.35746}
+  m_LocalPosition: {x: 0.581, y: -1.107, z: 11.35746}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 579317608}
@@ -5192,7 +5192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329905162}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.122, y: -0.218, z: 0.3308678}
+  m_LocalPosition: {x: -0.158, y: -0.218, z: 0.3308678}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2039111328}
@@ -5350,7 +5350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330365272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.30900007, y: -0.418, z: 0}
+  m_LocalPosition: {x: -1.51, y: 0.553, z: 0}
   m_LocalScale: {x: 0.63606906, y: 0.63606906, z: 0.63606906}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6113,7 +6113,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.14101943, y: -0.32620394}
+  m_Offset: {x: 0.14704075, y: -0.31817555}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6124,7 +6124,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.18379372, y: 0.10939199}
+  m_Size: {x: 0.15569419, y: 0.093334734}
   m_EdgeRadius: 0
 --- !u!1 &1507959246
 GameObject:
@@ -6578,7 +6578,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604245147}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.037, y: 0.421, z: 11.026591}
+  m_LocalPosition: {x: 0.076000005, y: 0.712, z: 11.026591}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 778472797}
@@ -7485,7 +7485,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887954735}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.028320834, y: -1.2744266, z: 11.026591}
+  m_LocalPosition: {x: -1.506, y: -0.375, z: 11.026591}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 404412548}
@@ -7599,7 +7599,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039111327}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.57800007, y: -0.50399995, z: 11.026591}
+  m_LocalPosition: {x: -0.65, y: -0.52, z: 11.026591}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1449532152}
@@ -7620,7 +7620,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.19896084, y: -0.19281375}
+  m_Offset: {x: -0.21301061, y: -0.19281375}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7631,7 +7631,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3223189, y: 0.10346389}
+  m_Size: {x: 0.29421937, y: 0.10346389}
   m_EdgeRadius: 0
 --- !u!1 &2071495655
 GameObject:

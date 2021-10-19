@@ -72,7 +72,8 @@ public class CloneMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()))
+        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()) ||
+            collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
         {
             Debug.Log("POTION! enter trigger pickable");
             pickableItem = collision.gameObject;
