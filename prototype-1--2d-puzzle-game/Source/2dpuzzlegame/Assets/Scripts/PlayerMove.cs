@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject clones;
     public CloneMove[] cloneMoves;
-
+    public Text loserText;
     private bool canJump;
 
     private Vector3 moveVector;
@@ -76,6 +77,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            loserText.text ="You Lost!";
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
