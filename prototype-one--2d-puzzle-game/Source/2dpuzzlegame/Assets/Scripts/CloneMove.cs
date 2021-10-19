@@ -13,12 +13,15 @@ public class CloneMove : MonoBehaviour
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
+
     private Vector3 target;
+    public GameObject TeleportGoal;
 
     private void Awake()
     {
         canJump = true;
         canMove = true;
+      
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
@@ -82,11 +85,7 @@ public class CloneMove : MonoBehaviour
             canMove = false;
 
         }
-
-
-
     }
-
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -97,22 +96,14 @@ public class CloneMove : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
         {
-            foreach (Component c in collision.gameObject.GetComponentInChildren<Transform>())
-            {
-
-                target = c.transform.position;
-
-            }
-
-            // Debug.Log("positionnnn" + target);
-            transform.position = target;
-            Debug.Log("clonnnnnnnnn");
-
+                target = TeleportGoal.transform.position;
+                transform.position = target;
+        
+                
         }
     }
 }

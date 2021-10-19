@@ -23,6 +23,9 @@ public class PlayerMove : MonoBehaviour
     public int reqKey;
     private bool isSource;
     private bool isDestination;
+    private int MagiKeyNum=0;
+   
+
 
     private Vector3 target;
     public GameObject TeleportGoal;
@@ -40,7 +43,7 @@ public class PlayerMove : MonoBehaviour
         moveVector = new Vector3(1 * factor, 0, 0);
         isSource = false;
         isDestination = false;
-
+       
 
     }
 
@@ -79,17 +82,18 @@ public class PlayerMove : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.E)&& isSource)
-        {
-          
-            
-                target = TeleportGoal.transform.position;
-                // Debug.Log("position" + target);
-                transform.position = target;
-                Debug.Log("source Doorrrr");
-                isSource = false;
+        {           
+                if (MagiKeyNum>0)
+                {       
+                    target = TeleportGoal.transform.position;
+                    // Debug.Log("position" + target);
+                    transform.position = target;
+                    Debug.Log("source Doorrrr");
+                    isSource = false;
+                   
+                }
             
         }
-
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -156,9 +160,20 @@ public class PlayerMove : MonoBehaviour
         {
             isSource = true;
         }
+
+        if (collision.gameObject.CompareTag(TagNames.magicKey.ToString()))
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                collision.gameObject.SetActive(false);
+                MagiKeyNum++;
+
+            }
+        }
+
     }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
@@ -181,6 +196,13 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            isSource = false;
         }
     }
 

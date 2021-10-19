@@ -11,7 +11,8 @@ public enum TagNames
     Key,
     WinDoor,
     SourceDoor,
-    DestinationDoor
+    DestinationDoor,
+    magicKey
 
 }
     
