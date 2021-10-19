@@ -56,4 +56,9 @@ public class UiManager : MonoBehaviour
     {
         teleportkeyPic.enabled = true;
     }
+
+    //public void SwitchPlayerAndClone()
+    //{
+    //    return;
+    //}
 }

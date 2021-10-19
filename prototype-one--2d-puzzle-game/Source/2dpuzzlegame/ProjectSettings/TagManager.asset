@@ -12,6 +12,7 @@ TagManager:
   - Door
   - telkey
   - doorT
+  - SwitchPC
   layers:
   - Default
   - TransparentFX

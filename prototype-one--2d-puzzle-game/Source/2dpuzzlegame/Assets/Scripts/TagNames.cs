@@ -13,6 +13,7 @@ public enum TagNames
     telkey,
     clones,
     doorT,
-    player
+    player,
+    SwitchPC
 }
     

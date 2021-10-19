@@ -13,6 +13,7 @@ public class CloneMove : MonoBehaviour
     public bool teleportPermission;
     public Animator animator;
     private float sp;
+    public bool telKey;
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
@@ -22,6 +23,7 @@ public class CloneMove : MonoBehaviour
         canJump = true;
         canMove = true;
     }
+
     void Update() 
     {
         animator.SetFloat("speed", sp);

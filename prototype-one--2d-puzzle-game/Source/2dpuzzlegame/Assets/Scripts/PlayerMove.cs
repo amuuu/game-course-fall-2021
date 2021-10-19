@@ -20,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     private int totalkeycount;
     public bool telKey;
     public bool teleportPermission;
+    public bool letsswitch;
 
     public Animator animator;
 
@@ -28,9 +29,10 @@ public class PlayerMove : MonoBehaviour
     private Vector3 moveVector;
     void Start()
     {
+        letsswitch = false;
         telKey = false;
         teleportPermission = false;
-        totalkeycount = 8;
+        totalkeycount = 3;
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
         keys = null;
         canJump = true;
@@ -41,7 +43,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+        cloneMoves = clones.GetComponentsInChildren<CloneMove>();//??
         float sp = 0;
         if (Input.GetKey(KeyCode.D))
         {
@@ -151,21 +153,18 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("enter near door");
             teleportPermission = true;
         }
+
+        if (collision.gameObject.CompareTag(TagNames.SwitchPC.ToString()))
+        {
+            collision.gameObject.SetActive(false);
+            FindObjectOfType<Switches>().GetID();
+            FindObjectOfType<PlayerMove>().GetComponent<MonoBehaviour>().enabled = false;
+            FindObjectOfType<Switches>().GetPlayerAndClones();
+            letsswitch = true;
+            Debug.Log("Switch player and clone");
+        }
     }
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag(TagNames.keyitem.ToString()))
-    //    {
-    //        if (keydisappear)
-    //        {
-    //            collision.gameObject.SetActive(false);
-    //            keydisappear = false;
-    //            eventSystem.OnKeyGetStay.Invoke();
-    //            Debug.Log("deasipear key!");
-    //        }
-    //    }
-    //}
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -184,6 +183,12 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.doorT.ToString()) && !FindObjectOfType<Teleport>().destinationDoor)
         {
             teleportPermission = false;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.SwitchPC.ToString()))
+        {
+            letsswitch = false;
+            FindObjectOfType<PlayerMove>().GetComponent<MonoBehaviour>().enabled = true;
         }
     }
 
