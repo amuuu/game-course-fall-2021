@@ -27,8 +27,8 @@ public class UiManager : MonoBehaviour
     public void UpdateKeyCounter()
     {
         Debug.Log("UPDATE Keys");
-        int newTextValue = int.Parse(keyText.text) + 1;
-        keyText.text = newTextValue.ToString();
+        int newTextValue = int.Parse(keyText.text.Split(' ')[0]) + 1;
+        keyText.text = newTextValue.ToString() + " Keys";
     }
 
     public void FinishGame()

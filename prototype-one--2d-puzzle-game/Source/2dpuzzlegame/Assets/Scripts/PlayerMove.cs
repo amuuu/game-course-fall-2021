@@ -84,6 +84,7 @@ public class PlayerMove : MonoBehaviour
                 Debug.Log("YOU WON! My friend");
                 if(eventSystem != null)
                     eventSystem.onCloneExitDoorEnter.Invoke();
+                Time.timeScale = 0;
                 // Destroy(this.onDoor);
                 // onExitKey.SetActive(false);
             }
