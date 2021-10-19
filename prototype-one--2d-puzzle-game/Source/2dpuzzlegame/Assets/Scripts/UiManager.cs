@@ -8,6 +8,7 @@ public class UiManager : MonoBehaviour
     public Text counterText;
     public EventSystemCustom eventSystem;
     public Text keyNumberText;
+    public Text statusText;
     void Start()
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);

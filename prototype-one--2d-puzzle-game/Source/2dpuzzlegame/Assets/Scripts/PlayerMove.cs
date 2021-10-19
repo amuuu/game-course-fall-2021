@@ -30,6 +30,7 @@ public class PlayerMove : MonoBehaviour
     private bool TeleportKey = false;
     
     public int keyNumToWin = 2;
+    
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -83,6 +84,7 @@ public class PlayerMove : MonoBehaviour
             else if (isWin)
             {
                 Debug.Log("WIN");
+                uiManager.statusText.text = "You Won!";
             }
             else if (TeleportKeyObj)
             {
@@ -116,6 +118,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            uiManager.statusText.text = "You lost!";
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
