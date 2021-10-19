@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     public GameObject clones;
     public CloneMove[] cloneMoves;
     public Text loserText;
+    public Text keyCounter;
     private bool canJump;
 
     private Vector3 moveVector;
@@ -55,11 +56,34 @@ public class PlayerMove : MonoBehaviour
 
 
         // This was added to answer a question.
-        if (Input.GetKeyDown(KeyCode.Z))
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     Destroy(this.gameObject);
+        // }
+        // if (Input.GetKeyDown(KeyCode.E))
+        // {
+        //     Destroy(this.gameObject);
+        // }
+        if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.848 && transform.position.x > 0.550 && transform.position.y > -0.039)
         {
-            Destroy(this.gameObject);
+            GameObject.FindGameObjectWithTag("ImageTree").SetActive(false);
+            int newTextValue = int.Parse(keyCounter.text) + 1;
+            keyCounter.text = newTextValue.ToString();
+
         }
 
+        if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < -0.276 && transform.position.x > -0.559 && transform.position.y > -0.051)
+        {
+            GameObject.FindGameObjectWithTag("ImageT").SetActive(false);
+            int newTextValue = int.Parse(keyCounter.text) + 1;
+            keyCounter.text = newTextValue.ToString();
+        }
+        if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.422 && transform.position.x > 0.200 && transform.position.y > -0.886)
+        {
+            GameObject.FindGameObjectWithTag("imageF").SetActive(false);
+            int newTextValue = int.Parse(keyCounter.text) + 1;
+            keyCounter.text = newTextValue.ToString();
+        }
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
