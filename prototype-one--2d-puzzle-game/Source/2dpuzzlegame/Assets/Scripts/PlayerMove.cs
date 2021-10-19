@@ -182,7 +182,7 @@ public class PlayerMove : MonoBehaviour
             Debug.LogWarning("sticky no more bruh");
             //canJump = true;
         }
-        if (collision.gameObject.CompareTag(TagNames.Platform.ToString())
+        else if (collision.gameObject.CompareTag(TagNames.Platform.ToString())
         || collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
             canJump = false;
