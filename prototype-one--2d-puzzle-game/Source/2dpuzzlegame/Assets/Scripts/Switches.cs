@@ -19,8 +19,6 @@ public class Switches : MonoBehaviour
     void Start()
     {
         id = 0;
-        player= FindObjectOfType<PlayerMove>();
-        cloneMoves = clones.GetComponentsInChildren<CloneMove>();
     }
 
     // Update is called once per frame
@@ -29,7 +27,7 @@ public class Switches : MonoBehaviour
         if (FindObjectOfType<PlayerMove>().letsswitch)
         {
             
-            cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+            cloneMoves = FindObjectsOfType<CloneMove>();
             GameObject pArrow = player_clones[id].transform.GetChild(0).gameObject;
             if (Input.GetKeyDown(KeyCode.A))
             {
@@ -61,6 +59,8 @@ public class Switches : MonoBehaviour
                 {
                     if (finished)
                     {
+                        FindObjectOfType<PlayerMove>().GetComponent<MonoBehaviour>().enabled = true;
+                        FindObjectOfType<UiManager>().switchpc.enabled = false;
                         FindObjectOfType<PlayerMove>().letsswitch = false;
                         finished = false;
                         return;
@@ -98,7 +98,7 @@ public class Switches : MonoBehaviour
                 System.Reflection.FieldInfo[] RF = oldc.GetType().GetFields();
                 foreach (System.Reflection.FieldInfo f in RF)
                 {
-                    f.SetValue(newp.GetComponent(oldc.GetType()), f.GetValue(oldc));
+                    f.SetValue(newc.GetComponent(oldc.GetType()), f.GetValue(oldc));
                 }
             }
         }
@@ -115,21 +115,24 @@ public class Switches : MonoBehaviour
     }
     private void ChangeCharacter()
     {
-
+        if (FindObjectOfType<PlayerMove>().gameObject.name == player_clones[id].name)
+        {
+            player_clones[id].GetComponent<MonoBehaviour>().enabled = true;
+            return;
+        }
         Create();
 
-        Sets(true,false);
+        Sets(true, false);
         newp.spriteRenderer = oldc.spriteRenderer;
         newp.GetComponent<SpriteRenderer>().color = colors.Item2;
         newp.rb = oldc.rb;
-        newp.animator = oldc.GetComponent<Animator>();
+        newp.animator = newp.GetComponent<Animator>();
 
-        Sets(false,false);
+        Sets(false, false);
         newc.spriteRenderer = oldp.spriteRenderer;
         newc.GetComponent<SpriteRenderer>().color = colors.Item1;
         newc.rb = oldp.rb;
-        newc.animator = oldp.GetComponent<Animator>();
-        //newc.telKey = oldp.telKey;
+        newc.animator = newc.GetComponent<Animator>();
 
         Sets(true, true);
         Sets(false, true);
@@ -140,8 +143,10 @@ public class Switches : MonoBehaviour
     }
     public void GetPlayerAndClones()
     {
+        player = FindObjectOfType<PlayerMove>();
+        cloneMoves = FindObjectsOfType<CloneMove>();
         player_clones.Add(player.gameObject);
-        foreach (CloneMove cl in clones.GetComponentsInChildren<CloneMove>())
+        foreach (CloneMove cl in FindObjectsOfType<CloneMove>())
         {
             player_clones.Add(cl.gameObject);
         }

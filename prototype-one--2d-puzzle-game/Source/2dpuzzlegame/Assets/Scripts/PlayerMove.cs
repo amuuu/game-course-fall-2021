@@ -33,7 +33,7 @@ public class PlayerMove : MonoBehaviour
         telKey = false;
         teleportPermission = false;
         totalkeycount = 3;
-        cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+        cloneMoves = FindObjectsOfType<CloneMove>();
         keys = null;
         canJump = true;
         getkey = false;
@@ -43,7 +43,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        cloneMoves = clones.GetComponentsInChildren<CloneMove>();//??
+        cloneMoves = FindObjectsOfType<CloneMove>();
         float sp = 0;
         if (Input.GetKey(KeyCode.D))
         {
@@ -158,11 +158,13 @@ public class PlayerMove : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             FindObjectOfType<Switches>().GetID();
-            FindObjectOfType<PlayerMove>().GetComponent<MonoBehaviour>().enabled = false;
+
             FindObjectOfType<Switches>().GetPlayerAndClones();
             letsswitch = true;
             FindObjectOfType<UiManager>().switchpc.enabled = true;
             Debug.Log("Switch player and clone");
+            animator.SetFloat("speed", 0);
+            FindObjectOfType<PlayerMove>().GetComponent<MonoBehaviour>().enabled = false;
         }
     }
 
@@ -186,12 +188,6 @@ public class PlayerMove : MonoBehaviour
             teleportPermission = false;
         }
 
-        if (collision.gameObject.CompareTag(TagNames.SwitchPC.ToString()))
-        {
-            letsswitch = false;
-            FindObjectOfType<PlayerMove>().GetComponent<MonoBehaviour>().enabled = true;
-            FindObjectOfType<UiManager>().switchpc.enabled = false;
-        }
     }
 
 

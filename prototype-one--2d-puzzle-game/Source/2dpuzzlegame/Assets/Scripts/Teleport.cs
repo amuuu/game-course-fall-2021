@@ -20,7 +20,7 @@ public class Teleport : MonoBehaviour
         {
             if (FindObjectOfType<PlayerMove>().teleportPermission && FindObjectOfType<PlayerMove>().telKey )
             {
-                player.transform.position = destination.position;
+                FindObjectOfType<PlayerMove>().gameObject.transform.position = destination.position;
             }
         }
     }
