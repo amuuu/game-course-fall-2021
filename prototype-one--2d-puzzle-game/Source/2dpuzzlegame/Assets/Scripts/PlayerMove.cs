@@ -11,8 +11,8 @@ public class PlayerMove : MonoBehaviour
     private GameObject _collectableObject;
     public int collectedKeys = 0;
     
-    public float factor = 0.01f;
-    public float jumpAmount = 0.5f;
+    public float factor;
+    public float jumpAmount ;
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;

@@ -15,7 +15,7 @@ public class CloneTeleport : MonoBehaviour
     void Start()
     {
         MIN_SIZE = 0.015f;
-        strengthOfAttraction = 20.0f;
+        strengthOfAttraction = 35.0f;
     }
 
     // Update is called once per frame
