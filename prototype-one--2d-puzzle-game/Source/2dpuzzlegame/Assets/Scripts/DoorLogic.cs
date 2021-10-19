@@ -28,7 +28,8 @@ public class DoorLogic : MonoBehaviour
             if (OnDoor)
             {
                 eventSystem.Door.Invoke();
-                if (counter >= 2 )
+                
+                if (counter >= 1)
                 {
                     counter -= 3;
                     Debug.Log(counter);

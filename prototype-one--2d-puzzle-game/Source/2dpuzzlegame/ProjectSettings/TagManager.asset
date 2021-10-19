@@ -9,6 +9,7 @@ TagManager:
   - ExitDoor
   - CollectableItem
   - Character
+  - WinPage
   layers:
   - Default
   - TransparentFX
