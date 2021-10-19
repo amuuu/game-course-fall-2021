@@ -81,6 +81,12 @@ public class CloneMove : MonoBehaviour
             canMove = false;
 
         }
+
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()))
+        {
+            transform.position = GameObject.FindGameObjectWithTag(TagNames.destination.ToString()).transform.position;
+
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)

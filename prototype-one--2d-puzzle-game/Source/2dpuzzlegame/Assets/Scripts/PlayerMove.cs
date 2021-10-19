@@ -19,8 +19,12 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private bool getKey;
+    private bool getKey1;
+
+    private bool haveKey;
 
     private bool win;
+    private bool transport;
 
     public EventSystemCustom eventSystem;
 
@@ -33,7 +37,10 @@ public class PlayerMove : MonoBehaviour
 
         canJump = true;
         getKey = false;
+        getKey1 = false;
         win = false;
+        haveKey = false;
+        transport = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -73,11 +80,16 @@ public class PlayerMove : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E) )
         {
+            if (transport == true)
+            {
+                transform.position = GameObject.FindGameObjectWithTag(TagNames.destination.ToString()).transform.position;
+            }
             if (win == true)
             {
                 SceneManager.LoadScene("win");
             }
             getKey = true;
+            getKey1 = true;
         }
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
@@ -111,7 +123,20 @@ public class PlayerMove : MonoBehaviour
                 eventSystem.OnGetKey.Invoke();
                 collision.gameObject.SetActive(false);
                 Debug.Log("KEY!");
+                getKey1 = false;
                 getKey = false;
+            }
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.keySource.ToString()))
+        {
+            if (getKey1 == true)
+            {
+                collision.gameObject.SetActive(false);
+                Debug.Log("KEY!");
+                getKey = false;
+                getKey1 = false;
+                haveKey = true;
             }
         }
     }
@@ -133,7 +158,12 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-       
+        if (collision.gameObject.CompareTag(TagNames.SourceDoor.ToString()) && haveKey)
+        {
+            transport = true;
+
+        }
+
 
     }
 
