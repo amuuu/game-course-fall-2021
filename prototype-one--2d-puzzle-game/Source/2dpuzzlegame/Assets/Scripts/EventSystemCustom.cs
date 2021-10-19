@@ -8,6 +8,7 @@ public class EventSystemCustom : MonoBehaviour
     public UnityEvent OnCloneStickyPlatformEnter;
     public UnityEvent OnKeyTrigger;
 	public UnityEvent OnWinCondition;
+	public UnityEvent OnLooseCondition;
 	public UnityEvent OnSpecialKeyTrigger;
 	public UnityEvent OnSpecialKeyDecrease;
 
@@ -16,6 +17,7 @@ public class EventSystemCustom : MonoBehaviour
         OnCloneStickyPlatformEnter = new UnityEvent();
 		OnKeyTrigger = new UnityEvent();
 		OnWinCondition = new UnityEvent();
+		OnLooseCondition = new UnityEvent();
 		OnSpecialKeyTrigger = new UnityEvent();
 		OnSpecialKeyDecrease = new UnityEvent();
 	}

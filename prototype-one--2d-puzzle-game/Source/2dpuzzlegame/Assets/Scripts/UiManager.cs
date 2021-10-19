@@ -8,6 +8,7 @@ public class UiManager : MonoBehaviour
     public Text counterText;
 	public Text keyText;
 	public Text win;
+	public Text loose;
 	public Text specialKeyText;
     public EventSystemCustom eventSystem;
 
@@ -16,6 +17,7 @@ public class UiManager : MonoBehaviour
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
         eventSystem.OnKeyTrigger.AddListener(UpdateKeyText);
 		eventSystem.OnWinCondition.AddListener(UpdateWinText);
+		eventSystem.OnLooseCondition.AddListener(UpdateLooseText);
 		eventSystem.OnSpecialKeyTrigger.AddListener(IncreaseSpecialKey);
 		eventSystem.OnSpecialKeyDecrease.AddListener(DecreaseSpecialKey);
 	}
@@ -38,6 +40,11 @@ public class UiManager : MonoBehaviour
 	{
 		//Debug.Log("Win!");
 		win.text = "You Won!";
+	}
+
+	public void UpdateLooseText()
+	{
+		loose.text = "You Lost!";
 	}
 
 	public void IncreaseSpecialKey()
