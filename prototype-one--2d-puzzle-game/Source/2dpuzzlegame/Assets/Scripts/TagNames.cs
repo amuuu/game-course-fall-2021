@@ -12,6 +12,7 @@ public enum TagNames
     keySource,
     Source,
     destination,
-    SourceDoor
+    SourceDoor,
+    switchKey
 }
     

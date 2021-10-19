@@ -96,5 +96,9 @@ public class CloneMove : MonoBehaviour
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
         }
+        if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

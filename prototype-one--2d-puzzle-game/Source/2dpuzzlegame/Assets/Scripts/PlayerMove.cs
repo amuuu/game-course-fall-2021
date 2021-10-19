@@ -20,6 +20,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool getKey;
     private bool getKey1;
+    private bool pause;
 
     private bool haveKey;
 
@@ -41,6 +42,7 @@ public class PlayerMove : MonoBehaviour
         win = false;
         haveKey = false;
         transport = false;
+        pause = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -92,6 +94,10 @@ public class PlayerMove : MonoBehaviour
             getKey1 = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            gameControl.disabled = true;
+        }
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
         {
@@ -138,6 +144,13 @@ public class PlayerMove : MonoBehaviour
                 getKey1 = false;
                 haveKey = true;
             }
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.switchKey.ToString()))
+        {
+            collision.gameObject.SetActive(false);
+            gameControl.disabled = false;
+            pause = true;
         }
     }
 
