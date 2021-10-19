@@ -19,8 +19,6 @@ public class PlayerMove : MonoBehaviour
 
     public Text deadText;
 
-    int i;
-
     private Vector3 moveVector;
     void Start()
     {
@@ -28,8 +26,6 @@ public class PlayerMove : MonoBehaviour
 
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
-
-        i = 0;
     }
 
     void Update()
@@ -68,18 +64,16 @@ public class PlayerMove : MonoBehaviour
       if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.556 && transform.position.x > 0.340 && transform.position.y > 0.3603)
         {
             GameObject.FindGameObjectWithTag("KeyO").SetActive(false);
-            i++;
             
         }
         if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < -0.340 && transform.position.x > -0.582 && transform.position.y > -0.0604)
         {
             GameObject.FindGameObjectWithTag("KeyT").SetActive(false);
-            i++;
+            ;
         }
         if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.453 && transform.position.x > 0.231 && transform.position.y >-0.875 &&transform.position.y <-0.7964266 )
         {
             GameObject.FindGameObjectWithTag("KeyF").SetActive(false);
-            i++;
           
         }
 
