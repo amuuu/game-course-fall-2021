@@ -8,6 +8,9 @@ TagManager:
   - StickyPlatform
   - ExitDoor
   - CollectableItem
+  - Key
+  - Character
+  - Clone
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -17,13 +18,21 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
     private Vector3 moveVector;
+
+    public GameObject deathMenu;
+    public GameObject Level;
+    public EventSystemCustom eventSystem;
+    public GameObject DestionationDoor;
+
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
-
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
+        eventSystem.PlayerShouldTeleport.AddListener(TeleportHandler);
     }
+
+
 
     void Update()
     {
@@ -75,7 +84,9 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
-            Debug.Log("DEATH ZONE");
+            //Debug.Log("DEATH ZONE");
+            deathMenu.SetActive(true);
+            Level.SetActive(false);
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -98,8 +109,6 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("exit door");
         }
 
-       
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -109,6 +118,7 @@ public class PlayerMove : MonoBehaviour
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
         }
+
     }
 
     public void MoveClones(Vector3 vec, bool isDirRight)
@@ -122,4 +132,10 @@ public class PlayerMove : MonoBehaviour
         foreach (var c in cloneMoves)
             c.Jump(amount);
     }
+    private void TeleportHandler()
+    {
+        var DestinationDoorPosition = DestionationDoor.transform.position;
+        transform.position = new Vector3(DestinationDoorPosition.x,DestinationDoorPosition.y,transform.position.z);
+    }
+
 }
