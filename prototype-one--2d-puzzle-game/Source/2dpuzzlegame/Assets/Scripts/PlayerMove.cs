@@ -45,6 +45,14 @@ public class PlayerMove : MonoBehaviour
     {
         cloneMoves[cloneToSwitchIndex].DisableArrow();
         arrow.SetActive(true);
+        var clone = cloneMoves[cloneToSwitchIndex];
+        var position = clone.transform.position;
+        var flipX = clone.spriteRenderer.flipX;
+
+        clone.transform.position = transform.position;
+        clone.spriteRenderer.flipX = spriteRenderer.flipX;
+        transform.position = position;
+        spriteRenderer.flipX = flipX;
         state = "move";
     }
 
