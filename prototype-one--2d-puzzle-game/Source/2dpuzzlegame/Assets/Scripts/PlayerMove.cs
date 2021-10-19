@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -18,7 +20,11 @@ public class PlayerMove : MonoBehaviour
 
     private bool getKey;
 
+    private bool win;
+
     public EventSystemCustom eventSystem;
+
+    public Text counterText;
 
     private Vector3 moveVector;
     void Start()
@@ -27,6 +33,7 @@ public class PlayerMove : MonoBehaviour
 
         canJump = true;
         getKey = false;
+        win = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -64,8 +71,12 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) )
         {
+            if (win == true)
+            {
+                SceneManager.LoadScene("win");
+            }
             getKey = true;
         }
 
@@ -84,9 +95,9 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
-            Debug.Log("DEATH ZONE");
+            SceneManager.LoadScene("gameover");
         }
-        
+
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
@@ -115,7 +126,11 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
-            Debug.Log("exit door");
+            int newTextValue = int.Parse(counterText.text);
+            if (newTextValue > 0 )
+            {
+                win = true;
+            }
         }
 
        
