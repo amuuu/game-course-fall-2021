@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,10 @@ public class CloneMove : MonoBehaviour
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
+
+    // New variables
+    private GameObject pickableItem = null;
+
 
     private void Awake()
     {
@@ -61,6 +66,35 @@ public class CloneMove : MonoBehaviour
     {
         if (canJump)
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
+    }
+
+    public bool HandleKeyPickUp()
+    {
+        if (pickableItem != null)
+        {
+            pickableItem.gameObject.SetActive(false);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()))
+        {
+            Debug.Log("POTION! enter trigger pickable");
+            pickableItem = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()))
+        {
+            Debug.Log("POTION! exit trigger pickable key");
+            pickableItem = null;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

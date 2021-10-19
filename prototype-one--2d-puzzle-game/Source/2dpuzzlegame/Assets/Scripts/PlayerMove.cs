@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -53,7 +54,18 @@ public class PlayerMove : MonoBehaviour
             spriteRenderer.flipX = true;
         }
 
-        // E To pick a pickable item
+        // E To pick a pickable item for clones
+        if (Input.GetKey(KeyCode.E))
+        {
+            var cloneCollectedKeys = cloneMoves.Count(cloneMove => cloneMove.HandleKeyPickUp());
+            if (cloneCollectedKeys != 0)
+            {
+                collectedKeys += cloneCollectedKeys;
+                eventSystem.OnKeyPickUp.Invoke();
+            }
+        }
+
+        // E To pick a pickable item for main character 
         if (Input.GetKey(KeyCode.E) && pickableItem != null)
         {
             pickableItem.SetActive(false);
@@ -76,11 +88,6 @@ public class PlayerMove : MonoBehaviour
         }
 
 
-        // Reload Game
-        if (Input.GetKey(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
 
         // This was added to answer a question.
         if (Input.GetKeyDown(KeyCode.Z))
