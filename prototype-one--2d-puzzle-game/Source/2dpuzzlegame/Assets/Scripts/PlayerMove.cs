@@ -18,6 +18,8 @@ public class PlayerMove : MonoBehaviour
 
     private bool getKey;
 
+    public EventSystemCustom eventSystem;
+
     private Vector3 moveVector;
     void Start()
     {
@@ -95,6 +97,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (getKey == true)
             {
+                eventSystem.OnGetKey.Invoke();
                 collision.gameObject.SetActive(false);
                 Debug.Log("KEY!");
                 getKey = false;

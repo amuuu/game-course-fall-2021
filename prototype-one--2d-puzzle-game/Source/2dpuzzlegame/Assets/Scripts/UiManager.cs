@@ -11,12 +11,12 @@ public class UiManager : MonoBehaviour
     void Start()
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
+        eventSystem.OnGetKey.AddListener(UpdateScoreText);
     }
 
     public void UpdateScoreText()
     {
-        Debug.Log("UPDATE SCORE");
         int newTextValue = int.Parse(counterText.text) + 1;
-            counterText.text = newTextValue.ToString();
+        counterText.text = newTextValue.ToString();
     }
 }
