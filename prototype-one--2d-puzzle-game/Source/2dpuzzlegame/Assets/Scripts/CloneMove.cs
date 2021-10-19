@@ -115,6 +115,7 @@ public class CloneMove : MonoBehaviour
     void Animate()
     {
         var isWalking = (Input.GetAxis("Horizontal") != 0f);
+        if (isWalking && !canMove) return;
         animator.SetBool("IsWalking", isWalking);
     }
 }
