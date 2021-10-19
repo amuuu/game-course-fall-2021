@@ -25,6 +25,8 @@ public class PlayerMove : MonoBehaviour
     private GameObject pickableItem = null;
     public EventSystemCustom eventSystem;
     private bool isNearExitDoor = false;
+    public GameObject isNearTeleportSource = null;
+    public bool hasTeleportKey = false;
 
     void Start()
     {
@@ -57,20 +59,39 @@ public class PlayerMove : MonoBehaviour
         // E To pick a pickable item for clones
         if (Input.GetKey(KeyCode.E))
         {
-            var cloneCollectedKeys = cloneMoves.Count(cloneMove => cloneMove.HandleKeyPickUp());
-            if (cloneCollectedKeys != 0)
+            foreach (var cloneMove in cloneMoves)
             {
-                collectedKeys += cloneCollectedKeys;
-                eventSystem.OnKeyPickUp.Invoke();
+                if (cloneMove.pickableItem != null)
+                {
+                    if (cloneMove.pickableItem.gameObject.tag.Equals(TagNames.TeleportKey.ToString()))
+                    {
+                        hasTeleportKey = true;
+                    }
+                    else if (cloneMove.pickableItem.gameObject.tag.Equals(TagNames.PickableItem.ToString()))
+                    {
+                        collectedKeys++;
+                        eventSystem.OnKeyPickUp.Invoke();
+                    }
+
+                    cloneMove.pickableItem.gameObject.SetActive(false);
+                }
             }
         }
 
         // E To pick a pickable item for main character 
         if (Input.GetKey(KeyCode.E) && pickableItem != null)
         {
+            if (pickableItem.gameObject.tag.Equals(TagNames.TeleportKey.ToString()))
+            {
+                hasTeleportKey = true;
+            }
+            else if (pickableItem.gameObject.tag.Equals(TagNames.PickableItem.ToString()))
+            {
+                collectedKeys++;
+                eventSystem.OnKeyPickUp.Invoke();
+            }
+
             pickableItem.SetActive(false);
-            collectedKeys++;
-            eventSystem.OnKeyPickUp.Invoke();
         }
 
         // E To exit the room and win the game
@@ -121,7 +142,8 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("POTION! enter trigger magic glass");
         }
 
-        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()))
+        if (collision.gameObject.CompareTag(TagNames.PickableItem.ToString()) ||
+            collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()))
         {
             Debug.Log("POTION! enter trigger pickable");
             pickableItem = collision.gameObject;
@@ -131,6 +153,12 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("POTION! enter trigger exit door");
             isNearExitDoor = true;
+        }
+
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportDoor.ToString()))
+        {
+            isNearTeleportSource = collision.gameObject;
         }
     }
 
@@ -147,6 +175,12 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("POTION! exit trigger exit door");
             isNearExitDoor = false;
+        }
+
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportDoor.ToString()))
+        {
+            isNearTeleportSource = null;
         }
     }
 

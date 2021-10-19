@@ -17,7 +17,8 @@ public class CloneMove : MonoBehaviour
     public EventSystemCustom eventSystem;
 
     // New variables
-    private GameObject pickableItem = null;
+    public GameObject pickableItem = null;
+    public bool isNearTeleport = false;
 
 
     private void Awake()
@@ -68,16 +69,6 @@ public class CloneMove : MonoBehaviour
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
     }
 
-    public bool HandleKeyPickUp()
-    {
-        if (pickableItem != null)
-        {
-            pickableItem.gameObject.SetActive(false);
-            return true;
-        }
-
-        return false;
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -85,6 +76,12 @@ public class CloneMove : MonoBehaviour
         {
             Debug.Log("POTION! enter trigger pickable");
             pickableItem = collision.gameObject;
+        }
+
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportDoor.ToString()))
+        {
+            isNearTeleport = true;
         }
     }
 
@@ -94,6 +91,12 @@ public class CloneMove : MonoBehaviour
         {
             Debug.Log("POTION! exit trigger pickable key");
             pickableItem = null;
+        }
+
+
+        if (collision.gameObject.CompareTag(TagNames.TeleportDoor.ToString()))
+        {
+            isNearTeleport = false;
         }
     }
 
