@@ -13,7 +13,6 @@ public class CloneMove : MonoBehaviour
     public bool teleportPermission;
     public Animator animator;
     private float sp;
-    public bool telKey;
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;

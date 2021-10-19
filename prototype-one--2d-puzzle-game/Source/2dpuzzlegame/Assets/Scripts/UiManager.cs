@@ -12,9 +12,13 @@ public class UiManager : MonoBehaviour
     public GameObject Win;
     public Image teleportkeyPic;
     public Text switchpc;
+    public int TotalKey;
+    public bool telKey;
 
     private void Awake() 
     {
+        telKey=false;
+        TotalKey = 0;
         teleportkeyPic.enabled = false;
         GOver.SetActive(false);
         Win.SetActive(false);
@@ -40,6 +44,7 @@ public class UiManager : MonoBehaviour
         string[] keys= KeyCount.text.Split(':');
         Debug.Log(keys);
         int newText = int.Parse(keys[1]) + 1;
+        TotalKey = newText;
         KeyCount.text = keys[0] + ": " + newText.ToString();
     }
     public void GameOverScene()
@@ -56,6 +61,7 @@ public class UiManager : MonoBehaviour
 
     public void GetteleportKey()
     {
+        telKey = true;
         teleportkeyPic.enabled = true;
     }
 

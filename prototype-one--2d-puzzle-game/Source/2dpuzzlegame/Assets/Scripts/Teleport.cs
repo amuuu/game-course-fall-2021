@@ -18,7 +18,7 @@ public class Teleport : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (FindObjectOfType<PlayerMove>().teleportPermission && FindObjectOfType<PlayerMove>().telKey )
+            if (FindObjectOfType<PlayerMove>().teleportPermission && FindObjectOfType<UiManager>().telKey )
             {
                 FindObjectOfType<PlayerMove>().gameObject.transform.position = destination.position;
             }

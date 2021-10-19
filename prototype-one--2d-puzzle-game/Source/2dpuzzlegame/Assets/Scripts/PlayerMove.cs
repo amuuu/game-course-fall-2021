@@ -18,7 +18,6 @@ public class PlayerMove : MonoBehaviour
     private bool enterdoor;
     private bool canJump;
     private int totalkeycount;
-    public bool telKey;
     public bool teleportPermission;
     public bool letsswitch;
 
@@ -30,9 +29,8 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         letsswitch = false;
-        telKey = false;
         teleportPermission = false;
-        totalkeycount = 3;
+        totalkeycount = 8;
         cloneMoves = FindObjectsOfType<CloneMove>();
         keys = null;
         canJump = true;
@@ -94,7 +92,7 @@ public class PlayerMove : MonoBehaviour
                 Debug.Log("deasipear key!");
             }
 
-            if (enterdoor && totalkeycount == 0)
+            if (enterdoor && FindObjectOfType<UiManager>().TotalKey == 8)
             {
                 enterdoor = false;
                 FindObjectOfType<UiManager>().WiningScene();
@@ -144,7 +142,6 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("telkey!");
             collision.gameObject.SetActive(false);
-            telKey = true;
             FindObjectOfType<UiManager>().GetteleportKey();
         }
 
