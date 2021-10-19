@@ -8,6 +8,8 @@ TagManager:
   - StickyPlatform
   - ExitDoor
   - CollectableItem
+  - ExitKey
+  - FinishDoor
   layers:
   - Default
   - TransparentFX

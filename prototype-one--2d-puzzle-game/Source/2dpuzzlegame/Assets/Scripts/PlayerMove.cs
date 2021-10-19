@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    
+    public EventSystemCustom eventSystem;
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
+    public int collectedKeys = 0;
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
@@ -15,7 +18,9 @@ public class PlayerMove : MonoBehaviour
     public CloneMove[] cloneMoves;
 
     private bool canJump;
-
+    public bool canEnd = false;
+    private GameObject onKey;
+    private GameObject onDoor;
     private Vector3 moveVector;
     void Start()
     {
@@ -29,6 +34,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
+            
             transform.position += moveVector;
 
             MoveClones(moveVector, true);
@@ -59,6 +65,35 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (Input.GetKeyDown((KeyCode.E)))
+        {
+            
+            if (onKey != null && canEnd == false)
+            {
+                collectedKeys++;
+                if(eventSystem != null)
+                    eventSystem.onCloneKeyCounterEnter.Invoke();
+                Destroy(this.onKey);
+                // onKey.SetActive(false);
+            }
+            
+            if (onDoor != null && canEnd)
+            {
+                Debug.Log("YOU WON! My friend");
+                if(eventSystem != null)
+                    eventSystem.onCloneExitDoorEnter.Invoke();
+                // Destroy(this.onDoor);
+                // onKey.SetActive(false);
+            }
+            
+            if (collectedKeys == 4)
+            {
+                canEnd = true;
+            }
+            
+            
+        }
+
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -76,12 +111,49 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
             Debug.Log("DEATH ZONE");
+            if (eventSystem != null)
+            {
+                Time.timeScale = 0;
+                Destroy(this.gameObject);
+                eventSystem.onCloneDeathZoneEnter.Invoke();
+            }
         }
-        
+
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
+
+        }
+        if (collision.gameObject.CompareTag(TagNames.ExitKey.ToString()))
+        {
+            onKey = collision.gameObject;
+            // collision.gameObject.SetActive(false);
+            Debug.Log("Key!");
+
+        }
+        if (collision.gameObject.CompareTag(TagNames.FinishDoor.ToString()))
+        {
+            onDoor = collision.gameObject;
+            // collision.gameObject.SetActive(false);
+            Debug.Log("FinishDoor!");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.ExitKey.ToString()))
+        {
+            onKey = null;
+            // collision.gameObject.SetActive(false);
+            Debug.Log("Key Exited!");
+
+        }
+        if (collision.gameObject.CompareTag(TagNames.FinishDoor.ToString()))
+        {
+            onDoor = null;
+            // collision.gameObject.SetActive(false);
+            Debug.Log("FinishDoor Exited!");
         }
     }
 
