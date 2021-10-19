@@ -99,6 +99,7 @@ public class CloneMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
+            eventSystem.OnCloneStickyPlatformExit.Invoke();
             Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
             canMove = true;

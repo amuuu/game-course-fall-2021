@@ -13,6 +13,7 @@ public class UiManager : MonoBehaviour
     void Start()
     {
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
+        eventSystem.OnCloneStickyPlatformExit.AddListener(DecreaseScoreText);
         eventSystem.OnPlayerKeyCollect.AddListener(UpdateKeyCounterText);
         eventSystem.OnPlayerWin.AddListener(ShowWinText);
         eventSystem.OnPlayerLose.AddListener(ShowLoseText);
@@ -23,6 +24,13 @@ public class UiManager : MonoBehaviour
         Debug.Log("UPDATE SCORE");
         int newTextValue = int.Parse(counterText.text) + 1;
             counterText.text = newTextValue.ToString();
+    }
+
+    public void DecreaseScoreText()
+    {
+        Debug.Log("UPDATE SCORE");
+        int newTextValue = int.Parse(counterText.text) - 1;
+        counterText.text = newTextValue.ToString();
     }
 
     public void UpdateKeyCounterText()
