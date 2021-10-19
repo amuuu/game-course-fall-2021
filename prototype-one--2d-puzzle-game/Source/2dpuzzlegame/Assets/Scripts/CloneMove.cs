@@ -13,11 +13,17 @@ public class CloneMove : MonoBehaviour
     //public Text counterText; // Too dirty!
 
     public EventSystemCustom eventSystem;
+    Animator animator;
 
     private void Awake()
     {
         canJump = true;
         canMove = true;
+        animator = GetComponent<Animator>();
+    }
+    void Update()
+    {
+        Animate();
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
@@ -105,5 +111,11 @@ public class CloneMove : MonoBehaviour
             Debug.Log("Clone Destroyed");
             Destroy(this.gameObject);
         }
+    }
+    void Animate()
+    {
+        var isWalking = (Input.GetAxis("Horizontal") != 0f);
+        if (isWalking && !canMove) return;
+        animator.SetBool("IsWalking", isWalking);
     }
 }

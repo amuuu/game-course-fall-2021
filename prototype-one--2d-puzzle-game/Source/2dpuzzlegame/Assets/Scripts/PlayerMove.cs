@@ -28,6 +28,7 @@ public class PlayerMove : MonoBehaviour
     int collectedKeysCount = 0;
     int portalKeysCount = 0;
     bool isTeleported = false; // useful when both portals are source
+    Animator animator;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
@@ -35,10 +36,12 @@ public class PlayerMove : MonoBehaviour
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
         adjacentKey = null;
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
+        Animate();
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += moveVector;
@@ -114,6 +117,12 @@ public class PlayerMove : MonoBehaviour
         {
             transform.position = new Vector3(-0.53f, transform.position.y, transform.position.z);
         }*/
+    }
+
+    void Animate()
+    {
+        var isWalking = (Input.GetAxis("Horizontal") != 0f);
+        animator.SetBool("IsWalking", isWalking);
     }
 
     private void EnterSwitchMode()
