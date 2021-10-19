@@ -132,7 +132,7 @@ public class PlayerMove : MonoBehaviour
         {
             eventSystem.OnPlayerDeath.Invoke();
             Debug.Log("DEATH ZONE");
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))

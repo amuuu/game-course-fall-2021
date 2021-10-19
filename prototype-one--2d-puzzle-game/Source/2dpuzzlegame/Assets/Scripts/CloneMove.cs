@@ -109,7 +109,7 @@ public class CloneMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
