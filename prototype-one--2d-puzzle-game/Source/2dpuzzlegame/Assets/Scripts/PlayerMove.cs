@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool getKey;
     private bool getKey1;
-    private bool pause;
+    public  static bool pause=false;
 
     private bool haveKey;
 
@@ -42,7 +42,6 @@ public class PlayerMove : MonoBehaviour
         win = false;
         haveKey = false;
         transport = false;
-        pause = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -97,6 +96,16 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             gameControl.disabled = true;
+        }
+
+        if (pause == true)
+        {
+            moveVector = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            moveVector = new Vector3(1 * factor, 0, 0);
+
         }
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
