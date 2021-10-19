@@ -8,6 +8,8 @@ public class UiManager : MonoBehaviour
     public Text counterText;
     public Text KeyText;
     public Text WinText;
+    public Text LoseText;
+
     public EventSystemCustom eventSystem;
    
     
@@ -17,6 +19,7 @@ public class UiManager : MonoBehaviour
         eventSystem.OnCloneStickyPlatformEnter.AddListener(UpdateScoreText);
         eventSystem.OnCollectedKeysEvent.AddListener(UpdateCollectedKey);
         eventSystem.OnWinDoorEvent.AddListener(UpdateWinDoor);
+        eventSystem.OnDeathZoneEvent.AddListener(UpdateLose);
     }
 
     public void UpdateScoreText()
@@ -37,5 +40,12 @@ public class UiManager : MonoBehaviour
     {
         Debug.Log("UPDATE Won");
         WinText.text = "You Won!";
+    }
+
+   
+        public void UpdateLose()
+    {
+        Debug.Log("UPDATE Lose");
+        LoseText.text = "You Lost!";
     }
 }

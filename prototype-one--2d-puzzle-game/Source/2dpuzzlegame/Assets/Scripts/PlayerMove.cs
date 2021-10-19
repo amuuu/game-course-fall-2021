@@ -109,8 +109,11 @@ public class PlayerMove : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+
         {
             Debug.Log("DEATH ZONE");
+            eventSystem.OnDeathZoneEvent.Invoke();
+
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
@@ -186,7 +189,6 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("exit door");
         }
 
-       
 
     }
 
