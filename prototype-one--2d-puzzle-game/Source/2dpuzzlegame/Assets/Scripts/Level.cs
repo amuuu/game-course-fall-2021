@@ -9,6 +9,7 @@ public class Level : MonoBehaviour
     public UiManager uiManager;
     public int portalKeyCount;
     public int stickyClonesCount;
+    public int keyCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +22,13 @@ public class Level : MonoBehaviour
         //{
         //    Debug.LogWarning("event system is null");
         //}
+        eventSystem.OnCloneStickyPlatformEnter.AddListener(OnCloneStickyPlatformEnter);
+        eventSystem.OnKeyPickup.AddListener(OnKeyPickup);
+        eventSystem.OnWinDoorInteract.AddListener(OnWinDoorInteract);
         eventSystem.OnPortalKeyPickup.AddListener(OnPortalKeyPickup);
         eventSystem.OnPortalInteract.AddListener(OnPortalInteract);
-        eventSystem.OnCloneStickyPlatformEnter.AddListener(OnCloneStickyPlatformEnter);
         stickyClonesCount = 0;
+        keyCount = 0;
         portalKeyCount = 0;
     }
 
@@ -33,7 +37,30 @@ public class Level : MonoBehaviour
         stickyClonesCount++;
         uiManager.UpdateStickyCloneText(stickyClonesCount);
     }
-
+    public void OnKeyPickup()
+    {
+        keyCount++;
+        uiManager.UpdateKeyText(keyCount);
+    }
+    public void OnWinDoorInteract(int requiredKeyCount)
+    {
+        if (keyCount >= requiredKeyCount)
+        {
+            Debug.Log("WIN");
+            keyCount -= requiredKeyCount;
+            uiManager.UpdateKeyText(keyCount);
+            uiManager.UpdateWinText();
+        }
+        else
+        {
+            Debug.Log("NOT ENOUGH KEYS");
+        }
+    }
+    public void OnPortalKeyPickup()
+    {
+        portalKeyCount++;
+        uiManager.UpdatePortalKeyText(portalKeyCount);
+    }
     public void OnPortalInteract()
     {
         if (portalKeyCount >= 1)
@@ -42,10 +69,5 @@ public class Level : MonoBehaviour
             uiManager.UpdatePortalKeyText(portalKeyCount);
             eventSystem.OnPlayerTeleport.Invoke();
         }
-    }
-    public void OnPortalKeyPickup()
-    {
-        portalKeyCount++;
-        uiManager.UpdatePortalKeyText(portalKeyCount);
     }
 }
