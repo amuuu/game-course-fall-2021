@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     private bool canJump;
 
 	public EventSystemCustom eventSystem;
+	public Animator animator;
 
 	private Vector3 moveVector;
     void Start()
@@ -37,6 +38,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+		float speed = 0f;
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += moveVector;
@@ -45,6 +47,7 @@ public class PlayerMove : MonoBehaviour
 
             spriteRenderer.flipX = false;
 
+			speed += moveVector.x+1;
         }
 
         if (Input.GetKey(KeyCode.A))
@@ -54,9 +57,11 @@ public class PlayerMove : MonoBehaviour
             MoveClones(moveVector, false);
 
             spriteRenderer.flipX = true;
-        }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+			speed += moveVector.x+1;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             rb.AddForce(transform.up * jumpAmount, ForceMode2D.Impulse);
             JumpClones(jumpAmount);
@@ -80,10 +85,11 @@ public class PlayerMove : MonoBehaviour
             transform.position = new Vector3(-0.53f, transform.position.y, transform.position.z);
         }*/
 
-		
-    }
+		animator.SetFloat("Speed", Mathf.Abs(speed));
 
-    private void OnTriggerEnter2D(Collider2D collision)
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {

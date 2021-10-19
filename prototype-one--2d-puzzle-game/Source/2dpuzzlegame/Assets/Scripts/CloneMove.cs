@@ -13,18 +13,28 @@ public class CloneMove : MonoBehaviour
 	//public Text counterText; // Too dirty!
 
 	public EventSystemCustom eventSystem;
+	public Animator animator;
+	private float speed;
 
-    private void Awake()
+	private void Awake()
     {
         canJump = true;
         canMove = true;
     }
-    public void Move(Vector3 vec, bool isDirRight)
+
+	void Update()
+	{
+		animator.SetFloat("Speed", Mathf.Abs(speed));
+		speed = 0;
+	}
+
+	public void Move(Vector3 vec, bool isDirRight)
     {
         if (!canMove)
             return;
 
-        int factor = 1;
+
+		int factor = 1;
         if (isDirRight)
         {
             if (isMovingSameDirection)
@@ -55,7 +65,8 @@ public class CloneMove : MonoBehaviour
         }
 
         transform.position += vec * factor;
-    }
+		speed += vec.x + 1;
+	}
 
     public void Jump(float amount)
     {

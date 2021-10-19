@@ -18,6 +18,7 @@ public enum TagNames
 public enum Doors
 {
 	one,
-	two
+	two,
+	three
 }
     
