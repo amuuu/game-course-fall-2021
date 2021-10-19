@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     // new variables
     public int collectedKeys = 0;
     private GameObject pickableItem = null;
-
+    public EventSystemCustom eventSystem;
 
     void Start()
     {
@@ -56,6 +56,7 @@ public class PlayerMove : MonoBehaviour
         {
             pickableItem.SetActive(false);
             collectedKeys++;
+            eventSystem.OnKeyPickUp.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
