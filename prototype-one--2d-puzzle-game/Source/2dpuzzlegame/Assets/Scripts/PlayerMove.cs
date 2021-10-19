@@ -16,12 +16,15 @@ public class PlayerMove : MonoBehaviour
 
     private bool canJump;
 
+    private bool getKey;
+
     private Vector3 moveVector;
     void Start()
     {
         cloneMoves = clones.GetComponentsInChildren<CloneMove>();
 
         canJump = true;
+        getKey = false;
         moveVector = new Vector3(1 * factor, 0, 0);
     }
 
@@ -59,6 +62,10 @@ public class PlayerMove : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            getKey = true;
+        }
 
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
@@ -82,6 +89,16 @@ public class PlayerMove : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.KeyItem.ToString()))
+        {
+            if (getKey == true)
+            {
+                collision.gameObject.SetActive(false);
+                Debug.Log("KEY!");
+                getKey = false;
+            }
         }
     }
 
