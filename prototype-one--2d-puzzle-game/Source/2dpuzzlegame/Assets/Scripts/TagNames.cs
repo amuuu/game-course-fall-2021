@@ -13,6 +13,10 @@ public enum TagNames
     Source,
     destination,
     SourceDoor,
-    switchKey
+    switchKey,
+    character,
+    clone,
+    clone1,
+    clone2
 }
     

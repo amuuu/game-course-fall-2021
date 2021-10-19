@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CloneMove : MonoBehaviour
 {
+    public GameObject arrow;
     public bool isMovingSameDirection;
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
@@ -63,8 +64,19 @@ public class CloneMove : MonoBehaviour
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
     }
 
+
+    public void active()
+    {
+        arrow.active = true;
+        arrow.SetActive(true);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            Destroy(this.gameObject);
+        }
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
             Debug.LogWarning("sticky for clone");

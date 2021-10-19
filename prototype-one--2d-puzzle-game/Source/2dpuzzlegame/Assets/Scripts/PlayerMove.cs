@@ -31,6 +31,7 @@ public class PlayerMove : MonoBehaviour
 
     public Text counterText;
 
+    public GameObject arrow;
     private Vector3 moveVector;
     void Start()
     {
@@ -105,7 +106,6 @@ public class PlayerMove : MonoBehaviour
         else
         {
             moveVector = new Vector3(1 * factor, 0, 0);
-
         }
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
