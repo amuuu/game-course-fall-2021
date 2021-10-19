@@ -16,6 +16,8 @@ public class PlayerMove : MonoBehaviour
     public CloneMove[] cloneMoves;
     public Text loserText;
     public Text keyCounter;
+    public Text winnerText;
+    public int check;
     private bool canJump;
 
     private Vector3 moveVector;
@@ -64,27 +66,39 @@ public class PlayerMove : MonoBehaviour
         // {
         //     Destroy(this.gameObject);
         // }
-        if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.848 && transform.position.x > 0.550 && transform.position.y > -0.039)
-        {
-            GameObject.FindGameObjectWithTag("ImageTree").SetActive(false);
-            int newTextValue = int.Parse(keyCounter.text) + 1;
-            keyCounter.text = newTextValue.ToString();
+        // if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.848 && transform.position.x > 0.550 && transform.position.y > -0.039)
+        // {
+        //     GameObject.FindGameObjectWithTag("ImageTree").SetActive(false);
+        //     int newTextValue = int.Parse(keyCounter.text) + 1;
+        //     keyCounter.text = newTextValue.ToString();
+        //     check = newTextValue;
 
-        }
+        // }
 
         if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < -0.276 && transform.position.x > -0.559 && transform.position.y > -0.051)
         {
             GameObject.FindGameObjectWithTag("ImageT").SetActive(false);
             int newTextValue = int.Parse(keyCounter.text) + 1;
             keyCounter.text = newTextValue.ToString();
+            check = newTextValue;
         }
-        if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.422 && transform.position.x > 0.200 && transform.position.y > -0.886)
+        if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.422 && transform.position.x > 0.200 && transform.position.y > -0.886 && transform.position.y <-0.7964266)
         {
             GameObject.FindGameObjectWithTag("imageF").SetActive(false);
             int newTextValue = int.Parse(keyCounter.text) + 1;
             keyCounter.text = newTextValue.ToString();
+            check = newTextValue;
         }
-
+        if (Input.GetKeyDown(KeyCode.E)&& transform.position.x < 0.529 && transform.position.x > 0.316 && transform.position.y > 0.374 )
+        {
+            GameObject.FindGameObjectWithTag("ImageFive").SetActive(false);
+            int newTextValue = int.Parse(keyCounter.text) + 1;
+            keyCounter.text = newTextValue.ToString();
+            check = newTextValue;
+        }
+        if(Input.GetKeyDown(KeyCode.E)&& transform.position.x < -0.769 && transform.position.x > -1.007 && transform.position.y > -0.4558 && check>1){
+            winnerText.text ="You Won!";
+        }
         // This is too dirty. We must decalare/calculate the bounds in another way. 
         /*if (transform.position.x < -0.55f) 
         {

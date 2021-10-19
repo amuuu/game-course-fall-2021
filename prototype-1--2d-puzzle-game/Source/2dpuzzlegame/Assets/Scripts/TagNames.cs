@@ -11,5 +11,7 @@ public enum TagNames
     ImageT,
     ImageTree,
     imageF,
+    ImageFive,
+    WonDoor,
 }
     
