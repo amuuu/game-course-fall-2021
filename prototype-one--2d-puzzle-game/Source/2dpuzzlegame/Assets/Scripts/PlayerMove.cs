@@ -198,6 +198,7 @@ public class PlayerMove : MonoBehaviour
 			{
 				Debug.Log("met exit conditions");
 				eventSystem.OnWinCondition.Invoke();
+				Time.timeScale = 0;
 			}
 		}
 	}
