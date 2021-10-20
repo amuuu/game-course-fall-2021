@@ -14,6 +14,7 @@ public class CloneMove : MonoBehaviour
     public GameObject arrow;
     public bool arrowActive;
     public Vector3 position;
+    public GameObject DestinationDoor;
 
     public EventSystemCustom eventSystem;
 
@@ -115,6 +116,13 @@ public class CloneMove : MonoBehaviour
         {
             //rb.gameObject.SetActive(false);
             Destroy(this.gameObject);
+
+        }
+        if (collision.gameObject.CompareTag(TagNames.EnterTransportDoor.ToString()))
+        {
+            //rb.gameObject.SetActive(false);
+            Debug.Log("hello");
+            transform.position = DestinationDoor.transform.position;
 
         }
     }
