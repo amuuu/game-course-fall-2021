@@ -39,6 +39,7 @@ public class PlayerMove : MonoBehaviour
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Key") as GameObject[];
         reqKey = objects.Length - 1;
 
+
         canJump = true;
         moveVector = new Vector3(1 * factor, 0, 0);
         isSource = false;
