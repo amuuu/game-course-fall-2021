@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] UnityEngine.UI.Text winTxt;
     [SerializeField] UnityEngine.UI.Text lostTxt;
 
-    public GameObject destinationDoor;
+    [SerializeField] GameObject destinationDoor;
 
     private Vector3 moveVector;
     void Start()

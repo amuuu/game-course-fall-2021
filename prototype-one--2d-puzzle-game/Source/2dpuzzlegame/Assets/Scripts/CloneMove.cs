@@ -14,6 +14,8 @@ public class CloneMove : MonoBehaviour
 
     public EventSystemCustom eventSystem;
 
+    [SerializeField] GameObject destinationDoor;
+
     private void Awake()
     {
         canJump = true;
@@ -81,6 +83,14 @@ public class CloneMove : MonoBehaviour
             canJump = false;
             canMove = false;
 
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.TeleSource.ToString()))
+        {
+            Vector3 detinationDoorPos = destinationDoor.transform.position;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.transform.position = detinationDoorPos;
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 
