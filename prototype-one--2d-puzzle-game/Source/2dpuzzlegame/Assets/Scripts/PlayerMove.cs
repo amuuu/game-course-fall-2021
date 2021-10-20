@@ -23,6 +23,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] UnityEngine.UI.Text lostTxt;
 
     [SerializeField] GameObject destinationDoor;
+    [SerializeField] AudioSource collectSthSFX;
 
     private Vector3 moveVector;
     void Start()
@@ -92,6 +93,7 @@ public class PlayerMove : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             Debug.Log("POTION!");
+            collectSthSFX.Play();
         }
 
         if (collision.gameObject.CompareTag(TagNames.Key.ToString()) )
@@ -102,6 +104,7 @@ public class PlayerMove : MonoBehaviour
                 keyCnt++;
                 Debug.Log(keyCnt.ToString() + " Keys Collected!");
                 keyCntTxt.text = ("Keys: " + keyCnt.ToString());
+                collectSthSFX.Play();
             }
         }
 
@@ -109,6 +112,7 @@ public class PlayerMove : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
             teleKeyCnt++;
+            collectSthSFX.Play();
         }
     }
 

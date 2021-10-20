@@ -15,6 +15,7 @@ public class CloneMove : MonoBehaviour
     public EventSystemCustom eventSystem;
 
     [SerializeField] GameObject destinationDoor;
+    
 
     private void Awake()
     {
