@@ -5,7 +5,7 @@ using UnityEngine;
 public class TeleportDoors : MonoBehaviour
 {
     [SerializeField] bool isSourceDoor;
-    [SerializeField] GameObject destinationDoor;
+    public GameObject destinationDoor;
 
     // Start is called before the first frame update
     void Start()

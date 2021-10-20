@@ -16,11 +16,13 @@ public class PlayerMove : MonoBehaviour
 
     private bool canJump;
 
-    [SerializeField] int keyCnt;
+    private int keyCnt;
+    [SerializeField] int teleKeyCnt;
     [SerializeField] UnityEngine.UI.Text keyCntTxt;
     [SerializeField] UnityEngine.UI.Text winTxt;
     [SerializeField] UnityEngine.UI.Text lostTxt;
 
+    public GameObject destinationDoor;
 
     private Vector3 moveVector;
     void Start()
@@ -102,6 +104,12 @@ public class PlayerMove : MonoBehaviour
                 keyCntTxt.text = ("Keys: " + keyCnt.ToString());
             }
         }
+
+        if(collision.gameObject.CompareTag(TagNames.TeleportKey.ToString()) && Input.GetKey(KeyCode.E))
+        {
+            collision.gameObject.SetActive(false);
+            teleKeyCnt++;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -119,6 +127,16 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("Exit Door");
         }
 
+        if (collision.gameObject.CompareTag(TagNames.TeleSource.ToString()) && Input.GetKey(KeyCode.E)
+            && teleKeyCnt >= 1)
+        {
+            Debug.Log("Here is source door!");
+            teleKeyCnt--;
+            Vector3 detinationDoorPos = destinationDoor.transform.position;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.transform.position = detinationDoorPos;
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
 

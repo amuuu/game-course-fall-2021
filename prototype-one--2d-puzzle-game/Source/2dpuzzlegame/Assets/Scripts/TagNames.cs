@@ -9,6 +9,8 @@ public enum TagNames
     DeathZone,
     CollectableItem,
     Key,
-
+    TeleportKey,
+    TeleSource,
+    TeleDestination
 }
     
