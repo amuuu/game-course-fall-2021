@@ -8,9 +8,8 @@ public class PlayerController : MonoBehaviour
 
     public EventSystemCustom eventSystem;
 
-    public int playerScore;
+    public int playerScore = 0;
     public int playerHealth = 3;
-    public int playerHeartsCount;
 
     private void Start()
     {
@@ -19,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        CheckGameOver();
+
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(moveAmount, 0, 0);
@@ -45,6 +46,8 @@ public class PlayerController : MonoBehaviour
 
             // destroy the food object
             Destroy(collision.gameObject);
+
+            eventSystem.onBoardScoresChanged.Invoke();
         }
 
         if (collision.gameObject.CompareTag("Combo"))
@@ -60,8 +63,16 @@ public class PlayerController : MonoBehaviour
 
             // destroy the combo object
             Destroy(collision.gameObject);
-        }
 
-        eventSystem.onBoardScoresChanged.Invoke();
+            eventSystem.onBoardScoresChanged.Invoke();
+        }
+    }
+
+    private void CheckGameOver()
+    {
+        if (this.playerHealth == 0)
+        {
+            eventSystem.onGameOver.Invoke();
+        }
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class FoodPlacer : MonoBehaviour
 {
+    public EventSystemCustom eventSystem;
+
     public GameObject[] prefabs;
     public GameObject[] comboPrefabs;
 
@@ -16,37 +18,44 @@ public class FoodPlacer : MonoBehaviour
 
     public PlayerController playerController;
 
+    public bool isRaining;
 
     private void Start()
     {
         currentTimerValue = timerMaxTime;
+        isRaining = true;
+        eventSystem.onGameOver.AddListener((() => isRaining = false));
     }
 
     void Update()
     {
-        if (currentTimerValue > 0)
+        if (isRaining)
         {
-            currentTimerValue -= Time.deltaTime;
-        }
-        else
-        {
-            GameObject go;
-
-            if (UnityEngine.Random.Range(0, 2000) % 5 < 6)
+            if (currentTimerValue > 0)
             {
-                go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                currentTimerValue -= Time.deltaTime;
             }
             else
             {
-                go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                GameObject go;
+
+                if (UnityEngine.Random.Range(0, 2000) % 5 > -1)
+                {
+                    go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                }
+                else
+                {
+                    go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                }
+
+                go.transform.position =
+                    new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
+
+                UpdateTimerValueBasedOnScore();
+
+                // reset timer
+                currentTimerValue = timerMaxTime;
             }
-
-            go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
-
-            UpdateTimerValueBasedOnScore();
-
-            // reset timer
-            currentTimerValue = timerMaxTime;
         }
     }
 
