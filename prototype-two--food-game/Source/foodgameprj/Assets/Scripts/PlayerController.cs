@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+
 
     private void Start()
     {
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
             // increase the player's score
             playerScore += conf.score;
 
+
             Debug.Log("SCORE: " + playerScore);
 
             // destroy the food object
@@ -52,6 +55,12 @@ public class PlayerController : MonoBehaviour
             comboController.OnConsume();
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
+
+            if (comboController.config.comboName.Equals("fishBones"))
+            {
+                playerHeartsCount--;
+                Debug.Log("Player Heart: " + playerHeartsCount);
+            }
 
             // destroy the combo object
             Destroy(collision.gameObject);
