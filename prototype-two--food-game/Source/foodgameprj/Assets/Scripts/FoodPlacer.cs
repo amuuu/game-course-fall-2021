@@ -32,7 +32,7 @@ public class FoodPlacer : MonoBehaviour
         {
             GameObject go;
 
-            if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
+            if (UnityEngine.Random.Range(0, 2000) % 5 < 4)
             {
                 go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
             }
@@ -59,7 +59,6 @@ public class FoodPlacer : MonoBehaviour
             if (timerMaxTime < 0.5f)
                 timerMaxTime = 0.5f;
         }
-
     }
 
     int GetRandomPrefabType(int max)
@@ -69,6 +68,6 @@ public class FoodPlacer : MonoBehaviour
 
     float GetRandomPrefabInitialX()
     {
-        return UnityEngine.Random.Range(minX,maxX);
+        return UnityEngine.Random.Range(minX, maxX);
     }
 }
