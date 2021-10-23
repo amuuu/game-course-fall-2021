@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [Range(0f, 1f)] public float moveAmount;
 
+    public EventSystemCustom eventSystem;
+
     public int playerScore;
     public int playerHealth = 3;
     public int playerHeartsCount;
@@ -59,5 +61,7 @@ public class PlayerController : MonoBehaviour
             // destroy the combo object
             Destroy(collision.gameObject);
         }
+
+        eventSystem.onBoardScoresChanged.Invoke();
     }
 }
