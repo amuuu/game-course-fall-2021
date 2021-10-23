@@ -10,8 +10,8 @@ public class PlayerController : MonoBehaviour
     public int playerScore;
     public int playerHeartsCount;
 
-    public Text Score;
-
+    public EventSystemCustom eventSystem;
+    
     private void Start()
     {
         playerScore = 0;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
             // increase the player's score
             playerScore += conf.score;
 
-            Score.text = playerScore.ToString();
+            eventSystem.OnEatFood.Invoke();
 
             Debug.Log("SCORE: " + playerScore);
 
