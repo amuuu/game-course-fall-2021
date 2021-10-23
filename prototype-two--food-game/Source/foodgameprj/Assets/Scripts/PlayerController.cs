@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public int playerScore;
     public int playerHeartsCount;
 
+    public Text Score;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
             // increase the player's score
             playerScore += conf.score;
 
+            Score.text = playerScore.ToString();
 
             Debug.Log("SCORE: " + playerScore);
 
