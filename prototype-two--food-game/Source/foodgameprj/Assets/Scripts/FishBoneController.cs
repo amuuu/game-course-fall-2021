@@ -5,10 +5,9 @@ using UnityEngine;
 public class FishBoneController : ComboInstanceController
 {
     // when player eats the combo item
-    public override void OnConsume()
+    public override void OnConsume(PlayerController player)
     {
         Debug.Log("You ate fish bone");
-
-        // you should fill this method!
+        player.playerHealth--;
     }
 }
