@@ -32,7 +32,7 @@ public class FoodPlacer : MonoBehaviour
         {
             GameObject go;
 
-            if (UnityEngine.Random.Range(0, 2000) % 5 < 0)
+            if (UnityEngine.Random.Range(0, 2000) % 5 < 6)
             {
                 go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
             }
