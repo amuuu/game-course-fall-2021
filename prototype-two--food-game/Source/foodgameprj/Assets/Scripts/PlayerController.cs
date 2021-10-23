@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
             {
                 playerHeartsCount--;
                 Debug.Log("Player Heart: " + playerHeartsCount);
+                eventSystem.onHeartLost.Invoke();
             }
 
             // destroy the combo object

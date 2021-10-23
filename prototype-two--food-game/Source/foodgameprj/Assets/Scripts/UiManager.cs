@@ -25,8 +25,8 @@ public class UiManager : MonoBehaviour
 
     public void UpdateHeartText()
     {
-        Debug.Log("UPDATE KEY");
-        // int newTextValue = int.Parse(keyText.text) + 1;
-        // keyText.text = newTextValue.ToString();
+        Debug.Log("UPDATE HEART");
+        int newTextValue = int.Parse(heartText.text) - 1;
+        heartText.text = newTextValue.ToString();
     }
 }
