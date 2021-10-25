@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        
         playerScore = 0;
     }
 
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Food"))
+            if (collision.gameObject.CompareTag("Food"))
         {
             // access the food object config
             FoodItemConfig conf = collision.gameObject.GetComponent<FoodInstanceController>().config;
