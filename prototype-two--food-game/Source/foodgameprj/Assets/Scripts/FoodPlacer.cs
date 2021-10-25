@@ -16,14 +16,28 @@ public class FoodPlacer : MonoBehaviour
 
     public PlayerController playerController;
 
+    private float freezeTimer = 0;
+    public float freezeTimerMaxTime;
+
 
     private void Start()
     {
         currentTimerValue = timerMaxTime;
+        freezeTimer = 0;
     }
 
     void Update()
     {
+        if (freezeTimer > 0)
+        {
+            freezeTimer -= Time.deltaTime;
+            if (freezeTimer <= 0)
+            {
+                UnFreezeTimer();
+            }
+            return;
+        }
+            
         if (currentTimerValue > 0)
         {
             currentTimerValue -= Time.deltaTime;
@@ -60,6 +74,23 @@ public class FoodPlacer : MonoBehaviour
                 timerMaxTime = 0.5f;
         }
 
+    }
+
+    public void FreezeTimer()
+    {
+        freezeTimer = freezeTimerMaxTime;
+        foreach( FoodInstanceController food in FindObjectsOfType<FoodInstanceController>())
+        {
+            food.rigidBody.useGravity = false;
+        }
+    }
+
+    private void UnFreezeTimer()
+    {
+        foreach (FoodInstanceController food in FindObjectsOfType<FoodInstanceController>())
+        {
+            food.rigidBody.useGravity = true;
+        }
     }
 
     int GetRandomPrefabType(int max)

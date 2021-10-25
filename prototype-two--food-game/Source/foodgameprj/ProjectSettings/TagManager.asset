@@ -7,6 +7,7 @@ TagManager:
   - Kill
   - Food
   - Combo
+  - Wall
   layers:
   - Default
   - TransparentFX

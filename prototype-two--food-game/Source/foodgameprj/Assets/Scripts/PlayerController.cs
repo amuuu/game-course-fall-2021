@@ -9,9 +9,12 @@ public class PlayerController : MonoBehaviour
     public int playerScore;
     public int playerHeartsCount;
 
+    private UiManager uiManager;
+
     private void Start()
     {
         playerScore = 0;
+        uiManager = FindObjectOfType<UiManager>();
     }
 
     void Update()
@@ -34,7 +37,7 @@ public class PlayerController : MonoBehaviour
             FoodItemConfig conf = collision.gameObject.GetComponent<FoodInstanceController>().config;
 
             // increase the player's score
-            playerScore += conf.score;
+            UpdatePlayerScore(conf.score);
 
             Debug.Log("SCORE: " + playerScore);
 
@@ -56,5 +59,22 @@ public class PlayerController : MonoBehaviour
             // destroy the combo object
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            //this.gameObject.transform.position = new Vector3(collision.gameObject.transform.position.x, ;
+        }
+    }
+
+    public void UpdatePlayerScore(int score)
+    {
+        playerScore += score;
+        uiManager.UpdateScoreText(playerScore);
+    }
+
+    public void UpdateHeartsCount(int updateAmount)
+    {
+        playerHeartsCount += updateAmount;
+        uiManager.UpdateHeartCountText(playerHeartsCount);
     }
 }
