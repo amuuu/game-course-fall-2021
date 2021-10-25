@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 816799633}
   - component: {fileID: 816799632}
   m_Layer: 5
-  m_Name: Text
+  m_Name: GameOverDes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816799630}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -763,6 +763,8 @@ MonoBehaviour:
   player: {fileID: 294549515}
   healthText: {fileID: 441402848}
   scoreText: {fileID: 846646664}
+  gameOverText: {fileID: 1690781330}
+  gameOverDesText: {fileID: 816799632}
 --- !u!1 &983205049
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +839,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onBoardScoresChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onGameOver:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1016800440
@@ -1182,7 +1187,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690781328}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -1259,6 +1264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85991f17c3bb3db4ca3210af179b6e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventSystem: {fileID: 1016800439}
   prefabs:
   - {fileID: 669693224618794538, guid: 99e45aedbf2daeb4b9470275dccbdbe9, type: 3}
   - {fileID: 669693224618794538, guid: 49a161c2cfc83d4418da676b6988128c, type: 3}
@@ -1275,6 +1281,7 @@ MonoBehaviour:
   maxX: 2.8
   timerMaxTime: 2
   playerController: {fileID: 294549515}
+  isRaining: 0
 --- !u!1 &1938880699
 GameObject:
   m_ObjectHideFlags: 0

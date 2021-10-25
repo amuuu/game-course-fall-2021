@@ -13,8 +13,8 @@ public class FoodPlacer : MonoBehaviour
     public float minX;
     public float maxX;
 
-    public float timerMaxTime;
-    private float currentTimerValue;
+    public double timerMaxTime = 2;
+    private double currentTimerValue;
 
     public PlayerController playerController;
 
@@ -39,9 +39,21 @@ public class FoodPlacer : MonoBehaviour
             {
                 GameObject go;
 
-                if (UnityEngine.Random.Range(0, 2000) % 5 > -1)
+                if (UnityEngine.Random.Range(0, 15000) % 15 > 11)
                 {
-                    go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                    var comboP = UnityEngine.Random.Range(0, 100) % 50;
+                    if (comboP % 50 > 47)
+                    {
+                        go = Instantiate(comboPrefabs[0]);
+                    }
+                    else if (comboP > 45 && playerController.playerHealth < 3)
+                    {
+                        go = Instantiate(comboPrefabs[2]);
+                    }
+                    else
+                    {
+                        go = Instantiate(comboPrefabs[1]);
+                    }
                 }
                 else
                 {
@@ -52,6 +64,10 @@ public class FoodPlacer : MonoBehaviour
                     new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
 
                 UpdateTimerValueBasedOnScore();
+                var rigidBody = go.GetComponent<Rigidbody>();
+                Vector3 force = new Vector3(0.0f, -1.0f, 0.0f);
+                rigidBody.velocity = force * rigidBody.mass *
+                                     (float) (0.25 * (int) (playerController.playerScore / 20000) + 1);
 
                 // reset timer
                 currentTimerValue = timerMaxTime;
@@ -61,12 +77,16 @@ public class FoodPlacer : MonoBehaviour
 
     private void UpdateTimerValueBasedOnScore()
     {
-        if (playerController.playerScore % 400 < 200 && playerController.playerScore % 400 >= 0)
-        {
-            timerMaxTime -= 0.02f;
+        var t = playerController.playerScore / 600;
+        var vel = 2 - t * 0.1;
 
-            if (timerMaxTime < 0.5f)
-                timerMaxTime = 0.5f;
+        if (vel < 0.3)
+        {
+            this.timerMaxTime = 0.25;
+        }
+        else
+        {
+            this.timerMaxTime = vel;
         }
     }
 

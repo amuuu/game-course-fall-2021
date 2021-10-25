@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Range(0f, 1f)] public float moveAmount;
+    [Range(0f, 1f)] public float moveAmount = 0.068f;
 
     public EventSystemCustom eventSystem;
 
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         CheckGameOver();
+        UpdatePlayerVel();
 
         if (Input.GetKey(KeyCode.D))
         {
@@ -73,6 +74,18 @@ public class PlayerController : MonoBehaviour
         if (this.playerHealth == 0)
         {
             eventSystem.onGameOver.Invoke();
+        }
+    }
+
+    private void UpdatePlayerVel()
+    {
+        if (this.playerScore > 4200)
+        {
+            this.moveAmount = 0.1f;
+        }
+        else if (this.playerScore > 6000)
+        {
+            this.moveAmount = 0.15f;
         }
     }
 }
