@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class FoodPlacer : MonoBehaviour
@@ -19,6 +20,9 @@ public class FoodPlacer : MonoBehaviour
     public PlayerController playerController;
 
     public bool isRaining;
+
+    private List<GameObject> combos = new List<GameObject>();
+    private List<GameObject> foods = new List<GameObject>();
 
     private void Start()
     {
@@ -46,7 +50,7 @@ public class FoodPlacer : MonoBehaviour
                     {
                         go = Instantiate(comboPrefabs[0]);
                     }
-                    else if (comboP > 45 && playerController.playerHealth < 3)
+                    else if (comboP > 40 && playerController.playerHealth < 3)
                     {
                         go = Instantiate(comboPrefabs[2]);
                     }
@@ -54,23 +58,46 @@ public class FoodPlacer : MonoBehaviour
                     {
                         go = Instantiate(comboPrefabs[1]);
                     }
+
+                    this.combos.Add(go);
                 }
                 else
                 {
                     go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                    this.foods.Add(go);
                 }
 
                 go.transform.position =
                     new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
 
-                UpdateTimerValueBasedOnScore();
-                var rigidBody = go.GetComponent<Rigidbody>();
-                Vector3 force = new Vector3(0.0f, -1.0f, 0.0f);
-                rigidBody.velocity = force * rigidBody.mass *
-                                     (float) (0.25 * (int) (playerController.playerScore / 20000) + 1);
-
                 // reset timer
                 currentTimerValue = timerMaxTime;
+
+                UpdateTimerValueBasedOnScore();
+            }
+
+            foreach (var food in this.foods)
+            {
+                var rigidBody = food.GetComponent<Rigidbody>();
+                Vector3 force = new Vector3(0.0f, -1.0f, 0.0f);
+                // rigidBody.velocity =
+                // (force * rigidBody.mass * (float) (0.25 * (int) (playerController.playerScore / 20000) + 1)) /
+                // (playerController.freeze * 10 - 9);
+                food.AddComponent<Rigidbody>().velocity =
+                    (force * rigidBody.mass * (float) (0.25 * (int) (playerController.playerScore / 20000) + 1)) /
+                    (playerController.freeze * 100 - 99);
+            }
+
+            foreach (var combo in this.foods)
+            {
+                var rigidBody = combo.GetComponent<Rigidbody>();
+                Vector3 force = new Vector3(0.0f, -1.0f, 0.0f);
+                // rigidBody.velocity =
+                // (force * rigidBody.mass * (float) (0.25 * (int) (playerController.playerScore / 20000) + 1)) /
+                // (playerController.freeze * 10 - 9);
+                combo.AddComponent<Rigidbody>().velocity =
+                    (force * rigidBody.mass * (float) (0.25 * (int) (playerController.playerScore / 20000) + 1)) /
+                    (playerController.freeze * 100 - 99);
             }
         }
     }

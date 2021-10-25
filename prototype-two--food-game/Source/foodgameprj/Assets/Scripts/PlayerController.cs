@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore = 0;
     public int playerHealth = 3;
+    public float freeze = 1;
+
+    private float elapsed = 0;
+    public bool ateFreeze = false;
+    public bool ateFreezeStarting = false;
 
     private void Start()
     {
@@ -20,6 +25,37 @@ public class PlayerController : MonoBehaviour
     {
         CheckGameOver();
         UpdatePlayerVel();
+
+        if (this.ateFreeze)
+        {
+            if (this.ateFreezeStarting && this.freeze < 15)
+            {
+                this.elapsed += Time.deltaTime;
+                if (this.elapsed >= 0.5f)
+                {
+                    this.elapsed = this.elapsed % 0.5f;
+                    this.freeze += 2f;
+                    Debug.Log("FFFFFreeeze " + this.freeze);
+                }
+            }
+            else
+            {
+                this.ateFreezeStarting = false;
+                this.elapsed += Time.deltaTime;
+                if (this.elapsed >= 0.5f)
+                {
+                    this.elapsed = this.elapsed % 0.5f;
+                    this.freeze -= 2f;
+                    Debug.Log("FFFFFreeeze " + this.freeze);
+                }
+
+                if (this.freeze < 1.2f)
+                {
+                    this.ateFreeze = false;
+                    this.freeze = 1f;
+                }
+            }
+        }
 
         if (Input.GetKey(KeyCode.D))
         {
@@ -61,6 +97,7 @@ public class PlayerController : MonoBehaviour
             comboController.OnConsume(this);
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
+            Debug.Log("Player: " + this.ateFreeze);
 
             // destroy the combo object
             Destroy(collision.gameObject);

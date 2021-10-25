@@ -262,8 +262,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAmount: 0.068
   eventSystem: {fileID: 1016800439}
-  playerScore: 0
+  playerScore: 40000
   playerHealth: 3
+  freeze: 1
+  ateFreeze: 0
+  ateFreezeStarting: 0
 --- !u!65 &294549516
 BoxCollider:
   m_ObjectHideFlags: 0
