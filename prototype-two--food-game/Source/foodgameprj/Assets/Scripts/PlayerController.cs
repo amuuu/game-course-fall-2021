@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public EventSystemCustom eventSystem;
 
     private void Start()
     {
         playerScore = 0;
+        playerHeartsCount = 3;
     }
 
     void Update()
@@ -36,6 +38,8 @@ public class PlayerController : MonoBehaviour
             // increase the player's score
             playerScore += conf.score;
 
+            // emit update score signal
+            eventSystem.onGetFood.Invoke();
             Debug.Log("SCORE: " + playerScore);
 
             // destroy the food object
@@ -50,7 +54,6 @@ public class PlayerController : MonoBehaviour
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
-
             Debug.Log("COMBO!!! " + comboController.config.comboName);
 
             // destroy the combo object
@@ -66,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
             comboController.OnConsume();
             playerHeartsCount -= 1;
-
+            eventSystem.onGetHeart.Invoke();
 
             // destroy the combo object
             Destroy(collision.gameObject);
@@ -81,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
             comboController.OnConsume();
             playerHeartsCount += 1;
-
+            eventSystem.onGetHeart.Invoke();
 
             // destroy the combo object
             Destroy(collision.gameObject);
