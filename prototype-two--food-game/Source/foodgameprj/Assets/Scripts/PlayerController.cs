@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public UiManager uimanager;
 
     private void Start()
     {
         playerScore = 0;
+        uimanager.UpdateHeartsCount(playerHeartsCount);
     }
 
     void Update()
@@ -60,11 +62,13 @@ public class PlayerController : MonoBehaviour
     public void LoseHeart()
     {
         playerHeartsCount--;
+        uimanager.UpdateHeartsCount(playerHeartsCount);
         Debug.Log("Heart lost");
     }
     public void EarnHeart()
     {
         playerHeartsCount++;
+        uimanager.UpdateHeartsCount(playerHeartsCount);
         Debug.Log("Heart earned");
     }
 }
