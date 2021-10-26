@@ -56,5 +56,35 @@ public class PlayerController : MonoBehaviour
             // destroy the combo object
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("FishBone"))
+        {
+
+            // for example, the object of type "TimeFreezerComboController" which is the child of "ComboInstanceController", is put inside the "comboController" object below.
+            ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();
+
+
+            comboController.OnConsume();
+            playerHeartsCount -= 1;
+
+
+            // destroy the combo object
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("HeartIncreaser"))
+        {
+
+            // for example, the object of type "TimeFreezerComboController" which is the child of "ComboInstanceController", is put inside the "comboController" object below.
+            ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();
+
+
+            comboController.OnConsume();
+            playerHeartsCount += 1;
+
+
+            // destroy the combo object
+            Destroy(collision.gameObject);
+        }
     }
 }
