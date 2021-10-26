@@ -529,12 +529,12 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 35.864223
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -543,7 +543,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 78.1
+  field of view: 37
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -568,13 +568,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18, y: 2.94, z: -6.16}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0.111, y: 5.303, z: -11.372}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!114 &1687258586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,72 +850,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 90}
---- !u!1001 &6108757952587071708
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6108757953864910844, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_Name
-      value: HeartIncreaser
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.84149355
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.0996616
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.4046687
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6108757953864910847, guid: 0011b78ceff59204f8c0a7bfeb58e539,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0011b78ceff59204f8c0a7bfeb58e539, type: 3}
