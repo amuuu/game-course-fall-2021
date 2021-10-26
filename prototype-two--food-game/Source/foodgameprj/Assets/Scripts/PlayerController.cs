@@ -51,6 +51,9 @@ public class PlayerController : MonoBehaviour
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
 
+            if (comboController.config.comboName == "FishBones")
+                playerHeartsCount--;
+
             Debug.Log("COMBO!!! " + comboController.config.comboName);
 
             // destroy the combo object
