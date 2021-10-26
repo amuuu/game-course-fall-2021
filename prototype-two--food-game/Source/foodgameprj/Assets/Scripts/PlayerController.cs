@@ -48,12 +48,23 @@ public class PlayerController : MonoBehaviour
             ComboInstanceController comboController =  collision.gameObject.GetComponent<ComboInstanceController>();
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
-            comboController.OnConsume();
+            comboController.OnConsume(this);
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
 
             // destroy the combo object
             Destroy(collision.gameObject);
         }
+    }
+
+    public void LoseHeart()
+    {
+        playerHeartsCount--;
+        Debug.Log("Heart lost");
+    }
+    public void EarnHeart()
+    {
+        playerHeartsCount++;
+        Debug.Log("Heart earned");
     }
 }
