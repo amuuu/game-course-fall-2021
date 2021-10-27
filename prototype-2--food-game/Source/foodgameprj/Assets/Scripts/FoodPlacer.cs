@@ -65,6 +65,7 @@ public class FoodPlacer : MonoBehaviour
     int GetRandomPrefabType(int max)
     {
         return UnityEngine.Random.Range(0, max);
+        //return 7;
     }
 
     float GetRandomPrefabInitialX()

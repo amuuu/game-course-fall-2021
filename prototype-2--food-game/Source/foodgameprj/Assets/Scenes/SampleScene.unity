@@ -284,13 +284,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294549513}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 124
   m_CollisionDetection: 0
 --- !u!1 &653260035
 GameObject:
@@ -654,6 +654,10 @@ MonoBehaviour:
   - {fileID: 669693224618794538, guid: 49a161c2cfc83d4418da676b6988128c, type: 3}
   - {fileID: 669693224618794538, guid: 28632f266dd27a547850606d8634cc19, type: 3}
   - {fileID: 669693224618794538, guid: f5b93f84df6a0ca41a122d3382f16c45, type: 3}
+  - {fileID: 7110627197082057487, guid: 7bd781ab5d850d749823b4833e266612, type: 3}
+  - {fileID: 424587616622164417, guid: 4b15fdc7488b1e544b7507a2e4d55a4c, type: 3}
+  - {fileID: 3684144740426097034, guid: 6172bc253bb06ab40b18f5c30312f640, type: 3}
+  - {fileID: 9075061184802064104, guid: 816f3fc71be857e40866eef0d363b2b6, type: 3}
   comboPrefabs:
   - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
   minX: -2.2
