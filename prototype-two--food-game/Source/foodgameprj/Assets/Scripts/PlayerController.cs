@@ -8,10 +8,13 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public int PlayerHearts;
+    public PlayerRecords PlayerRecords;
 
     private void Start()
     {
         playerScore = 0;
+        PlayerHearts = 3;
     }
 
     void Update()
@@ -26,6 +29,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void heartHandler(int getorlose)
+    {
+        PlayerHearts += getorlose;
+        PlayerRecords.UpdateHeartsText(getorlose);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Food"))
@@ -35,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
             // increase the player's score
             playerScore += conf.score;
+            PlayerRecords.UpdateScoreText(conf.score);
 
             Debug.Log("SCORE: " + playerScore);
 
@@ -52,6 +62,10 @@ public class PlayerController : MonoBehaviour
             comboController.OnConsume();
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
+            if (comboController.config.comboName== "LoseHeart")
+            {
+                this.heartHandler(-1);
+            }
 
             // destroy the combo object
             Destroy(collision.gameObject);
