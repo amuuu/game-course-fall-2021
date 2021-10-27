@@ -639,6 +639,9 @@ MonoBehaviour:
   onHeartLost:
     m_PersistentCalls:
       m_Calls: []
+  onHeartIncrease:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &826398175
 Transform:
   m_ObjectHideFlags: 0
