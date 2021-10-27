@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 669693224618794538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children:
   - {fileID: 1063275081925219790}
   m_Father: {fileID: 0}
@@ -76,7 +76,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 463c8ba02ef06aa4a95e315375624aa2, type: 2}
-  rigidBody: {fileID: 669693224618794539}
 --- !u!1001 &669693225695457829
 PrefabInstance:
   m_ObjectHideFlags: 0
