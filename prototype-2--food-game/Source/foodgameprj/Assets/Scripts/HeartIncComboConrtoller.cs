@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class HeartIncComboConrtoller : ComboInstanceController
 {
-    // Start is called before the first frame update
+    public EventSystemCustom eventSystem;
     public override void OnConsume()
     {
-        Debug.Log("HEART INCREASE COMBO");
-
+        Debug.Log("HEART DECREASE COMBO");
+        eventSystem.HeartCounterIncrease.Invoke();
     }
 }
