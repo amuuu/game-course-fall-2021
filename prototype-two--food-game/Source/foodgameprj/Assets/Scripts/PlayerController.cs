@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [Range(0f, 1f)] public float moveAmount;
-
+    public Text ScoreContainer;
+    public Text heartContainer;
     public int playerScore;
     public int playerHeartsCount;
 
@@ -17,9 +18,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+        
+        ScoreContainer.text = "Score : " + playerScore.ToString();
+        heartContainer.text = "Heart : " + playerHeartsCount.ToString();
+       
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(moveAmount, 0, 0);
+
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -52,7 +59,8 @@ public class PlayerController : MonoBehaviour
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
-            
+            playerHeartsCount -= comboController.config.heart;
+
             Debug.Log("COMBO!!! " + comboController.config.comboName);
             
             // destroy the combo object
