@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -7,25 +9,122 @@ public class PlayerMove : MonoBehaviour
     
     public float factor = 0.01f;
     public float jumpAmount = 0.5f;
+    public int totalKeys, accquiredKeys;
 
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rb;
 
     public GameObject clones;
-    public CloneMove[] cloneMoves;
+    public List<CloneMove> cloneMoves;
+    int currActiveArrow;
 
-    private bool canJump;
+    public GameObject myArrow;
+    public GameObject keys;
+
+    private bool canJump, canSwitchCharacter, isInSwitchChatMode;
+    private bool isNearKey, isNearExitDoor, isRunning;
+    private Collider2D nearbyKey;
 
     private Vector3 moveVector;
+    private Vector3 previousPosition;
+
+    public EventSystemCustom eventSystem;
+
+    public Animator animator;
+
     void Start()
     {
-        cloneMoves = clones.GetComponentsInChildren<CloneMove>();
+        cloneMoves = clones.GetComponentsInChildren<CloneMove>().ToList();
+        totalKeys = GameObject.FindGameObjectWithTag(TagNames.KeyParent.ToString()).transform.childCount;
 
+        isInSwitchChatMode = false;
         canJump = true;
+        canSwitchCharacter = false;
         moveVector = new Vector3(1 * factor, 0, 0);
+        isNearKey = false;
+        isNearExitDoor = false;
+        nearbyKey = null;
+        accquiredKeys = 0;
+        currActiveArrow = 0;
+
+        myArrow = transform.GetChild(0).gameObject;
+        previousPosition = transform.position;
     }
 
     void Update()
+    {
+        UpdateCloneMoveList();
+
+        //if ((transform.position - previousPosition).magnitude > 0.5)
+        if (transform.position != previousPosition)
+            isRunning = true;
+        else
+            isRunning = false;
+
+        previousPosition = transform.position;
+
+        animator.SetBool("isRunning", isRunning);
+
+        if (!isInSwitchChatMode)
+            NormalControls();
+
+        else
+            SwitchCharControls();
+    }
+
+    private void SwitchCharControls()
+    {
+        if (Input.GetKeyDown(KeyCode.D)) // move cursor to next clone
+        {
+            if (currActiveArrow == cloneMoves.Count)
+                return;
+
+            if (currActiveArrow == 0)
+                myArrow.SetActive(false);
+
+            else
+                cloneMoves[currActiveArrow - 1].myArrow.SetActive(false);
+
+            cloneMoves[currActiveArrow].myArrow.SetActive(true);
+            currActiveArrow++;
+        }
+
+        if (Input.GetKeyDown(KeyCode.A)) // move cursor to previous clone
+        {
+            if (currActiveArrow == 0)
+                return;
+
+            if (currActiveArrow == 1)
+                myArrow.SetActive(true);
+
+            else
+                cloneMoves[currActiveArrow - 2].myArrow.SetActive(true);
+            
+            cloneMoves[currActiveArrow - 1].myArrow.SetActive(false);
+            currActiveArrow--;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            SwitchCharacter();
+    }
+
+    private void SwitchCharacter()
+    {
+        if (currActiveArrow != 0)
+        {
+            var mainCharOriginalPosition = transform.position;
+            transform.position = cloneMoves[currActiveArrow - 1].transform.position;
+            cloneMoves[currActiveArrow - 1].transform.position = mainCharOriginalPosition;
+
+            myArrow.SetActive(true);
+            cloneMoves[currActiveArrow - 1].myArrow.SetActive(false);
+        }
+
+        currActiveArrow = 0;
+        ExitSwitchCharacterMode();
+    }
+
+    private void NormalControls()
     {
         if (Input.GetKey(KeyCode.D))
         {
@@ -52,36 +151,67 @@ public class PlayerMove : MonoBehaviour
             JumpClones(jumpAmount);
         }
 
-
         // This was added to answer a question.
         if (Input.GetKeyDown(KeyCode.Z))
-        {
             Destroy(this.gameObject);
-        }
 
+        if (Input.GetKeyDown(KeyCode.E) &&
+            isNearKey)
+            PickupKey();
 
-        // This is too dirty. We must decalare/calculate the bounds in another way. 
-        /*if (transform.position.x < -0.55f) 
-        {
-            transform.position = new Vector3(0.51f, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x > 0.53f)
-        {
-            transform.position = new Vector3(-0.53f, transform.position.y, transform.position.z);
-        }*/
+        if (Input.GetKeyDown(KeyCode.E) &&
+            isNearExitDoor && accquiredKeys == totalKeys)
+            eventSystem.OnWon.Invoke();
+
+        if (Input.GetKeyDown(KeyCode.Q) &&
+            canSwitchCharacter)
+            EnterSwitchCharacterMode();
+    }
+
+    private void EnterSwitchCharacterMode()
+    {
+        Time.timeScale = 0;
+        isInSwitchChatMode = true;
+
+        eventSystem.OnCharSwtchEnter.Invoke();
+    }
+
+    private void ExitSwitchCharacterMode()
+    {
+        Time.timeScale = 1;
+        isInSwitchChatMode = false;
+    
+        eventSystem.OnCharSwtchExit.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
         {
-            Debug.Log("DEATH ZONE");
+            eventSystem.OnLost.Invoke();
         }
         
         if (collision.gameObject.CompareTag(TagNames.CollectableItem.ToString()))
         {
             collision.gameObject.SetActive(false);
-            Debug.Log("POTION!");
+            canSwitchCharacter = true;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            eventSystem.OnCharacterNearObjectEnter.Invoke();
+            isNearKey = true;
+            nearbyKey = collision;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.Key.ToString()))
+        {
+            eventSystem.OnCharacterNearObjectExit.Invoke();
+            isNearKey = false;
+            nearbyKey = null;
         }
     }
 
@@ -95,11 +225,9 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
         {
-            Debug.Log("exit door");
+            eventSystem.OnCharacterExitDoorEnter.Invoke();
+            isNearExitDoor = true;
         }
-
-       
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -108,6 +236,12 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.LogWarning("sticky no more bruh");
             canJump = true;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.ExitDoor.ToString()))
+        {
+            eventSystem.OnCharacterExitDoorExit.Invoke();
+            isNearExitDoor = false;
         }
     }
 
@@ -121,5 +255,22 @@ public class PlayerMove : MonoBehaviour
     {
         foreach (var c in cloneMoves)
             c.Jump(amount);
+    }
+
+    private void PickupKey()
+    {
+        if (nearbyKey != null)
+        {
+            accquiredKeys++;
+            eventSystem.OnAccquiredKey.Invoke();
+            nearbyKey.gameObject.SetActive(false);
+            Debug.Log("Key accquired!!!");
+            nearbyKey = null;
+        }
+    }
+
+    private void UpdateCloneMoveList()
+    {
+        cloneMoves.RemoveAll(item => item == null);
     }
 }

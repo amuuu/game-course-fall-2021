@@ -10,7 +10,8 @@ public class CloneMove : MonoBehaviour
     public Rigidbody2D rb;
     private bool canJump;
     private bool canMove;
-    //public Text counterText; // Too dirty!
+
+    public GameObject myArrow;
 
     public EventSystemCustom eventSystem;
 
@@ -18,10 +19,12 @@ public class CloneMove : MonoBehaviour
     {
         canJump = true;
         canMove = true;
+
+        myArrow = transform.GetChild(0).gameObject;
     }
     public void Move(Vector3 vec, bool isDirRight)
     {
-        if (!canMove)
+        if (!canMove || spriteRenderer == null)
             return;
 
         int factor = 1;
@@ -59,7 +62,7 @@ public class CloneMove : MonoBehaviour
 
     public void Jump(float amount)
     {
-        if (canJump)
+        if (canJump && spriteRenderer != null)
             rb.AddForce(transform.up * amount, ForceMode2D.Impulse);
     }
 
@@ -67,19 +70,9 @@ public class CloneMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
-            Debug.LogWarning("sticky for clone");
-
-            // Updating the UI text. But this is not a clean way. We'll fix it later.
-            /*int newTextValue = int.Parse(counterText.text) + 1;
-            counterText.text = newTextValue.ToString();*/
-
-            // This is used by UiManager
             eventSystem.OnCloneStickyPlatformEnter.Invoke();
-            Debug.Log("OnCloneStickyPlatformEnter fired.");
-
             canJump = false;
             canMove = false;
-
         }
     }
 
@@ -87,8 +80,17 @@ public class CloneMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagNames.StickyPlatform.ToString()))
         {
-            Debug.LogWarning("sticky no more for clone bruh");
             canJump = true;
+            canMove = true;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.DeathZone.ToString()))
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
