@@ -9,6 +9,6 @@ public class HeartDecreaserComboController : ComboInstanceController
     // when player eats the combo item
     public override void OnConsume()
     {
-        eventSystem.OnHeartDecrease.Invoke();
+        eventSystem.OnHeartDecreasePlayerScore.Invoke();
     }
 }

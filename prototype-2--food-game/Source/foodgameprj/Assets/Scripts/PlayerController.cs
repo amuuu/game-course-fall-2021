@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        UnityEngine.Events.UnityAction DecreaseHeart = () => playerHeartsCount--;
+        //UnityEngine.Events.UnityAction DecreaseHeart = () => playerHeartsCount--;
 
-        eventSystem.OnHeartDecrease.AddListener(DecreaseHeart);
+        eventSystem.OnHeartDecreasePlayerScore.AddListener(DecreaseHeart);
         playerScore = 0;
     }
 
@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("SCORE: " + playerScore);
 
+            eventSystem.OnScoreUpdate.Invoke();
+
             // destroy the food object
             Destroy(collision.gameObject);
         }
@@ -60,5 +62,11 @@ public class PlayerController : MonoBehaviour
             // destroy the combo object
             Destroy(collision.gameObject);
         }
+    }
+
+    private void DecreaseHeart()
+    {
+        playerHeartsCount--;
+        eventSystem.OnHeartDecreaseUIUpdate.Invoke();
     }
 }
