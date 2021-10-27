@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public int playerScore;
     public int playerHeartsCount;
 
+    private int foodComboCount;
+
     public EventSystemCustom eventSystem;
     
     private void Start()
@@ -45,6 +47,12 @@ public class PlayerController : MonoBehaviour
 
             // destroy the food object
             Destroy(collision.gameObject);
+            foodComboCount++;
+            if (foodComboCount == 5)
+            {
+                eventSystem.onHeartIncrease.Invoke();
+                foodComboCount = 0;
+            }
         }
 
         if (collision.gameObject.CompareTag("Combo"))

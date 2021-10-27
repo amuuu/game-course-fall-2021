@@ -14,6 +14,7 @@ public class UiManager : MonoBehaviour
     {
         eventSystem.OnEatFood.AddListener(UpdateScoreText);
         eventSystem.onHeartLost.AddListener(UpdateHeartText);
+        eventSystem.onHeartIncrease.AddListener(UpdateHeartTextIncrease);
     }
 
     public void UpdateScoreText()
@@ -27,6 +28,12 @@ public class UiManager : MonoBehaviour
     {
         Debug.Log("UPDATE HEART");
         int newTextValue = int.Parse(heartText.text) - 1;
+        heartText.text = newTextValue.ToString();
+    }
+
+    public void UpdateHeartTextIncrease()
+    {
+        int newTextValue = int.Parse(heartText.text) + 1;
         heartText.text = newTextValue.ToString();
     }
 }
