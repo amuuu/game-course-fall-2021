@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
             {
                 eventSystem.onHeartIncrease.Invoke();
                 foodComboCount = 0;
+                playerHeartsCount++;
             }
         }
 
@@ -68,9 +69,12 @@ public class PlayerController : MonoBehaviour
 
             if (comboController.config.comboName.Equals("fishBones"))
             {
-                playerHeartsCount--;
-                Debug.Log("Player Heart: " + playerHeartsCount);
-                eventSystem.onHeartLost.Invoke();
+                if (playerHeartsCount > 0)
+                {
+                    playerHeartsCount--;
+                    Debug.Log("Player Heart: " + playerHeartsCount);
+                    eventSystem.onHeartLost.Invoke();
+                }
             }
 
             // destroy the combo object
