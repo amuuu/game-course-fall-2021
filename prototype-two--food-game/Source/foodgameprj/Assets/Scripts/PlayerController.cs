@@ -8,10 +8,13 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public UiManager uimanager;
 
     private void Start()
     {
         playerScore = 0;
+        uimanager.UpdateScoreCount(playerScore);
+        uimanager.UpdateHeartsCount(playerHeartsCount);
     }
 
     void Update()
@@ -33,7 +36,7 @@ public class PlayerController : MonoBehaviour
             FoodItemConfig conf = collision.gameObject.GetComponent<FoodInstanceController>().config;
 
             // increase the player's score
-            playerScore += conf.score;
+            AddScore(conf.score);
 
             Debug.Log("SCORE: " + playerScore);
 
@@ -60,11 +63,26 @@ public class PlayerController : MonoBehaviour
     public void LoseHeart()
     {
         playerHeartsCount--;
+        uimanager.UpdateHeartsCount(playerHeartsCount);
+        if(playerHeartsCount == 0)
+            EndGame();
         Debug.Log("Heart lost");
     }
     public void EarnHeart()
     {
         playerHeartsCount++;
+        uimanager.UpdateHeartsCount(playerHeartsCount);
         Debug.Log("Heart earned");
+    }
+    public void AddScore(int score)
+    {
+        playerScore += score;
+        uimanager.UpdateScoreCount(playerScore);
+    }
+
+    public void EndGame()
+    {
+        Time.timeScale = 0;
+        uimanager.ShowLoseText();
     }
 }
