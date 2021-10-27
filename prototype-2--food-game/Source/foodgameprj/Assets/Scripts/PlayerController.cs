@@ -8,9 +8,13 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public EventSystemCustom eventSystem;
 
     private void Start()
     {
+        UnityEngine.Events.UnityAction DecreaseHeart = () => playerHeartsCount--;
+
+        eventSystem.OnHeartDecrease.AddListener(DecreaseHeart);
         playerScore = 0;
     }
 
