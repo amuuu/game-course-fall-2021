@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TurkeyConfig
   m_EditorClassIdentifier: 
   foodName: Turkey
-  weight: 4
+  weight: 150
   score: 250

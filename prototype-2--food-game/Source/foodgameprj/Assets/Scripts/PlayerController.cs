@@ -7,19 +7,22 @@ public class PlayerController : MonoBehaviour
     [Range(0f, 1f)] public float moveAmount;
 
     public int playerScore;
+    private int baseLevelUpValue, speedLevel;
     public int playerHeartsCount;
     public EventSystemCustom eventSystem;
 
     private void Start()
     {
-        //UnityEngine.Events.UnityAction DecreaseHeart = () => playerHeartsCount--;
-
         eventSystem.OnHeartDecreasePlayerScore.AddListener(DecreaseHeart);
         playerScore = 0;
+        speedLevel = 1;
+        baseLevelUpValue = 500;
     }
 
     void Update()
     {
+        UpdateMovementSpeedValueBasedOnScore();
+
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(moveAmount, 0, 0);
@@ -27,6 +30,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += new Vector3(-moveAmount, 0, 0);
+        }
+    }
+
+    private void UpdateMovementSpeedValueBasedOnScore()
+    {
+        if (playerScore - baseLevelUpValue * speedLevel > 0 && speedLevel < 5)
+        {
+            moveAmount *= 1.3f;
+            speedLevel++;
         }
     }
 

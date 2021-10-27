@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FriesConfig
   m_EditorClassIdentifier: 
   foodName: Fries
-  weight: 3
+  weight: 100
   score: 180

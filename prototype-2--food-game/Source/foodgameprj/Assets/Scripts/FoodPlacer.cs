@@ -32,7 +32,7 @@ public class FoodPlacer : MonoBehaviour
         {
             GameObject go;
 
-            if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
+            if (UnityEngine.Random.Range(0, 2000) % 7 == 0)
             {
                 go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
             }
@@ -52,9 +52,9 @@ public class FoodPlacer : MonoBehaviour
 
     private void UpdateTimerValueBasedOnScore()
     {
-        if (playerController.playerScore % 400 < 200 && playerController.playerScore % 400 >= 0)
+        if (playerController.playerScore % 500 < 250 && playerController.playerScore % 500 >= 0)
         {
-            timerMaxTime -= 0.02f;
+            timerMaxTime -= 0.075f;
 
             if (timerMaxTime < 0.5f)
                 timerMaxTime = 0.5f;
