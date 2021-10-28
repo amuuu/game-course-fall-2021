@@ -208,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84049142}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.26, y: 1.92, z: 0}
+  m_LocalPosition: {x: 4.93, y: 1.92, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 1230083577}
@@ -243,10 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04847926f77a5504993fe4809e8d4510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GetFoodScoreCount:
+  GetHeartsCount:
     m_PersistentCalls:
       m_Calls: []
-  GetHeartsCount:
+  GameOver:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &121322870
@@ -378,6 +378,7 @@ MonoBehaviour:
   counterText: {fileID: 1388833871}
   eventSystem: {fileID: 121322869}
   HeartCount: {fileID: 1500017193}
+  GOver: {fileID: 0}
 --- !u!1 &248766847
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,7 +1442,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938880699}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.69, y: 1.92, z: 0}
+  m_LocalPosition: {x: -4.4, y: 1.92, z: 0}
   m_LocalScale: {x: 1, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 1230083577}

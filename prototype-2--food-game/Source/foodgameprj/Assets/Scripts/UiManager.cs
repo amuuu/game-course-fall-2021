@@ -17,24 +17,37 @@ public class UiManager : MonoBehaviour
 
     void Start()
     {
-        eventSystem.GetFoodScoreCount.AddListener(UpdateScoreText);
+        //eventSystem.GetFoodScoreCount.AddListener(UpdateScoreText);
+        //eventSystem.GetFoodScore2Count.AddListener(UpdateDecreaseScoreText);
         eventSystem.GetHeartsCount.AddListener(UpdateHeartCountText);
         eventSystem.GameOver.AddListener(GameOverScene);
     }
 
-    public void UpdateScoreText()
+    //public void UpdateScoreText(int amount)
+    //{
+    //    Debug.Log("UPDATE SCORE");
+    //    string[] newText = counterText.text.Split(':');
+    //    int hold = int.Parse(newText[1]) + amount;
+    //    counterText.text = newText[0] + ": " + hold.ToString();
+    //}
+
+    //public void UpdateDecreaseScoreText()
+    //{
+    //    Debug.Log("UPDATE SCORE");
+    //    string[] newText = counterText.text.Split(':');
+    //    int hold = int.Parse(newText[1]) - FindObjectOfType<PlayerController>().playerScore;
+    //    counterText.text = newText[0] + ": " + hold.ToString();
+    //}
+
+    public void ScoreCount(int amount)
     {
-        Debug.Log("UPDATE SCORE");
         string[] newText = counterText.text.Split(':');
-        int hold = int.Parse(newText[1]) + FindObjectOfType<PlayerController>().playerScore;
+        int hold = int.Parse(newText[1]) + amount;
         counterText.text = newText[0] + ": " + hold.ToString();
     }
-
     public void UpdateHeartCountText()
     {
         Debug.Log("UPDATE KEY SCORE");
-        //string[] keys= KeyCount.text.Split(':');
-        //Debug.Log(keys);
         HeartCount.text = FindObjectOfType<PlayerController>().playerHeartsCount.ToString();
     }
     public void GameOverScene()

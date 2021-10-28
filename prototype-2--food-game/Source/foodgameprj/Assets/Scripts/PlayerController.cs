@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
     public int playerScore;
     public int playerHeartsCount;
     public EventSystemCustom eventSystem;
+    private UiManager uiManager;
 
     private void Start()
     {
         playerScore = 0;
         playerHeartsCount=3;
+        uiManager = FindObjectOfType<UiManager>();
     }
 
     void Update()
@@ -37,8 +39,8 @@ public class PlayerController : MonoBehaviour
 
             // increase the player's score
             playerScore += conf.score;
+            uiManager.ScoreCount(conf.score);
 
-            eventSystem.GetFoodScoreCount.Invoke();
             Debug.Log("SCORE: " + playerScore);
 
             // destroy the food object
@@ -70,6 +72,5 @@ public class PlayerController : MonoBehaviour
         {
             eventSystem.GameOver.Invoke();
         }
-        //uiManager.UpdateHeartCountText(playerHeartsCount);
     }
 }

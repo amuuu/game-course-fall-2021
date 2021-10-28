@@ -11,4 +11,12 @@ public class ComboInstanceController : MonoBehaviour
     {
         Debug.Log("PARENT CLASS ON CONSUME");
     }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Kill"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
