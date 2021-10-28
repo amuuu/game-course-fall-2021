@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public EventSystemCustom eventSystem;
 
     private void Start()
     {
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Food"))
+        if (collision.gameObject.CompareTag(TagNames.Food.ToString()))
         {
             // access the food object config
             FoodItemConfig conf = collision.gameObject.GetComponent<FoodInstanceController>().config;
@@ -37,13 +38,14 @@ public class PlayerController : MonoBehaviour
             // increase the player's score
             playerScore += conf.score;
 
+            eventSystem.GetFoodScoreCount.Invoke();
             Debug.Log("SCORE: " + playerScore);
 
             // destroy the food object
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.CompareTag("Combo"))
+        if (collision.gameObject.CompareTag(TagNames.Combo.ToString()))
         {
             // polymorphism!
             // for example, the object of type "TimeFreezerComboController" which is the child of "ComboInstanceController", is put inside the "comboController" object below.
@@ -51,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
+            eventSystem.GetHeartsCount.Invoke();
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
 
