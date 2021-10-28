@@ -8,6 +8,8 @@ TagManager:
   - Food
   - Combo
   - wall
+  - Heart Increaser
+  - Heart decreaser
   layers:
   - Default
   - TransparentFX

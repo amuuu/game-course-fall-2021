@@ -8,15 +8,20 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public Lost lost;
 
     private void Start()
     {
-        
+       
         playerScore = 0;
     }
 
     void Update()
     {
+        if(playerHeartsCount == 0)
+        {
+            lost.setup();
+        }
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(moveAmount, 0, 0);
@@ -64,6 +69,7 @@ public class PlayerController : MonoBehaviour
             comboController.OnConsume();
             Debug.Log("Heart Decreased!!!  Remain Hearts: " + playerHeartsCount);
             Destroy(collision.gameObject);
+            //eventSystem.OnDecreaseHeart.Invoke();
         }
         //+Heart
         if (collision.gameObject.CompareTag("Heart Increaser"))
@@ -72,6 +78,7 @@ public class PlayerController : MonoBehaviour
             comboController.OnConsume();
             Debug.Log("Heart Increased!!! Eaten Hearts :" + playerHeartsCount);
             Destroy(collision.gameObject);
+            //eventSystem.OnIncreaseHeart.Invoke();
         }
     }
 }
