@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public EventSystemCustom eventSystem;
+
 
     private void Start()
     {
@@ -40,6 +42,8 @@ public class PlayerController : MonoBehaviour
 
             // destroy the food object
             Destroy(collision.gameObject);
+            eventSystem.OnIncreaseScore.Invoke();
+
         }
 
         if (collision.gameObject.CompareTag("Combo"))
