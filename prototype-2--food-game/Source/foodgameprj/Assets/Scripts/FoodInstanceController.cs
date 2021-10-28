@@ -6,13 +6,13 @@ public class FoodInstanceController : MonoBehaviour
 {
     public FoodItemConfig config;
     private Rigidbody rigidBody;
-    private EventSystemCustom eventSystem;
     private UiManager uiManager;
+    private PlayerController player;
     private void Start()
     {
         // change mass based on config
         rigidBody = GetComponent<Rigidbody>();
-        eventSystem = FindObjectOfType<EventSystemCustom>();
+        player = FindObjectOfType<PlayerController>();
         rigidBody.mass = config.weight;
 
         // rotate randomly when instantiating
@@ -26,6 +26,7 @@ public class FoodInstanceController : MonoBehaviour
         if (other.gameObject.CompareTag("Kill"))
         {
             uiManager.ScoreCount(-1*config.score);
+            player.playerScore -= config.score;
             Destroy(this.gameObject);
         }
     }
