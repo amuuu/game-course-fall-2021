@@ -8,10 +8,37 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    [SerializeField] private int heart;
+    public EventSystemCustom eventSystem;
+    public GameObject Heart3;
+    public GameObject Heart2;
+    public GameObject Heart1;
+
 
     private void Start()
     {
         playerScore = 0;
+        heart = 3;
+        eventSystem.OnHeartDecreaseCollected.AddListener(UpdateRemainHearts);
+    }
+
+    private void UpdateRemainHearts()
+    {
+        heart--;
+        if (heart==2)
+        {
+            Heart3.SetActive(false);
+        }
+
+        if (heart == 1)
+        {
+            Heart2.SetActive(false);
+        }
+
+        if (heart == 0)
+        {
+            Heart1.SetActive(false);
+        }
     }
 
     void Update()
