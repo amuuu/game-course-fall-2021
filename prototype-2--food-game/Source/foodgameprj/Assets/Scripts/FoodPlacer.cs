@@ -89,7 +89,7 @@ public class FoodPlacer : MonoBehaviour
             Time.timeScale += 0.05f;
             yield return new WaitForSecondsRealtime(.05f);
         }
-        //in rare occurrences, the timescale won't exactly be 1, so i added this and line 84 to make sure it gets to round numbers.
+        //in rare occurrences, the timescale won't exactly be 1 (or 0), so i added this and line 85-86 to make sure it gets to round numbers.
         Time.timeScale = 1; 
     }
 
