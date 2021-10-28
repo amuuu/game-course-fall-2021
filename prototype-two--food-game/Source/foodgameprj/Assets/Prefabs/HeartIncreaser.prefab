@@ -48,7 +48,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 10
   m_CollisionDetection: 0
 --- !u!65 &6252368664666682787
 BoxCollider:
@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 50688a9a5d8630e41b0bae61eb18bb81, type: 2}
+  collidedWithPlayer: 0
 --- !u!1001 &5090097625580373893
 PrefabInstance:
   m_ObjectHideFlags: 0

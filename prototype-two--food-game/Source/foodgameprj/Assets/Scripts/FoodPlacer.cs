@@ -16,27 +16,14 @@ public class FoodPlacer : MonoBehaviour
 
     public PlayerController playerController;
 
-    private float freezeTimer = 0;
-    public float freezeTimerMaxTime;
-
-
     private void Start()
     {
         currentTimerValue = timerMaxTime;
-        freezeTimer = 0;
+        Screen.SetResolution(500, 800, true);
     }
 
     void Update()
     {
-        if (freezeTimer > 0)
-        {
-            freezeTimer -= Time.deltaTime;
-            if (freezeTimer <= 0)
-            {
-                UnFreezeTimer();
-            }
-            return;
-        }
             
         if (currentTimerValue > 0)
         {
@@ -46,9 +33,16 @@ public class FoodPlacer : MonoBehaviour
         {
             GameObject go;
 
-            if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
+            if (UnityEngine.Random.Range(1, 8) % 7 == 0)
             {
-                go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                if (UnityEngine.Random.Range(0, 2) % 2 == 0)
+                {
+                    go = Instantiate(comboPrefabs[1]); //giving heart decreaser more chance to spawn
+                }
+                else
+                {
+                    go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                }
             }
             else
             {
@@ -66,9 +60,9 @@ public class FoodPlacer : MonoBehaviour
 
     private void UpdateTimerValueBasedOnScore()
     {
-        if (playerController.playerScore % 400 < 200 && playerController.playerScore % 400 >= 0)
+        if (playerController.playerScore % 400 < 200)
         {
-            timerMaxTime -= 0.02f;
+            timerMaxTime -= 0.05f;
 
             if (timerMaxTime < 0.5f)
                 timerMaxTime = 0.5f;
@@ -76,21 +70,27 @@ public class FoodPlacer : MonoBehaviour
 
     }
 
-    public void FreezeTimer()
+    public void StartFreezingTime()
     {
-        freezeTimer = freezeTimerMaxTime;
-        foreach( FoodInstanceController food in FindObjectsOfType<FoodInstanceController>())
-        {
-            food.rigidBody.useGravity = false;
-        }
+        StartCoroutine(FreezeTime());
     }
 
-    private void UnFreezeTimer()
+    public IEnumerator FreezeTime()
     {
-        foreach (FoodInstanceController food in FindObjectsOfType<FoodInstanceController>())
+        for (int t = 19; t > 0; t -= 1)
         {
-            food.rigidBody.useGravity = true;
+            Time.timeScale -= 0.05f;
+            yield return new WaitForSecondsRealtime(.05f);
         }
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(.05f);
+        for (int t = 20; t > 0; t -= 1)
+        {
+            Time.timeScale += 0.05f;
+            yield return new WaitForSecondsRealtime(.05f);
+        }
+        //in rare occurrences, the timescale won't exactly be 1, so i added this and line 84 to make sure it gets to round numbers.
+        Time.timeScale = 1; 
     }
 
     int GetRandomPrefabType(int max)

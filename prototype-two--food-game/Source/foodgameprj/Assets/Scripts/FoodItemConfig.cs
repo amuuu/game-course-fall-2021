@@ -6,6 +6,7 @@ using UnityEngine;
 public class FoodItemConfig : ScriptableObject
 {
     public string foodName;
-    public float weight;
+    //using mass wasn't working well for me, so i used rigidbody's drag instead
+    public float drag;
     public int score;
 }

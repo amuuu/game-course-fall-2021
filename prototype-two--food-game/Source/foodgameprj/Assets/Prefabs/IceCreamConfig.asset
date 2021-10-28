@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: IceCreamConfig
   m_EditorClassIdentifier: 
   foodName: IceCream
-  weight: 1.5
-  score: 150
+  drag: 0.3
+  score: 300

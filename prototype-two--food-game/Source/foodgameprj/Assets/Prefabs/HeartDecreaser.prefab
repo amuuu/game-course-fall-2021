@@ -26,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3098820624461129735}
-  m_LocalRotation: {x: -0.6427876, y: 0, z: 0, w: 0.7660445}
-  m_LocalPosition: {x: 0.03, y: 0.856, z: 0}
+  m_LocalRotation: {x: -0.6320237, y: -0.090165704, z: 0.29468507, w: 0.71103936}
+  m_LocalPosition: {x: 0.043623146, y: 0.8620766, z: -0.0012759939}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5890813292596364678}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -80, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -57.741, y: -69.739006, z: 87.05601}
 --- !u!54 &3098820624461129734
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -48,7 +48,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 10
   m_CollisionDetection: 0
 --- !u!65 &4096514330941549662
 BoxCollider:
@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: dd291428915a22f40823c9145364015f, type: 2}
+  collidedWithPlayer: 0
 --- !u!1 &6524466634829815612
 GameObject:
   m_ObjectHideFlags: 0
