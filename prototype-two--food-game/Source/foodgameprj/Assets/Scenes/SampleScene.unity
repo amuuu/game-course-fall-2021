@@ -439,10 +439,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveAmount: 0.068
-  playerScore: 0
-  playerHeartsCount: 3
   ScoreContainer: {fileID: 276751795}
   heartContainer: {fileID: 1792529397}
+  playerScore: 0
+  playerHeartsCount: 3
 --- !u!65 &294549516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -900,8 +900,13 @@ MonoBehaviour:
   - {fileID: 669693224618794538, guid: 49a161c2cfc83d4418da676b6988128c, type: 3}
   - {fileID: 669693224618794538, guid: 28632f266dd27a547850606d8634cc19, type: 3}
   - {fileID: 669693224618794538, guid: f5b93f84df6a0ca41a122d3382f16c45, type: 3}
+  - {fileID: 8382969729204036128, guid: 0fc928815c50a3348afeee370df8e422, type: 3}
+  - {fileID: 1281014202809862720, guid: e1c3a7ace87d1a5478881fe0bde8a8c9, type: 3}
+  - {fileID: 3501875227674505514, guid: 530244eb7bf1c89449dba50ecfd58501, type: 3}
   comboPrefabs:
   - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 8111451401191807154, guid: 8176fa803c80fb947ac81b211f218ba8, type: 3}
+  - {fileID: 4585660696622270860, guid: f0f2d2f06b24f484e9f48310a6a4509a, type: 3}
   minX: -2.2
   maxX: 3
   timerMaxTime: 2
