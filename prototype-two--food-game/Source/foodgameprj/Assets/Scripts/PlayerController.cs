@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     [Range(0f, 1f)] public float moveAmount;
@@ -10,15 +11,51 @@ public class PlayerController : MonoBehaviour
     public int playerHeartsCount;
     public int PlayerHearts;
     public PlayerRecords PlayerRecords;
+    public float GravityVolume;
+    public bool timerFreeze;
+    public float freezeTime;
+    public float increaseGravityVolume = 1F;
 
     private void Start()
     {
+        timerFreeze = false;
+        freezeTime = 2;
+        GravityVolume = -20;
         playerScore = 0;
         PlayerHearts = 3;
     }
 
     void Update()
     {
+        if (timerFreeze)
+        {
+            
+            GravityVolume += increaseGravityVolume;
+
+            
+            if (GravityVolume >= 0)
+            {
+                freezeTime -= Time.deltaTime;
+                GravityVolume = 0;
+            }
+            if(freezeTime < 0)
+            {
+                increaseGravityVolume=-1F;
+
+            }
+            if(GravityVolume <= -20)
+            {
+                GravityVolume = -20;
+                increaseGravityVolume = 2F;
+                timerFreeze = false;
+            }
+        }
+        
+            
+            
+            
+   
+        Physics.gravity = new Vector3(0, GravityVolume, 0);
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(moveAmount, 0, 0);
@@ -70,6 +107,12 @@ public class PlayerController : MonoBehaviour
             {
                 this.heartHandler(1);
             }
+            if (comboController.config.comboName == "Time Freezer")
+            {
+                timerFreeze = true;
+                freezeTime = 2;
+            }
+            
 
             // destroy the combo object
             Destroy(collision.gameObject);

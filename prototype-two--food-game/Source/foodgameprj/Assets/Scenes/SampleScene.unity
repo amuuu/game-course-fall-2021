@@ -265,6 +265,10 @@ MonoBehaviour:
   playerHeartsCount: 3
   PlayerHearts: 0
   PlayerRecords: {fileID: 1206599346}
+  GravityVolume: 0
+  timerFreeze: 0
+  freezeTime: 0
+  increaseGravityVolume: 0.1
 --- !u!65 &294549516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -862,9 +866,16 @@ MonoBehaviour:
   - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
   - {fileID: 262781090101841535, guid: 4b9dc945d3caf0342b1a6c3a68c0e8b0, type: 3}
   - {fileID: 7006685284238861769, guid: bca5dcd471c531b4b9a9594cbe19bf4a, type: 3}
+  - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
   minX: -2.2
   maxX: 3
-  timerMaxTime: 2
+  timerMaxTime: 1
   playerController: {fileID: 294549515}
 --- !u!1 &1938880699
 GameObject:
