@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-            if (collision.gameObject.CompareTag("Food"))
+        if (collision.gameObject.CompareTag("Food"))
         {
             // access the food object config
             FoodItemConfig conf = collision.gameObject.GetComponent<FoodInstanceController>().config;
@@ -55,6 +55,22 @@ public class PlayerController : MonoBehaviour
             Debug.Log("COMBO!!! " + comboController.config.comboName);
 
             // destroy the combo object
+            Destroy(collision.gameObject);
+        }
+        // -Heart
+        if (collision.gameObject.CompareTag("Heart decreaser"))
+        {
+            ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();
+            comboController.OnConsume();
+            Debug.Log("Heart Decreased!!!  Remain Hearts: " + playerHeartsCount);
+            Destroy(collision.gameObject);
+        }
+        //+Heart
+        if (collision.gameObject.CompareTag("Heart Increaser"))
+        {
+            ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();
+            comboController.OnConsume();
+            Debug.Log("Heart Increased!!! Eaten Hearts :" + playerHeartsCount);
             Destroy(collision.gameObject);
         }
     }
