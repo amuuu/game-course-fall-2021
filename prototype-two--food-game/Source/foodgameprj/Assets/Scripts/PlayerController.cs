@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public int playerScore;
     public int playerHeartsCount;
 
+    public EventSystemCustom eventSystem;
+
     private void Start()
     {
         playerScore = 0;
