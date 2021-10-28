@@ -1,0 +1,20 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+
+public class UIManager : MonoBehaviour
+{
+    public Text timerText;
+    public Text heartCounterText;
+    public Text scoreText;
+    public int score = 0;
+
+    public void onCollectFood(FoodItemConfig foodItemConfig)
+    {
+        score += foodItemConfig.score;
+        scoreText.text = "score: " + score.ToString();
+    }
+
+}

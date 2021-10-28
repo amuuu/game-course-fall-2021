@@ -6,13 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [Range(0f, 1f)] public float moveAmount;
 
-    public int playerScore;
+    public UIManager UiManager;
     public int playerHeartsCount;
-
-    private void Start()
-    {
-        playerScore = 0;
-    }
 
     void Update()
     {
@@ -34,9 +29,7 @@ public class PlayerController : MonoBehaviour
             FoodItemConfig conf = collision.gameObject.GetComponent<FoodInstanceController>().config;
 
             // increase the player's score
-            playerScore += conf.score;
-
-            Debug.Log("SCORE: " + playerScore);
+            UiManager.onCollectFood(conf);
 
             // destroy the food object
             Destroy(collision.gameObject);

@@ -14,7 +14,7 @@ public class FoodPlacer : MonoBehaviour
     public float timerMaxTime;
     private float currentTimerValue;
 
-    public PlayerController playerController;
+    public UIManager UiManager;
 
 
     private void Start()
@@ -52,7 +52,7 @@ public class FoodPlacer : MonoBehaviour
 
     private void UpdateTimerValueBasedOnScore()
     {
-        if (playerController.playerScore % 400 < 200 && playerController.playerScore % 400 >= 0)
+        if (UiManager.score % 400 < 200 && UiManager.score % 400 >= 0)
         {
             timerMaxTime -= 0.02f;
 
