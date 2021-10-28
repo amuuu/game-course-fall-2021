@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Pitzza Config
   m_EditorClassIdentifier: 
   foodName: Pizza
-  weight: 1
-  score: 170
+  weight: 0.75
+  score: 90

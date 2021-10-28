@@ -10,18 +10,26 @@ public class UIManager : MonoBehaviour
     public EventSystemCustom eventSystem;
     GameObject obj;
     PlayerController player;
+    public Text finalScoreText;
 
     void Start()
     {
         obj = GameObject.Find("Player");
         player = obj.GetComponent<PlayerController>();
         ScoreText.text = player.playerScore.ToString();
+        finalScoreText.text = "Score : " + player.playerScore.ToString();
     }
 
     private void Update()
     {
         HeartCountText.text = player.playerHeartsCount.ToString();
         ScoreText.text = player.playerScore.ToString();
+        if (player.playerHeartsCount == 0)
+        {
+            finalScoreText.text = "Score : " + player.playerScore.ToString();
+        }
+        
+
     }
 
 

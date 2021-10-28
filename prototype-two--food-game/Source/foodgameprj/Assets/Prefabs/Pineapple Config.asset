@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Pineapple Config
   m_EditorClassIdentifier: 
   foodName: Pineapple
-  weight: 1.5
-  score: 80
+  weight: 2
+  score: 100

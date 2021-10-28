@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: Sausage
   weight: 0.5
-  score: 160
+  score: 80
