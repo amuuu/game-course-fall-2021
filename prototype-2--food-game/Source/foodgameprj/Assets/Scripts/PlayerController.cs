@@ -6,68 +6,44 @@ public class PlayerController : MonoBehaviour
 {
     [Range(0f, 1f)] public float moveAmount;
 
-    public int playerScore;
-    public int playerHeartsCount;
-    [SerializeField] private int heart;
-    public EventSystemCustom eventSystem;
-    public GameObject Heart3;
-    public GameObject Heart2;
-    public GameObject Heart1;
+    [SerializeField] protected int playerScore;
+    [SerializeField] protected int playerHeartsCount;
 
+    public int getHeartCount()
+    {
+        return playerHeartsCount;
+    }
+    public int getScoreCount()
+    {
+        return playerScore;
+    }
+    public EventSystemCustom eventSystem;
 
     private void Start()
     {
         playerScore = 0;
-        heart = 3;
+        playerHeartsCount = 3;
         eventSystem.OnHeartDecreaseCollected.AddListener(DeacreaseHeart);
         eventSystem.OnHeartIncreaseCollected.AddListener(IncreaseHeart);
     }
 
-    private void updateHeartUI()
-    {
-        if (heart == 3)
-        {
-            Heart3.SetActive(true);
-            Heart2.SetActive(true);
-            Heart1.SetActive(true);
-        }
 
-        else if (heart == 2)
-        {
-            Heart3.SetActive(false);
-            Heart2.SetActive(true);
-            Heart1.SetActive(true);
-        }
-
-        else if (heart == 1)
-        {
-            Heart3.SetActive(false);
-            Heart2.SetActive(false);
-            Heart1.SetActive(true);
-        }
-        else if (heart == 0)
-        {
-            Heart3.SetActive(false);
-            Heart2.SetActive(false);
-            Heart1.SetActive(false);
-        }
-    }
 
     private void DeacreaseHeart()
     {
-        if (heart != 0)
+        if (playerHeartsCount != 0)
         {
-            heart--;
-            updateHeartUI();
+            playerHeartsCount--;
+            eventSystem.updateHeartUI.Invoke();
         }
     }
 
     private void IncreaseHeart()
     {
-        if (heart != 3)
+        if (playerHeartsCount != 3)
         {
-            heart++;
-            updateHeartUI();
+            playerHeartsCount++;
+            eventSystem.updateHeartUI.Invoke();
         }
     }
 
@@ -95,7 +71,7 @@ public class PlayerController : MonoBehaviour
             playerScore += conf.score;
 
             Debug.Log("SCORE: " + playerScore);
-
+            eventSystem.updateScoreUI.Invoke();
             // destroy the food object
             Destroy(collision.gameObject);
         }
