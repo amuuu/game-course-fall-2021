@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 84049143}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: rightCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -473,8 +473,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8980872, y: 0.18238378, z: 1}
-  m_Center: {x: -0.0140405, y: 0.04666555, z: 0}
+  m_Size: {x: 0.93797004, y: 0.18238378, z: 1}
+  m_Center: {x: 0.0059009194, y: 0.04666555, z: 0}
 --- !u!54 &294549517
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1369,7 +1369,7 @@ GameObject:
   - component: {fileID: 1938880700}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: leftCube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,6 +6,8 @@ public enum TagNames
 {
     Kill,
     Food,
-    Combo
+    Combo,
+    leftCube,
+    rightCube
 }
     

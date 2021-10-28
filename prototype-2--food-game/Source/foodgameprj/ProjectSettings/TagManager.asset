@@ -7,6 +7,8 @@ TagManager:
   - Kill
   - Food
   - Combo
+  - leftCube
+  - rightCube
   layers:
   - Default
   - TransparentFX

@@ -10,21 +10,25 @@ public class PlayerController : MonoBehaviour
     public int playerHeartsCount;
     public EventSystemCustom eventSystem;
     private UiManager uiManager;
+    private bool canmoveleft;
+    private bool canmoveright;
 
     private void Start()
     {
         playerScore = 0;
         playerHeartsCount=3;
         uiManager = FindObjectOfType<UiManager>();
+        canmoveleft = true;
+        canmoveright = true;
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && canmoveright)
         {
             transform.position += new Vector3(moveAmount, 0, 0);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && canmoveleft)
         {
             transform.position += new Vector3(-moveAmount, 0, 0);
         }
@@ -61,6 +65,31 @@ public class PlayerController : MonoBehaviour
 
             // destroy the combo object
             Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.leftCube.ToString()))
+        {
+            Debug.Log("left waalll");
+            canmoveleft = false;
+
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.rightCube.ToString()))
+        {
+            canmoveright = false;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(TagNames.leftCube.ToString()))
+        {
+            canmoveleft = true;
+        }
+
+        if (collision.gameObject.CompareTag(TagNames.rightCube.ToString()))
+        {
+            canmoveright = true;
         }
     }
 
