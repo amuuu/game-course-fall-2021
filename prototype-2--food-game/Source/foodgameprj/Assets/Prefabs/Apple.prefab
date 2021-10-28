@@ -61,8 +61,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3153534
-  m_Center: {x: 0, y: 0.21, z: 0.1846466}
+  m_Radius: 0.21078527
+  m_Center: {x: 0.0011631548, y: 0.25, z: 0}
 --- !u!114 &7821847196001506487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +76,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 463c8ba02ef06aa4a95e315375624aa2, type: 2}
-  rigidBody: {fileID: 669693224618794539}
 --- !u!1001 &669693225695457829
 PrefabInstance:
   m_ObjectHideFlags: 0

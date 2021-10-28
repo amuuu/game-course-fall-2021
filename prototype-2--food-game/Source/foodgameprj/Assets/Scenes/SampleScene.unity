@@ -659,6 +659,7 @@ MonoBehaviour:
   - {fileID: 669693224618794538, guid: 97e8235220a4b3c4e83ef1c497dbe428, type: 3}
   comboPrefabs:
   - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 669693224618794538, guid: 4fd6467037f2be44c80e8a69dbbea022, type: 3}
   minX: -2.2
   maxX: 3
   timerMaxTime: 2
