@@ -7,8 +7,10 @@ public class HeartDecreaserComboController : ComboInstanceController
     // when player eats the heart decreaser item
     public override void OnConsume()
     {
-        Debug.Log("YOUR HEART DECREASED!");
-        rigidBody = GetComponent<Rigidbody>();
-
+        //Debug.Log("YOUR HEART DECREASED!");
+        int heart = GameObject.Find("Player").GetComponent<PlayerController>().playerHeartsCount;
+        if(heart > 0)
+            GameObject.Find("Player").GetComponent<PlayerController>().playerHeartsCount--;
+        // else : loss
     }
 }

@@ -8,15 +8,25 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public double timeRemaining;
+
+    public EventSystemCustomScript eventSystem;
 
     private void Start()
     {
         playerScore = 0;
-        playerHeartsCount = 0;
+        playerHeartsCount = 3;
+        timeRemaining = 20;
     }
 
     void Update()
     {
+        if (timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+            eventSystem.OnUpdateRemainingTime.Invoke();
+        }
+
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(moveAmount, 0, 0);
@@ -37,7 +47,9 @@ public class PlayerController : MonoBehaviour
             // increase the player's score
             playerScore += conf.score;
 
-            Debug.Log("SCORE: " + playerScore);
+            //Debug.Log("SCORE: " + playerScore);
+
+            eventSystem.OnEatFood.Invoke();
 
             // destroy the food object
             Destroy(collision.gameObject);
@@ -52,7 +64,7 @@ public class PlayerController : MonoBehaviour
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
 
-            Debug.Log("COMBO!!! " + comboController.config.comboName);
+            eventSystem.OnDecreaseHeart.Invoke();
 
             // destroy the combo object
             Destroy(collision.gameObject);

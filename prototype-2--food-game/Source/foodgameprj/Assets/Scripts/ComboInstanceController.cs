@@ -6,6 +6,7 @@ public class ComboInstanceController : MonoBehaviour
 {
     public ComboItemConfig config;
     public Rigidbody rigidBody;
+    public UIManager Ui;
 
     // when player eats the combo item
     public virtual void OnConsume()
