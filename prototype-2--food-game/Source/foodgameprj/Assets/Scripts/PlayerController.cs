@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerScore = 0;
+        playerHeartsCount=3;
     }
 
     void Update()
@@ -56,5 +57,12 @@ public class PlayerController : MonoBehaviour
             // destroy the combo object
             Destroy(collision.gameObject);
         }
+    }
+
+    public void HeartsCounts(int amount)
+    {
+        playerHeartsCount += amount;
+        Debug.Log(playerHeartsCount);
+        //uiManager.UpdateHeartCountText(playerHeartsCount);
     }
 }
