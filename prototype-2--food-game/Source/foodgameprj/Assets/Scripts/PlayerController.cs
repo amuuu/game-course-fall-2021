@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public UITextController UiController;
 
     private void Start()
     {
@@ -36,7 +37,8 @@ public class PlayerController : MonoBehaviour
             // increase the player's score
             playerScore += conf.score;
 
-            Debug.Log("SCORE: " + playerScore);
+            //Debug.Log("SCORE: " + playerScore);
+            UiController.ScoreText.text = playerScore.ToString();
 
             // destroy the food object
             Destroy(collision.gameObject);
@@ -50,6 +52,19 @@ public class PlayerController : MonoBehaviour
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
+            //Debug.Log("comboController : " + comboController);
+            if (comboController.config.comboName == "Fish Bones")
+            {
+                int HeartCounterNew = int.Parse(UiController.HeartCounterText.text) - 1;
+                UiController.HeartCounterText.text = HeartCounterNew.ToString();
+               // Debug.Log("Hear counter text : " + UiController.HeartCounterText.text);
+            }
+            if(comboController.config.comboName == "Soda Can")
+            {
+                int HeartCounterNew = int.Parse(UiController.HeartCounterText.text) + 1;
+                UiController.HeartCounterText.text = HeartCounterNew.ToString();
+                //Debug.Log("Hear counter text : " + UiController.HeartCounterText.text);
+            }
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
 

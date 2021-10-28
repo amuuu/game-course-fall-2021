@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (fileName = "FoodItemConfig", menuName = "FoodGameConfigs/FoodItemConfig")]
+
+[CreateAssetMenu(fileName = "FoodItemConfig", menuName = "FoodGameConfigs/FoodItemConfig")]
 public class FoodItemConfig : ScriptableObject
 {
     public string foodName;

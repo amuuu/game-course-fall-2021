@@ -7,3 +7,4 @@ public class ComboItemConfig : ScriptableObject
 {
     public string comboName;
 }
+
