@@ -66,6 +66,10 @@ public class PlayerController : MonoBehaviour
     {
         playerHeartsCount += amount;
         Debug.Log(playerHeartsCount);
+        if (playerHeartsCount <= 0)
+        {
+            eventSystem.GameOver.Invoke();
+        }
         //uiManager.UpdateHeartCountText(playerHeartsCount);
     }
 }
