@@ -19,25 +19,55 @@ public class PlayerController : MonoBehaviour
     {
         playerScore = 0;
         heart = 3;
-        eventSystem.OnHeartDecreaseCollected.AddListener(UpdateRemainHearts);
+        eventSystem.OnHeartDecreaseCollected.AddListener(DeacreaseHeart);
+        eventSystem.OnHeartIncreaseCollected.AddListener(IncreaseHeart);
     }
 
-    private void UpdateRemainHearts()
+    private void updateHeartUI()
     {
-        heart--;
-        if (heart==2)
+        if (heart == 3)
+        {
+            Heart3.SetActive(true);
+            Heart2.SetActive(true);
+            Heart1.SetActive(true);
+        }
+
+        else if (heart == 2)
         {
             Heart3.SetActive(false);
+            Heart2.SetActive(true);
+            Heart1.SetActive(true);
         }
 
-        if (heart == 1)
+        else if (heart == 1)
         {
+            Heart3.SetActive(false);
             Heart2.SetActive(false);
+            Heart1.SetActive(true);
         }
-
-        if (heart == 0)
+        else if (heart == 0)
         {
+            Heart3.SetActive(false);
+            Heart2.SetActive(false);
             Heart1.SetActive(false);
+        }
+    }
+
+    private void DeacreaseHeart()
+    {
+        if (heart != 0)
+        {
+            heart--;
+            updateHeartUI();
+        }
+    }
+
+    private void IncreaseHeart()
+    {
+        if (heart != 3)
+        {
+            heart++;
+            updateHeartUI();
         }
     }
 
@@ -47,6 +77,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += new Vector3(moveAmount, 0, 0);
         }
+
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += new Vector3(-moveAmount, 0, 0);
@@ -73,7 +104,7 @@ public class PlayerController : MonoBehaviour
         {
             // polymorphism!
             // for example, the object of type "TimeFreezerComboController" which is the child of "ComboInstanceController", is put inside the "comboController" object below.
-            ComboInstanceController comboController =  collision.gameObject.GetComponent<ComboInstanceController>();
+            ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
