@@ -66,6 +66,10 @@ public class PlayerController : MonoBehaviour
             {
                 this.heartHandler(-1);
             }
+            if (comboController.config.comboName == "GetHeart")
+            {
+                this.heartHandler(1);
+            }
 
             // destroy the combo object
             Destroy(collision.gameObject);

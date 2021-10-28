@@ -861,6 +861,7 @@ MonoBehaviour:
   comboPrefabs:
   - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
   - {fileID: 262781090101841535, guid: 4b9dc945d3caf0342b1a6c3a68c0e8b0, type: 3}
+  - {fileID: 7006685284238861769, guid: bca5dcd471c531b4b9a9594cbe19bf4a, type: 3}
   minX: -2.2
   maxX: 3
   timerMaxTime: 2
@@ -1206,6 +1207,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: broccoli
       objectReference: {fileID: 0}
+    - target: {fileID: 7006685284238861769, guid: bca5dcd471c531b4b9a9594cbe19bf4a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7671723120267624307, guid: bca5dcd471c531b4b9a9594cbe19bf4a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1276,5 +1282,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2237632148442369784, guid: bca5dcd471c531b4b9a9594cbe19bf4a, type: 3}
+    - {fileID: -8741257210234038403, guid: bca5dcd471c531b4b9a9594cbe19bf4a, type: 3}
+    - {fileID: -248669080128977338, guid: bca5dcd471c531b4b9a9594cbe19bf4a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bca5dcd471c531b4b9a9594cbe19bf4a, type: 3}
