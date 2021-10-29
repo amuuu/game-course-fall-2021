@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GrapesConfig
   m_EditorClassIdentifier: 
   foodName: Grapes
-  weight: 1
-  score: 120
+  weight: 2
+  score: 12

@@ -1029,7 +1029,8 @@ MonoBehaviour:
   - {fileID: 3793698351681173248, guid: dbbeef35e9feb42438c99a40a0c4b2a9, type: 3}
   minX: -2.2
   maxX: 3
-  timerMaxTime: 2
+  INIT_MAX_TIME: 2
+  timerMaxTime: 0
   playerController: {fileID: 294549515}
 --- !u!1 &1792064859
 GameObject:
