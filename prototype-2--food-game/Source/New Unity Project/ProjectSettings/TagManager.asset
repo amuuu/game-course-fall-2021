@@ -7,6 +7,7 @@ TagManager:
   - Kill
   - Food
   - Combo
+  - HeartCombo
   layers:
   - Default
   - TransparentFX

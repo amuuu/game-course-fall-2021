@@ -11,4 +11,11 @@ public class HearthComboInstanceController : MonoBehaviour
     {
         Debug.Log("PARENT CLASS ON CONSUME");
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Kill"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
