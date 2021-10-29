@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        //decreasing hearts
         if (collision.gameObject.CompareTag("Bones"))
         {
             ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        //Taking extra heart
         if (collision.gameObject.CompareTag("Heart"))
         {
             ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();
