@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public int playerScore;
     public static int playerHeartsCount;
 
+    [SerializeField] UnityEngine.UI.Text scoreText;
+
     private void Start()
     {
         playerScore = 0;
@@ -36,6 +38,9 @@ public class PlayerController : MonoBehaviour
 
             // increase the player's score
             playerScore += conf.score;
+
+            //update the score on screen
+            scoreText.text = "Score:" +  playerScore.ToString();
 
             Debug.Log("SCORE: " + playerScore);
 
