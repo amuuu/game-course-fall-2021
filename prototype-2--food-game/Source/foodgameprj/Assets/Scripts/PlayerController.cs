@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerScore = 0;
+        playerHeartsCount = 0;
     }
 
     void Update()
@@ -64,7 +65,16 @@ public class PlayerController : MonoBehaviour
             // the CONTENT of OnConsume method inside "BonesComboController" is available inside the "comboController"
             comboController.OnConsume();
 
-            //Debug.Log("Bones eaten! " + comboController.config.comboName);
+            // destroy the combo object
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Heart"))
+        {
+            ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();
+
+            // the CONTENT of OnConsume method inside "HeartsComboController" is available inside the "comboController"
+            comboController.OnConsume();
 
             // destroy the combo object
             Destroy(collision.gameObject);

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BonesComboController : ComboInstanceController
+public class HeartsComboController : ComboInstanceController
 {
     public override void OnConsume()
     {
-        PlayerController.playerHeartsCount--;
+
+        PlayerController.playerHeartsCount++;
         Debug.LogWarning(PlayerController.playerHeartsCount);
 
+        // you should fill this method!
     }
 }
