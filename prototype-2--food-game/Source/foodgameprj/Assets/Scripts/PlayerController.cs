@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] UnityEngine.UI.Text scoreText;
     [SerializeField] UnityEngine.UI.Text heartText;
+    [SerializeField] UnityEngine.UI.Text timeFreezeTxt;
 
     private void Start()
     {
@@ -58,7 +59,11 @@ public class PlayerController : MonoBehaviour
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
 
-            Debug.Log("COMBO!!! " + comboController.config.comboName);
+            //Time freezing process
+            StartPause();
+            timeFreezeTxt.color = Color.magenta;
+            timeFreezeTxt.text = "Time is Freezed!";
+
 
             // destroy the combo object
             Destroy(collision.gameObject);
@@ -93,5 +98,45 @@ public class PlayerController : MonoBehaviour
             // destroy the combo object
             Destroy(collision.gameObject);
         }
+    }
+
+    public void StartPause()
+    {
+        StartCoroutine(PauseGame(3f));
+    }
+
+    public IEnumerator PauseGame(float pauseTime)
+    {
+        Debug.Log("Start Freezing!");
+
+
+        yield return new WaitForSeconds(0.5f);
+        timeFreezeTxt.color = Color.yellow;
+        timeFreezeTxt.text = "Take a Breath...";
+
+        yield return new WaitForSeconds(0.5f);
+        timeFreezeTxt.color = Color.cyan;
+        timeFreezeTxt.text = "Ready?";
+
+        
+
+        Time.timeScale = 0f;
+        float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
+        while (Time.realtimeSinceStartup < pauseEndTime)
+        {
+            //timeFreezeTxt.color = Color.magenta;
+            //timeFreezeTxt.text = "Time is Freezed!";
+            yield return 0;
+        }
+        Time.timeScale = 1f;
+
+        yield return new WaitForSeconds(0.4f);
+        timeFreezeTxt.color = Color.green;
+        timeFreezeTxt.text = "Go!";
+
+        yield return new WaitForSeconds(0.3f);
+        timeFreezeTxt.text = "";
+
+        Debug.Log("Freezing Finished!");
     }
 }
