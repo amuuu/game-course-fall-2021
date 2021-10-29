@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: bugerConfig
   m_EditorClassIdentifier: 
   foodName: Burger
-  weight: 1
+  weight: 0.0000001
   score: 250

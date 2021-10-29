@@ -10,9 +10,10 @@ public class HeartIncrease : ComboInstanceController
     {
     }
 
-    public override void OnConsume()
+    public override void OnConsume(GameObject gameObject)
     {
         Debug.Log("Heart Increase ON CONSUME");
+        Destroy(gameObject);
         eventSystem.OnHeartIncreaseCollected.Invoke();
 
         // you should fill this method!

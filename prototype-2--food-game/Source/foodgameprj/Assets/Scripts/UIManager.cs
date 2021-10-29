@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class UIManager : MonoBehaviour
 
     // Start is called before the first frame update
     public EventSystemCustom eventSystem;
+
     void Start()
     {
         eventSystem.updateHeartUI.AddListener(updateHeartUI);
@@ -20,12 +22,13 @@ public class UIManager : MonoBehaviour
 
     private void updateScoreUI()
     {
-        int playerScoreCount=GameObject.Find("Player").GetComponent<PlayerController>().getScoreCount();
+        int playerScoreCount = GameObject.Find("Player").GetComponent<PlayerController>().getScoreCount();
         ScoreText.text = playerScoreCount.ToString();
     }
+
     private void updateHeartUI()
     {
-        int playerHeartsCount=GameObject.Find("Player").GetComponent<PlayerController>().getHeartCount();
+        int playerHeartsCount = GameObject.Find("Player").GetComponent<PlayerController>().getHeartCount();
         if (playerHeartsCount == 3)
         {
             Heart3.SetActive(true);
@@ -54,5 +57,4 @@ public class UIManager : MonoBehaviour
         }
     }
     // Update is called once per frame
-
 }
