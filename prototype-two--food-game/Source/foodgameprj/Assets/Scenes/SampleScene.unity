@@ -295,8 +295,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.3618331, y: 1, z: 1}
+  m_Center: {x: -0.18091655, y: 0, z: 0}
 --- !u!23 &84049144
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fa4397417ccae4599958b308f1153b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0.06
+  moveAmount: 0.16
   playerScore: 0
   eventSystem: {fileID: 1740387731}
 --- !u!65 &294549516
@@ -1241,8 +1241,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.4020364, y: 1, z: 1}
+  m_Center: {x: 0.20101821, y: 0, z: 0}
 --- !u!23 &1938880701
 MeshRenderer:
   m_ObjectHideFlags: 0
