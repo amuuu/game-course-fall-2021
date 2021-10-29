@@ -18,9 +18,11 @@ public class FoodPlacer : MonoBehaviour
 
     public PlayerController playerController;
 
+    private int timeFreezer;
 
     private void Start()
     {
+        timeFreezer = 0;
         timerMaxTime = INIT_MAX_TIME;
         currentTimerValue = timerMaxTime;
     }

@@ -22,9 +22,18 @@ public class UIManager : MonoBehaviour
         
     }
 
-    private void UpdateHealth(int health)
+    private void UpdateHealth(int healthChange)
     {
-        this.health.text = "Health : " + health.ToString();
+        int currentHealth = int.Parse(this.health.text.Split(':')[1]); 
+        
+
+        if (currentHealth + healthChange < 0)
+        {
+            EventSystemCustom.current.onEndGame.Invoke("You lose!");
+            Time.timeScale = 0;
+        }
+        else
+            this.health.text = "Health : " + (currentHealth + healthChange);
     }
     private void UpdateScore(int score)
     {

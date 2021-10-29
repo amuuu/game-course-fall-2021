@@ -9,8 +9,8 @@ public class HealthComboController : ComboInstanceController
     public override void OnConsume()
     {
         Debug.Log("Health combo ON CONSUME");
-        // HealthComboItemConfig healthComboItemConfig = (HealthComboItemConfig) config;
-        // EventSystemCustom.current.onHealthChange.Invoke(playerHeartsCount);
+        HealthComboItemConfig healthComboItemConfig = (HealthComboItemConfig) config;
+        EventSystemCustom.current.onHealthChange.Invoke(healthComboItemConfig.healthChange);
         // player.playerHeartsCount += healthComboItemConfig.healthChange;
         // you should fill this method!
     }
