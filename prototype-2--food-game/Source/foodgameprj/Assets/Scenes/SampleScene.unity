@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fa4397417ccae4599958b308f1153b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0.068
+  moveAmount: 2.07
   playerScore: 0
   playerHeartsCount: 3
   eventSystem: {fileID: 1919301897}
@@ -1077,6 +1077,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnLooseCondition:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1919301898
 MonoBehaviour:
   m_ObjectHideFlags: 0

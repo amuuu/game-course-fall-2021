@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
 		eventSystem.OnScoreIncrease.AddListener(UpdateScoreText);
 		eventSystem.OnHeartDecrease.AddListener(UpdateHeartCountText);
 		eventSystem.OnHeartIncrease.AddListener(UpdateHeartCountText);
+		eventSystem.OnLooseCondition.AddListener(UpdateLooseText);
 	}
 
 	public void UpdateScoreText()
@@ -31,6 +32,12 @@ public class UIManager : MonoBehaviour
 	{
 		Debug.Log("update hearts count");
 		heartText.text = player.playerHeartsCount.ToString();
+	}
+
+	public void UpdateLooseText()
+	{
+		heartText.text = "YOU LOST!";
+		Time.timeScale = 0;
 	}
 
 }

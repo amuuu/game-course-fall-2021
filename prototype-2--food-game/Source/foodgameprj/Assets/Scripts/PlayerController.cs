@@ -5,31 +5,53 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [Range(0f, 1f)] public float moveAmount;
+    [Range(0f, 10f)] public float moveAmount;
 
     public int playerScore;
     public int playerHeartsCount;
+	//private float moveSpeed;
 	public EventSystemCustom eventSystem;
 
 
 	private void Start()
     {
         playerScore = 0;
+		//moveSpeed = 1;
+	}
+
+	private void PlateSpeed()
+	{
+		if (playerScore % 100 > 80)
+		{
+			moveAmount += 0.01f;
+			Debug.Log("speed " + moveAmount);
+		}
 	}
 
 	void Update()
     {
+		//as the score goes higher, move the plate faster as bonus
+		PlateSpeed();
+
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += new Vector3(moveAmount, 0, 0);
+            transform.position += new Vector3(moveAmount * Time.deltaTime, 0, 0);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += new Vector3(-moveAmount, 0, 0);
+            transform.position += new Vector3(-moveAmount * Time.deltaTime, 0, 0);
         }
+
+		// if player looses all hearts --> end game
+		if(playerHeartsCount == 0)
+		{
+			eventSystem.OnLooseCondition.Invoke();
+		}
     }
 
-    private void OnCollisionEnter(Collision collision)
+	
+
+	private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Food"))
         {
