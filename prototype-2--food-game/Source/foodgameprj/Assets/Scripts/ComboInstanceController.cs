@@ -5,11 +5,13 @@ using UnityEngine;
 public class ComboInstanceController : MonoBehaviour
 {
     public ComboItemConfig config;
+    private Rigidbody rigidBody;
 
     // when player eats the combo item
     private void Start()
     {
-
+        rigidBody = GetComponent<Rigidbody>();
+        rigidBody.mass = config.weight;
         // rotate randomly when instantiating
         transform.Rotate(0, Random.Range(-45, 45), 0);
     }

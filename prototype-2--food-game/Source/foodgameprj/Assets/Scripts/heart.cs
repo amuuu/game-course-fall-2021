@@ -11,7 +11,7 @@ public class heart : MonoBehaviour
     void Start()
     {
         heartText = GetComponent<Text>();
-        heartAmount = 3;
+        heartAmount = 0;
 
     }
 

@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ede673a895a60b4a99bf76b22e67a77, type: 3}
-  m_Name: ComboItemConfig
+  m_Name: WholerHamConfig
   m_EditorClassIdentifier: 
-  comboName: 
-  heart: 0
+  comboName: wholerHam
+  heart: -1
+  weight: 10000

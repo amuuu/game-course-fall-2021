@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: FishBonesConfig
   m_EditorClassIdentifier: 
   comboName: fishBones
+  heart: 1

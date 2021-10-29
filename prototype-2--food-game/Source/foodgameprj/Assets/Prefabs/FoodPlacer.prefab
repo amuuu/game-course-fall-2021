@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &18684047425364482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 18684047425364483}
+  - component: {fileID: 18684047425364480}
+  m_Layer: 0
+  m_Name: FoodPlacer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &18684047425364483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18684047425364482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.59, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &18684047425364480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18684047425364482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85991f17c3bb3db4ca3210af179b6e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 669693224618794538, guid: 99e45aedbf2daeb4b9470275dccbdbe9, type: 3}
+  - {fileID: 669693224618794538, guid: 49a161c2cfc83d4418da676b6988128c, type: 3}
+  - {fileID: 669693224618794538, guid: 28632f266dd27a547850606d8634cc19, type: 3}
+  - {fileID: 669693224618794538, guid: f5b93f84df6a0ca41a122d3382f16c45, type: 3}
+  - {fileID: 3647983979539366899, guid: 91d9c8be52942a44ba2ee766a0f7a665, type: 3}
+  - {fileID: 294002532119458398, guid: 39f826a27b1d16145be7d48084bc8977, type: 3}
+  - {fileID: 1786978910002322671, guid: ace67171c511edb498cda35082f34771, type: 3}
+  comboPrefabs:
+  - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 5780202372960662507, guid: 5ff30fe13bc5c91488edb1c9b6f0bccb, type: 3}
+  - {fileID: 1769438311727131693, guid: d5e837560e5af49489e8012efcd6ca4e, type: 3}
+  minX: -2.2
+  maxX: 3
+  timerMaxTime: 2
+  playerController: {fileID: 0}
