@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public int playerScore;
     public int playerHeartsCount;
     public int playerHearts;
+    public EventSystemCustom eventSystem;
 
     private void Start()
     {
@@ -38,6 +39,9 @@ public class PlayerController : MonoBehaviour
             // increase the player's score
             playerScore += conf.score;
 
+            eventSystem.playrScore = playerScore;
+            eventSystem.updateScore.Invoke();
+
             Debug.Log("SCORE: " + playerScore);
 
             // destroy the food object
@@ -55,8 +59,8 @@ public class PlayerController : MonoBehaviour
 
             if (comboController.config.comboName.Equals("Fish Bones"))
             {
-                Debug.Log("Siuu");
                 playerHeartsCount -= 1;
+                eventSystem.updateHeartCount.Invoke();
                 if (playerHeartsCount == 0)
                 {
                     Debug.Log("Game Over!");
