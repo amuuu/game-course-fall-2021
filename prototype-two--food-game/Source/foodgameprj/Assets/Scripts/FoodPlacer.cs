@@ -11,8 +11,10 @@ public class FoodPlacer : MonoBehaviour
     public float minX;
     public float maxX;
 
-    public float timerMaxTime;
-    private float currentTimerValue;
+    public double timerMaxTime;
+    private double currentTimerValue;
+
+    private int lastScore;
 
     public PlayerController playerController;
 
@@ -20,6 +22,7 @@ public class FoodPlacer : MonoBehaviour
     private void Start()
     {
         currentTimerValue = timerMaxTime;
+        lastScore = 0;
     }
 
     void Update()
@@ -44,23 +47,25 @@ public class FoodPlacer : MonoBehaviour
 
             go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
 
-            UpdateTimerValueBasedOnScore();
-
             // reset timer
             currentTimerValue = timerMaxTime;
+        }
+
+        if (lastScore != playerController.playerScore)
+        {
+            lastScore = playerController.playerScore;
+            UpdateTimerValueBasedOnScore();
         }
     }
 
     private void UpdateTimerValueBasedOnScore()
     {
-        if (playerController.playerScore % 400 < 200 && playerController.playerScore % 400 >= 0)
-        {
-            timerMaxTime -= 0.02f;
+        timerMaxTime -= GaussianFunction(playerController.playerScore);
+    }
 
-            if (timerMaxTime < 0.5f)
-                timerMaxTime = 0.5f;
-        }
-
+    private double GaussianFunction(int x, double a=0.7, double b =900, double c =75000)
+    {
+        return a * Math.Exp(-1 * Math.Pow(x - b, 2) / c);
     }
 
     int GetRandomPrefabType(int max)
