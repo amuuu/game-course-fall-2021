@@ -57,6 +57,8 @@ public class TimeFreezerComboController : ComboInstanceController
             Time.timeScale = newTimeScale;
             yield return null;
         }
+
+        actionDone = true;
     }
 
     IEnumerator UpdateFrostFrame()
@@ -65,7 +67,6 @@ public class TimeFreezerComboController : ComboInstanceController
         {
             var color = frostFrame.color;
             color.a = (1 - Time.timeScale);
-            Debug.LogWarning("scale&alpha: " + Time.timeScale + ", " + color.a);
             frostFrame.color = color;
             yield return null;
         }
