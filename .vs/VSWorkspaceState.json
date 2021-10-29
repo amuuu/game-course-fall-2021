@@ -1,12 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\prototype-one--2d-puzzle-game",
-    "\\prototype-one--2d-puzzle-game\\Source",
-    "\\prototype-one--2d-puzzle-game\\Source\\2dpuzzlegame",
-    "\\prototype-one--2d-puzzle-game\\Source\\2dpuzzlegame\\Assets",
-    "\\prototype-one--2d-puzzle-game\\Source\\2dpuzzlegame\\Assets\\Scripts"
+    "\\prototype-2--food-game",
+    "\\prototype-2--food-game\\Raw Assets",
+    "\\prototype-2--food-game\\Source",
+    "\\prototype-2--food-game\\Source\\foodgameprj",
+    "\\prototype-2--food-game\\Source\\foodgameprj\\Assets",
+    "\\prototype-2--food-game\\Source\\foodgameprj\\Assets\\Scripts"
   ],
-  "SelectedNode": "\\prototype-one--2d-puzzle-game\\Source\\2dpuzzlegame\\Assets\\Scripts\\EventSystemCustom.cs",
+  "SelectedNode": "\\prototype-2--food-game\\Source\\foodgameprj\\Assets\\Scripts\\FoodPlacer.cs.meta",
   "PreviewInSolutionExplorer": false
 }

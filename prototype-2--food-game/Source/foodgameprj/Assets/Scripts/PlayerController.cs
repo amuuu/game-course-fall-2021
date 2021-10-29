@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerScore = 0;
+        playerHeartsCount = 3;
     }
 
     void Update()
@@ -52,9 +53,20 @@ public class PlayerController : MonoBehaviour
             comboController.OnConsume();
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
+            if(comboController.config.comboName =="Fish")
+            {
+                Debug.Log("FishBones");
+                if (playerHeartsCount > 0)
+                {
+                    playerHeartsCount--;
+                }
+                Debug.Log("HeartCount "+playerHeartsCount);
+
+            }
 
             // destroy the combo object
             Destroy(collision.gameObject);
         }
+
     }
 }

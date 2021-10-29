@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10ffdbe31607f514f937d0d9754a042b, type: 3}
-  m_Name: FoodItemConfig
+  m_Name: IceCreamScoopConfig
   m_EditorClassIdentifier: 
   foodName: 
   weight: 0
