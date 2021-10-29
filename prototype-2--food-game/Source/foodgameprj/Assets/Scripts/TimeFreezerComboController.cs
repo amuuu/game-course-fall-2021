@@ -8,14 +8,8 @@ public class TimeFreezerComboController : ComboInstanceController
     [Range(0.0f, 1.0f)] public float changeRate;
     public Image frostFrame;
     bool actionDone = false;
+    static TimeFreezerComboController activeCombo;
 
-    static TimeFreezerComboController Instance { get; set;}
-    void Awake()
-    {
-        if (Instance != null && Instance != this)
-            Instance.DestroyCombo();
-        Instance = this;
-    }
     void Start()
     {
         AutoDestroyOnConsume = false;
@@ -23,14 +17,20 @@ public class TimeFreezerComboController : ComboInstanceController
     }
     void Update()
     {
-        if (actionDone) DestroyCombo();
+        if (actionDone)
+        {
+            activeCombo = null;
+            DestroyCombo();
+        }
     }
 
     // when player eats the combo item
     protected override void OnConsumeAction(PlayerController playerController)
     {
         Debug.Log("TIME FREEZER ON CONSUME");
-        
+        if (activeCombo != null) activeCombo.DestroyCombo();
+        activeCombo = this;
+
         GetComponent<Collider>().enabled = false;
         GetComponentInChildren<MeshRenderer>().enabled = false;
 
