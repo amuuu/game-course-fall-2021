@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     [Range(0f, 1f)] public float moveAmount;
 
     public int playerScore;
     public int playerHeartsCount;
+    public EventSystemCustom ev;
 
     private void Start()
     {
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
             // increase the player's score
             playerScore += conf.score;
+            ev.OnScore.Invoke();
 
             Debug.Log("SCORE: " + playerScore);
 
@@ -53,6 +56,8 @@ public class PlayerController : MonoBehaviour
             comboController.OnConsume();
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
+            if(comboController.config.comboName.Equals("fishBones"))
+            ev.OnHeart.Invoke();
 
             // destroy the combo object
             Destroy(collision.gameObject);
