@@ -7,6 +7,8 @@ public class FoodPlacer : MonoBehaviour
 {
     public GameObject[] prefabs;
     public GameObject[] comboPrefabs;
+    public GameObject[] heartPrefabs;
+
 
     public float minX;
     public float maxX;
@@ -32,9 +34,13 @@ public class FoodPlacer : MonoBehaviour
         {
             GameObject go;
 
-            if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
+            if (UnityEngine.Random.Range(0, 2000) % 3 == 0)
             {
                 go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+            }
+            else if (UnityEngine.Random.Range(0, 2000) % 3 == 1)
+            {
+                go = Instantiate(heartPrefabs[GetRandomPrefabType(heartPrefabs.Length)]);
             }
             else
             {

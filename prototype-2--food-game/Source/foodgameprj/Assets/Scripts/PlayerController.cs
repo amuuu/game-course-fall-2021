@@ -56,5 +56,19 @@ public class PlayerController : MonoBehaviour
             // destroy the combo object
             Destroy(collision.gameObject);
         }
+
+        if (collision.gameObject.CompareTag("Heart"))
+        {
+            // access the heart object config
+            HeartItemConfig conf = collision.gameObject.GetComponent<HeartInstanceController>().config;
+
+            // increase the player's hearts
+            playerHeartsCount += conf.value;
+
+            Debug.Log("HEART: " + playerHeartsCount);
+
+            // destroy the heart object
+            Destroy(collision.gameObject);
+        }
     }
 }
