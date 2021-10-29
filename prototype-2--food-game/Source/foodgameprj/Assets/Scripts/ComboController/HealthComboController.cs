@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class HealthComboController : ComboInstanceController
 {
+    public PlayerController player;
     // when player eats the combo item
     public override void OnConsume()
     {
         Debug.Log("Health combo ON CONSUME");
-        
+        HealthComboItemConfig healthComboItemConfig = (HealthComboItemConfig) config;
+        // player.playerHeartsCount += healthComboItemConfig.healthChange;
         // you should fill this method!
     }
 }

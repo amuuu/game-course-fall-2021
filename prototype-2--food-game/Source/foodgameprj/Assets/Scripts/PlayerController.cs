@@ -51,8 +51,8 @@ public class PlayerController : MonoBehaviour
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
 
-            Debug.Log("COMBO!!! " + comboController.config.comboName);
-
+            Debug.Log("COMBO!!! " + comboController.config.comboName+" health:"+playerHeartsCount);
+            
             // destroy the combo object
             Destroy(collision.gameObject);
         }
