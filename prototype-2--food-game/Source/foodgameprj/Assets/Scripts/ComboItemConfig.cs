@@ -6,4 +6,5 @@ using UnityEngine;
 public class ComboItemConfig : ScriptableObject
 {
     public string comboName;
+    public int heart;
 }
