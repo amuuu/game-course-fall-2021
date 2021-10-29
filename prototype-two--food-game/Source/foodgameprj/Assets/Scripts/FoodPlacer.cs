@@ -28,6 +28,10 @@ public class FoodPlacer : MonoBehaviour
 
     void Update()
     {
+        if (playerController.playerHeartsCount == 0)
+        {
+            return;
+        }
         if (currentTimerValue > 0)
         {
             currentTimerValue -= Time.deltaTime;

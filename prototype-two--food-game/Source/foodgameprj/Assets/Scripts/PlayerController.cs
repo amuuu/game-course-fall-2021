@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (playerHeartsCount == 0)
+        {
+            return;
+        }
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(moveAmount, 0, 0);
@@ -54,6 +58,10 @@ public class PlayerController : MonoBehaviour
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
+            if (playerHeartsCount == 0)
+            {
+                eventSystem.OnPlayerLose.Invoke();
+            }
 
             eventSystem.OnPlayerHeartCountUpdate.Invoke();
 

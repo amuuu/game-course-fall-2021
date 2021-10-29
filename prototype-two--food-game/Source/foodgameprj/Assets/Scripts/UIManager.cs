@@ -11,11 +11,13 @@ public class UIManager : MonoBehaviour
 
     public Text scoreValueText;
     public Text heartCountText;
+    public Text loseText;
 
     void Start()
     {
         eventSystem.OnPlayerScoreUpdate.AddListener(UpdateScoreText);
         eventSystem.OnPlayerHeartCountUpdate.AddListener(UpdateHeartText);
+        eventSystem.OnPlayerLose.AddListener(ShowPlayerLoseText);
     }
 
     void Update()
@@ -31,5 +33,10 @@ public class UIManager : MonoBehaviour
     public void UpdateHeartText()
     {
         heartCountText.text = playerController.playerHeartsCount.ToString();
+    }
+
+    public void ShowPlayerLoseText()
+    {
+        loseText.text = "You Lost!";
     }
 }

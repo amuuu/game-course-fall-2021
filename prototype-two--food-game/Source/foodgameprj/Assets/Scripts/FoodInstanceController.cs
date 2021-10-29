@@ -27,6 +27,10 @@ public class FoodInstanceController : MonoBehaviour
             Destroy(this.gameObject);
             playerController.playerHeartsCount -= 1;
             eventSystem.OnPlayerHeartCountUpdate.Invoke();
+            if (playerController.playerHeartsCount == 0)
+            {
+                eventSystem.OnPlayerLose.Invoke();
+            }
         }
     }
 }
