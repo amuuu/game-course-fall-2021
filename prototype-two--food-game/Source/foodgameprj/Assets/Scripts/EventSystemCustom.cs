@@ -7,10 +7,12 @@ public class EventSystemCustom : MonoBehaviour
 {
     public UnityEvent OnHeartDecreaserEnter;
     public UnityEvent OnFoodToPlateEnter;
+    public UnityEvent OnHeartReachZeroEnter;
 
     void Awake()
     {
         OnHeartDecreaserEnter = new UnityEvent();
         OnFoodToPlateEnter = new UnityEvent();
+        OnHeartReachZeroEnter = new UnityEvent();
     }
 }

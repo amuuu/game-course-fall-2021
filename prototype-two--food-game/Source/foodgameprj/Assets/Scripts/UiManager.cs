@@ -7,6 +7,7 @@ public class UiManager : MonoBehaviour
 {
     public Text scoreText;
     public Text heartText;
+    public Text gameOverText;
 
     public EventSystemCustom eventSystem;
 
@@ -16,6 +17,7 @@ public class UiManager : MonoBehaviour
     {
         eventSystem.OnHeartDecreaserEnter.AddListener(UpdateHeartText);
         eventSystem.OnFoodToPlateEnter.AddListener(UpdateScoreText);
+        eventSystem.OnHeartReachZeroEnter.AddListener(GetGameOverText);
     }
 
     public void UpdateHeartText()
@@ -30,5 +32,10 @@ public class UiManager : MonoBehaviour
         string[] tokens = scoreText.text.Split(' ');
         int newKeyValue = player.playerScore;
         scoreText.text = tokens[0] + ' ' + tokens[1] + ' ' + newKeyValue;
+    }
+
+    public void GetGameOverText()
+    {
+        gameOverText.text = "Game Over";
     }
 }

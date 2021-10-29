@@ -16,14 +16,28 @@ public class FoodPlacer : MonoBehaviour
 
     public PlayerController playerController;
 
+    private int lastScore;
 
     private void Start()
     {
         currentTimerValue = timerMaxTime;
+        lastScore = playerController.playerScore;
     }
 
     void Update()
     {
+        if (!playerController)
+        {
+            Destroy(this.gameObject);
+        }
+
+        if (lastScore != playerController.playerScore)
+        {
+            lastScore = playerController.playerScore;
+            UpdateTimerValueBasedOnScore();
+
+        }
+
         if (currentTimerValue > 0)
         {
             currentTimerValue -= Time.deltaTime;
@@ -32,7 +46,8 @@ public class FoodPlacer : MonoBehaviour
         {
             GameObject go;
 
-            if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
+            var rand = UnityEngine.Random.Range(0, 2000) % (prefabs.Length + 3 * comboPrefabs.Length);
+            if (rand < 3 * comboPrefabs.Length)
             {
                 go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
             }
@@ -43,8 +58,6 @@ public class FoodPlacer : MonoBehaviour
 
             go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
 
-            UpdateTimerValueBasedOnScore();
-
             // reset timer
             currentTimerValue = timerMaxTime;
         }
@@ -54,7 +67,7 @@ public class FoodPlacer : MonoBehaviour
     {
         if (playerController.playerScore % 400 < 200 && playerController.playerScore % 400 >= 0)
         {
-            timerMaxTime -= 0.02f;
+            timerMaxTime -= 0.5f;
 
             if (timerMaxTime < 0.5f)
                 timerMaxTime = 0.5f;

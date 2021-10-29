@@ -26,6 +26,12 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += new Vector3(-moveAmount, 0, 0);
         }
+
+        if (playerHeartsCount <= 0)
+        {
+            Destroy(this.gameObject);
+            eventSystem.OnHeartReachZeroEnter.Invoke();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
