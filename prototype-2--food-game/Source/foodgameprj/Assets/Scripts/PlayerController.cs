@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [Range(0f, 1f)] public float moveAmount;
 
     public int playerScore;
     public int playerHeartsCount;
+    public EventSystemCustom eventSystem;
+    public Text playerScoreText;
     private void Start()
     {
         playerScore = 0;
@@ -35,7 +37,8 @@ public class PlayerController : MonoBehaviour
 
             // increase the player's score
             playerScore += conf.score;
-
+            int newTextValue = int.Parse(playerScoreText.text) + playerScore;
+            playerScoreText.text = newTextValue.ToString();
             Debug.Log("SCORE: " + playerScore);
 
             // destroy the food object
@@ -55,11 +58,13 @@ public class PlayerController : MonoBehaviour
 
             if (comboController.config.comboName == "Fish")
             {
+                eventSystem.onFish.Invoke();
                 playerHeartsCount++;
                 Debug.Log("Heart Increased: " + playerHeartsCount);
             }
             if (comboController.config.comboName == "FishBone")
             {
+                eventSystem.onFishBone.Invoke();
                 playerHeartsCount--;
                 Debug.Log("Heart Decreased: " + playerHeartsCount);
             }
