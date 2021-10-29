@@ -56,8 +56,13 @@ public class PlayerController : MonoBehaviour
             
             HealthComboItemConfig healthComboItemConfig = (HealthComboItemConfig) comboController.config;
             playerHeartsCount += healthComboItemConfig.healthChange;
+
             if (playerHeartsCount < 0)
+            {
                 EventSystemCustom.current.onEndGame.Invoke("You lose!");
+                Time.timeScale = 0;
+            }
+                
             else
                 EventSystemCustom.current.onHealthChange.Invoke(playerHeartsCount);
 
