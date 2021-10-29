@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerScore = 0;
+        playerHeartsCount = 3;
     }
 
     void Update()
