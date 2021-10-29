@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeartDecreaserComboController : ComboInstanceController
 {
-    public override void OnConsume(PlayerController playerController)
+    protected override void OnConsumeAction(PlayerController playerController)
     {
         playerController.LoseHeart();
     }
