@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public EventSystemCustom eventSystem;
 
     private void Start()
     {
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
             // increase the player's score
             playerScore += conf.score;
 
+            eventSystem.ScoreEvent.Invoke();
             Debug.Log("SCORE: " + playerScore);
 
             // destroy the food object
@@ -60,6 +62,7 @@ public class PlayerController : MonoBehaviour
                 {
                     playerHeartsCount--;
                 }
+                eventSystem.HeartCountEvent.Invoke();
                 Debug.Log("HeartCount "+playerHeartsCount);
 
             }
