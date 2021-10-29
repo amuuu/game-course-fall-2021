@@ -9,6 +9,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ComboController/TimeFreezerComboController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EventSystemCustom.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="20AtinK99aaWtsYqYHFj8fTEP1j" />
   <component name="ProjectViewState">
@@ -54,6 +55,7 @@
       <updated>1635499362160</updated>
       <workItem from="1635499363561" duration="6000" />
       <workItem from="1635499920003" duration="9661000" />
+      <workItem from="1635518437724" duration="696000" />
     </task>
     <servers />
   </component>
