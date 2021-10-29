@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +8,14 @@ public class TimeFreezerComboController : ComboInstanceController
     [Range(0.0f, 1.0f)] public float changeRate;
     public Image frostFrame;
     bool actionDone = false;
+
+    static TimeFreezerComboController Instance { get; set;}
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+            Instance.DestroyCombo();
+        Instance = this;
+    }
     void Start()
     {
         AutoDestroyOnConsume = false;
