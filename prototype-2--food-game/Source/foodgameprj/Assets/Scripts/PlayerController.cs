@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,8 +24,11 @@ public class PlayerController : MonoBehaviour
 
     private void MovementHandler()
     {
-        float movementX = Input.GetAxis("Horizontal");
-        transform.Translate(movementX * moveAmount * Time.deltaTime, 0, 0, Space.Self);
+        float movementX = Input.GetAxisRaw("Horizontal");
+        var move = new Vector3(movementX, 0);
+        move.Normalize();
+        move *= moveAmount * Time.unscaledDeltaTime;
+        transform.Translate(move);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -55,9 +58,6 @@ public class PlayerController : MonoBehaviour
             //combo destoys itself when done
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
-
-            // destroy the combo object
-            Destroy(collision.gameObject);
         }
     }
 
@@ -83,7 +83,8 @@ public class PlayerController : MonoBehaviour
 
     public void EndGame()
     {
-        Time.timeScale = 0;
         uimanager.ShowLoseText();
+        moveAmount = 0;
+        while(true) Time.timeScale = 0;
     }
 }
