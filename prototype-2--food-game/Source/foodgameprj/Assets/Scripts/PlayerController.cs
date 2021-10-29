@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] UnityEngine.UI.Text heartText;
     [SerializeField] UnityEngine.UI.Text timeFreezeTxt;
 
+    [SerializeField] AudioSource collectFruitSFX;
+
     private void Start()
     {
         playerScore = 0;
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Food"))
         {
+            collectFruitSFX.Play();
             // access the food object config
             FoodItemConfig conf = collision.gameObject.GetComponent<FoodInstanceController>().config;
 
@@ -87,6 +90,7 @@ public class PlayerController : MonoBehaviour
         //Taking extra heart
         if (collision.gameObject.CompareTag("Heart"))
         {
+            collectFruitSFX.Play();
             ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();
 
             // the CONTENT of OnConsume method inside "HeartsComboController" is available inside the "comboController"
