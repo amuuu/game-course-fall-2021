@@ -52,7 +52,7 @@ public class FoodPlacer : MonoBehaviour
 
     private void UpdateTimerValueBasedOnScore()
     {
-        if (playerController.playerScore % 400 < 200 /*&& playerController.playerScore % 400 >= 0*/)
+        if (playerController.playerScore % 400 < 200 )
         {
             timerMaxTime -= 0.03f;
 
