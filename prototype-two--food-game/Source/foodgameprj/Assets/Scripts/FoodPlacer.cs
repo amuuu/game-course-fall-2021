@@ -16,13 +16,12 @@ public class FoodPlacer : MonoBehaviour
 
     public PlayerController playerController;
 
-
-    private void Start()
+	private void Start()
     {
         currentTimerValue = timerMaxTime;
-    }
+	}
 
-    void Update()
+	void Update()
     {
         if (currentTimerValue > 0)
         {
