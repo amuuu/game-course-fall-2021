@@ -30,12 +30,13 @@ public class FoodPlacer : MonoBehaviour
         }
         else
         {
+            //Combo instantiation rate
             GameObject go;
-
-            if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
+            if (UnityEngine.Random.Range(0, 2000) % 3 == 0)
             {
                 go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
             }
+            //Foods instantiation rate
             else
             {
                 go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);

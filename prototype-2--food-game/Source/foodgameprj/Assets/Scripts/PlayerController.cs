@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Range(0f, 1f)] public float moveAmount;
+    [Range(0f, 0.9f)] public float moveAmount;
 
     public int playerScore;
     public static int playerHeartsCount;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
         playerHeartsCount = 3;
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKey(KeyCode.D))
         {
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
             playerScore += conf.score;
 
             //update the score on screen
-            scoreText.text = "Score:" +  playerScore.ToString();
+            scoreText.text = "Score: " +  playerScore.ToString();
 
             Debug.Log("SCORE: " + playerScore);
 
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        //decreasing hearts
+        //Decreasing hearts
         if (collision.gameObject.CompareTag("Bones"))
         {
             ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();

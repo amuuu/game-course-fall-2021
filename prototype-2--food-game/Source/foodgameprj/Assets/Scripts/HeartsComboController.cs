@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeartsComboController : ComboInstanceController
 {
-    //add heart by one
+    //Add hearts count by one
     public override void OnConsume()
     {
         PlayerController.playerHeartsCount++;

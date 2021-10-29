@@ -208,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84049142}
   m_LocalRotation: {x: 0.000077050805, y: -0.000092318194, z: 0.00047322488, w: 0.9999999}
-  m_LocalPosition: {x: 4.2599983, y: 1.9237622, z: 0.00073424616}
+  m_LocalPosition: {x: 4.37, y: 1.9237622, z: 0.00073424616}
   m_LocalScale: {x: 1, y: 14.326782, z: 1}
   m_Children: []
   m_Father: {fileID: 1230083577}
@@ -828,7 +828,7 @@ MonoBehaviour:
   - {fileID: 5390816787227971057, guid: 02616a64863a00d4c9e6e5692cdb2142, type: 3}
   minX: -2.2
   maxX: 3
-  timerMaxTime: 1.5
+  timerMaxTime: 1.3
   playerController: {fileID: 294549515}
 --- !u!1 &1882378473 stripped
 GameObject:
@@ -1014,7 +1014,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1938880699}
   m_LocalRotation: {x: 0.000077050805, y: -0.000092318194, z: 0.00047322488, w: 0.9999999}
-  m_LocalPosition: {x: -3.6899981, y: 1.9162377, z: -0.0007342462}
+  m_LocalPosition: {x: -3.79, y: 1.9162377, z: -0.0007342462}
   m_LocalScale: {x: 1, y: 14.326782, z: 1}
   m_Children: []
   m_Father: {fileID: 1230083577}

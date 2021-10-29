@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BonesComboController : ComboInstanceController
 {
-    //decrease heart by one
+    //Decrease hearts count by one
     public override void OnConsume()
     {
         PlayerController.playerHeartsCount--;
