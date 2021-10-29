@@ -7,6 +7,9 @@ TagManager:
   - Kill
   - Food
   - Combo
+  - Players
+  - Score
+  - Heart
   layers:
   - Default
   - TransparentFX

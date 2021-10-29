@@ -19,8 +19,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (this.playerScore > 1000)
+        {
+            moveAmount = 0.13f;
+
+        }
         if (Input.GetKey(KeyCode.D))
         {
+
             transform.position += new Vector3(moveAmount, 0, 0);
         }
         if (Input.GetKey(KeyCode.A))
@@ -63,4 +69,6 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+   
+
 }

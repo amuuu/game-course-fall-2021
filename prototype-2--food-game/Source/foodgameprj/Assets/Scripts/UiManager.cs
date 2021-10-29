@@ -30,5 +30,4 @@ public class UiManager : MonoBehaviour
             val--;
         heartText.text = val.ToString();
     }
- 
 }

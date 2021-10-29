@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ede673a895a60b4a99bf76b22e67a77, type: 3}
   m_Name: FishBonesConfig
   m_EditorClassIdentifier: 
-  comboName: 
+  comboName: fishBones

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SausageConfig
   m_EditorClassIdentifier: 
   foodName: Sausage
-  weight: 1
+  weight: 1.5
   score: 160
