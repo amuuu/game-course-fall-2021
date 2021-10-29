@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
     [Range(0f, 10f)] public float moveAmount;
 
     public int playerScore;
-    public int playerHeartsCount;
+    public int maxPlayerHearts;
+    int playerHeartsCount;
     public UiManager uimanager;
 
     private void Start()
     {
         playerScore = 0;
+        playerHeartsCount = maxPlayerHearts;
         uimanager.UpdateScoreCount(playerScore);
         uimanager.UpdateHeartsCount(playerHeartsCount);
     }
@@ -71,6 +73,8 @@ public class PlayerController : MonoBehaviour
     }
     public void EarnHeart()
     {
+        if (playerHeartsCount >= maxPlayerHearts)
+            return;
         playerHeartsCount++;
         uimanager.UpdateHeartsCount(playerHeartsCount);
         Debug.Log("Heart earned");
@@ -85,6 +89,19 @@ public class PlayerController : MonoBehaviour
     {
         uimanager.ShowLoseText();
         moveAmount = 0;
-        while(true) Time.timeScale = 0;
+        StartCoroutine(KeepTimeScaleZero());
+    }
+    IEnumerator KeepTimeScaleZero()
+    {
+        while(true)
+        {
+            Time.timeScale = 0;
+            yield return null;
+        }
+    }
+
+    public void increaseMovementSpeed(float speed)
+    {
+        moveAmount += speed;
     }
 }
