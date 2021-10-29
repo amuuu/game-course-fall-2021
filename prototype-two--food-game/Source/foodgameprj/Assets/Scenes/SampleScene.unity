@@ -1315,7 +1315,7 @@ MonoBehaviour:
   - {fileID: 5177670105868480932, guid: 6d8b87e7a77c945a6a8f9d9a12744c1c, type: 3}
   minX: -2.2
   maxX: 3
-  timerMaxTime: 3
+  timerMaxTime: 2.5
   playerController: {fileID: 294549515}
   eventSystem: {fileID: 1015247368}
 --- !u!1 &1938880699
