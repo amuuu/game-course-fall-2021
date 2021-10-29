@@ -263,6 +263,7 @@ MonoBehaviour:
   moveAmount: 0.068
   playerScore: 0
   playerHeartsCount: 3
+  playerHearts: 0
 --- !u!65 &294549516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -659,6 +660,7 @@ MonoBehaviour:
   - {fileID: 2918735847797368808, guid: 12a49b7aba0d51247be66518c485e24c, type: 3}
   comboPrefabs:
   - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 4579126485596580436, guid: 7f9d3be0f18b76e448ea5693dea5f12b, type: 3}
   minX: -2.2
   maxX: 3
   timerMaxTime: 2

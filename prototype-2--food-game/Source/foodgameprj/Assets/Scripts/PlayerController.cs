@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public int playerHearts;
 
     private void Start()
     {
+        playerHearts = 3;
         playerScore = 0;
     }
 
@@ -50,6 +52,17 @@ public class PlayerController : MonoBehaviour
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
+
+            if (comboController.config.comboName.Equals("Fish Bones"))
+            {
+                Debug.Log("Siuu");
+                playerHeartsCount -= 1;
+                if (playerHeartsCount == 0)
+                {
+                    Debug.Log("Game Over!");
+                    Destroy(this.gameObject);
+                }
+            }
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
 
