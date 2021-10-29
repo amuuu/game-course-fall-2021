@@ -7,43 +7,36 @@ public class UiManager : MonoBehaviour
 {
     public Text score;
     public Text heart;
+
     public EventSystemCustom eventSystem;
 
-    public FoodItemConfig config;
+    public PlayerController player;
 
     void Start()
     {
-        eventSystem.OnIncreaseScore.AddListener(UpdateScoreText);
-        eventSystem.OnGainHeart.AddListener(UpdateHeartText);
-        eventSystem.OnDecreaseScore.AddListener(DegradeScoreText);
-        eventSystem.OnLoseHeart.AddListener(DegradeHeartText);
+        eventSystem.OnScore.AddListener(UpdateScoreText);
+        eventSystem.OnIncreaseHeart.AddListener(UpdateIncreaseHeartText);
+        eventSystem.OnDecreaseHeart.AddListener(UpdateDecreaseHeartText);
     }
 
     public void UpdateScoreText()
     {
         Debug.Log("UPDATE SCORE");
-        int newTextValue = int.Parse(score.text) + 1;
-        score.text = newTextValue.ToString();
+        score.text = player.playerScore.ToString();
     }
 
-    public void UpdateHeartText()
+    public void UpdateIncreaseHeartText()
     {
         Debug.Log("UPDATE HEART");
-        int newTextValue = int.Parse(heart.text) + config.score;
-        heart.text = newTextValue.ToString();
+        int value = int.Parse(heart.text) + 1;
+        heart.text = value.ToString();
     }
 
-    public void DegradeScoreText()
+    public void UpdateDecreaseHeartText()
     {
-        Debug.Log("DEGRADE SCORE");
-        int newTextValue = int.Parse(score.text) - 1;
-        score.text = newTextValue.ToString();
+        Debug.Log("UPDATE HEART");
+        int value = int.Parse(heart.text) - 1;
+        heart.text = value.ToString();
     }
 
-    public void DegradeHeartText()
-    {
-        Debug.Log("DEGRADE HEART");
-        int newTextValue = int.Parse(heart.text) - 1;
-        heart.text = newTextValue.ToString();
-    }
 }

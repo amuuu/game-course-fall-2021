@@ -5,16 +5,14 @@ using UnityEngine.Events;
 
 public class EventSystemCustom : MonoBehaviour
 {
-    public UnityEvent OnIncreaseScore;
-    public UnityEvent OnDecreaseScore;
-    public UnityEvent OnGainHeart;
-    public UnityEvent OnLoseHeart;
+    public UnityEvent OnScore;
+    public UnityEvent OnIncreaseHeart;
+    public UnityEvent OnDecreaseHeart;
 
     void Awake()
     {
-        OnIncreaseScore = new UnityEvent();
-        OnDecreaseScore = new UnityEvent();
-        OnGainHeart = new UnityEvent();
-        OnLoseHeart = new UnityEvent();
+        OnScore = new UnityEvent();
+        OnIncreaseHeart = new UnityEvent();
+        OnDecreaseHeart = new UnityEvent();
     }
 }

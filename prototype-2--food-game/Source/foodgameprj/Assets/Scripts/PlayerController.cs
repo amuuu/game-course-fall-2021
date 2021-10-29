@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
             // destroy the food object
             Destroy(collision.gameObject);
-            eventSystem.OnIncreaseScore.Invoke();
+            eventSystem.OnScore.Invoke();
 
         }
 
