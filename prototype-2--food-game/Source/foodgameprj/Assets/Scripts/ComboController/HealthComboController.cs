@@ -8,7 +8,7 @@ public class HealthComboController : ComboInstanceController
     public override void OnConsume()
     {
         Debug.Log("Health combo ON CONSUME");
-
+        
         // you should fill this method!
     }
 }
