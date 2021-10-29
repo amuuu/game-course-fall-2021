@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fa4397417ccae4599958b308f1153b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0.068
+  moveAmount: 0.07
   playerScore: 0
   playerHeartsCount: 3
   playerHearts: 0
@@ -780,6 +780,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  playrScore: 0
 --- !u!4 &1561732374 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e3ba26860d91c464f95c9b91039b53d1,

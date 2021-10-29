@@ -16,7 +16,7 @@ public class FoodPlacer : MonoBehaviour
 
     public PlayerController playerController;
 
-
+    // with parameter settings, it's hard to get over 10000 points, which is logical. 
     private void Start()
     {
         currentTimerValue = timerMaxTime;
@@ -31,10 +31,17 @@ public class FoodPlacer : MonoBehaviour
         else
         {
             GameObject go;
-
+            // 50% combat, 50% food is ok
             if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
             {
-                go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                var ind = GetRandomPrefabType(comboPrefabs.Length);
+                // double check timer freeze combat to give it less possibility 
+                // than other types of combats (here we have just 2 combats)
+                if (ind == 0)
+                {
+                    ind = GetRandomPrefabType(comboPrefabs.Length);
+                }
+                go = Instantiate(comboPrefabs[ind]);
             }
             else
             {
@@ -52,12 +59,20 @@ public class FoodPlacer : MonoBehaviour
 
     private void UpdateTimerValueBasedOnScore()
     {
-        if (playerController.playerScore % 400 < 200 && playerController.playerScore % 400 >= 0)
+        // it looked more exciting
+        if (playerController.playerScore % 1000 < 500 && playerController.playerScore % 500 >= 0)
         {
             timerMaxTime -= 0.02f;
 
-            if (timerMaxTime < 0.5f)
-                timerMaxTime = 0.5f;
+            if (timerMaxTime < 0.4f)
+                timerMaxTime = 0.4f;
+        }
+        else if (playerController.playerScore % 1000 > 500 && playerController.playerScore % 500 >= 0)
+        {
+            timerMaxTime -= 0.04f;
+
+            if (timerMaxTime < 0.4f)
+                timerMaxTime = 0.4f;
         }
 
     }

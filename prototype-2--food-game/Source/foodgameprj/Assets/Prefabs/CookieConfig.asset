@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: Cookie
   weight: 0.5
-  score: 120
+  score: 100
