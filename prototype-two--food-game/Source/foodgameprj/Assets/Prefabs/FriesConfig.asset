@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ffdbe31607f514f937d0d9754a042b, type: 3}
   m_Name: FriesConfig
   m_EditorClassIdentifier: 
-  foodName: 
-  weight: 0
-  score: 0
+  foodName: Fries
+  weight: 0.5
+  score: 50
