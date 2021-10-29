@@ -340,7 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAmount: 4
   playerScore: 0
-  playerHeartsCount: 1
+  maxPlayerHearts: 3
   uimanager: {fileID: 431164773}
 --- !u!65 &294549516
 BoxCollider:
