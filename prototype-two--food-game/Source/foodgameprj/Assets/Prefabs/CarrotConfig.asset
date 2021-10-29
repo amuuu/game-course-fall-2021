@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CarrotConfig
   m_EditorClassIdentifier: 
   foodName: Carrot
-  weight: 2
-  score: 80
+  weight: 9
+  score: 9

@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public Text Score;
-    public Text Heart;          // Reference to key number text in UI
+    public Text Heart;
+    public int playerHeartsCount;
     public EventSystemCustom eventSystem;
 
-    // Start is called before the first frame update
     void Start()
     {
-        Heart.text = FindObjectOfType<PlayerController>().playerHeartsCount.ToString();
+        playerHeartsCount = 3;
+        //Heart.text = FindObjectOfType<PlayerController>().playerHeartsCount.ToString();
+        Heart.text = playerHeartsCount.ToString();
         eventSystem.onGetFood.AddListener(UpdateScoreText);
         eventSystem.onGetHeart.AddListener(UpdateHeartText);
     }
@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHeartText()
     {
-        Heart.text = FindObjectOfType<PlayerController>().playerHeartsCount.ToString();
+        Heart.text = playerHeartsCount.ToString();
         Debug.Log("UPDATE Heart");
     }
 }

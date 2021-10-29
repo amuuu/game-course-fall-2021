@@ -8,7 +8,7 @@ public class FishBonesComboController : ComboInstanceController
     public override void OnConsume()
     {
         Debug.Log("Fish Bone ON CONSUME");
-
+        FindObjectOfType<UIManager>().playerHeartsCount -= 1;
 
         // you should fill this method!
     }

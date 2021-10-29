@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 14f566e542be75347ad0b402239200fd, type: 2}
+  ui: {fileID: 0}
 --- !u!1001 &6122521652870746349
 PrefabInstance:
   m_ObjectHideFlags: 0

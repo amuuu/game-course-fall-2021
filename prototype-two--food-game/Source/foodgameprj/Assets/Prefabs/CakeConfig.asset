@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CakeConfig
   m_EditorClassIdentifier: 
   foodName: Cake
-  weight: 4
-  score: 15
+  weight: 2
+  score: 2
