@@ -15,6 +15,8 @@ public class FoodPlacer : MonoBehaviour
     private float currentTimerValue;
 
     public PlayerController playerController;
+    private bool gameOver = false;
+    public UITextController UiController;
 
     private void Start()
     {
@@ -23,29 +25,38 @@ public class FoodPlacer : MonoBehaviour
 
     void Update()
     {
+        if (int.Parse(UiController.HeartCounterText.text) == 0)
+        {
+            gameOver = true;
+            //Debug.Log("game over !!!!!!!");
+            UiController.StatusText.text = "GAME OVER";
+        }
         if (currentTimerValue > 0)
         {
             currentTimerValue -= Time.deltaTime;
         }
         else
         {
-            GameObject go;
-
-            if (UnityEngine.Random.Range(0, 2000) % 7 == 0)
+            if (!gameOver)
             {
-                go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                GameObject go;
+
+                if (UnityEngine.Random.Range(0, 2000) % 7 == 0)
+                {
+                    go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                }
+                else
+                {
+                    go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                }
+
+                go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
+
+                UpdateTimerValueBasedOnScore();
+
+                // reset timer
+                currentTimerValue = timerMaxTime;
             }
-            else
-            {
-                go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
-            }
-
-            go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
-
-            UpdateTimerValueBasedOnScore();
-
-            // reset timer
-            currentTimerValue = timerMaxTime;
         }
     }
 

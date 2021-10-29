@@ -6,6 +6,7 @@ public class FoodInstanceController : MonoBehaviour
 {
     public FoodItemConfig config;
     private Rigidbody rigidBody;
+    public UITextController UiController;
 
     private void Start()
     {
@@ -16,7 +17,7 @@ public class FoodInstanceController : MonoBehaviour
         // rotate randomly when instantiating
         transform.Rotate(0, Random.Range(-45, 45), 0);
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Kill"))
@@ -24,4 +25,5 @@ public class FoodInstanceController : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    
 }
