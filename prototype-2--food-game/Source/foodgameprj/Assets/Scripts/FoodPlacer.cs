@@ -24,29 +24,32 @@ public class FoodPlacer : MonoBehaviour
 
     void Update()
     {
-        if (currentTimerValue > 0)
+        if(playerController.playerHeartsCount > 0)
         {
-            currentTimerValue -= Time.deltaTime;
-        }
-        else
-        {
-            GameObject go;
-
-            if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
+            if (currentTimerValue > 0)
             {
-                go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                currentTimerValue -= Time.deltaTime;
             }
             else
             {
-                go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                GameObject go;
+
+                if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
+                {
+                    go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                }
+                else
+                {
+                    go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                }
+
+                go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
+
+                UpdateTimerValueBasedOnScore();
+
+                // reset timer
+                currentTimerValue = timerMaxTime;
             }
-
-            go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
-
-            UpdateTimerValueBasedOnScore();
-
-            // reset timer
-            currentTimerValue = timerMaxTime;
         }
     }
 

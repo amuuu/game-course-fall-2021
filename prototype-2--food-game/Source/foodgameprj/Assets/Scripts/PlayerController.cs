@@ -18,13 +18,20 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
+        if(playerHeartsCount > 0)
         {
-            transform.position += new Vector3(moveAmount, 0, 0);
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.position += new Vector3(moveAmount, 0, 0);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.position += new Vector3(-moveAmount, 0, 0);
+            }
         }
-        if (Input.GetKey(KeyCode.A))
+        else
         {
-            transform.position += new Vector3(-moveAmount, 0, 0);
+            eventSystem.YouLost.Invoke();
         }
     }
 
@@ -40,9 +47,10 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("SCORE: " + playerScore);
 
+            eventSystem.OnScore.Invoke();
+
             // destroy the food object
             Destroy(collision.gameObject);
-            eventSystem.OnScore.Invoke();
 
         }
 

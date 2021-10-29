@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 463c8ba02ef06aa4a95e315375624aa2, type: 2}
-  rigidBody: {fileID: 669693224618794539}
+  eventSystem: {fileID: 0}
 --- !u!1001 &669693225695457829
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class HearDecreaserComboComtroller : ComboInstanceController
 {
-    public EventSystemCustom eventSystem;
 
     // when player eats the combo item
     public override void OnConsume()
     {
         Debug.Log("HEART DECREASER ON CONSUME");
-        eventSystem.OnDecreaseHeart.Invoke();       
+        eventSystem.OnDecreaseHeart.Invoke();
+
     }
 }

@@ -6,6 +6,7 @@ public class FoodInstanceController : MonoBehaviour
 {
     public FoodItemConfig config;
     private Rigidbody rigidBody;
+    public EventSystemCustom eventSystem;
 
     private void Start()
     {

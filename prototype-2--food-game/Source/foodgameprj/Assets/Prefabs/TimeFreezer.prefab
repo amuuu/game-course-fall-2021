@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 1843d47992829664ab862940ec0666a6, type: 2}
+  eventSystem: {fileID: 6092305564556217922, guid: 2d4d46c8290fe674abcc195b4770d80b,
+    type: 3}
 --- !u!1 &8864241876471490562
 GameObject:
   m_ObjectHideFlags: 0

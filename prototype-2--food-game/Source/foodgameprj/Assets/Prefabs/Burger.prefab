@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -987522601545791220}
   - component: {fileID: 8311479903159737959}
   m_Layer: 0
-  m_Name: burger
+  m_Name: Burger
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: aecc7664c34d9ca44bdf1cf86051522c, type: 2}
+  eventSystem: {fileID: 0}
 --- !u!1 &3312537611339534222
 GameObject:
   m_ObjectHideFlags: 0

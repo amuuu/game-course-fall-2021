@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 1ab9ca7c051a91f41a60f84226f74f73, type: 2}
+  eventSystem: {fileID: 0}
 --- !u!54 &-8979218920691663273
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class HeartIncreaserComboController : ComboInstanceController
 {
-    public EventSystemCustom eventSystem;
 
     // when player eats the combo item
     public override void OnConsume()
     {
         Debug.Log("HEART INCREASER ON CONSUME");
         eventSystem.OnIncreaseHeart.Invoke();
+
     }
 }

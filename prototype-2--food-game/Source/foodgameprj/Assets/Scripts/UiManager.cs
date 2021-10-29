@@ -7,16 +7,23 @@ public class UiManager : MonoBehaviour
 {
     public Text score;
     public Text heart;
+    public Text lose;
 
     public EventSystemCustom eventSystem;
 
     public PlayerController player;
+
+    void Awake()
+    {
+        heart.text = player.playerHeartsCount.ToString();
+    }
 
     void Start()
     {
         eventSystem.OnScore.AddListener(UpdateScoreText);
         eventSystem.OnIncreaseHeart.AddListener(UpdateIncreaseHeartText);
         eventSystem.OnDecreaseHeart.AddListener(UpdateDecreaseHeartText);
+        eventSystem.YouLost.AddListener(YouLostText);
     }
 
     public void UpdateScoreText()
@@ -28,15 +35,24 @@ public class UiManager : MonoBehaviour
     public void UpdateIncreaseHeartText()
     {
         Debug.Log("UPDATE HEART");
-        int value = int.Parse(heart.text) + 1;
-        heart.text = value.ToString();
+        player.playerHeartsCount += 1;
+
+        heart.text = player.playerHeartsCount.ToString();
+
     }
 
     public void UpdateDecreaseHeartText()
     {
         Debug.Log("UPDATE HEART");
-        int value = int.Parse(heart.text) - 1;
-        heart.text = value.ToString();
+        player.playerHeartsCount -= 1;
+
+        heart.text = player.playerHeartsCount.ToString();
+    }
+
+    public void YouLostText()
+    {
+        Debug.Log("YOU LOST");
+        lose.text = "YOU LOST!";
     }
 
 }

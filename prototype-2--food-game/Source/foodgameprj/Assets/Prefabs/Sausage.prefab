@@ -63,6 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 98126653c0889d643bf114b263f1d671, type: 2}
+  eventSystem: {fileID: 0}
 --- !u!65 &1915081612271950451
 BoxCollider:
   m_ObjectHideFlags: 0

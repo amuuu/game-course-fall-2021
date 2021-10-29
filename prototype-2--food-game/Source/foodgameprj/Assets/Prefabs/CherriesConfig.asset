@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: Cherries
   weight: 0.2
-  score: 100
+  score: 50
