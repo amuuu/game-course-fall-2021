@@ -5,7 +5,6 @@ using UnityEngine;
 public class ComboInstanceController : MonoBehaviour
 {
     public ComboItemConfig config;
-    public bool collidedWithPlayer = false;
 
     private void Start()
     {

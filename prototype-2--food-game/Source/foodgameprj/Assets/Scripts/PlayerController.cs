@@ -54,17 +54,13 @@ public class PlayerController : MonoBehaviour
             // polymorphism!
             // for example, the object of type "TimeFreezerComboController" which is the child of "ComboInstanceController", is put inside the "comboController" object below.
             ComboInstanceController comboController =  collision.gameObject.GetComponent<ComboInstanceController>();
-            if (!comboController.collidedWithPlayer)
-            {
-                comboController.collidedWithPlayer = true;
-                // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
-                comboController.OnConsume();
+            // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
+            comboController.OnConsume();
 
-                Debug.Log("COMBO!!! " + comboController.config.comboName);
+            Debug.Log("COMBO!!! " + comboController.config.comboName);
 
-                // destroy the combo object
-                Destroy(collision.gameObject);
-            }
+            // destroy the combo object
+            Destroy(collision.gameObject);
             
         }
     }
