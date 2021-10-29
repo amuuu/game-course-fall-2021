@@ -458,6 +458,7 @@ MonoBehaviour:
   moveAmount: 0.068
   playerScore: 0
   playerHeartsCount: 3
+  TIME_SCALE_CHANGE: 0.001
 --- !u!65 &294549516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -810,6 +811,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91e5f6e53466ed145af0b29cb960a369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onFreeze:
+    m_PersistentCalls:
+      m_Calls: []
   onHealthChange:
     m_PersistentCalls:
       m_Calls: []

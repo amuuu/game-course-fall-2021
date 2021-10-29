@@ -12,7 +12,8 @@ public class MyStringEvent : UnityEvent<string> {}
 
 public class EventSystemCustom : MonoBehaviour
 {
-    public static EventSystemCustom current; 
+    public static EventSystemCustom current;
+    public UnityEvent onFreeze;
     public MyIntEvent onHealthChange;
     public MyIntEvent onScoreChange;
     public MyStringEvent onEndGame;
@@ -22,5 +23,6 @@ public class EventSystemCustom : MonoBehaviour
         onHealthChange = new MyIntEvent();
         onScoreChange = new MyIntEvent();
         onEndGame = new MyStringEvent();
+        onFreeze = new UnityEvent();
     }
 }

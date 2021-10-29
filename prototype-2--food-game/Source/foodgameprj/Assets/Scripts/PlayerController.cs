@@ -8,10 +8,13 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
-
+    private int freezeState;
+    public float TIME_SCALE_CHANGE;
     private void Start()
     {
         playerScore = 0;
+        freezeState = 0;
+        EventSystemCustom.current.onFreeze.AddListener(UpdateFreezeState);
         EventSystemCustom.current.onHealthChange.Invoke(playerHeartsCount);
         EventSystemCustom.current.onScoreChange.Invoke(0);
     }
@@ -26,6 +29,40 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += new Vector3(-moveAmount, 0, 0);
         }
+
+        switch (freezeState)
+        {
+            case 1:
+                Debug.Log("TIME SCALE "+Time.timeScale);
+                if (Time.timeScale - TIME_SCALE_CHANGE <0)
+                {
+                    Time.timeScale = 0;
+                    freezeState = 2;
+                }
+                else
+                {
+                    Time.timeScale -= TIME_SCALE_CHANGE;
+                }
+                break;
+            case 2:
+                ;
+                if (Time.timeScale + TIME_SCALE_CHANGE >1)
+                {
+                    Time.timeScale = 1;
+                    freezeState = 0;
+                }
+                else
+                {
+                    Time.timeScale += TIME_SCALE_CHANGE;
+                }
+                break;
+        }
+    }
+
+    private void UpdateFreezeState()
+    {
+        freezeState = 1;
+        Time.timeScale = 1;
     }
 
     private void OnCollisionEnter(Collision collision)

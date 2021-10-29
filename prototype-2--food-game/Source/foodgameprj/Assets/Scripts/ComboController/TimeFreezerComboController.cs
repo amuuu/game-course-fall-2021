@@ -8,7 +8,7 @@ public class TimeFreezerComboController : ComboInstanceController
     public override void OnConsume()
     {
         Debug.Log("TIME FREEZER ON CONSUME");
-
+        EventSystemCustom.current.onFreeze.Invoke();
         // you should fill this method!
     }
 }
