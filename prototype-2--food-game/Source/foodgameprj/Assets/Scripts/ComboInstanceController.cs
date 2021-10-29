@@ -5,15 +5,21 @@ using UnityEngine;
 public abstract class ComboInstanceController : MonoBehaviour
 {
     public ComboItemConfig config;
+    protected bool AutoDestroyOnConsume { get; set; } = true;
 
     // when player eats the combo item
-    public abstract void OnConsume(PlayerController playerController);
+    public void OnConsume(PlayerController playerController)
+    {
+        OnConsumeAction(playerController);
+        if (AutoDestroyOnConsume) DestroyCombo();
+    }
+    protected abstract void OnConsumeAction(PlayerController playerController);
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Kill"))
-        {
-            Destroy(this.gameObject);
-        }
+            DestroyCombo();
     }
+
+    protected void DestroyCombo() => Destroy(this.gameObject);
 }
