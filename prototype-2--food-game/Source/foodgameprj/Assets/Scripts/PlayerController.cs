@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -89,6 +89,8 @@ public class PlayerController : MonoBehaviour
     {
         uimanager.ShowLoseText();
         moveAmount = 0;
-        while(true) Time.timeScale = 0;
+    public void increaseMovementSpeed(float speed)
+    {
+        moveAmount += speed;
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,6 +56,8 @@ public class FoodPlacer : MonoBehaviour
         if (playerController.playerScore % 400 < 200 && playerController.playerScore % 400 >= 0)
         {
             timerMaxTime -= 0.02f;
+            playerController.increaseMovementSpeed(0.02f);
+            Physics.gravity = new Vector3(0, Physics.gravity.y-0.25F, 0);
 
             if (timerMaxTime < 0.5f)
                 timerMaxTime = 0.5f;
