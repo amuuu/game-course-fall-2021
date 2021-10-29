@@ -56,6 +56,7 @@ public class UIManager : MonoBehaviour
             Heart1.SetActive(false);
             DeadMenu.SetActive(true);
             player.moveAmount=0f;
+            player.transform.position=new Vector3(10000, 10000, 1000);
         }
     }
     // Update is called once per frame
