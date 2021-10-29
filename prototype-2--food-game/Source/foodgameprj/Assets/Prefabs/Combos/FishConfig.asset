@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7aa33dc7ea92491faa452c027574ebec, type: 3}
-  m_Name: HealthComboItemConfig
+  m_Name: FishConfig
   m_EditorClassIdentifier: 
   comboName: Health received
   healthChange: 1

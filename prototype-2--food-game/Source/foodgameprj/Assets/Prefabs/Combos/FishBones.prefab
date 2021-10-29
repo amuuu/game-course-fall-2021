@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3433168970731968213}
   - component: {fileID: 1751374836899055266}
   - component: {fileID: -6906136033305807357}
-  - component: {fileID: -5606605658941553910}
+  - component: {fileID: 4805404773880475298}
   m_Layer: 0
   m_Name: FishBones
   m_TagString: Combo
@@ -111,7 +111,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-5606605658941553910
+--- !u!114 &4805404773880475298
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3793698351681173248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c891aad4815c15d49abbadbff26cb7e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dee03f03e1094141a383ab1a2b774a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: a8f0f99bf6313c84bbc624e868fbe3c8, type: 2}
+  config: {fileID: 11400000, guid: eb72e85b4a5ef89449e501c04fae0ae9, type: 2}

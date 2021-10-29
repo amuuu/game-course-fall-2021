@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2801663367720685970}
   - component: {fileID: 1247033551484378679}
   - component: {fileID: 3939151183904025341}
-  - component: {fileID: 981531904708766338}
   - component: {fileID: 4917444978036541268}
   - component: {fileID: -7700948877103901729}
+  - component: {fileID: 8659710979113372114}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -84,19 +84,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &981531904708766338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3290531889026632488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c891aad4815c15d49abbadbff26cb7e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: a80a5635ab19a034f91b94b115dadb37, type: 2}
 --- !u!54 &4917444978036541268
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,3 +113,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19783181, y: 0.3222011, z: 0.62078255}
   m_Center: {x: 0, y: 0.16110055, z: 0}
+--- !u!114 &8659710979113372114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3290531889026632488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dee03f03e1094141a383ab1a2b774a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 11df37a7705b41b4fb6e21ba6c37a0e3, type: 2}
