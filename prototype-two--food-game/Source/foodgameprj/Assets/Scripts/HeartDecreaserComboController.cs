@@ -6,6 +6,9 @@ public class HeartDecreaserComboController : ComboInstanceController
 {
     public override void OnConsume()
     {
-        playerController.playerHeartsCount -= 1;
+        if (playerController.playerHeartsCount > 0)
+        {
+            playerController.playerHeartsCount -= 1;
+        }
     }
 }
