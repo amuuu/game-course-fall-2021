@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeFreezerComboController : ComboInstanceController
+public class TimeFreezerComboController : MonoBehaviour
 {
-    // when player eats the combo item
-    public override void OnConsume(PlayerController foodPlayer)
+    public ComboItemConfig config;
+    public void OnConsume(FoodPlacer foodPlacer)
     {
         Debug.Log("TIME FREEZER ON CONSUME");
-
+        
+        // player.foodPlacer.GetComponent<ScriptableObject>()
+        // foodPlacer
         // you should fill this method!
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ComboInstanceController : MonoBehaviour
+public class HearthComboInstanceController : MonoBehaviour
 {
     public ComboItemConfig config;
 

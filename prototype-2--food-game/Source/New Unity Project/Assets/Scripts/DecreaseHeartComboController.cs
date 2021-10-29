@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecreaseHeartComboController : ComboInstanceController
+public class DecreaseHeartComboController : HearthComboInstanceController
 {
     //public GameObject player;
     public override void OnConsume(PlayerController player)
