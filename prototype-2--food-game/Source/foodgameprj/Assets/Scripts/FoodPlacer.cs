@@ -16,6 +16,8 @@ public class FoodPlacer : MonoBehaviour
 
     public UIManager UiManager;
 
+    public bool finishGame = false;
+
 
     private void Start()
     {
@@ -24,6 +26,11 @@ public class FoodPlacer : MonoBehaviour
 
     void Update()
     {
+        if (finishGame)
+        {
+            return;
+        }
+
         if (currentTimerValue > 0)
         {
             currentTimerValue -= Time.deltaTime;

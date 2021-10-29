@@ -8,9 +8,15 @@ public class PlayerController : MonoBehaviour
 
     public UIManager UiManager;
     public int playerHeartsCount;
+    public bool finishGame = false;
 
     void Update()
     {
+        if (finishGame)
+        {
+            return;
+        }
+
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(moveAmount, 0, 0);

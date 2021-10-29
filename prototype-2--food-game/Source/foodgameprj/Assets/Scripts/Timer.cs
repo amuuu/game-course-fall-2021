@@ -26,6 +26,7 @@ public class Timer : MonoBehaviour
             else
             {
                 isFeezed = false;
+                freezeTime = 5;
                 timerText.color = Color.white;
             }
         }
@@ -63,6 +64,12 @@ public class Timer : MonoBehaviour
     {
         isFeezed = true;
         timerText.color = Color.blue;
+    }
+
+    public void stopTime()
+    {
+        freezeTime = 99999;
+        isFeezed = true;
     }
 
     public void decreaseTime(float amount)
