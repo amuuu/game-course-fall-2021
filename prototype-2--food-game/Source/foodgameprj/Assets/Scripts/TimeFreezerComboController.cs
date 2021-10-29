@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeFreezerComboController : ComboInstanceController
 {
     [Range(0.0f, 1.0f)] public float changeRate;
+    public Image frostFrame;
     bool actionDone = false;
     void Start()
     {
         AutoDestroyOnConsume = false;
+        frostFrame = GameObject.Find("FrostFrame").GetComponent<Image>();
     }
     void Update()
     {
@@ -24,6 +27,7 @@ public class TimeFreezerComboController : ComboInstanceController
         GetComponentInChildren<MeshRenderer>().enabled = false;
 
         StartCoroutine(ChangeTimeScaleAndDestroy());
+        StartCoroutine(UpdateFrostFrame());
     }
 
     IEnumerator ChangeTimeScaleAndDestroy()
@@ -46,5 +50,16 @@ public class TimeFreezerComboController : ComboInstanceController
             yield return null;
         }
     }
+
+    IEnumerator UpdateFrostFrame()
+    {
+        while(!actionDone)
+        {
+            var color = frostFrame.color;
+            color.a = (1 - Time.timeScale);
+            Debug.LogWarning("scale&alpha: " + Time.timeScale + ", " + color.a);
+            frostFrame.color = color;
+            yield return null;
+        }
     }
 }
