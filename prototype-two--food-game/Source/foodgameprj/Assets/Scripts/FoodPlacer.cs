@@ -70,7 +70,7 @@ public class FoodPlacer : MonoBehaviour
         timerMaxTime -= GaussianFunction(playerController.playerScore);
     }
 
-    private double GaussianFunction(int x, double a=0.7, double b =900, double c =75000)
+    private double GaussianFunction(int x, double a=0.4, double b =1000, double c =250000)
     {
         return a * Math.Exp(-1 * Math.Pow(x - b, 2) / c);
     }
