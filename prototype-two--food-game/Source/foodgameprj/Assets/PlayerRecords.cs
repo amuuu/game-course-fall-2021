@@ -7,12 +7,14 @@ public class PlayerRecords : MonoBehaviour
 {
     public Text Score;
     public Text Hearts;
+    public Text LostMessage;
     public int PlayerHearts;
+    public PlayerController playerController;
 
     void Start()
     {
         Score.text = "0";
-        Hearts.text = "3 X";
+        Hearts.text = playerController.PlayerHearts.ToString() + " X";
     }
 
     public void UpdateScoreText(int AddedScore)
@@ -32,6 +34,6 @@ public class PlayerRecords : MonoBehaviour
 
     public void UpdateWonOrLostText(string won)
     {
-    
+        LostMessage.text = won;
     }
 }

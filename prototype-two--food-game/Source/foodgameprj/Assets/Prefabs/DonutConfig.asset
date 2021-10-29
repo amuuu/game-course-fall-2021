@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DonutConfig
   m_EditorClassIdentifier: 
   foodName: Donut
-  weight: 0.7
+  weight: 3
   score: 150

@@ -13,6 +13,7 @@ public class FoodPlacer : MonoBehaviour
 
     public float timerMaxTime;
     private float currentTimerValue;
+    public bool placeFoodOrNOt;
 
     public PlayerController playerController;
 
@@ -24,30 +25,34 @@ public class FoodPlacer : MonoBehaviour
 
     void Update()
     {
-        if (currentTimerValue > 0)
+        if (placeFoodOrNOt)
         {
-            currentTimerValue -= Time.deltaTime;
-        }
-        else
-        {
-            GameObject go;
-
-            if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
+            if (currentTimerValue > 0)
             {
-                go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                currentTimerValue -= Time.deltaTime;
             }
             else
             {
-                go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                GameObject go;
+
+                if (UnityEngine.Random.Range(0, 2000) % 3 == 0)
+                {
+                    go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                }
+                else
+                {
+                    go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                }
+
+                go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
+
+                UpdateTimerValueBasedOnScore();
+
+                // reset timer
+                currentTimerValue = timerMaxTime;
             }
-
-            go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
-
-            UpdateTimerValueBasedOnScore();
-
-            // reset timer
-            currentTimerValue = timerMaxTime;
         }
+        
     }
 
     private void UpdateTimerValueBasedOnScore()
@@ -56,8 +61,8 @@ public class FoodPlacer : MonoBehaviour
         {
             timerMaxTime -= 0.02f;
 
-            if (timerMaxTime < 0.5f)
-                timerMaxTime = 0.5f;
+            if (timerMaxTime < 0.3f)
+                timerMaxTime = 0.3f;
         }
 
     }

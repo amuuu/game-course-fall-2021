@@ -8,50 +8,63 @@ public class PlayerController : MonoBehaviour
     [Range(0f, 1f)] public float moveAmount;
 
     public int playerScore;
-    public int playerHeartsCount;
     public int PlayerHearts;
     public PlayerRecords PlayerRecords;
+    public FoodPlacer foodPlacer;
     public float GravityVolume;
     public bool timerFreeze;
     public float freezeTime;
-    public float increaseGravityVolume = 1F;
+    public float notSendFoodTime;
+    public float increaseGravityVolume;
 
     private void Start()
     {
-        timerFreeze = false;
-        freezeTime = 2;
-        GravityVolume = -20;
-        playerScore = 0;
-        PlayerHearts = 3;
+        
     }
 
     void Update()
     {
         if (timerFreeze)
         {
-            
             GravityVolume += increaseGravityVolume;
+            notSendFoodTime -= Time.deltaTime;
+            if (notSendFoodTime>0)
+            {
+                foodPlacer.placeFoodOrNOt = false;
 
-            
+            }
+            else
+            {
+                foodPlacer.placeFoodOrNOt = true;
+
+            }
+
             if (GravityVolume >= 0)
             {
                 freezeTime -= Time.deltaTime;
                 GravityVolume = 0;
+
             }
             if(freezeTime < 0)
             {
-                increaseGravityVolume=-1F;
+                increaseGravityVolume=-0.5F;
 
             }
-            if(GravityVolume <= -20)
+            if(GravityVolume <= -10)
             {
-                GravityVolume = -20;
-                increaseGravityVolume = 2F;
+                GravityVolume = -10;
+                increaseGravityVolume = 0.5F;
+                foodPlacer.placeFoodOrNOt = true;
                 timerFreeze = false;
             }
         }
-        
-            
+
+
+        if (PlayerHearts == 0)
+        {
+            PlayerRecords.UpdateWonOrLostText("You lost and a loser doesn't deserve to play again so there is no restart");
+            foodPlacer.placeFoodOrNOt = false;
+        }
             
             
    
@@ -110,7 +123,8 @@ public class PlayerController : MonoBehaviour
             if (comboController.config.comboName == "Time Freezer")
             {
                 timerFreeze = true;
-                freezeTime = 2;
+                freezeTime = 1;
+                notSendFoodTime = 1.5F;
             }
             
 

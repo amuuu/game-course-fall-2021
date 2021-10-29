@@ -14,7 +14,7 @@ public class FoodInstanceController : MonoBehaviour
         rigidBody.mass = config.weight;
 
         // rotate randomly when instantiating
-        transform.Rotate(0, Random.Range(-45, 45), 0);
+        transform.Rotate(Random.Range(-45, 45), Random.Range(-45, 45), Random.Range(-45, 45));
     }
 
     private void OnTriggerEnter(Collider other)
