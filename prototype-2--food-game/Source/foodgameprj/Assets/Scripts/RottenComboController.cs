@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class TimeFreezerComboController : ComboInstanceController
+public class RottenComboController : ComboInstanceController
 {
     private UIManager UiManager;
 
@@ -13,6 +12,6 @@ public class TimeFreezerComboController : ComboInstanceController
 
     public override void OnConsume()
     {
-        UiManager.onTimeFreezerConsume();
+        UiManager.onRottenConsume();
     }
 }

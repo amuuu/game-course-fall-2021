@@ -30,8 +30,6 @@ public class PlayerController : MonoBehaviour
 
             // increase the player's score
             UiManager.onCollectFood(conf);
-
-            // destroy the food object
             Destroy(collision.gameObject);
         }
 
@@ -43,11 +41,8 @@ public class PlayerController : MonoBehaviour
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
-
-            Debug.Log("COMBO!!! " + comboController.config.comboName);
-
-            // destroy the combo object
             Destroy(collision.gameObject);
         }
+
     }
 }

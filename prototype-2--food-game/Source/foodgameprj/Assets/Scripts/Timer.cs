@@ -10,29 +10,70 @@ public class Timer : MonoBehaviour
     public Text timerText;
     public Action OnFinishTime;
 
+    public float freezeTime = 5;
+    public bool isFeezed = false;
+
 
     // Update is called once per frame
     void Update()
     {
-        if (time > 0)
+        if (isFeezed)
         {
-            time -= Time.deltaTime;
+            if(freezeTime > 0)
+            {
+                freezeTime -= Time.deltaTime;
+            }
+            else
+            {
+                isFeezed = false;
+                timerText.color = Color.white;
+            }
         }
         else
         {
-            OnFinishTime.Invoke();
+            if (time > 0)
+            {
+                time -= Time.deltaTime;
+            }
+            else
+            {
+                OnFinishTime.Invoke();
+                time = 0;
+            }
+
+            if(time < 10)
+            {
+                timerText.color = Color.red;
+            }
+
+            int sec = (int)time % 60;
+            int min = (int)time / 60;
+
+            string secondDisplay = sec.ToString();
+            if (sec < 10)
+            {
+                secondDisplay = '0' + sec.ToString();
+            }
+
+            timerText.text = min.ToString() + ":" + secondDisplay;
+        }
+    }
+
+    public void enableFreezeTime()
+    {
+        isFeezed = true;
+        timerText.color = Color.blue;
+    }
+
+    public void decreaseTime(float amount)
+    {
+        if(time < 4)
+        {
             time = 0;
         }
-
-        int sec = (int)time % 60;
-        int min = (int)time / 60;
-
-        string secondDisplay = sec.ToString();
-        if(sec < 10)
+        else
         {
-            secondDisplay = '0' + sec.ToString();
+            time -= amount;
         }
-
-        timerText.text = min.ToString() +":"+ secondDisplay;
     }
 }

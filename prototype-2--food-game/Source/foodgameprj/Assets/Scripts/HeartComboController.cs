@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeFreezerComboController : ComboInstanceController
+public class HeartComboController : ComboInstanceController
 {
     private UIManager UiManager;
 
@@ -13,6 +13,6 @@ public class TimeFreezerComboController : ComboInstanceController
 
     public override void OnConsume()
     {
-        UiManager.onTimeFreezerConsume();
+        UiManager.onHeartComboConsume();
     }
 }
