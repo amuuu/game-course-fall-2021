@@ -6,7 +6,6 @@ public class FoodInstanceController : MonoBehaviour
 {
     public FoodItemConfig config;
     private Rigidbody rigidBody;
-
     private void Start()
     {
         // change mass based on config

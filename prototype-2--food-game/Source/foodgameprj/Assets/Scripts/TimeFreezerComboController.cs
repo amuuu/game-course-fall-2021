@@ -10,5 +10,6 @@ public class TimeFreezerComboController : ComboInstanceController
         Debug.Log("TIME FREEZER ON CONSUME");
 
         // you should fill this method!
+        
     }
 }

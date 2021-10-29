@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: Carrot
   weight: 1
-  score: 200
+  score: 30

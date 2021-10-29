@@ -7,12 +7,11 @@ using UnityEngine.UI;
 public class UiManager : MonoBehaviour
 {
     public Text playerHeartText;
-    public EventSystemCustom eventSystem;
 
     void Start()
     {
-        eventSystem.onFish.AddListener(IncreasePlayerHeart);
-        eventSystem.onFishBone.AddListener(DecreasePlayerHeart);
+        EventSystemCustom.current.onFish.AddListener(IncreasePlayerHeart);
+        EventSystemCustom.current.onFishBone.AddListener(DecreasePlayerHeart);
     }
 
     public void IncreasePlayerHeart()
