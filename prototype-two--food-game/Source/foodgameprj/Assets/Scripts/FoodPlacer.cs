@@ -14,6 +14,7 @@ public class FoodPlacer : MonoBehaviour
     private float currentTimerValue;
     private static int[] foodIndex;
     private static int[] comboIndex;
+   
 
     private void Start()
     {
@@ -29,6 +30,8 @@ public class FoodPlacer : MonoBehaviour
         foodIndex = new int[] {0,1,2,3,4,5,6,0,0,0,1,1,1,1,1,1,2,2,3,3,3,4,5,5,5,5,6,6 };
         comboIndex = new int[] {0,1,2,0,0,0,0,1,1,2,2,2,2,2,2,2,2};
         currentTimerValue = timerMaxTime;
+        
+
     }
 
     void Update()
@@ -62,13 +65,15 @@ public class FoodPlacer : MonoBehaviour
 
     private void UpdateTimerValueBasedOnScore()
     {
-        if (playerController.playerScore % 400 < 200 && playerController.playerScore % 400 >= 0)
+        
+        if ((playerController.playerScore % 400 < 200 && playerController.playerScore % 400 >= 0)|| playerController.playerHeartsCount>=5)
         {
-            timerMaxTime -= 0.02f;
+            timerMaxTime -= 0.015f;
 
             if (timerMaxTime < 0.5f)
                 timerMaxTime = 0.5f;
         }
+        
 
     }
     

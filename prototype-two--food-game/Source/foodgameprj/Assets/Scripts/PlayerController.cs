@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     public int playerScore;
     public int playerHeartsCount;
     public Lost lost;
-    GameObject obj;
 
     private void Start()
     {
@@ -19,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        
         if(playerHeartsCount == 0)
         {
             lost.setup();
