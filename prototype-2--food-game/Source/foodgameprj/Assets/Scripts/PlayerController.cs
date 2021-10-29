@@ -36,8 +36,9 @@ public class PlayerController : MonoBehaviour
 
             // increase the player's score
             playerScore += conf.score;
+            score.scoreAmount += conf.score;
 
-            Debug.Log("SCORE: " + playerScore);
+            Debug.Log("SCORE: " + score.scoreAmount);
 
             // destroy the food object
             Destroy(collision.gameObject);
