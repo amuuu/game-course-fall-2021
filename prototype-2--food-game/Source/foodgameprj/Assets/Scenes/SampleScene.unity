@@ -331,7 +331,6 @@ MonoBehaviour:
   health: {fileID: 283675249}
   score: {fileID: 1792064861}
   endGame: {fileID: 1100487827}
-  eventSystemCustom: {fileID: 1108851556}
 --- !u!1 &283675247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,7 +1065,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70.3, y: -232.4}
+  m_AnchoredPosition: {x: 75, y: -232.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1792064861

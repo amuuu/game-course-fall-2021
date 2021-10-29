@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
             playerScore += conf.score;
 
             Debug.Log("SCORE: " + playerScore);
+            EventSystemCustom.current.onScoreChange.Invoke(playerScore);
 
             // destroy the food object
             Destroy(collision.gameObject);
@@ -52,6 +53,13 @@ public class PlayerController : MonoBehaviour
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
+            
+            HealthComboItemConfig healthComboItemConfig = (HealthComboItemConfig) comboController.config;
+            playerHeartsCount += healthComboItemConfig.healthChange;
+            if (playerHeartsCount < 0)
+                EventSystemCustom.current.onEndGame.Invoke("You lose!");
+            else
+                EventSystemCustom.current.onHealthChange.Invoke(playerHeartsCount);
 
             Debug.Log("COMBO!!! " + comboController.config.comboName+" health:"+playerHeartsCount);
             
