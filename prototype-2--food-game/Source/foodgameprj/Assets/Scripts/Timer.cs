@@ -42,7 +42,16 @@ public class Timer : MonoBehaviour
                 time = 0;
             }
 
-            if(time < 10)
+            if (time < 10)
+            {
+                timerText.color = Color.yellow;
+            }
+            else
+            {
+                timerText.color = Color.white;
+            }
+
+            if (time < 5)
             {
                 timerText.color = Color.red;
             }
@@ -60,6 +69,13 @@ public class Timer : MonoBehaviour
         }
     }
 
+    public void increaseTime(int amount)
+    {
+        if (!isFeezed)
+        {
+            time += amount;
+        }
+    }
     public void enableFreezeTime()
     {
         isFeezed = true;

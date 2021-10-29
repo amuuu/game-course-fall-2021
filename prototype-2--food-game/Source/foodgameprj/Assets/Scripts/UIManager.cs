@@ -70,6 +70,8 @@ public class UIManager : MonoBehaviour
     {
         score += foodItemConfig.score;
         scoreText.text = "score: " + score.ToString();
+
+        timer.increaseTime((int)foodItemConfig.weight);
     }
 
 }
