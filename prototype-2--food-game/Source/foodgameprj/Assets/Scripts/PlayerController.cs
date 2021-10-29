@@ -5,19 +5,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Range(0f, 1f)] public float moveAmount;
-
+   
     public int playerScore;
     public int playerHeartsCount;
     public EventSystemCustom eventSystem;
 
     private void Start()
     {
+        moveAmount = moveAmount * 1.3f;
         playerScore = 0;
         playerHeartsCount = 3;
     }
 
     void Update()
     {
+      
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(moveAmount, 0, 0);

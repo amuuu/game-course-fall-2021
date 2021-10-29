@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BananaConfig
   m_EditorClassIdentifier: 
   foodName: Banana
-  weight: 1.5
-  score: 150
+  weight: 2
+  score: 120
