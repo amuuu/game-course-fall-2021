@@ -17,6 +17,7 @@ public class FoodPlacer : MonoBehaviour
     private int lastScore;
 
     public PlayerController playerController;
+    public EventSystemCustom eventSystem;
 
 
     private void Start()
@@ -43,6 +44,8 @@ public class FoodPlacer : MonoBehaviour
             else
             {
                 go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                go.GetComponent<FoodInstanceController>().playerController = playerController;
+                go.GetComponent<FoodInstanceController>().eventSystem = eventSystem;
             }
 
             go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);

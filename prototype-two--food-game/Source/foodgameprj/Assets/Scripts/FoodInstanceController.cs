@@ -7,6 +7,9 @@ public class FoodInstanceController : MonoBehaviour
     public FoodItemConfig config;
     private Rigidbody rigidBody;
 
+    public PlayerController playerController;
+    public EventSystemCustom eventSystem;
+
     private void Start()
     {
         // change mass based on config
@@ -22,6 +25,8 @@ public class FoodInstanceController : MonoBehaviour
         if (other.gameObject.CompareTag("Kill"))
         {
             Destroy(this.gameObject);
+            playerController.playerHeartsCount -= 1;
+            eventSystem.OnPlayerHeartCountUpdate.Invoke();
         }
     }
 }
