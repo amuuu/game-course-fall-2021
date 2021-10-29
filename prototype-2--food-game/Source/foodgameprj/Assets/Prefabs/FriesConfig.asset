@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodName: 
   weight: 3
-  score: 130
+  score: -3

@@ -63,7 +63,7 @@ public class FoodPlacer : MonoBehaviour
     private void UpdateTimerValueBasedOnScore()
     { 
         if (
-            UiManager.score % 10 == 0 && UiManager.score != 0 ||
+            UiManager.score % 10 == 0 && UiManager.score != 0 && UiManager.score > 0 ||
             UiManager.score % 5 == 0 && UiManager.score > 10 ||
             UiManager.score % 2 == 0 && UiManager.score > 20
             )

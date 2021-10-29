@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BurgerConfig
   m_EditorClassIdentifier: 
   foodName: 
-  weight: 3
-  score: 120
+  weight: 4
+  score: -5
