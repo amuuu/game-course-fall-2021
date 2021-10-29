@@ -8,7 +8,6 @@ public class HeartIncreaserComboController : ComboInstanceController
 
     public override void OnConsume()
     {
-        Debug.Log("Cup Cake ON CONSUME");
         FindObjectOfType<UIManager>().playerHeartsCount += 1;
         // you should fill this method!
     }

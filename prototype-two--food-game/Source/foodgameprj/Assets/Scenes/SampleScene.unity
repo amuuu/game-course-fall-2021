@@ -404,9 +404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fa4397417ccae4599958b308f1153b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0.068
+  moveAmount: 0.06
   playerScore: 0
-  playerHeartsCount: 3
   eventSystem: {fileID: 1740387731}
 --- !u!65 &294549516
 BoxCollider:
@@ -1127,6 +1126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Score: {fileID: 1509279613}
   Heart: {fileID: 33131140}
+  playerHeartsCount: 3
   eventSystem: {fileID: 1740387731}
 --- !u!114 &1897861459
 MonoBehaviour:

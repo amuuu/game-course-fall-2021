@@ -20,14 +20,10 @@ public class UIManager : MonoBehaviour
     public void UpdateScoreText()
     {
         Score.text = FindObjectOfType<PlayerController>().playerScore.ToString();
-        //Score.text = GetComponent<PlayerController>().playerScore.ToString();
-        //Score.text;
-        Debug.Log("UPDATE SCORE");
     }
 
     public void UpdateHeartText()
     {
         Heart.text = playerHeartsCount.ToString();
-        Debug.Log("UPDATE Heart");
     }
 }

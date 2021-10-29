@@ -44,7 +44,6 @@ public class FoodPlacer : MonoBehaviour
             go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
 
             UpdateTimerValueBasedOnScore();
-            Debug.Log(timerMaxTime);
             // reset timer
             currentTimerValue = timerMaxTime;
         }

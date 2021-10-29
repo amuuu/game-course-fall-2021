@@ -7,13 +7,14 @@ public class PlayerController : MonoBehaviour
     [Range(0f, 1f)] public float moveAmount;
 
     public int playerScore;
+    private int timeCombosCount;
     // public int playerHeartsCount;
     public EventSystemCustom eventSystem;
 
     private void Start()
     {
+        timeCombosCount = 0;
         playerScore = 0;
-        // playerHeartsCount = 3;
     }
 
     void Update()
@@ -51,11 +52,11 @@ public class PlayerController : MonoBehaviour
             // polymorphism!
             // for example, the object of type "TimeFreezerComboController" which is the child of "ComboInstanceController", is put inside the "comboController" object below.
             ComboInstanceController comboController =  collision.gameObject.GetComponent<ComboInstanceController>();
-
+            timeCombosCount += 1;
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
             comboController.OnConsume();
             // Debug.Log("COMBO!!! " + comboController.config.comboName);
-
+            StartCoroutine("SpeedController");
             // destroy the combo object
             Destroy(collision.gameObject);
         }
@@ -68,7 +69,6 @@ public class PlayerController : MonoBehaviour
 
 
             comboController.OnConsume();
-            // playerHeartsCount -= 1;
             eventSystem.onGetHeart.Invoke();
 
             // destroy the combo object
@@ -83,11 +83,37 @@ public class PlayerController : MonoBehaviour
 
 
             comboController.OnConsume();
-            // playerHeartsCount += 1;
             eventSystem.onGetHeart.Invoke();
 
             // destroy the combo object
             Destroy(collision.gameObject);
+        }
+    }
+    IEnumerator SpeedController()
+    {
+        if (timeCombosCount <= 1)
+        {
+            for (float ft = moveAmount; ft >= 0f; ft -= 0.002f)
+            {
+                moveAmount = ft;
+                yield return new WaitForSeconds(.2f);
+                if (moveAmount <= 0.0021f)
+                {
+                    moveAmount = 0;
+                    break;
+                }
+            }
+            for (float ft = moveAmount; ft <= 0.06f; ft += 0.002f)
+            {
+                if (moveAmount >= 0.575f)
+                {
+                    moveAmount = 0.6f;
+                    break;
+                }
+                moveAmount = ft;
+                yield return new WaitForSeconds(.2f);
+            }
+            timeCombosCount = 0;
         }
     }
 }
