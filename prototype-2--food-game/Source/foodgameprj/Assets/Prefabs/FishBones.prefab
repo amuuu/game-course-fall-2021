@@ -42,6 +42,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 20294357b7efc0e41b025ef5e93fc791, type: 2}
+  heartCounter: 0
 --- !u!1001 &1542272936621513143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53,6 +54,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 33cc0238b96ebb84fa355071d3f2c3e4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 33cc0238b96ebb84fa355071d3f2c3e4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 33cc0238b96ebb84fa355071d3f2c3e4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 33cc0238b96ebb84fa355071d3f2c3e4,
         type: 3}
