@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,15 +31,16 @@ public class FoodPlacer : MonoBehaviour
         else
         {
             GameObject go;
+            var rand = UnityEngine.Random.Range(0, 1000) % 25;
 
-            if (UnityEngine.Random.Range(0, 2000) % 2 == 0)
-            {
-                go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
-            }
-            else
-            {
+            if (rand >= 0 && rand <= 13) // 52% Food
                 go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
-            }
+            else if (rand <= 18) // 20% HeartDecreaser
+                go = Instantiate(comboPrefabs[1]);
+            else if (rand <= 22) // 16% TimeFreezer
+                go = Instantiate(comboPrefabs[0]);
+            else // 8% HeartIncreaser
+                go = Instantiate(comboPrefabs[2]);
 
             go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
 
