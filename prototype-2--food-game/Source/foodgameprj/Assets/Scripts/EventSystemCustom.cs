@@ -5,24 +5,22 @@ using UnityEngine.Events;
 
 [System.Serializable]
 public class MyIntEvent : UnityEvent<int> {}
+
 [System.Serializable]
-public class MyTextEvent : UnityEvent<string> {}
+public class MyStringEvent : UnityEvent<string> {}
 
 
 public class EventSystemCustom : MonoBehaviour
 {
-    public static EventSystemCustom current;
-    public UnityEvent OnCloneStickyPlatformEnter;
-    public MyIntEvent onKeyCollect;
-    public MyTextEvent onHintChange;
-    public MyTextEvent onEndGame;
-
+    public static EventSystemCustom current; 
+    public MyIntEvent onHealthChange;
+    public MyIntEvent onScoreChange;
+    public MyStringEvent onEndGame;
     void Awake()
     {
         current = this;
-        OnCloneStickyPlatformEnter = new UnityEvent();
-        onKeyCollect = new MyIntEvent();
-        onHintChange = new MyTextEvent();
-        onEndGame = new MyTextEvent();
+        onHealthChange = new MyIntEvent();
+        onScoreChange = new MyIntEvent();
+        onEndGame = new MyStringEvent();
     }
 }

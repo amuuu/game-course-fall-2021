@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerScore = 0;
+        EventSystemCustom.current.onHealthChange.Invoke(playerHeartsCount);
+        EventSystemCustom.current.onScoreChange.Invoke(playerScore);
     }
 
     void Update()
