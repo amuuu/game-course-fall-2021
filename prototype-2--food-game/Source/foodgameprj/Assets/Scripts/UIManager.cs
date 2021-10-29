@@ -10,10 +10,10 @@ public class UIManager : MonoBehaviour
     public GameObject Heart2;
     public GameObject Heart1;
     public Text ScoreText;
-
+    public GameObject DeadMenu;
     // Start is called before the first frame update
     public EventSystemCustom eventSystem;
-
+    public PlayerController player;
     void Start()
     {
         eventSystem.updateHeartUI.AddListener(updateHeartUI);
@@ -54,6 +54,8 @@ public class UIManager : MonoBehaviour
             Heart3.SetActive(false);
             Heart2.SetActive(false);
             Heart1.SetActive(false);
+            DeadMenu.SetActive(true);
+            player.moveAmount=0f;
         }
     }
     // Update is called once per frame
