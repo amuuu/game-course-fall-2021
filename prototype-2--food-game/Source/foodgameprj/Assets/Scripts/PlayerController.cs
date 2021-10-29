@@ -10,11 +10,12 @@ public class PlayerController : MonoBehaviour
     public static int playerHeartsCount;
 
     [SerializeField] UnityEngine.UI.Text scoreText;
+    [SerializeField] UnityEngine.UI.Text heartText;
 
     private void Start()
     {
         playerScore = 0;
-        playerHeartsCount = 0;
+        playerHeartsCount = 3;
     }
 
     void Update()
@@ -71,6 +72,9 @@ public class PlayerController : MonoBehaviour
             // the CONTENT of OnConsume method inside "BonesComboController" is available inside the "comboController"
             comboController.OnConsume();
 
+            //update heart UI
+            heartText.text = "Lifes ♥ : " + playerHeartsCount.ToString();
+
             // destroy the combo object
             Destroy(collision.gameObject);
         }
@@ -82,6 +86,9 @@ public class PlayerController : MonoBehaviour
 
             // the CONTENT of OnConsume method inside "HeartsComboController" is available inside the "comboController"
             comboController.OnConsume();
+
+            //update heart UI
+            heartText.text = "Lifes ♥ : " + playerHeartsCount.ToString();
 
             // destroy the combo object
             Destroy(collision.gameObject);

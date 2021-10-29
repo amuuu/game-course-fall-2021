@@ -263,6 +263,7 @@ MonoBehaviour:
   moveAmount: 0.068
   playerScore: 0
   scoreText: {fileID: 1560803822}
+  heartText: {fileID: 1901854951}
 --- !u!65 &294549516
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -917,7 +918,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Lifes \u2665 : "
+  m_Text: "Lifes \u2665 :  3"
 --- !u!222 &1901854952
 CanvasRenderer:
   m_ObjectHideFlags: 0
