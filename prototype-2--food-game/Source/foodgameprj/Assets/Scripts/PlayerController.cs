@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public Text scoreText;
+    public Text heartText;
 
     private void Start()
     {
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
             playerScore += conf.score;
 
             Debug.Log("SCORE: " + playerScore);
+            scoreText.text = "SCORE: " + playerScore.ToString();
 
             // destroy the food object
             Destroy(collision.gameObject);
@@ -66,6 +70,7 @@ public class PlayerController : MonoBehaviour
             playerHeartsCount += conf.value;
 
             Debug.Log("HEART: " + playerHeartsCount);
+            heartText.text = "HEART: " + playerHeartsCount.ToString();
 
             // destroy the heart object
             Destroy(collision.gameObject);

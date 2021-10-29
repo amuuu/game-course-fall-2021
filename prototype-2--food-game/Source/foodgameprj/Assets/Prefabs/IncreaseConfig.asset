@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d022e28c61250943a93decec2e3884a, type: 3}
   m_Name: IncreaseConfig
   m_EditorClassIdentifier: 
-  heartName: 
-  weight: 0
-  value: 0
+  heartName: Increase
+  weight: 1
+  value: 1
