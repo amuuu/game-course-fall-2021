@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BurgerCheeseConfig
   m_EditorClassIdentifier: 
   foodName: BurgerCheese
-  weight: 1
-  score: 175
+  weight: 2.3
+  score: 300
