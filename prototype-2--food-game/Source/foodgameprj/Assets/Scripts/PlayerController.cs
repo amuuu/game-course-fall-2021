@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerScore = 0;
+        playerHeartsCount = 3;
     }
 
     void Update()
@@ -46,10 +47,12 @@ public class PlayerController : MonoBehaviour
         {
             // polymorphism!
             // for example, the object of type "TimeFreezerComboController" which is the child of "ComboInstanceController", is put inside the "comboController" object below.
-            ComboInstanceController comboController =  collision.gameObject.GetComponent<ComboInstanceController>();
+            ComboInstanceController comboController = collision.gameObject.GetComponent<ComboInstanceController>();
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
-            comboController.OnConsume();
+
+            playerHeartsCount -= comboController.config.heart;
+            Debug.Log("HEARTS: " + playerHeartsCount);
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
 
