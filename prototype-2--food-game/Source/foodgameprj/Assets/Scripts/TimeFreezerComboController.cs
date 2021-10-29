@@ -6,7 +6,7 @@ public class TimeFreezerComboController : ComboInstanceController
 {
     // when player eats the combo item
     private Vector3 graivty = new Vector3(0, -10.0F, 0);
-
+    public FoodPlacer foodPlacer;
     void start()
     {
         Physics.gravity = graivty;
@@ -24,8 +24,7 @@ public class TimeFreezerComboController : ComboInstanceController
 
     IEnumerator FreezeTimeGradiantly(GameObject gameObject)
     {
-        {
-        }
+        foodPlacer.changeInstanciateState(false);
         gameObject.transform.position = new Vector3(1000, 1000, 1000);
         for (int i = 0; i < 10; i++)
         {
@@ -39,7 +38,7 @@ public class TimeFreezerComboController : ComboInstanceController
             Physics.gravity -= new Vector3(0, 1F, 0);
             yield return new WaitForSecondsRealtime(0.1f);
         }
-
+        foodPlacer.changeInstanciateState(true);
         Destroy(gameObject);
     }
 }

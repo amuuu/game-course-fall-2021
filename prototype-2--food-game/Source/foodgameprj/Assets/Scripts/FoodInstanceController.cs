@@ -6,6 +6,7 @@ public class FoodInstanceController : MonoBehaviour
 {
     public FoodItemConfig config;
     private Rigidbody rigidBody;
+    public EventSystemCustom eventSystemCustom;
 
     private void Start()
     {
@@ -21,7 +22,9 @@ public class FoodInstanceController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Kill"))
         {
-            Destroy(this.gameObject);
+            int heartCount= GameObject.Find("Player").GetComponent<PlayerController>().getHeartCount();
+            GameObject.Find("Player").GetComponent<PlayerController>().setHeartCount(--heartCount);
+            Destroy(gameObject);
         }
     }
 }

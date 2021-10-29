@@ -13,6 +13,11 @@ public class PlayerController : MonoBehaviour
     {
         return playerHeartsCount;
     }
+    public void setHeartCount(int number)
+    {
+        playerHeartsCount = number;
+        eventSystem.updateHeartUI.Invoke();
+    }
     public int getScoreCount()
     {
         return playerScore;
@@ -50,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Physics.gravity);
+        //Debug.Log(Physics.gravity);
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += new Vector3(moveAmount, 0, 0);

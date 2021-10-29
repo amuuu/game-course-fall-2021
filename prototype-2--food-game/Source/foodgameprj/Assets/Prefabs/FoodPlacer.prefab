@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4227243515257079329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4227243515257079328}
+  - component: {fileID: 4227243515257079331}
+  m_Layer: 0
+  m_Name: FoodPlacer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4227243515257079328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4227243515257079329}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4227243515257079331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4227243515257079329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85991f17c3bb3db4ca3210af179b6e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 669693224618794538, guid: 99e45aedbf2daeb4b9470275dccbdbe9, type: 3}
+  - {fileID: 669693224618794538, guid: 49a161c2cfc83d4418da676b6988128c, type: 3}
+  - {fileID: 669693224618794538, guid: 28632f266dd27a547850606d8634cc19, type: 3}
+  - {fileID: 669693224618794538, guid: f5b93f84df6a0ca41a122d3382f16c45, type: 3}
+  - {fileID: 2828325700720256856, guid: f5f33b9a36b02c5428992404237e169d, type: 3}
+  - {fileID: 7791973776569194827, guid: fc237ee423c3d154c87187804044d3ff, type: 3}
+  - {fileID: 3761432429025048171, guid: b504dbebd89619142a32c45d47a211c6, type: 3}
+  comboPrefabs:
+  - {fileID: 669693224618794538, guid: 4d057a17e270fdb42b8c0637eb096b32, type: 3}
+  - {fileID: 2651450103475630821, guid: f460df7595c11b14e9bc7aeb20ecfeab, type: 3}
+  - {fileID: 3129587512056442061, guid: 2b0fb2fafa182b94c92e553b38646c94, type: 3}
+  minX: -2.2
+  maxX: 3
+  timerMaxTime: 1
+  playerController: {fileID: 0}

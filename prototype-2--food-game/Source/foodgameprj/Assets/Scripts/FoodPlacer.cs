@@ -13,40 +13,54 @@ public class FoodPlacer : MonoBehaviour
 
     public float timerMaxTime;
     private float currentTimerValue;
-
+    private bool gameStatus;
     public PlayerController playerController;
 
 
     private void Start()
     {
+        gameStatus = true;
         currentTimerValue = timerMaxTime;
+    }
+
+    public void changeInstanciateState(bool status)
+    {
+        gameStatus = status;
     }
 
     void Update()
     {
-        if (currentTimerValue > 0)
+        if (gameStatus)
         {
-            currentTimerValue -= Time.deltaTime;
-        }
-        else
-        {
-            GameObject go;
-
-            if (UnityEngine.Random.Range(0, 2000) % 3 == 0)
+            if (currentTimerValue > 0)
             {
-                go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                currentTimerValue -= Time.deltaTime;
             }
             else
             {
-                go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                GameObject go;
+
+                if (UnityEngine.Random.Range(0, 2000) % 3 == 0)
+                {
+                    go = Instantiate(comboPrefabs[GetRandomPrefabType(comboPrefabs.Length)]);
+                }
+                else
+                {
+                    go = Instantiate(prefabs[GetRandomPrefabType(prefabs.Length)]);
+                }
+
+                go.transform.position =
+                    new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
+
+                UpdateTimerValueBasedOnScore();
+
+                // reset timer
+                currentTimerValue = timerMaxTime;
             }
-
-            go.transform.position = new Vector3(GetRandomPrefabInitialX(), transform.position.y, transform.position.z);
-
-            UpdateTimerValueBasedOnScore();
-
-            // reset timer
-            currentTimerValue = timerMaxTime;
+        }
+        else
+        {
+            Debug.Log("Injaaas");
         }
     }
 
@@ -56,10 +70,9 @@ public class FoodPlacer : MonoBehaviour
         {
             timerMaxTime -= 0.02f;
 
-            if (timerMaxTime < 0.5f)
-                timerMaxTime = 0.5f;
+            if (timerMaxTime < 0.35f)
+                timerMaxTime = 0.35f;
         }
-
     }
 
     int GetRandomPrefabType(int max)
@@ -69,6 +82,6 @@ public class FoodPlacer : MonoBehaviour
 
     float GetRandomPrefabInitialX()
     {
-        return UnityEngine.Random.Range(minX,maxX);
+        return UnityEngine.Random.Range(minX, maxX);
     }
 }

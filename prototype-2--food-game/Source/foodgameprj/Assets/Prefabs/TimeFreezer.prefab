@@ -76,6 +76,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 1843d47992829664ab862940ec0666a6, type: 2}
+  foodPlacer: {fileID: 4227243515257079331, guid: 4346d9c7d5924024ba0a137606bbc7e6,
+    type: 3}
 --- !u!1 &8864241876471490562
 GameObject:
   m_ObjectHideFlags: 0
