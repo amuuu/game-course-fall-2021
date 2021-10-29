@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
 
             playerHeartsCount -= comboController.config.heart;
+            heart.heartAmount -= comboController.config.heart;
+
             Debug.Log("HEARTS: " + playerHeartsCount);
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
