@@ -81,8 +81,12 @@ public class PlayerController : MonoBehaviour
 
     public void heartHandler(int getorlose)
     {
-        PlayerHearts += getorlose;
-        PlayerRecords.UpdateHeartsText(getorlose);
+        if (PlayerHearts > 0)
+        {
+            PlayerHearts += getorlose;
+            PlayerRecords.UpdateHeartsText(getorlose);
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
