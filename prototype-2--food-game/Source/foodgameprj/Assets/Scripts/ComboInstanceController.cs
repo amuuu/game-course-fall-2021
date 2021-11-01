@@ -10,5 +10,6 @@ public class ComboInstanceController : MonoBehaviour
     public virtual void OnConsume()
     {
         Debug.Log("PARENT CLASS ON CONSUME");
+        
     }
 }
