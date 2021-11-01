@@ -9,6 +9,14 @@ public class TimeFreezerComboController : ComboInstanceController
     {
         Debug.Log("TIME FREEZER ON CONSUME");
 
+        Pause();
         // you should fill this method!
+    }
+
+     IEnumerator Pause()
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSeconds(3);
+        Time.timeScale = 1;
     }
 }

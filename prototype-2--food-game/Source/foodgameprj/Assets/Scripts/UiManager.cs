@@ -8,6 +8,9 @@ public class UiManager : MonoBehaviour
 {
     public Text Score;
     public Text Heart;
+    public Text gameOverTex;
+    public Text WonText;
+    public Button Restartbutton;
     public PlayerController playerController;
     public HeartComboController HeartComboController;
     public EventSystemCustom eventSystem;
@@ -19,6 +22,12 @@ public class UiManager : MonoBehaviour
         Heart.gameObject.SetActive(true);
         eventSystem.UpdatScore.AddListener(UpdateScore);
         eventSystem.UpdateHeart.AddListener(UpdateHeart);
+        Restartbutton.gameObject.SetActive(false);
+        WonText.gameObject.SetActive(false);
+        gameOverTex.gameObject.SetActive(false);
+
+        eventSystem.GameOver.AddListener(GameOverText);
+        eventSystem.Win.AddListener(WinText);
     }
 
     // Update is called once per frame
@@ -27,14 +36,38 @@ public class UiManager : MonoBehaviour
         {
             Debug.Log("UPDATE KEYS");
             Score.text = "Score : " + playerController.playerScore.ToString();
+        if(playerController.playerScore >= 3000)
+        {
+            eventSystem.Win.Invoke();
+            Time.timeScale = 0;
+        }
 
         }
 
     public void UpdateHeart()
     {
         Debug.Log("UPDATE Heart");
-        Score.text = "Hearts : " + HeartComboController.heart.ToString();
+        Heart.text = "Heart : " + HeartComboController.heart.ToString();
+        if(HeartComboController.heart == 0)
+        {
+            eventSystem.GameOver.Invoke();
+        }
 
     }
+    public void WinText()
+    {
+        WonText.gameObject.SetActive(true);
+    }
 
+    public void GameOverText()
+    {
+        gameOverTex.gameObject.SetActive(true);
+        Restartbutton.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void RestartButton()
+    {
+        SceneManager.LoadScene("SampleScene");
+        Time.timeScale = 1;
+    }
 }

@@ -55,9 +55,14 @@ public class PlayerController : MonoBehaviour
             comboController.OnConsume();
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
+            Destroy(collision.gameObject);
+            if (comboController.config.comboName == "FishBone")
+            {
+                eventSystem.UpdateHeart.Invoke();
+            }
 
             // destroy the combo object
-            Destroy(collision.gameObject);
+            
         }
     }
 }
