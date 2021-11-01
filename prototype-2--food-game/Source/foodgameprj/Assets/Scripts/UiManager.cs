@@ -51,7 +51,9 @@ public class UiManager : MonoBehaviour
         if(HeartComboController.heart == 0)
         {
             eventSystem.GameOver.Invoke();
+            HeartComboController.heart = 3;
         }
+        
 
     }
     public void WinText()
