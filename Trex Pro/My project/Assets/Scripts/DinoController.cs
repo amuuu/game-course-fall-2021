@@ -13,7 +13,7 @@ public class DinoController : MonoBehaviour
 
         isGrounded = true;
         rb = GetComponent<Rigidbody2D>();
-        PlayerPrefs.SetInt("speed", 1);
+        PlayerPrefs.SetInt("speed", 6);
     }
 
     // Update is called once per frame
