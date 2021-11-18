@@ -7,6 +7,10 @@ TagManager:
   - Land
   - BG1
   - BG2
+  - Cactus
+  - Rock
+  - HeartCombo
+  - BulletCombo
   layers:
   - Default
   - TransparentFX

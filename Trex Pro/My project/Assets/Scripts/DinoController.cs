@@ -37,5 +37,7 @@ public class DinoController : MonoBehaviour
             isGrounded = true;
         }
 
+       
+
     }
 }

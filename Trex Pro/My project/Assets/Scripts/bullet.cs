@@ -18,7 +18,7 @@ public class bullet : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Quad1")
+        if (collision.tag == "Cactus")
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
@@ -29,7 +29,10 @@ public class bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-       
+        if (collision.tag == "Rock")
+        {
+            Destroy(gameObject);
+        }
 
     }
 
