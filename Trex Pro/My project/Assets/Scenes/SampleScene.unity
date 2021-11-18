@@ -303,7 +303,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -78449746868798773, guid: 68953e2076953b3468deabefbb10677c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.6890942, b: 0.9150943, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -696,6 +696,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1130420851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1130420852}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1130420852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130420851}
+  m_LocalRotation: {x: -0, y: -0, z: -0.03837183, w: 0.9992636}
+  m_LocalPosition: {x: 0.56, y: 0.4, z: 0}
+  m_LocalScale: {x: 0.9875, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1348466640}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -4.3980002}
 --- !u!1 &1348466639
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,6 +739,7 @@ GameObject:
   - component: {fileID: 1348466642}
   - component: {fileID: 1348466643}
   - component: {fileID: 1348466644}
+  - component: {fileID: 1348466645}
   m_Layer: 0
   m_Name: Dino
   m_TagString: Untagged
@@ -728,6 +759,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 151676256}
+  - {fileID: 1130420852}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -743,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea5d8000e8587142ad65d79bed25688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpAmount: 18
+  jumpAmount: 20
   isGrounded: 1
 --- !u!50 &1348466642
 Rigidbody2D:
@@ -779,7 +811,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.005043298, y: 0.005044341}
+  m_Offset: {x: 0.1620218, y: 0.005044341}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -790,7 +822,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2925107, y: 1.373308}
+  m_Size: {x: 1.0029312, y: 1.373308}
   m_EdgeRadius: 0
 --- !u!114 &1348466644
 MonoBehaviour:
@@ -804,6 +836,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 223037930abb3d549a9a39d5c2efacf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1348466645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348466639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e1d034acb19f24880979bfed4a2fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firepoint: {fileID: 1130420852}
+  bulletPrefab: {fileID: 1918626719042713990, guid: bec9a4c18f8025b4f81444cae0c7e3db,
+    type: 3}
 --- !u!1 &1689430393
 GameObject:
   m_ObjectHideFlags: 0
