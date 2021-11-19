@@ -6,10 +6,13 @@ public class GameOver : MonoBehaviour
 {
     DinoController dino;
     public GameObject obj;
+    public ImgBg ImgBg;
     // Start is called before the first frame update
     void Start()
     {
         dino = obj.GetComponent<DinoController>();
+        
+
     }
 
     // Update is called once per frame
@@ -22,6 +25,7 @@ public class GameOver : MonoBehaviour
         if (collider.name == "Quad1" )
         {
             Time.timeScale = 0;
+            ImgBg.setup();
             Debug.Log("Final Score: " + dino.Score);
         }
 
