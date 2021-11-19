@@ -6,9 +6,13 @@ public class Obstacles : MonoBehaviour
 {
     public GameObject[] ob;
     public Transform camPos;
+    public GameObject obj;
+    DinoController dino;
     // Start is called before the first frame update
     void Start()
     {
+        
+        dino = obj.GetComponent<DinoController>();
         ObstacleMaker();
     }
 
@@ -19,12 +23,25 @@ public class Obstacles : MonoBehaviour
     {
         transform.Translate(Vector3.right * PlayerPrefs.GetInt("speed") * Time.deltaTime);
         GameObject cs = GameObject.Find("Quad1");
+        
     
-        if(cs != null)
+        if(cs != null )
         {
+            var cs_config = cs.GetComponent<ObstacleConfig>();
             if (camPos.position.x - cs.transform.position.x > 25)
             {
+
                 Destroy(cs);
+            }
+
+            if (cs.transform.position.x < obj.transform.position.x  && cs_config.isNotPassed==true )
+            {
+                dino.Score += 10;
+                cs_config.isNotPassed = false;
+                Debug.Log("Score: " + dino.Score);
+                
+
+
             }
         }
         

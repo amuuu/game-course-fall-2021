@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6745844529174964524}
   - component: {fileID: 6745844529174964525}
+  - component: {fileID: 2883456646096267640}
   m_Layer: 0
   m_Name: LarObstacles_0
   m_TagString: Cactus
@@ -81,3 +82,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2883456646096267640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6745844529174964522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481260c453eae2141b9438100ff452fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isNotPassed: 1

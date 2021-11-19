@@ -734,6 +734,7 @@ MonoBehaviour:
   - {fileID: 5352188156026066306, guid: 153db2d383663c749bc1f5b4632c7458, type: 3}
   - {fileID: 3482562243194368316, guid: 47b85076b206d5a45b0220471fd6eb98, type: 3}
   camPos: {fileID: 519420032}
+  obj: {fileID: 1348466639}
 --- !u!61 &1062482271
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -861,6 +862,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea5d8000e8587142ad65d79bed25688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Score: 0
+  BulletCount: 5
   jumpAmount: 20
   isGrounded: 1
 --- !u!50 &1348466642
@@ -922,6 +925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 223037930abb3d549a9a39d5c2efacf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obj: {fileID: 1348466639}
 --- !u!114 &1348466645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,6 +941,7 @@ MonoBehaviour:
   firepoint: {fileID: 1130420852}
   bulletPrefab: {fileID: 1918626719042713990, guid: bec9a4c18f8025b4f81444cae0c7e3db,
     type: 3}
+  obj: {fileID: 1348466639}
 --- !u!1 &1689430393
 GameObject:
   m_ObjectHideFlags: 0

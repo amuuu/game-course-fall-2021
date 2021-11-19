@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class DinoController : MonoBehaviour
 {
+    public int Score;
+    public int BulletCount;
     public float jumpAmount ;
     public bool isGrounded;
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
-
+        Score = 0;
+        BulletCount = 5;
         isGrounded = true;
         rb = GetComponent<Rigidbody2D>();
         PlayerPrefs.SetInt("speed", 6);
