@@ -8,6 +8,8 @@ TagManager:
   - StickyPlatform
   - ExitDoor
   - CollectableItem
+  - player
+  - User
   layers:
   - Default
   - TransparentFX
