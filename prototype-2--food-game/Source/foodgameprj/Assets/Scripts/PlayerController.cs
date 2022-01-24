@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
 
     public int playerScore;
     public int playerHeartsCount;
+    public static int heart;
 
     private void Start()
     {
         playerScore = 0;
+        heart = 0;
     }
 
     void Update()
@@ -24,6 +26,12 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += new Vector3(-moveAmount, 0, 0);
         }
+
+    }
+
+    public static void decreaseHeart()
+    {
+        heart--;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -49,7 +57,7 @@ public class PlayerController : MonoBehaviour
             ComboInstanceController comboController =  collision.gameObject.GetComponent<ComboInstanceController>();
 
             // the CONTENT of OnConsume method inside "TimeFreezerComboController" is available inside the "comboController"
-            comboController.OnConsume();
+            comboController.OnConsume(collision.gameObject);
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
 

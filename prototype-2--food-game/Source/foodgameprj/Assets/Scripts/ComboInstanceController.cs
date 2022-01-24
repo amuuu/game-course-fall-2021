@@ -7,7 +7,7 @@ public class ComboInstanceController : MonoBehaviour
     public ComboItemConfig config;
 
     // when player eats the combo item
-    public virtual void OnConsume()
+    public virtual void OnConsume(GameObject gameObject)
     {
         Debug.Log("PARENT CLASS ON CONSUME");
     }
