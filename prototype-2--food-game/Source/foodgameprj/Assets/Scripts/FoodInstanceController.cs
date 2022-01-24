@@ -6,6 +6,7 @@ public class FoodInstanceController : MonoBehaviour
 {
     public FoodItemConfig config;
     private Rigidbody rigidBody;
+    public static bool foodLoss;
 
     private void Start()
     {
@@ -13,6 +14,7 @@ public class FoodInstanceController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         rigidBody.mass = config.weight;
 
+        foodLoss = false;
         // rotate randomly when instantiating
         transform.Rotate(0, Random.Range(-45, 45), 0);
     }
@@ -21,6 +23,7 @@ public class FoodInstanceController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Kill"))
         {
+            foodLoss = true;
             Destroy(this.gameObject);
         }
     }
