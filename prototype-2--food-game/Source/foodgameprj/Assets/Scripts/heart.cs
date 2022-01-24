@@ -18,6 +18,6 @@ public class heart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        heartText.text = "Heart: " + heartAmount;
+        heartText.text = "Joon: " + heartAmount;
     }
 }
