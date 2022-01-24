@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [Range(0f, 1f)] public float moveAmount;
 
     public int playerScore;
-    public int playerHeartsCount;
-    public static int heart;
+    private int heartCount;
+    public Text heartText;
+    public Text scoreText;
+    public GameObject losePage;
+    public GameObject plate;
 
     private void Start()
     {
         playerScore = 0;
-        heart = 0;
+        heartCount = 3;
     }
 
     void Update()
@@ -29,10 +33,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public static void decreaseHeart()
-    {
-        heart--;
-    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
             // increase the player's score
             playerScore += conf.score;
+            scoreText.text = playerScore.ToString();
 
             Debug.Log("SCORE: " + playerScore);
 
@@ -60,6 +62,17 @@ public class PlayerController : MonoBehaviour
             comboController.OnConsume(collision.gameObject);
 
             Debug.Log("COMBO!!! " + comboController.config.comboName);
+
+            if (comboController.config.comboName=="FishBones")
+            {
+                heartCount--;
+                heartText.text = heartCount.ToString();
+                if (heartCount==0)
+                {
+                    losePage.SetActive(true);
+                    plate.SetActive(false);
+                }
+            }
 
             // destroy the combo object
             Destroy(collision.gameObject);
