@@ -10,6 +10,7 @@ TagManager:
   - CollectableItem
   - player
   - User
+  - Clone
   layers:
   - Default
   - TransparentFX
